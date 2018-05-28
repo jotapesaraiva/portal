@@ -1,0 +1,45 @@
+Desenvolvido codeigniter é um Framework para php
+
+Baseado em MVC
+Model (modelos)
+    responsavel pela interação com o banco de dados.
+View (visualização)
+    e a pagina de interação com o usuario.
+Controller(controler)
+    contem a logia de negocio.
+
+velocidade de desenvolvimento
+    redução de codigos repetitivos, divisão de tarefas entre equipes
+        dba -> consulta mysql (sql)
+        weddesing -> criação das paginas (html)
+        programador -> criação das logicas (PHP / javascript)
+Leve
+    necessita de poucas bibliotecas para funcionar
+flexivel
+    pode ser facilmente adicionado outras bibliotecas ou criando as minhas proprias
+
+Comunidade
+    possui uma grande comunidade de desenvolvedores
+Documentação
+    possui wikis, forums, tutoriais...
+
+=====================O que já foi feito=====================
+conexões com banco de dados oracle, mysql
+reestruturação do banco de dados
+    conexao direta com o banco do mantis, monitora, zabbix...
+redução do tamanho do banco de dados
+
+organização dos codigos
+redução de linha de codigo
+
+sistema de login usando LDAP
+nivel de acesso
+
+======================O que ainda falta fazer==================
+melhor gerenciamento dos arquivos de configuração
+integração com zabbix
+criação de um novo dashboard
+    um para cada equipe
+
+migração do indicadores mantis
+migração do portal monitoramento
