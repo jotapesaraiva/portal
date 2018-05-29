@@ -55,6 +55,80 @@ $(document).ready(function() {
     });
 });
 
+function membro_group(id){
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+    //Ajax Load data from ajax
+        $.ajax({
+        url : server+"/perfil_modulo/"+id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data) {
+            console.log(data.membro);
+                $.each(data.membro, function(index,item){
+                    var html = '';
+                    html += '';
+                    html += '<div class="col-md-offset-1 col-md-8">';
+                        html += '<div class="input-group">';
+                            html += '<input class="form-control" id="'+item.id_usuario+'" value="'+item.nome_usuario+'" disabled="" type="text">';
+                            html += '<span class="input-group-btn">';
+                                html += '<button class="btn red remove_field" id="'+index+'" type="button">';
+                                    html += '<i class="fa fa-times"></i>';
+                                html += '</button>';
+                            html += '</span>';
+                        html += '</div>';
+                    html += '</div>';
+                    $("#membro").append(html);
+                });
+                $('#modal_membros').modal('show'); // show bootstrap modal when complete loaded
+                $('.modal-title').text('Lista de membros do grupo'); // Set title to Bootstrap modal title
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Erro ao pegar os dados do ajax');
+            }
+        });
+}
+
+function modulo_group(id){
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+    //Ajax Load data from ajax
+    $.ajax({
+        url : server+"/perfil_modulo/"+id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data) {
+            $.each(data.modulo, function(index,item) {
+                    // console.log(item.nome_modulo);
+                if(item.nome_modulo == 'tecnicos') {
+                    $('[name="tecnicos"]').bootstrapSwitch('state', true);
+                } else if(item.nome_modulo == 'servidores') {
+                    $('[name="servidores"]').bootstrapSwitch('state', true);
+                } else if(item.nome_modulo == 'fornecedores') {
+                    $('[name="fornecedores"]').bootstrapSwitch('state', true);
+                } else if(item.nome_modulo == 'contato') {
+                    $('[name="contato"]').bootstrapSwitch('state', true);
+                } else if(item.nome_modulo == 'voip') {
+                    $('[name="voip"]').bootstrapSwitch('state', true);
+                } else if(item.nome_modulo == 'perfil') {
+                    $('[name="perfil"]').bootstrapSwitch('state', true);
+                } else if(item.nome_modulo == 'link') {
+                    $('[name="link"]').bootstrapSwitch('state', true);
+                } else if (item.nome_modulo == 'unidade') {
+                    $('[name="unidade"]').bootstrapSwitch('state', true);
+                }
+            });
+            $('#modal_modulos').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Lista de modulos do grupo'); // Set title to Bootstrap modal title
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Erro ao pegar os dados do ajax');
+        }
+    });
+}
+
 function add_person() {
     save_method = 'add';
     $('#form')[0].reset(); // reset form on modals
@@ -72,7 +146,7 @@ function edit_person(id) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : "http://10.3.3.96/portal/usuarios/perfil/perfil_edit/" + id,
+        url : server+"/perfil_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -98,9 +172,9 @@ function save(){
     var url;
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
-        url = "http://10.3.3.96/portal/usuarios/perfil/perfil_add";
+        url = server+"/perfil_add";
     } else {
-        url = "http://10.3.3.96/portal/usuarios/perfil/perfil_update";
+        url = server+"/perfil_update";
     }
 
     // ajax adding data to database
@@ -136,7 +210,7 @@ function delete_person(id){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : "http://10.3.3.96/portal/usuarios/perfil_delete/"+id,
+            url : server+"/perfil_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)

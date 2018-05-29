@@ -32,7 +32,55 @@ class Perfil extends CI_Controller {
 
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+            <link href="' . base_url() . 'assets/switch.css" rel="stylesheet" type="text/css" />';
+
+        $session['username'] = $this->session->userdata('username');
+        $modal['modulos'] = $this->usuario_model->list_modulos();
+
+        $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
+        $this->breadcrumbs->push('<span>Usuários</span>', '/usuarios;');
+        $this->breadcrumbs->push('<span>Perfil</span>', '/usuarios/perfil');
+
+        $this->load->view('template/header',$css);
+        $this->load->view('template/navbar',$session);
+        $this->load->view('template/sidebar');
+
+        $this->load->view('usuarios/perfil');
+        $this->load->view('modal/modal_modulos',$modal);
+        $this->load->view('modal/modal_membros');
+
+        $this->load->view('template/footer',$script);
+    }
+
+    public function teste() {
+        // echo $this->uri->uri_string();
+        // echo "<br>";
+        // echo $this->uri->segment(2);
+        // echo "<br>";
+        // echo "<br>";
+        // $membros = $this->usuario_model->modulos_grupo_nome('CGRE-Produção');
+        // // vd($membros->result());
+        // $mod = array();
+        // foreach ($membros->result() as $mem) {
+        //     // echo $mem->nome_modulo . "<br>";
+        //     $mod[] = $mem->nome_modulo;
+        // }
+        // // vd($mod);
+        // if (in_array($this->uri->segment(3), $mod)) {
+        //     echo "acesso ok";
+        // } else {
+        //     echo "acesso negado <br>";
+        // }
+        $css['headerinc'] = '
+            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
             <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
+
+        $script['footerinc'] = '
+            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/perfil.js" type="text/javascript"></script>';
+        $script['script'] = '';
 
         $session['username'] = $this->session->userdata('username');
 
@@ -44,32 +92,11 @@ class Perfil extends CI_Controller {
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('usuarios/perfil');
+        // $this->load->view('usuarios/perfil');
+        $this->load->view('teste/checkbox');
         $this->load->view('modal/modal_form');
-        $this->load->view('modal/modal_delete');
 
         $this->load->view('template/footer',$script);
-    }
-
-    public function teste() {
-        echo $this->uri->uri_string();
-        echo "<br>";
-        echo $this->uri->segment(2);
-        echo "<br>";
-        echo "<br>";
-        $membros = $this->usuario_model->modulos_grupo_nome('CGRE-Produção');
-        // vd($membros->result());
-        $mod = array();
-        foreach ($membros->result() as $mem) {
-            // echo $mem->nome_modulo . "<br>";
-            $mod[] = $mem->nome_modulo;
-        }
-        // vd($mod);
-        if (in_array($this->uri->segment(3), $mod)) {
-            echo "acesso ok";
-        } else {
-            echo "acesso negado <br>";
-        }
     }
 
     public function perfil_list(){
@@ -86,26 +113,18 @@ class Perfil extends CI_Controller {
            $row = array();
            $row[] = $perfil->id_grupo;
            $row[] = $perfil->nome_grupo;
-           $membros = $this->usuario_model->membros_grupo($perfil->id_grupo);
-           if($membros == null){
-                $row[] ="";
-           } else {
-               $mem ='';
-               foreach ($membros->result() as $membro) {
-                    $mem .= $membro->nome_usuario. '<br>';
-                }
-               $row[] = $mem;
-           }
-           $modulos = $this->usuario_model->modulos_grupo($perfil->id_grupo);
-           if($modulos == null){
-                $row[]="";
-           } else {
-               $mod = '';
-               foreach($modulos->result() as $modulo){
-                    $mod .= $modulo->nome_modulo. '<br>';
-                }
-               $row[] = $mod;
-           }
+           // $membros = $this->usuario_model->membros_grupo($perfil->id_grupo);
+           // if($membros == null){
+           //      $row[] ="";
+           // } else {
+           //     $mem ='';
+           //     foreach ($membros->result() as $membro) {
+           //          $mem .= $membro->nome_usuario. '<br>';
+           //      }
+           //     $row[] = $mem;
+           // }
+           $row[] = '<a href="javascript:void(0)" title="Modulo" onclick="membro_group('."'".$perfil->id_grupo."'".')"> Membros </a>';
+           $row[] = '<a href="javascript:void(0)" title="Modulo" onclick="modulo_group('."'".$perfil->id_grupo."'".')"> Modulos </a>';
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
            $data[] = $row;
@@ -118,6 +137,26 @@ class Perfil extends CI_Controller {
            "data" => $data,
        );
        echo json_encode($output);
+    }
+
+    public function perfil_modulo($id) {
+      $modulo = $this->usuario_model->modulos_grupo($id);
+      $membro = $this->usuario_model->membros_grupo($id);
+      // if($modulos == null){
+      //      $row[]="";
+      // } else {
+      //     $mod = '';
+      //     foreach($modulos->result() as $modulo){
+      //          $mod .= $modulo->nome_modulo. '<br>';
+      //      }
+      //     $row[] = $mod;
+      // }
+      // vd($modulos);
+      $data = array(
+        'modulo' => $modulo,
+        'membro' => $membro->result()
+      );
+      echo json_encode($data);
     }
 
     public function perfil_add(){

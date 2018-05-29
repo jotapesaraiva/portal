@@ -246,25 +246,37 @@ class Usuario_model extends CI_Model{
 
     public function membros_grupo($id) {
         $portal_db = $this->load->database('default',true);
-        return $query = $portal_db->query('SELECT *
+        return $query = $portal_db->query('SELECT u.nome_usuario, u.id_usuario
                                     FROM tbl_usuario u
                                     WHERE u.id_grupo='.$id.' ');
     }
 
-    public function modulos_grupo($id) {
+    public function modulos_grupo($id_group) {
         $portal_db = $this->load->database('default',true);
-        return $query = $portal_db->query('SELECT *
-                                    FROM tbl_perfil p
-                                    JOIN tbl_modulos m ON p.id_modulo=m.id_modulo
-                                    WHERE p.id_grupo='.$id.' ');
+        $portal_db->select('*');
+        $portal_db->from('tbl_perfil p');
+        $portal_db->join('tbl_modulos m','p.id_modulo=m.id_modulo');
+        $portal_db->where('p.id_grupo',$id_group);
+        $query = $portal_db->get();
+        return $query->result_array();
     }
-    public function modulos_grupo_nome($group) {
+    public function modulos_grupo_nome($nome_group) {
         $portal_db = $this->load->database('default',true);
-        return $query = $portal_db->query('SELECT m.id_modulo, m.nome_modulo
-                                            FROM tbl_perfil p
-                                            JOIN tbl_modulos m ON p.id_modulo=m.id_modulo
-                                            JOIN tbl_grupos g ON p.id_grupo=g.id_grupo
-                                            WHERE g.nome_grupo="'.$group.'" ');
+        $portal_db->select('*');
+        $portal_db->from('tbl_perfil p');
+        $portal_db->join('tbl_modulos m','p.id_modulo=m.id_modulo');
+        $portal_db->join('tbl_grupos g','p.id_grupo=g.id_grupo');
+        $portal_db->where('g.nome_grupo',$nome_group);
+        $query = $portal_db->get();
+        return $query;
+    }
+
+    public function list_modulos() {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('*');
+        $portal_db->from('tbl_modulos');
+        $query = $portal_db->get();
+        return $query;
     }
 
 }
