@@ -22,6 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="caption">
                             <i class="icon-settings font-dark"></i>
                             <span class="caption-subject font-dark sbold ">LDAP Configurações</span>
+                            <?php echo $this->uri->segment(2); ?>
                         </div>
                         <div class="actions">
                         </div>

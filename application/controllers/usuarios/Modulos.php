@@ -41,7 +41,6 @@ class Modulos extends CI_Controller {
 
         $this->load->view('usuarios/modulos');
         $this->load->view('modal/modal_form');
-        $this->load->view('modal/modal_delete');
 
         $this->load->view('template/footer',$script);
     }
@@ -86,12 +85,12 @@ class Modulos extends CI_Controller {
        echo json_encode(array("status" => TRUE));
     }
 
-    public function modulo_edit($id){
+    public function modulo_edit($id) {
        $data = $this->usuario_model->edit_modulo($id);
        echo json_encode($data);
     }
 
-    public function modulo_update(){
+    public function modulo_update() {
        //$this->_validate();
        $data = array(
                'nome_modulo' => $this->input->post('nome'),
@@ -101,7 +100,7 @@ class Modulos extends CI_Controller {
        echo json_encode(array("status" => TRUE));
     }
 
-    public function modulo_delete($id){
+    public function modulo_delete($id) {
        $this->usuario_model->delete_modulo($id);
        echo json_encode(array("status" => TRUE));
     }

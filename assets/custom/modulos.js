@@ -102,12 +102,13 @@ function save(){
     } else {
         url = server+"/modulo_update";
     }
-
+    console.log($('#form').serialize());
     // ajax adding data to database
     $.ajax({
         url : url,
         type: "POST",
         data: $('#form').serialize(),
+
         dataType: "JSON",
         success: function(data) {
             if(data.status){ //if success close modal and reload ajax table

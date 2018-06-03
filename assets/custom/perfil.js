@@ -55,42 +55,58 @@ $(document).ready(function() {
     });
 });
 
-function membro_group(id){
-    $('#form')[0].reset(); // reset form on modals
-    $('.form-group').removeClass('has-error'); // clear error class
-    $('.help-block').empty(); // clear error string
-    //Ajax Load data from ajax
-        $.ajax({
-        url : server+"/perfil_modulo/"+id,
-        type: "GET",
-        dataType: "JSON",
-        success: function(data) {
-            console.log(data.membro);
-                $.each(data.membro, function(index,item){
-                    var html = '';
-                    html += '';
-                    html += '<div class="col-md-offset-1 col-md-8">';
-                        html += '<div class="input-group">';
-                            html += '<input class="form-control" id="'+item.id_usuario+'" value="'+item.nome_usuario+'" disabled="" type="text">';
-                            html += '<span class="input-group-btn">';
-                                html += '<button class="btn red remove_field" id="'+index+'" type="button">';
-                                    html += '<i class="fa fa-times"></i>';
-                                html += '</button>';
-                            html += '</span>';
-                        html += '</div>';
-                    html += '</div>';
-                    $("#membro").append(html);
-                });
-                $('#modal_membros').modal('show'); // show bootstrap modal when complete loaded
-                $('.modal-title').text('Lista de membros do grupo'); // Set title to Bootstrap modal title
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Erro ao pegar os dados do ajax');
-            }
-        });
-}
+    function add_dynamic_input_field(count) {
+        var button = '';
+        if(count > 1) {
+            button =    '<button class="btn red remove" id="'+$count+'" type="button">';
+            button +=       '<i class="fa fa-times"></i>';
+            button +=   '</button>';
+        } else {
+            button =    '<button class="btn red remove" id="'+$count+'" type="button">';
+            button +=       '<i class="fa fa-times"></i>';
+            button +=   '</button>';
+        }
+        output = '';
+        output += '';
+
+        $('#dynamic_field').append(output);
+    }
+
+    $(document).on('click', '#add_more', function(){
+        count = count + 1;
+        add_dynamic_input_field(count);
+    });
+
+    $(document).on('click', '.remove', function(){
+        var row_id = $(this).attr("id");
+        $('#row'+row_id).remove();
+    });
+
+    function membro_group(id){
+        save_method = 'membro';
+        $('#form')[0].reset(); // reset form on modals
+        $('.form-group').removeClass('has-error'); // clear error class
+        $('.help-block').empty(); // clear error string
+        //Ajax Load data from ajax
+            $.ajax({
+            url : server+"/perfil_membro/"+id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                    // console.log(data.membro);
+                    $('#membro').html(data.membro);
+
+                    $('#modal_membros').modal('show'); // show bootstrap modal when complete loaded
+                    $('.modal-title').text('Lista de membros do grupo'); // Set title to Bootstrap modal title
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Erro ao pegar os dados do ajax');
+                }
+            });
+    }
 
 function modulo_group(id){
+    save_method = 'modulo';
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
@@ -101,7 +117,8 @@ function modulo_group(id){
         dataType: "JSON",
         success: function(data) {
             $.each(data.modulo, function(index,item) {
-                    // console.log(item.nome_modulo);
+                // $('#modulo').html(data.modulo);
+                //     console.log(item.nome_modulo);
                 if(item.nome_modulo == 'tecnicos') {
                     $('[name="tecnicos"]').bootstrapSwitch('state', true);
                 } else if(item.nome_modulo == 'servidores') {
@@ -127,6 +144,10 @@ function modulo_group(id){
             alert('Erro ao pegar os dados do ajax');
         }
     });
+}
+
+function submit_modulo(){
+
 }
 
 function add_person() {
@@ -173,8 +194,12 @@ function save(){
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
         url = server+"/perfil_add";
-    } else {
+    } else if(save_method == 'update') {
         url = server+"/perfil_update";
+    } else if(save_method == 'membro') {
+        url = server+"/perfil_add_membro";
+    } else {
+        url = server+"/perfil_add_modulo";
     }
 
     // ajax adding data to database

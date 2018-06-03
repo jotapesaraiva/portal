@@ -8,7 +8,7 @@ class Perfil extends CI_Controller {
         //Do your magic here
         $this->load->model('usuario_model');
         $this->load->library('Auth_AD');
-        if($this->auth_ad->is_authenticated()){
+        if($this->auth_ad->is_authenticated()) {
             if($this->auth_ad->level_access($this->uri->segment(2),$this->session->userdata('physicaldeliveryofficename'))){
                 $username = $this->session->userdata('username');
             } else {
@@ -23,20 +23,23 @@ class Perfil extends CI_Controller {
     }
 
     public function index() {
+        $css['headerinc'] = '
+            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
+            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+            <link href="' . base_url() . 'assets/switch.css" rel="stylesheet" type="text/css" />';
         $script['footerinc'] = '
+            <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/perfil.js" type="text/javascript"></script>
         ';
         $script['script'] = '';
 
-        $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/switch.css" rel="stylesheet" type="text/css" />';
 
         $session['username'] = $this->session->userdata('username');
         $modal['modulos'] = $this->usuario_model->list_modulos();
+        $data['membros'] = $this->usuario_model->listar_usuarios();
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Usuários</span>', '/usuarios;');
@@ -48,53 +51,7 @@ class Perfil extends CI_Controller {
 
         $this->load->view('usuarios/perfil');
         $this->load->view('modal/modal_modulos',$modal);
-        $this->load->view('modal/modal_membros');
-
-        $this->load->view('template/footer',$script);
-    }
-
-    public function teste() {
-        // echo $this->uri->uri_string();
-        // echo "<br>";
-        // echo $this->uri->segment(2);
-        // echo "<br>";
-        // echo "<br>";
-        // $membros = $this->usuario_model->modulos_grupo_nome('CGRE-Produção');
-        // // vd($membros->result());
-        // $mod = array();
-        // foreach ($membros->result() as $mem) {
-        //     // echo $mem->nome_modulo . "<br>";
-        //     $mod[] = $mem->nome_modulo;
-        // }
-        // // vd($mod);
-        // if (in_array($this->uri->segment(3), $mod)) {
-        //     echo "acesso ok";
-        // } else {
-        //     echo "acesso negado <br>";
-        // }
-        $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
-
-        $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/perfil.js" type="text/javascript"></script>';
-        $script['script'] = '';
-
-        $session['username'] = $this->session->userdata('username');
-
-        $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Usuários</span>', '/usuarios;');
-        $this->breadcrumbs->push('<span>Perfil</span>', '/usuarios/perfil');
-
-        $this->load->view('template/header',$css);
-        $this->load->view('template/navbar',$session);
-        $this->load->view('template/sidebar');
-
-        // $this->load->view('usuarios/perfil');
-        $this->load->view('teste/checkbox');
-        $this->load->view('modal/modal_form');
+        $this->load->view('modal/modal_membros',$data);
 
         $this->load->view('template/footer',$script);
     }
@@ -113,16 +70,6 @@ class Perfil extends CI_Controller {
            $row = array();
            $row[] = $perfil->id_grupo;
            $row[] = $perfil->nome_grupo;
-           // $membros = $this->usuario_model->membros_grupo($perfil->id_grupo);
-           // if($membros == null){
-           //      $row[] ="";
-           // } else {
-           //     $mem ='';
-           //     foreach ($membros->result() as $membro) {
-           //          $mem .= $membro->nome_usuario. '<br>';
-           //      }
-           //     $row[] = $mem;
-           // }
            $row[] = '<a href="javascript:void(0)" title="Modulo" onclick="membro_group('."'".$perfil->id_grupo."'".')"> Membros </a>';
            $row[] = '<a href="javascript:void(0)" title="Modulo" onclick="modulo_group('."'".$perfil->id_grupo."'".')"> Modulos </a>';
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
@@ -140,26 +87,83 @@ class Perfil extends CI_Controller {
     }
 
     public function perfil_modulo($id) {
+      $modulos = $this->usuario_model->list_modulos();
       $modulo = $this->usuario_model->modulos_grupo($id);
-      $membro = $this->usuario_model->membros_grupo($id);
-      // if($modulos == null){
-      //      $row[]="";
-      // } else {
-      //     $mod = '';
-      //     foreach($modulos->result() as $modulo){
-      //          $mod .= $modulo->nome_modulo. '<br>';
-      //      }
-      //     $row[] = $mod;
-      // }
-      // vd($modulos);
+      // $html = '';
+      //     $html .= '<ul class="list-group">';
+      //   foreach ($modulos->result() as $mod) {
+      //     $check = "";
+      //     foreach($modulo->result() as $modgroup){
+      //       if($mod->nome_modulo == $modgroup->nome_modulo) {
+      //         $check = "checked";
+      //         break;
+      //       } else{
+      //         $check = "";
+      //       }
+      //     }
+      //     $html .=  '<li class="list-group-item">';
+      //     $html .=    '<label class="col-md-offset-1 col-md-8 uppercase">'.$mod->nome_modulo.' :</label>';
+      //     $html .=       '<input name="'.$mod->nome_modulo.'" type="checkbox" '. $check . ' class="make-switch" data-on-text="<i class=\'fa fa-check\'></i>" data-off-text="<i class=\'fa fa-times\'></i>">';
+      //     $html .=  '</li>';
+      //   }
+      //     $html .= '</ul>';
       $data = array(
-        'modulo' => $modulo,
-        'membro' => $membro->result()
+        'modulo' => $modulo->result()
       );
       echo json_encode($data);
+      // vd($html);
+      // }
     }
 
-    public function perfil_add(){
+    public function perfil_membro($id) {
+        $membros = $this->usuario_model->membros_grupo($id);
+        $html = '';
+        $count = 1;
+        foreach ($membros->result() as $membro) {
+            $button = '';
+            if($count > 1){
+                $button = '<button class="btn red remove" id="'.$count.'" type="button">
+                            <i class="fa fa-times"></i>
+                           </button>';
+            } else {
+                $button = '<button class="btn red remove" id="'.$count.'" type="button">
+                            <i class="fa fa-times"></i>
+                           </button>';
+            }
+            $html .= '<div class="col-md-offset-1 col-md-8" id="row'.$count.'">';
+                $html .= '<div class="input-group">';
+                    $html .= '<input class="form-control" name="membros_grupo[]" id="'.$membro->id_usuario.'" value="'.$membro->nome_usuario.'" disabled="" type="text">';
+                    $html .= '<span class="input-group-btn">';
+                            $html .= $button;
+                    $html .= '</span>';
+                $html .= '</div>';
+            $html .= '</div>';
+            $count++;
+        }
+        $output = array(
+            'membro' => $html
+        );
+        echo json_encode($output);
+    }
+
+    public function perfil_add_membro() {
+
+      $this->input->post('membros_group');
+
+      $data = array(
+        'id_grupo' => $this->input->post('id'),
+        'membros' => $this->input->post('membros_group')
+      );
+      // $update = $this->unidade_model->update_membros($data);
+      // echo json_encode(array("status" => TRUE));
+      vd($data);
+    }
+
+    public function perfil_add_modulo() {
+
+    }
+
+    public function perfil_add() {
        //$this->_validate();
        $data = array(
                'nome_perfil' => $this->input->post('nome'),
@@ -169,12 +173,12 @@ class Perfil extends CI_Controller {
        echo json_encode(array("status" => TRUE));
     }
 
-    public function perfil_edit($id){
+    public function perfil_edit($id) {
        $data = $this->usuario_model->edit_perfil($id);
        echo json_encode($data);
     }
 
-    public function perfil_update(){
+    public function perfil_update() {
        //$this->_validate();
        $data = array(
                'nome_perfil' => $this->input->post('nome'),

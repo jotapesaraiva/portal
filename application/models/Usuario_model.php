@@ -253,12 +253,12 @@ class Usuario_model extends CI_Model{
 
     public function modulos_grupo($id_group) {
         $portal_db = $this->load->database('default',true);
-        $portal_db->select('*');
+        $portal_db->select('m.nome_modulo');
         $portal_db->from('tbl_perfil p');
         $portal_db->join('tbl_modulos m','p.id_modulo=m.id_modulo');
         $portal_db->where('p.id_grupo',$id_group);
         $query = $portal_db->get();
-        return $query->result_array();
+        return $query;
     }
     public function modulos_grupo_nome($nome_group) {
         $portal_db = $this->load->database('default',true);

@@ -8,14 +8,29 @@
             </div>
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal" role="form">
-                    <input type="hidden" value="" id="tecnico" name="id"/>
-                    <input type="hidden" value="" id="array_antigo" name="id"/>
+                    <!-- <input type="hidden" value="" id="tecnico" name="id"/> -->
+                    <!-- <input type="hidden" value="" id="array_antigo" name="id"/> -->
                     <div class="form-body">
-
-                         <div class="form-group">
-                                <div id="membro"></div>
-                         </div>
-
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-8">
+                                <div class="input-group">
+                                    <select class="selectpicker form-control" name="voip[]" data-live-search="true">
+                                        <option value="">------Selecione um usuario-----</option>
+                                        <?php foreach($membros->result() as $membro) : ?>
+                                        <option value="<?=$membro->id_usuario?>"><?=$membro->nome_usuario?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <button class="btn blue" id="" type="button">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="membro">
+                           <!-- <div id="membro"></div> -->
+                        </div>
                     </div>
                 </form>
             </div>
