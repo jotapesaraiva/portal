@@ -70,9 +70,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <th> Telefone </th>
                                     <!-- <th> Celular </th> -->
                                     <th> Voip </th>
-                                    <th> Link </th>
+                                    <th> IP Link </th>
+                                    <th> Designação </th>
                                     <th> Técnico </th>
-                                    <th> Servidor </th>
                                     <th> Status </th>
                                     <th> Ação </th>
                                 </tr>

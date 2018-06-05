@@ -37,10 +37,10 @@ class Unidade_model extends CI_Model{
     public function listar_unidade_usuario($id_unidade,$id_cargo){
         $portal_db = $this->load->database('default',true);
         $portal_db->select('*');
-        $portal_db->from('tbl_unidade u');
-        $portal_db->join('tbl_unidade_usuario uu', 'uu.id_unidade=u.id_unidade');
+        $portal_db->from('tbl_unidade_usuario uu');
         $portal_db->join('tbl_usuario us', 'uu.id_usuario=us.id_usuario');
-        $portal_db->join('tbl_unidade un', 'uu.id_unidade=un.id_unidade');
+        // $portal_db->join('tbl_usuario_telefone ut', 'ut.id_usuario=uu.id_usuario');
+        // $portal_db->join('tbl_telefone t', 't.id_telefone=ut.id_telefone');
         $portal_db->where('us.id_cargo', $id_cargo);
         $portal_db->where('uu.id_unidade', $id_unidade);
         $query = $portal_db->get();

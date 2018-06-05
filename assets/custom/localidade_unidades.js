@@ -543,7 +543,7 @@ function view_person(id) {
     // $('.help-block').empty(); // clear error string
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/unidades_edit/" + id,
+        url : server+"/unidade_view/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -739,7 +739,7 @@ function view_person(id) {
                              a += '<input type="hidden" value="'+valor.id_telefone+'" id=telefone name="id_telefone[]"/>';
                              a += '<label class="control-label col-md-2">Telefone :</label>';
                              a += '<div class="col-md-6">';
-                                     a += '<input class="form-control" name="telefone[]" value="'+valor.numero_telefone+'" disabled="" data-mask="(00) 0000-0000" type="text">';
+                                     a += '<input class="form-control" name="telefone[]" value="'+valor.numero_telefone+'" disabled="" type="text">';
                              a += '</div>';
                          a += '</div>';
                         $("#view_telefone_add").append(a);
@@ -749,6 +749,7 @@ function view_person(id) {
            }
 
  //************************************************CELULAR**********************************************************************
+
          if(data.celular == null) {
              $('[name="celular[]"]').val('');
          } else {
@@ -757,7 +758,7 @@ function view_person(id) {
                      $('[name="celular[]"]').val(valor.numero_telefone);
                      $('[name="id_celular[]"]').val(valor.id_telefone);
                  });
-             }else{
+             } else {
                  $.each(data.celular, function(indice,valor) {
                      // console.log(indice);
                      if(indice == 0){
@@ -769,7 +770,7 @@ function view_person(id) {
                             a += '<input type="hidden" value="'+item.id_telefone+'" id=celular name="id_celular[]"/>';
                             a += '<label class="control-label col-md-2">Celular :</label>';
                             a += '<div class="col-md-6">';
-                                    a += '<input class="form-control" name="celular[]" value="'+item.numero_telefone+'" disabled="" data-mask="(00) 00000-0000" type="text">';
+                                    a += '<input class="form-control" name="celular[]" value="'+item.numero_telefone+'" disabled="" type="text">';
                             a += '</div>';
                         a += '</div>';
                        $("#view_celular_add").append(a);
@@ -777,6 +778,93 @@ function view_person(id) {
                  });
                  }
              }
+
+ //************************************************TECNICO**********************************************************************
+          if(data.tecnico == null) {
+            $('nome_tecnico').val('');
+            $('telefone_tecnico').val('');
+            $('celular_tecnico').val('');
+            $('voip_tecnico').val('');
+          } else {
+              $.each(data.tecnico, function(indice,valor) {
+                  if(indice == 0) {
+                    $('[name="id_tecnico"]').val(valor.id_tecnico);
+                    $('[name="nome_tecnico"]').val(valor.nome_tecnico);
+                    $('[name="telefone_tecnico"]').val(valor.telefone_tecnico);
+                    $('[name="celular_tecnico"]').val(valor.celular_tecnico);
+                    $('[name="voip_tecnico"]').val(valor.voip_tecnico);
+                  } else {
+                  // console.log(valor.nome_tecnico);
+                    var a = '';
+                    a += '<hr>';
+                    a += '<div class="form-group">';
+                    a += '    <input type="hidden" name="id_tecnico" value="'+valor.id_tecnico+'"/>';
+                    a += '    <label class="col-md-1 control-label">Nome: </label>';
+                    a += '    <div class="col-md-5">';
+                    a += '        <input type="text" name="nome_tecnico" value="'+valor.nome_tecnico+'" class="form-control" disabled="" >';
+                    a += '    </div>';
+                    a += '    <label class="col-md-1 control-label">Telefone: </label>';
+                    a += '    <div class="col-md-5">';
+                    a += '        <input type="text" name="telefone_tecnico" value="'+valor.telefone_tecnico+'" class="form-control" disabled="" >';
+                    a += '    </div>';
+                    a += '</div>';
+                    a += '<div class="form-group">';
+                    a += '    <label class="col-md-1 control-label">Celular: </label>';
+                    a += '    <div class="col-md-5">';
+                    a += '        <input type="text" name="celular_tecnico" value="'+valor.celular_tecnico+'" class="form-control" disabled="" >';
+                    a += '    </div>';
+                    a += '    <label class="col-md-1 control-label">VoIP: </label>';
+                    a += '    <div class="col-md-5">';
+                    a += '        <input type="text" name="voip_tecnico" value="'+valor.voip_tecnico+'" class="form-control" disabled="" >';
+                    a += '    </div>';
+                    a += '</div>';
+                    $("#view_tecnico_add").append(a);
+                  }
+              });
+          }
+ //************************************************SERVIDORES Pub**********************************************************************
+           if(data.servidor == null) {
+             $('nome_servidor').val('');
+             $('telefone_servidor').val('');
+             $('celular_servidor').val('');
+             $('voip_servidor').val('');
+           } else {
+               $.each(data.servidor, function(indice,valor) {
+                   if(indice == 0) {
+                     $('[name="id_servidor"]').val(valor.id_servidor);
+                     $('[name="nome_servidor"]').val(valor.nome_servidor);
+                     $('[name="telefone_servidor"]').val(valor.telefone_servidor);
+                     $('[name="celular_servidor"]').val(valor.celular_servidor);
+                     $('[name="voip_servidor"]').val(valor.voip_servidor);
+                   } else {
+                  // console.log(valor.nome_servidor);
+                    var a = '';
+                    a += '<hr>';
+                    a += '<div class="form-group">';
+                    a += '    <input type="hidden" name="id_servidor" value="'+valor.id_servidor+'"/>';
+                    a += '    <label class="col-md-1 control-label">Nome: </label>';
+                    a += '    <div class="col-md-5">';
+                    a += '        <input type="text" name="nome_servidor" value="'+valor.nome_servidor+'" class="form-control" disabled="" >';
+                    a += '    </div>';
+                    a += '    <label class="col-md-1 control-label">Telefone: </label>';
+                    a += '    <div class="col-md-5">';
+                    a += '        <input type="text" name="telefone_servidor" value="'+valor.telefone_servidor+'" class="form-control" disabled="" >';
+                    a += '    </div>';
+                    a += '</div>';
+                    a += '<div class="form-group">';
+                    a += '    <label class="col-md-1 control-label">Celular: </label>';
+                    a += '    <div class="col-md-5">';
+                    a += '        <input type="text" name="celular_servidor" value="'+valor.celular_servidor+'" class="form-control" disabled="" >';
+                    a += '    </div>';
+                    a += '    <label class="col-md-1 control-label">VoIP: </label>';
+                    a += '    <div class="col-md-5">';
+                    a += '        <input type="text" name="voip_servidor" value="'+valor.voip_servidor+'" class="form-control" disabled="" >';
+                    a += '    </div>';
+                    a += '</div>';
+                    $("#view_servidor_add").append(a);
+                  }
+              });
+          }
 
             $('#modal_unidade_view').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Editar unidade'); // Set title to Bootstrap modal title

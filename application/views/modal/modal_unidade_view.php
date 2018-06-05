@@ -161,25 +161,27 @@
                             <form class="form-horizontal" id="form_3" role="form">
                                 <div class="form-body">
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Nome: </label>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" disabled="" >
+                                        <input type="hidden" name="id_tecnico"/>
+                                        <label class="col-md-1 control-label">Nome: </label>
+                                        <div class="col-md-5">
+                                            <input type="text" name="nome_tecnico" class="form-control" disabled="" >
                                         </div>
-                                        <label class="col-md-2 control-label">Telefone: </label>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" disabled="" >
+                                        <label class="col-md-1 control-label">Telefone: </label>
+                                        <div class="col-md-5">
+                                            <input type="text" name="telefone_tecnico" class="form-control" disabled="" >
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Celular: </label>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" disabled="" >
+                                        <label class="col-md-1 control-label">Celular: </label>
+                                        <div class="col-md-5">
+                                            <input type="text" name="celular_tecnico" class="form-control" disabled="" >
                                         </div>
-                                        <label class="col-md-2 control-label">VoIP: </label>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" disabled="">
+                                        <label class="col-md-1 control-label">VoIP: </label>
+                                        <div class="col-md-5">
+                                            <input type="text" name="voip_tecnico" class="form-control" disabled="" >
                                         </div>
                                     </div>
+                                    <div id="view_tecnico_add"></div>
                                 </div>
                             </form>
                         </div>
@@ -187,25 +189,27 @@
                             <form class="form-horizontal" id="form_4" role="form">
                                 <div class="form-body">
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Nome: </label>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" disabled="" >
+                                        <input type="hidden" name="id_servidor"/>
+                                        <label class="col-md-1 control-label">Nome: </label>
+                                        <div class="col-md-5">
+                                            <input type="text" name="nome_servidor" class="form-control" disabled="" >
                                         </div>
-                                        <label class="col-md-2 control-label">Telefone: </label>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" disabled="" >
+                                        <label class="col-md-1 control-label">Telefone: </label>
+                                        <div class="col-md-5">
+                                            <input type="text" name="telefone_servidor" class="form-control" disabled="" >
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Celular: </label>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" disabled="" >
+                                        <label class="col-md-1 control-label">Celular: </label>
+                                        <div class="col-md-5">
+                                            <input type="text" name="celular_servidor" class="form-control" disabled="" >
                                         </div>
-                                        <label class="col-md-2 control-label">VoIP: </label>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" disabled="" >
+                                        <label class="col-md-1 control-label">VoIP: </label>
+                                        <div class="col-md-5">
+                                            <input type="text" name="voip_servidor" class="form-control" disabled="" >
                                         </div>
                                     </div>
+                                    <div id="view_servidor_add"></div>
                                 </div>
                             </form>
                         </div>

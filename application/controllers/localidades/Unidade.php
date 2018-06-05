@@ -7,6 +7,7 @@ class Unidade extends CI_Controller {
         parent::__construct();
         //Do your magic here
         $this->load->model('unidade_model');
+        $this->load->model('usuario_model');
         $this->load->model('link_model');
         $this->load->model('fornecedor_model');
         $this->load->model('telefonia_model');
@@ -120,7 +121,17 @@ class Unidade extends CI_Controller {
            } else {
              $Link = '';
              foreach($links->result() as $link){
-              $Link .= $link->nome_link. '<br>';
+              $Link .= $link->ip_lan_link. '<br>';
+             }
+           $row[] = $Link;
+           }
+
+           if($links == null){
+              $row[] = "";
+           } else {
+             $Link = '';
+             foreach($links->result() as $link){
+              $Link .= $link->designacao_link. '<br>';
              }
            $row[] = $Link;
            }
@@ -136,16 +147,16 @@ class Unidade extends CI_Controller {
               $row[] = $Tecnico;
             }
            //****************************************************************************************
-           $servidores = $this->unidade_model->listar_unidade_usuario($unidade->id_unidade,16);
-           if($servidores == null){
-              $row[] = "";
-           } else {
-             $Servidor = '';
-             foreach($servidores->result() as $servidor){
-              $Servidor .= $servidor->nome_usuario. '<br>';
-             }
-             $row[] = $Servidor;
-           }
+           // $servidores = $this->unidade_model->listar_unidade_usuario($unidade->id_unidade,16);
+           // if($servidores == null){
+           //    $row[] = "";
+           // } else {
+           //   $Servidor = '';
+           //   foreach($servidores->result() as $servidor){
+           //    $Servidor .= $servidor->nome_usuario. '<br>';
+           //   }
+           //   $row[] = $Servidor;
+           // }
            //****************************************************************************************
            if ($unidade->status_unidade == '1'){
             $row[] = '<span class="label label-sm label-info"> Ativo. </span>';
@@ -256,10 +267,114 @@ class Unidade extends CI_Controller {
     }
 
     public function unidade_view($id) {
-      $unidade  = $this->unidade_model->listar_unidade($id);
-      $link     = $this->unidade_model->listar_link($id);
-      $tecnico  = $this->unidade_model->listar_unidade_usuario($id,6);
-      $servidor = $this->unidade_model->listar_unidade_usuario($id,16);
+        $unidade  = $this->unidade_model->listar_unidade($id);
+        $link     = $this->unidade_model->listar_link($id);
+
+        $tecnicos  = $this->unidade_model->listar_unidade_usuario($id,6);
+        $tecnico = array();
+        foreach ($tecnicos->result() as $tec) {
+        if($tec->id_usuario == null) {
+            $row = array(
+                'id_tecnico' => '',
+                'nome_tecnico' => '',
+                'celular_tecnico' => '',
+                'telefone_tecnico' => '',
+                'voip_tecnico' => ''
+            );
+        } else {
+            $celulares = $this->usuario_model->edit_usuario_telefone($tec->id_usuario,2);
+            if($celulares == null) {
+                $cel = "";
+            } else {
+                  $cel = "";
+                  // vd($celulares);
+                  foreach($celulares as $celular) {
+                   $cel .= $celular->numero_telefone. ', ';
+                  }
+            }
+            $telefones = $this->usuario_model->edit_usuario_telefone($tec->id_usuario,1);
+            if($telefones == null) {
+                $tel = "";
+            } else {
+                  $tel = "";
+                  // vd($telefones);
+                  foreach($telefones as $telefone) {
+                   $tel .= $telefone->numero_telefone. ', ';
+                  }
+            }
+            $voips = $this->usuario_model->edit_usuario_telefone($tec->id_usuario,3);
+            if($voips == null) {
+                $vp = "";
+            } else {
+                  $vp = "";
+                  // vd($voips);
+                  foreach($voips as $voip) {
+                   $vp .= $voip->numero_telefone. ', ';
+                  }
+            }
+            $row = array(
+                'id_tecnico' => $tec->id_usuario,
+                'nome_tecnico' => $tec->nome_usuario,
+                'celular_tecnico' => $cel,
+                'telefone_tecnico' => $tel,
+                'voip_tecnico' => $vp
+            );
+        }
+        $tecnico[] = $row;
+        }
+
+      $servidores = $this->unidade_model->listar_unidade_usuario($id,16);
+      $servidor = array();
+      foreach ($servidores->result() as $serv) {
+      if($serv->id_usuario == null) {
+          $row = array(
+              'id_servidor' => '',
+              'nome_servidor' => '',
+              'celular_servidor' => '',
+              'telefone_servidor' => '',
+              'voip_servidor' => ''
+          );
+      } else {
+          $celulares = $this->usuario_model->edit_usuario_telefone($serv->id_usuario,2);
+          if($celulares == null) {
+              $cel = "";
+          } else {
+                $cel = "";
+                // vd($celulares);
+                foreach($celulares as $celular) {
+                 $cel .= $celular->numero_telefone. ', ';
+                }
+          }
+          $telefones = $this->usuario_model->edit_usuario_telefone($serv->id_usuario,1);
+          if($telefones == null) {
+              $tel = "";
+          } else {
+                $tel = "";
+                // vd($telefones);
+                foreach($telefones as $telefone) {
+                 $tel .= $telefone->numero_telefone. ', ';
+                }
+          }
+          $voips = $this->usuario_model->edit_usuario_telefone($serv->id_usuario,3);
+          if($voips == null) {
+              $vp = "";
+          } else {
+                $vp = "";
+                // vd($voips);
+                foreach($voips as $voip) {
+                 $vp .= $voip->numero_telefone. ', ';
+                }
+          }
+          $row = array(
+              'id_servidor' => $serv->id_usuario,
+              'nome_servidor' => $serv->nome_usuario,
+              'celular_servidor' => $cel,
+              'telefone_servidor' => $tel,
+              'voip_servidor' => $vp
+          );
+      }
+      $servidor[] = $row;
+      }
       $voip     = $this->unidade_model->edit_unidade_telefone($id,4);
       $telefone = $this->unidade_model->edit_unidade_telefone($id,1);
       $celular  = $this->unidade_model->edit_unidade_telefone($id,2);
@@ -267,8 +382,8 @@ class Unidade extends CI_Controller {
       $data = array(
         'unidade'  => $unidade->row(),
         'link'     => $link->result_array(),
-        'tecnico'  => $tecnico->result_array(),
-        'servidor' => $servidor->result_array(),
+        'tecnico'  => $tecnico,
+        'servidor' => $servidor,
         'voip'     => $voip->result_array(),
         'telefone' => $telefone->result_array(),
         'celular'  => $celular->result_array());

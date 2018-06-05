@@ -160,7 +160,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <?php if($this->auth_ad->level_access('historico',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('historico_bkp',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php if($this->uri->uri_string() == 'backup/historico') { echo 'active open'; } ?>">
                             <?php echo anchor('backup/historico', 'Histórico', 'class="nav-link"')?>
                             <?php if($this->uri->uri_string() == 'backup/historico') { echo '<span class="selected"></span>'; } ?>
@@ -192,7 +192,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </li>
                             </ul>
                         </li>
-                        <?php } if($this->auth_ad->level_access('graficos',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('graficos_bkp',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php if($this->uri->segment(2) == 'graficos') { echo 'active open'; } ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <span class="title">Gráficos</span>
@@ -269,7 +269,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <?php if($this->auth_ad->level_access('historico',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('historico_link',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php if($this->uri->uri_string() == 'links/historico') { echo 'active open'; } ?>">
                             <?php echo anchor('links/historico', 'Historico', 'class="nav-link"')?>
                             <?php if($this->uri->uri_string() == 'links/historico') { echo '<span class="selected"></span>'; } ?>
@@ -279,7 +279,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor('links/calculo_multa', 'Cálculo Multa', 'class="nav-link"')?>
                             <?php if($this->uri->uri_string() == 'links/calculo_multa') { echo '<span class="selected"></span>'; } ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('graficos',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('graficos_link',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php if($this->uri->segment(2) == 'graficos') { echo 'active open'; } ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-feed"></i>
@@ -500,7 +500,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor_popup('http://nobreak.sefa.pa.gov.br:8080/ScadaBR/login.htm', 'Nobreak SEFA'); ?>
                         </li>
                         <li class="nav-item ">
-                            <?php echo anchor_popup('intranet.sefa.pa.gov.br/mantis/', 'Mantis'); ?>
+                            <?php echo anchor_popup('https://mantis.sefa.pa.gov.br/', 'Mantis'); ?>
                         </li>
                         <li class="nav-item ">
                             <?php echo anchor_popup('https://email.sefa.pa.gov.br:8443/', 'Email'); ?>
