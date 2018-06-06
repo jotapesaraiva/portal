@@ -42,22 +42,22 @@ $(document).ready(function() {
         table.button( '0-1' ).trigger();
     });
     //set input/textarea/select event when change value, remove class error and remove text help block
-    $("input").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $("textarea").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $("select").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $('.selectpicker').on('change', function () {
-        $(this).parent().parent().parent().removeClass('has-error');
-        $(this).next().next().empty();
-    });
+    // $("input").change(function(){
+    //     $(this).parent().parent().removeClass('has-error');
+    //     $(this).next().empty();
+    // });
+    // $("textarea").change(function(){
+    //     $(this).parent().parent().removeClass('has-error');
+    //     $(this).next().empty();
+    // });
+    // $("select").change(function(){
+    //     $(this).parent().parent().removeClass('has-error');
+    //     $(this).next().empty();
+    // });
+    // $('.selectpicker').on('change', function () {
+    //     $(this).parent().parent().parent().removeClass('has-error');
+    //     $(this).next().next().empty();
+    // });
 
     $('a[href="<?php echo current_url();?>"]').click(function (e) {
         e.preventDefault();
@@ -77,6 +77,8 @@ $(document).ready(function() {
     //     // alert("mudou !!!!");
     // });
 });
+
+    $('.multi-select').multiSelect();
 
 /*********************************************************************
 *********************************************************************/
@@ -178,8 +180,8 @@ function add_person() {
 function edit_person(id_tecnico) {
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
-    $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker bootstrap
-    // $('#multiselect').multiSelect('refresh');
+    // $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker bootstrap
+    $('.multi-select').multiSelect('refresh');
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
 
@@ -189,11 +191,15 @@ function edit_person(id_tecnico) {
         type: "GET",
         dataType: "JSON",
         success: function(data) {
-            $('[name="id"]').val(data.id_usuario);
-            $('[name="nome"]').selectpicker('val', data.id_usuario);
-            $('#array_antigo').val(data.id_unidade);
-            $('[name="unidade[]"]').selectpicker('val', data.id_unidade);
+            console.log(data);
+            $('[name="nome"]').multiSelect('select',data.id_usuario);
+            $('[name="unidade[]"]').multiSelect('select',data.id_unidade);
+            // $('[name="id"]').val(data.id_usuario);
+            // $('[name="nome"]').selectpicker('val', data.id_usuario);
+            // $('#array_antigo').val(data.id_unidade);
+            // $('[name="unidade[]"]').selectpicker('val', data.id_unidade);
             // $('#multiselect').multiSelect('select', data.id_unidade);
+            //
             $('#modal_tecnico').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Editar Tecnico'); // Set title to Bootstrap modal title
         },

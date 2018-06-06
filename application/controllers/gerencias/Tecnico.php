@@ -24,19 +24,25 @@ class Tecnico extends CI_Controller {
     public function index() {
       $this->output->enable_profiler(TRUE);
         $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
+            <link href="' . base_url() . 'assets/multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
             <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />';
+            ';
+            // <link href="' . base_url() . 'assets/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
+            // <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
         $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/tecnico.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
-            <script src="' . base_url() . 'assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js" type="text/javascript"></script>';
+';
+            // <script src="' . base_url() . 'assets/multi-select.js" type="text/javascript"></script>
+            // <script src="' . base_url() . 'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
+            // <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
+            // <script src="' . base_url() . 'assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
         $script['script'] = '
-        <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>';
+        ';
+        // <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>
 
         $session['username'] = $this->session->userdata('username');
         $unidades = $this->unidade_model->listar_unidade();
@@ -52,7 +58,7 @@ class Tecnico extends CI_Controller {
         $this->load->view('template/sidebar');
 
         $this->load->view('gerencias/tecnico');
-        $this->load->view('modal/modal_tecnico', $dados);
+        $this->load->view('modal/modal_tecnico_teste', $dados);
 
         $this->load->view('template/footer',$script);
     }
