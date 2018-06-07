@@ -14,6 +14,7 @@ class Unidade_model extends CI_Model{
         $portal_db->from('tbl_unidade u');
         $portal_db->join('tbl_cidade c','c.id_cidade=u.id_cidade');
         $portal_db->join('tbl_expediente e','e.id_expediente=u.id_expediente');
+        $portal_db->order_by('u.nome_unidade');
         if($id != null){
             $portal_db->where('u.id_unidade', $id);
         }

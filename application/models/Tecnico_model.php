@@ -42,6 +42,7 @@ class Tecnico_model extends CI_Model{
         $portal_db->select('*');
         $portal_db->from('tbl_usuario');
         $portal_db->where('id_cargo', 6);
+        $portal_db->order_by('nome_usuario');
         $query = $portal_db->get();
         return $query;
     }
@@ -70,7 +71,7 @@ class Tecnico_model extends CI_Model{
 
     public function edit_unidade_tecnico($id_tecnico){
         $portal_db = $this->load->database('default',true);
-        $portal_db->select('id_unidade');
+        $portal_db->select('*');
         $portal_db->from('tbl_unidade_usuario');
         $portal_db->where('id_usuario', $id_tecnico);
         $query = $portal_db->get();

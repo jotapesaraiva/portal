@@ -59,23 +59,6 @@ $(document).ready(function() {
     //     $(this).next().next().empty();
     // });
 
-    $('a[href="<?php echo current_url();?>"]').click(function (e) {
-        e.preventDefault();
-        $('li.nav-item').removeClass('active open');
-        // $('').removeChild('<span class="selected"></span>');
-        $(this).parents('li').addClass('active open');
-        // $(this).append('<span class="selected"></span>');
-        // alert("mudou !!!!");
-    });
-
-    // $('a[href="<?php echo current_url();?>"]').click(function (e) {
-    //     e.preventDefault();
-    //     $('li.nav-item').removeClass('active open');
-    //     // $('').removeChild('<span class="selected"></span>');
-    //     $(this).parents('li').addClass('active open');
-    //     // $(this).append('<span class="selected"></span>');
-    //     // alert("mudou !!!!");
-    // });
 });
 
     $('.multi-select').multiSelect();
@@ -170,7 +153,7 @@ $(document).ready(function() {
 function add_person() {
     save_method = 'add';
     $('#form')[0].reset(); // reset form on modals
-    $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker bootstrap
+    $('.multi-select').multiSelect('refresh'); //reset selectcpicker bootstrap
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_tecnico').modal('show'); // show bootstrap modal
@@ -196,7 +179,7 @@ function edit_person(id_tecnico) {
             $('[name="unidade[]"]').multiSelect('select',data.id_unidade);
             // $('[name="id"]').val(data.id_usuario);
             // $('[name="nome"]').selectpicker('val', data.id_usuario);
-            // $('#array_antigo').val(data.id_unidade);
+            $('#array_antigo').val(data.id_unidade);
             // $('[name="unidade[]"]').selectpicker('val', data.id_unidade);
             // $('#multiselect').multiSelect('select', data.id_unidade);
             //

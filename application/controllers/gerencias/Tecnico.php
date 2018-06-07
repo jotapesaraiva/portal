@@ -58,7 +58,7 @@ class Tecnico extends CI_Controller {
         $this->load->view('template/sidebar');
 
         $this->load->view('gerencias/tecnico');
-        $this->load->view('modal/modal_tecnico_teste', $dados);
+        $this->load->view('modal/modal_tecnico', $dados);
 
         $this->load->view('template/footer',$script);
     }
@@ -122,35 +122,17 @@ class Tecnico extends CI_Controller {
 
         $id_unidades = $this->tecnico_model->edit_unidade_tecnico($id_tecnico);
         foreach ($id_unidades as $id_unidade) {
-          $array[] = $id_unidade['id_unidade'];
+          $unidade[] = $id_unidade['id_unidade'];
+          $id_key[] = $id_unidade['id_usuario_unidade'];
         }
         $id_usuario = $id_tecnico;
         $data = array(
-          'id_unidade' => $array,
+          'id_key' => $id_key,
+          'id_unidade' => $unidade,
           'id_usuario' => $id_usuario
         );
         echo json_encode($data);
-    }
-
-    public function teste($id_tecnico) {
-      // $id_tecnico = $this->tecnico_model->edit_tecnico($id_tecnico,$id_unidade);
-      // $id_unidade = $this->tecnico_model->edit_unidade_tecnico($id_tecnico);
-      // vd($id_unidade);
-      // $id_unidades = $this->tecnico_model->edit_unidade_tecnico($id_tecnico);
-      // foreach ($id_unidades as $id_unidade) {
-      //   $array[] = $id_unidade['id_unidade'];
-      // }
-      // vd($array);
-      $id_unidades = $this->tecnico_model->edit_unidade_tecnico($id_tecnico);
-      foreach ($id_unidades as $id_unidade) {
-        $array[] = $id_unidade['id_unidade'];
-      }
-      $id_usuario = $id_tecnico;
-      $data = array(
-        'id_unidade' => $array,
-        'id_usuario' => $id_usuario
-      );
-      echo json_encode($data);
+        // vd($id_unidades);
     }
 
     public function tecnico_update() {
@@ -158,22 +140,25 @@ class Tecnico extends CI_Controller {
         $this->tecnico_validate();
         $unidades = $this->input->post('unidade');
         foreach ($unidades as $unidade) {
+          $id_unidade[] = $unidade;
+          $id_usuario[] = $this->input->post('nome');
+        }
             $data = array(
-               'id_usuario' => $this->input->post('nome'),
-               'id_unidade' => $unidade,
+               'id_usuario' => $id_usuario,
+               'id_unidade' => $id_unidade
             );
             // $data = array(
             //    'id_usuario' => $this->input->post('nome'),
             //    'id_unidade' => $this->input->post('unidade'),
             // );
-            $existe = $this->tecnico_model->exist_tecnico($this->input->post('nome'),$unidade);
-            if($existe->num_rows() == 1) {
-              //$this->tecnico_model->update_tecnico(array('id_usuario' => $this->input->post('nome')), $data);
-            } else {
-              $this->tecnico_model->save_tecnico($data);
-            }
-        }
-        echo json_encode(array("status" => TRUE));
+            // $existe = $this->tecnico_model->exist_tecnico($this->input->post('nome'),$unidade);
+            // if($existe->num_rows() == 1) {
+              // $this->tecnico_model->update_tecnico(array('id_usuario' => $this->input->post('nome')), $data);
+            // } else {
+            //   $this->tecnico_model->save_tecnico($data);
+            // }
+        // echo json_encode(array("status" => TRUE));
+
     }
 
     public function tecnico_delete($id_tecnico,$id_unidade) {
