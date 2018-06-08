@@ -41,9 +41,10 @@ class Lista extends CI_Controller {
         $usuarios = $this->auth_ad->get_all_users();
         $permissaos = $this->usuario_model->listar_permissao();
         $cargos = $this->usuario_model->listar_cargo();
+        $grupos = $this->usuario_model->listar_grupo();
         $voips = $this->voip_model->listar_ramal();
 
-        $dados = array('permissaos' => $permissaos, 'cargos' => $cargos, 'usuarios' => $usuarios,'voips' => $voips);
+        $dados = array('permissaos' => $permissaos, 'cargos' => $cargos, 'grupos' => $grupos, 'usuarios' => $usuarios,'voips' => $voips);
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Usuários</span>', '/usuarios;');
@@ -88,7 +89,7 @@ class Lista extends CI_Controller {
            }
            $row[] = $usuario->nome_permissao;
            $row[] = $usuario->nome_cargo;
-           $row[] = $usuario->celula_equipe;
+           $row[] = $usuario->nome_grupo;
            if ($usuario->status_usuario == '1') {
             $row[] = '<span class="label label-sm label-info"> Ativo. </span>';
            } else {
@@ -106,6 +107,12 @@ class Lista extends CI_Controller {
            "data" => $data,
        );
        echo json_encode($output);
+    }
+
+    public function teste() {
+      // $exist = $this->telefonia_model->listar_telefone('(91) 3323-3853');
+      $id_telefone = $this->telefonia_model->id_telefone('(91) 3323-3853');
+      vd($id_telefone);
     }
 
     public function usuarios_add() {
@@ -126,12 +133,13 @@ class Lista extends CI_Controller {
                'nome_usuario'       => $this->input->post('nome'),
                'login_usuario'      => $this->input->post('login'),
                'email_usuario'      => $this->input->post('email'),
-               'celula_equipe'      => $this->input->post('equipe'),
+               // 'celula_equipe'      => $this->input->post('equipe'),
                'senha_usuario'      => $this->input->post('senha'),
                'sobreaviso_usuario' => $sobreaviso,
                'status_usuario'     => $status,
                'id_permissao'          => $this->input->post('permissao'),
-               'id_cargo'           => $this->input->post('cargo')
+               'id_cargo'           => $this->input->post('cargo'),
+               'id_grupo'           => $this->input->post('grupo')
            );
        $insert = $this->usuario_model->save_usuario($data);
 
@@ -140,12 +148,17 @@ class Lista extends CI_Controller {
            if(!empty($tel)) {
              $telefone = array (
                              'numero_telefone'            => $tel,
-                             'id_tipo_categoria_telefone' => 1,
+                             'id_tipo_categoria_telefone' => 1
                          );
-             $id_telefone = $this->telefonia_model->salvar_telefone($telefone);
+             $exist = $this->telefonia_model->listar_telefone($tel);
+             if($exist->num_rows() != 1) {
+                $id_telefone = $this->telefonia_model->salvar_telefone($telefone);
+             } else {
+                $id_telefone = $this->telefonia_model->id_telefone($telefone);
+             }
              $usuario_telefone = array (
                                    'id_telefone' => $id_telefone,
-                                   'id_usuario'  =>  $insert,
+                                   'id_usuario'  =>  $insert
                                  );
              $this->usuario_model->salvar_usuario_telefone($usuario_telefone);
            }
@@ -199,12 +212,13 @@ class Lista extends CI_Controller {
               'nome_usuario'       => $this->input->post('nome'),
               'login_usuario'      => $this->input->post('login'),
               'email_usuario'      => $this->input->post('email'),
-              'celula_equipe'      => $this->input->post('equipe'),
+              // 'celula_equipe'      => $this->input->post('equipe'),
               'senha_usuario'      => $this->input->post('senha'),
               'sobreaviso_usuario' => $sobreaviso,
               'status_usuario'     => $status,
-              'id_permissao'          => $this->input->post('permissao'),
-              'id_cargo'           => $this->input->post('cargo')
+              'id_permissao'       => $this->input->post('permissao'),
+              'id_cargo'           => $this->input->post('cargo'),
+              'id_grupo'           => $this->input->post('grupo')
            );
        $this->usuario_model->update_usuario(array('id_usuario' => $this->input->post('id_usuario')), $data);
 
@@ -224,13 +238,19 @@ class Lista extends CI_Controller {
                  $this->telefonia_model->update_telefone(array ('id_telefone' => $this->input->post('id_telefone')[$i]), $telefone_where);
                  $this->usuario_model->update_usuario_telefone(array ($this->input->post('id')), $telefone_dados);
                  } else {
-                    $id_telefone = $this->telefonia_model->salvar_telefone($telefone_where);
-                    $usuario_telefone = array (
-                          'id_telefone' => $id_telefone,
-                          'id_usuario' =>  $this->input->post('id_usuario'),
-                    );
-                    $this->usuario_model->salvar_usuario_telefone($usuario_telefone);
+                    $exist = $this->telefonia_model->listar_telefone($this->input->post('telefone')[$i]);
+                    if($exist->num_rows() != 1) {
+                       $id_telefone = $this->telefonia_model->salvar_telefone($telefone_where);
+                    } else {
+                       $id_telefone = $this->telefonia_model->id_telefone($this->input->post('telefone')[$i]);
                     }
+                    $usuario_telefone = array (
+                          'id_telefone' => $id_telefone->id_telefone,
+                          'id_usuario' =>  $this->input->post('id_usuario')
+                    );
+                    // vd($usuario_telefone);
+                    $this->usuario_model->salvar_usuario_telefone($usuario_telefone);
+                }
               } else {
                // echo "array com value vazio";
               }
@@ -270,14 +290,14 @@ class Lista extends CI_Controller {
 
     public function usuarios_delete($id) {
 
+      $telefones = $this->usuario_model->listar_usuario_telefone($id);
       $this->usuario_model->delete_usuario_telefone($id);
       $this->usuario_model->delete_usuario($id);
-      $telefones = $this->usuario_model->listar_usuario_telefone($id);
       foreach($telefones->result() as $telefone) {
         $this->telefonia_model->delete_telefone($telefone->id_telefone);
       }
 
-       $this->usuario_model->delete_usuario($id);
+       // $this->usuario_model->delete_usuario($id);
        echo json_encode(array("status" => TRUE));
     }
 
@@ -317,9 +337,9 @@ class Lista extends CI_Controller {
                 $data['status'] = FALSE;
             }
 
-            if($this->input->post('equipe') == '') {
-                $data['inputerror'][] = 'equipe';
-                $data['error_string'][] = 'O campo celula/equipe é obrigatorio';
+            if($this->input->post('grupo') == '') {
+                $data['inputerror'][] = 'grupo';
+                $data['error_string'][] = 'O campo grupo é obrigatorio';
                 $data['status'] = FALSE;
             }
 

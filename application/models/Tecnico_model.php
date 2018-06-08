@@ -47,12 +47,14 @@ class Tecnico_model extends CI_Model{
         return $query;
     }
 
-    public function listar_unidade($id_usuario) {
+    public function listar_unidade($id_usuario=null) {
         $portal_db = $this->load->database('default',true);
         $portal_db->select('*');
         $portal_db->from('tbl_unidade u');
         $portal_db->join('tbl_unidade_usuario uu','uu.id_unidade=u.id_unidade');
-        $portal_db->where('uu.id_usuario',$id_usuario);
+        if($id_usuario != null) {
+            $portal_db->where('uu.id_usuario',$id_usuario);
+        }
         $query = $portal_db->get();
         return $query;
     }
@@ -104,14 +106,20 @@ class Tecnico_model extends CI_Model{
         return $portal_db->affected_rows();
     }
 
-    public function delete_tecnico($id_tecnico,$id_unidade){
+    public function delete_tecnico($id_tecnico,$id_unidade) {
         $portal_db = $this->load->database('default',true);
         $portal_db->where('id_usuario', $id_tecnico);
         $portal_db->where('id_unidade', $id_unidade);
         $portal_db->delete('tbl_unidade_usuario');
     }
 
-    public function save_tecnico($dados){
+    public function delete_all($id_tecnico) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->where('id_usuario', $id_tecnico);
+        $portal_db->delete('tbl_unidade_usuario');
+    }
+
+    public function save_tecnico($dados) {
         $portal_db = $this->load->database('default',true);
         $portal_db->insert('tbl_unidade_usuario', $dados);
         return $portal_db->insert_id();

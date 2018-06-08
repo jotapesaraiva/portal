@@ -177,12 +177,7 @@ function edit_person(id_tecnico) {
             console.log(data);
             $('[name="nome"]').multiSelect('select',data.id_usuario);
             $('[name="unidade[]"]').multiSelect('select',data.id_unidade);
-            // $('[name="id"]').val(data.id_usuario);
-            // $('[name="nome"]').selectpicker('val', data.id_usuario);
-            $('#array_antigo').val(data.id_unidade);
-            // $('[name="unidade[]"]').selectpicker('val', data.id_unidade);
-            // $('#multiselect').multiSelect('select', data.id_unidade);
-            //
+
             $('#modal_tecnico').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Editar Tecnico'); // Set title to Bootstrap modal title
         },
@@ -196,6 +191,9 @@ function reload_table(){
     table.ajax.reload(null,false); //reload datatable ajax
 }
 
+
+
+
 function save(){
     $('#btnSave').text('Salvando...'); //change button text
     $('#btnSave').attr('disabled',true); //set button disable
@@ -208,6 +206,7 @@ function save(){
         texto = "alterado";
     }
     // ajax adding data to database
+    console.log($('#form').serialize());
     $.ajax({
         url : url,
         type: "POST",

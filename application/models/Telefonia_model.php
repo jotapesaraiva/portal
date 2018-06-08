@@ -37,13 +37,26 @@ class Telefonia_model extends CI_Model{
 
     //=============================================================================
 
-    public function listar_telefone() {
+    public function listar_telefone($num_telefone=null) {
         $portal_db = $this->load->database('default',true);
-        return $portal_db->query('
-                            SELECT *
-                            FROM tbl_telefone
-                            WHERE id_tipo_categoria_telefone=1
-            ');
+        $portal_db->select('*');
+        $portal_db->from('tbl_telefone');
+        if($num_telefone != null){
+            $portal_db->where('numero_telefone',$num_telefone);
+        } else {
+            $portal_db->where('id_tipo_categoria_telefone',1);
+        }
+        $query = $portal_db->get();
+        return $query;
+    }
+
+    public function id_telefone($num_telefone) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('id_telefone');
+        $portal_db->from('tbl_telefone');
+        $portal_db->where('numero_telefone',$num_telefone);
+        $query = $portal_db->get();
+        return $query->row();
     }
 
     public function listar_celular() {
@@ -60,7 +73,7 @@ class Telefonia_model extends CI_Model{
         return $portal_db->insert_id();
     }
 
-    public function salvar_telefone($dados){
+    public function salvar_telefone($dados) {
         $portal_db = $this->load->database('default',true);
         $portal_db->insert('tbl_telefone', $dados);
         return $portal_db->insert_id();

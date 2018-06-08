@@ -66,7 +66,12 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Celula / Equipe :</label>
                             <div class="col-md-9">
-                                <input name="equipe" placeholder="Celula/Equipe" class="form-control" type="text">
+                                <select class="selectpicker form-control" name="grupo" data-live-search="true">
+                                    <option value="">------Selecione um grupo-----</option>
+                                    <?php foreach($grupos->result() as $grupo) :?>
+                                      <option value="<?=$grupo->id_grupo?>"><?=$grupo->nome_grupo?></option>
+                                    <?php endforeach ?>
+                                </select>
                                 <span class="help-block"></span>
                             </div>
                         </div>

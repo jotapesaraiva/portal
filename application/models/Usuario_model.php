@@ -78,11 +78,23 @@ class Usuario_model extends CI_Model{
             SELECT
                u.*,
                c.nome_cargo,
-               p.nome_permissao
+               p.nome_permissao,
+               g.nome_grupo
             FROM tbl_usuario AS u
             JOIN tbl_cargo AS c ON c.id_cargo = u.id_cargo
+            JOIN tbl_grupos AS g ON g.id_grupo = u.id_grupo
             JOIN tbl_permissao AS p ON p.id_permissao = u.id_permissao');
         //return $portal_db->get('tbl_usuario');
+    }
+
+    public function listar_usuario_telefone($id_usuario) {
+            $portal_db = $this->load->database('default',true);
+            $portal_db->select('*');
+            $portal_db->from('tbl_usuario_telefone ut');
+            $portal_db->join('tbl_telefone t','t.id_telefone=ut.id_telefone');
+            $portal_db->where('ut.id_usuario',$id_usuario);
+            $query = $portal_db->get();
+            return $query;
     }
 
     public function update_usuario($where,$dados){

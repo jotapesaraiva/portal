@@ -277,7 +277,7 @@ function edit_person(id) {
             }
             $('[name="permissao"]').val(data.usuario.id_permissao);
             $('[name="cargo"]').val(data.usuario.id_cargo);
-            $('[name="equipe"]').val(data.usuario.celula_equipe);
+            $('[name="grupo"]').val(data.usuario.id_grupo);
                           if(data.telefone.length == 2) {
                               $.each(data.telefone, function(i, item) {
                                 if(i == 0) {
@@ -402,7 +402,7 @@ function delete_person(id){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/listar_usuarios_delete"+id,
+            url : server+"/usuarios_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
