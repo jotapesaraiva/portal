@@ -22,27 +22,19 @@ class Tecnico extends CI_Controller {
     }
 
     public function index() {
-      $this->output->enable_profiler(TRUE);
+      $this->output->enable_profiler(FALSE);
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
             <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-            ';
-            // <link href="' . base_url() . 'assets/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
-            // <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
+        ';
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/tecnico.js" type="text/javascript"></script>
-';
-            // <script src="' . base_url() . 'assets/multi-select.js" type="text/javascript"></script>
-            // <script src="' . base_url() . 'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
-            // <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
-            // <script src="' . base_url() . 'assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
-        $script['script'] = '
         ';
-        // <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>
+        $script['script'] = '';
 
         $session['username'] = $this->session->userdata('username');
         $unidades = $this->unidade_model->listar_unidade();
@@ -134,7 +126,6 @@ class Tecnico extends CI_Controller {
     }
 
     public function tecnico_update() {
-        // $this->output->enable_profiler(TRUE);
         $this->tecnico_validate();
         $this->tecnico_model->delete_all($this->input->post('nome'));
         $unidades = $this->input->post('unidade');
@@ -148,9 +139,9 @@ class Tecnico extends CI_Controller {
         echo json_encode(array("status" => TRUE));
     }
 
-    public function tecnico_delete($id_tecnico,$id_unidade) {
+    public function tecnico_delete($id_tecnico) {
         // $this->output->enable_profiler(TRUE);
-        $this->tecnico_model->delete_tecnico($id_tecnico,$id_unidade);
+        $this->tecnico_model->delete_all($id_tecnico);
         set_msg("msgOk", "Tecnico deletado com sucesso !!!","info");
         echo json_encode(array("status" => TRUE));
     }

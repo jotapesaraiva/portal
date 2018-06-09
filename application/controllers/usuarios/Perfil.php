@@ -24,11 +24,13 @@ class Perfil extends CI_Controller {
 
     public function index() {
         $css['headerinc'] = '
+            <link href="' . base_url() . 'assets/multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
             <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
             <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
             <link href="' . base_url() . 'assets/switch.css" rel="stylesheet" type="text/css" />';
         $script['footerinc'] = '
+            <script src="' . base_url() . 'assets/multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
@@ -50,6 +52,7 @@ class Perfil extends CI_Controller {
         $this->load->view('template/sidebar');
 
         $this->load->view('usuarios/perfil');
+        $this->load->view('modal/modal_form');
         $this->load->view('modal/modal_modulos',$modal);
         $this->load->view('modal/modal_membros',$data);
 
@@ -72,8 +75,9 @@ class Perfil extends CI_Controller {
            $row[] = $perfil->nome_grupo;
            $row[] = '<a href="javascript:void(0)" title="Modulo" onclick="membro_group('."'".$perfil->id_grupo."'".')"> Membros </a>';
            $row[] = '<a href="javascript:void(0)" title="Modulo" onclick="modulo_group('."'".$perfil->id_grupo."'".')"> Modulos </a>';
-           $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
-                     <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+
+           $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_perfil('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
+                     <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_perfil('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
            $data[] = $row;
        }
 
@@ -87,32 +91,19 @@ class Perfil extends CI_Controller {
     }
 
     public function perfil_modulo($id) {
-      $modulos = $this->usuario_model->list_modulos();
-      $modulo = $this->usuario_model->modulos_grupo($id);
-      // $html = '';
-      //     $html .= '<ul class="list-group">';
-      //   foreach ($modulos->result() as $mod) {
-      //     $check = "";
-      //     foreach($modulo->result() as $modgroup){
-      //       if($mod->nome_modulo == $modgroup->nome_modulo) {
-      //         $check = "checked";
-      //         break;
-      //       } else{
-      //         $check = "";
-      //       }
-      //     }
-      //     $html .=  '<li class="list-group-item">';
-      //     $html .=    '<label class="col-md-offset-1 col-md-8 uppercase">'.$mod->nome_modulo.' :</label>';
-      //     $html .=       '<input name="'.$mod->nome_modulo.'" type="checkbox" '. $check . ' class="make-switch" data-on-text="<i class=\'fa fa-check\'></i>" data-off-text="<i class=\'fa fa-times\'></i>">';
-      //     $html .=  '</li>';
-      //   }
-      //     $html .= '</ul>';
+      $id_modulos = $this->usuario_model->modulos_grupo($id);
+      if($id_modulos == null){
+        $row[] ="";
+      } else{
+          foreach ($id_modulos as $modulo) {
+              $row[] = $modulo['id_modulo'];
+          }
+      }
       $data = array(
-        'modulo' => $modulo->result()
-      );
+        'id_modulo' => $row,
+        'id_grupo' => $id
+        );
       echo json_encode($data);
-      // vd($html);
-      // }
     }
 
     public function perfil_membro($id) {
@@ -146,7 +137,7 @@ class Perfil extends CI_Controller {
         echo json_encode($output);
     }
 
-    public function perfil_add_membro() {
+    public function membro_update() {
 
       $this->input->post('membros_group');
 
@@ -159,17 +150,31 @@ class Perfil extends CI_Controller {
       vd($data);
     }
 
-    public function perfil_add_modulo() {
-
+    public function modulo_update() {
+        $this->usuario_model->delete_modulos($this->input->post('grupo'));
+        $modulos = $this->input->post('modulo');
+        foreach ($modulos as $modulo) {
+            $data = array(
+                'id_grupo' => $this->input->post('grupo'),
+                'id_modulo' => $modulo
+            );
+            $this->usuario_model->save_perfil($data);
+        }
+        echo json_encode(array("status" => TRUE));
     }
 
     public function perfil_add() {
-       //$this->_validate();
+       $this->perfil_validate();
        $data = array(
-               'nome_perfil' => $this->input->post('nome'),
-               'comentario_perfil' => $this->input->post('comentario'),
+               'nome_grupo' => $this->input->post('nome'),
+               'descricao_grupo' => $this->input->post('comentario'),
            );
-       $insert = $this->usuario_model->save_perfil($data);
+       $this->usuario_model->save_perfil($data);
+       echo json_encode(array("status" => TRUE));
+    }
+
+    public function perfil_delete($id){
+       $this->usuario_model->delete_perfil($id);
        echo json_encode(array("status" => TRUE));
     }
 
@@ -179,20 +184,14 @@ class Perfil extends CI_Controller {
     }
 
     public function perfil_update() {
-       //$this->_validate();
+       $this->perfil_validate();
        $data = array(
-               'nome_perfil' => $this->input->post('nome'),
-               'comentario_perfil' => $this->input->post('comentario'),
+               'nome_grupo' => $this->input->post('nome'),
+               'descricao_grupo' => $this->input->post('comentario'),
            );
-       $this->usuario_model->update_perfil(array('id_perfil' => $this->input->post('id')), $data);
+       $this->usuario_model->update_perfil(array('id_grupo' => $this->input->post('id')), $data);
        echo json_encode(array("status" => TRUE));
     }
-
-    public function perfil_delete($id){
-       $this->usuario_model->delete_perfil($id);
-       echo json_encode(array("status" => TRUE));
-    }
-
     private function perfil_validate() {
         $data = array();
         $data['error_string'] = array();

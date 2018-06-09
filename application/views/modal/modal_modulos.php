@@ -1,6 +1,6 @@
 <!-- Bootstrap modal -->
-<div class="modal fade" id="modal_modulos" role="dialog">
-    <div class="modal-dialog">
+<div class="modal fade bs-modal-lg" id="modal_modulos" role="dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -8,21 +8,20 @@
             </div>
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal" role="form">
-                    <input type="hidden" value="" id="tecnico" name="id"/>
-                    <input type="hidden" value="" id="array_antigo" name="id"/>
                     <div class="form-body">
-
                          <div class="form-group">
-                             <ul class="list-group">
-                                     <?php foreach ($modulos->result() as $modulo): ?>
-                                 <li class="list-group-item">
-                                     <label class="col-md-offset-1 col-md-8 uppercase"><?=$modulo->nome_modulo?> :</label>
-                                     <!-- <div class="col-md-3"> -->
-                                         <input name="<?=$modulo->nome_modulo?>" type="checkbox" class="make-switch" data-on-text="<i class='fa fa-check'></i>" data-off-text="<i class='fa fa-times'></i>">
-                                     <!-- </div> -->
-                                 </li>
-                                     <?php endforeach ?>
-                             </ul>
+                            <input type="hidden" value="" id="grupo" name="grupo"/>
+                           <div class="form-group">
+                               <label class="control-label col-md-2">Nome :</label>
+                               <div class="col-md-10">
+                                   <select class="multi-select" name="modulo[]" multiple="multiple" >
+                                    <?php foreach ($modulos->result() as $modulo): ?>
+                                         <option value="<?=$modulo->id_modulo?>"><?=$modulo->nome_modulo?></option>
+                                    <?php endforeach ?>
+                                  </select>
+                              </div>
+                           </div>
+
                          </div>
                     </div>
                 </form>

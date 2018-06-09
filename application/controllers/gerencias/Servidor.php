@@ -10,11 +10,12 @@ class Servidor extends CI_Controller {
         $this->load->model('link_model');
         $this->load->model('fornecedor_model');
         $this->load->model('telefonia_model');
+        $this->load->model('tecnico_model');
         $this->load->model('servidor_model');
         $this->load->model('voip_model');
         $this->load->library('breadcrumbs');
         $this->load->library('Auth_AD');
-        if($this->auth_ad->is_authenticated()){
+        if($this->auth_ad->is_authenticated()) {
             $username = $this->session->userdata('username');
         } else {
             // $data = array('error_message' => 'Efetue o login para acessar o sistema');
@@ -24,19 +25,18 @@ class Servidor extends CI_Controller {
     }
 
     public function index() {
-        $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/servidor.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
-        $script['script'] = '
-        <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>';
-
         $css['headerinc'] = '
-           <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
-                   <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-                   <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
+            <link href="' . base_url() . 'assets/multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
+            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+            ';
+        $script['footerinc'] = '
+            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/servidor.js" type="text/javascript"></script>
+        ';
+        $script['script'] = '';
 
         $session['username'] = $this->session->userdata('username');
         $unidades = $this->unidade_model->listar_unidade();
@@ -53,7 +53,6 @@ class Servidor extends CI_Controller {
 
         $this->load->view('gerencias/servidor');
         $this->load->view('modal/modal_servidor', $dados);
-        //$this->load->view('modal/modal_delete');
 
         $this->load->view('template/footer',$script);
     }
@@ -70,7 +69,6 @@ class Servidor extends CI_Controller {
 
     foreach($servidors->result() as $servidor) {
        $row = array();
-       // $row[] = $servidor->id_usuario;
        $row[] = $servidor->nome_usuario;
        $unidades = $this->servidor_model->listar_unidade($servidor->id_usuario);
        if($unidades == null){
@@ -82,11 +80,8 @@ class Servidor extends CI_Controller {
          }
          $row[] = $Unidade;
        }
-       // $row[] = $servidor->nome_unidade;
        $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$servidor->id_usuario."','".$servidor->id_unidade."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                  <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$servidor->id_usuario."','".$servidor->id_unidade."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
-       // $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$tecnico->id_usuario."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
-                 // <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$tecnico->id_usuario."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
        $data[] = $row;
     }
 
@@ -110,35 +105,40 @@ class Servidor extends CI_Controller {
             // var_dump($data);
             $insert = $this->servidor_model->save_servidor($data);
         }
-
         echo json_encode(array("status" => TRUE));
+        set_msg("msgOk", "Servidor inserido com sucesso !!!","info");
     }
 
-    public function servidor_edit($id_servidor,$id_unidade) {
-        $data = $this->servidor_model->edit_servidor($id_servidor,$id_unidade);
+    public function servidor_edit($id_servidor) {
+        $id_ = $this->tecnico_model->edit_unidade_tecnico($id_servidor);
+        foreach ($id_unidades as $id_unidade) {
+            $unidade[] = $id_unidade['id_unidade'];
+        }
+        $id_usuario = $id_servidor;
+        $data = array(
+          'id_unidade' => $unidade,
+          'id_usuario' => $id_usuario
+        );
         echo json_encode($data);
     }
 
     public function servidor_update() {
         $this->servidor_validate();
+        $this->tecnico_model->delete_all($this->input->post('nome'));
         $unidades = $this->input->post('unidade');
         foreach ($unidades as $unidade) {
             $data = array(
                'id_usuario' => $this->input->post('nome'),
                'id_unidade' => $unidade,
             );
-            $existe = $this->servidor_model->exist_servidor($this->input->post('nome'),$unidade);
-            if($existe->num_rows() == 1) {
-              //$this->servidor_model->update_tecnico(array('id_usuario' => $this->input->post('nome')), $data);
-            } else {
-              $this->servidor_model->update_servidor($data);
-            }
+            $this->servidor_model->save_servidor($data);
         }
         echo json_encode(array("status" => TRUE));
     }
 
-    public function servidor_delete($id_servidor,$id_unidade) {
-        $this->servidor_model->delete_servidor($id_servidor,$id_unidade);
+    public function servidor_delete($id_servidor) {
+        $this->tecnico_model->delete_all($id_servidor);
+        set_msg("msgOk", "Servidor deletado com sucesso !!!","info");
         echo json_encode(array("status" => TRUE));
     }
 

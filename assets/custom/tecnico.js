@@ -41,23 +41,6 @@ $(document).ready(function() {
     $('#btn-excel').on('click', function() {
         table.button( '0-1' ).trigger();
     });
-    //set input/textarea/select event when change value, remove class error and remove text help block
-    // $("input").change(function(){
-    //     $(this).parent().parent().removeClass('has-error');
-    //     $(this).next().empty();
-    // });
-    // $("textarea").change(function(){
-    //     $(this).parent().parent().removeClass('has-error');
-    //     $(this).next().empty();
-    // });
-    // $("select").change(function(){
-    //     $(this).parent().parent().removeClass('has-error');
-    //     $(this).next().empty();
-    // });
-    // $('.selectpicker').on('change', function () {
-    //     $(this).parent().parent().parent().removeClass('has-error');
-    //     $(this).next().next().empty();
-    // });
 
 });
 
@@ -163,7 +146,6 @@ function add_person() {
 function edit_person(id_tecnico) {
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
-    // $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker bootstrap
     $('.multi-select').multiSelect('refresh');
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
@@ -174,7 +156,6 @@ function edit_person(id_tecnico) {
         type: "GET",
         dataType: "JSON",
         success: function(data) {
-            console.log(data);
             $('[name="nome"]').multiSelect('select',data.id_usuario);
             $('[name="unidade[]"]').multiSelect('select',data.id_unidade);
 
@@ -190,9 +171,6 @@ function edit_person(id_tecnico) {
 function reload_table(){
     table.ajax.reload(null,false); //reload datatable ajax
 }
-
-
-
 
 function save(){
     $('#btnSave').text('Salvando...'); //change button text
@@ -239,7 +217,7 @@ function delete_person(id_tecnico,id_unidade){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/tecnico_delete/"+id_tecnico+"/"+id_unidade,
+            url : server+"/tecnico_delete/"+id_tecnico,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

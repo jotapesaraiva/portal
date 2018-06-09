@@ -227,33 +227,36 @@ class Usuario_model extends CI_Model{
     //
     public function listar_perfil() {
         $portal_db = $this->load->database('default',true);
-        return $portal_db->get('tbl_perfil');
+        $portal_db->select('p.id_perfil,p.id_modulo,p.id_grupo,g.nome_grupo');
+        $portal_db->from('tbl_perfil p');
+        $portal_db->join('tbl_grupos g','g.id_grupo=p.id_grupo');
+        return $portal_db->get();
     }
 
     public function edit_perfil($id) {
         $portal_db = $this->load->database('default',true);
-        $portal_db->from('tbl_perfil');
-        $portal_db->where('id_perfil',$id);
+        $portal_db->from('tbl_grupos');
+        $portal_db->where('id_grupo',$id);
         $query = $portal_db->get();
         return $query->row();
     }
 
     public function save_perfil($dados) {
         $portal_db = $this->load->database('default',true);
-        $portal_db->insert('tbl_perfil', $dados);
+        $portal_db->insert('tbl_grupos', $dados);
         return $portal_db->insert_id();
     }
 
     public function update_perfil($where,$dados){
         $portal_db = $this->load->database('default',true);
-        $portal_db->update('tbl_perfil', $dados, $where);
+        $portal_db->update('tbl_grupos', $dados, $where);
         return $portal_db->affected_rows();
     }
 
     public function delete_perfil($id){
         $portal_db = $this->load->database('default',true);
-        $portal_db->where('id_perfil', $id);
-        $portal_db->delete('tbl_perfil');
+        $portal_db->where('id_grupos', $id);
+        $portal_db->delete('tbl_grupo');
     }
 
     public function membros_grupo($id) {
@@ -265,12 +268,12 @@ class Usuario_model extends CI_Model{
 
     public function modulos_grupo($id_group) {
         $portal_db = $this->load->database('default',true);
-        $portal_db->select('m.nome_modulo');
+        $portal_db->select('m.id_modulo');
         $portal_db->from('tbl_perfil p');
         $portal_db->join('tbl_modulos m','p.id_modulo=m.id_modulo');
         $portal_db->where('p.id_grupo',$id_group);
         $query = $portal_db->get();
-        return $query;
+        return $query->result_array();
     }
     public function modulos_grupo_nome($nome_group) {
         $portal_db = $this->load->database('default',true);
@@ -289,6 +292,12 @@ class Usuario_model extends CI_Model{
         $portal_db->from('tbl_modulos');
         $query = $portal_db->get();
         return $query;
+    }
+
+    public function delete_modulos($id_grupo) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->where('id_grupo', $id_grupo);
+        $portal_db->delete('tbl_perfil');
     }
 
 }

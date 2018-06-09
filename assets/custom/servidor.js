@@ -40,34 +40,10 @@ $(document).ready(function() {
     $('#btn-excel').on('click', function() {
         table.button( '0-1' ).trigger();
     });
-    //set input/textarea/select event when change value, remove class error and remove text help block
-    $("input").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $("textarea").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $("select").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $('.selectpicker').on('change', function () {
-        $(this).parent().parent().parent().removeClass('has-error');
-        $(this).next().next().empty();
-    });
 
-    $('a[href="<?php echo current_url();?>"]').click(function (e) {
-        e.preventDefault();
-        $('li.nav-item').removeClass('active open');
-        // $('').removeChild('<span class="selected"></span>');
-        $(this).parents('li').addClass('active open');
-        // $(this).append('<span class="selected"></span>');
-        // alert("mudou !!!!");
-    });
 });
 
+    $('.multi-select').multiSelect();
 /*********************************************************************
 *********************************************************************/
 
@@ -158,7 +134,7 @@ $(document).ready(function() {
 function add_person() {
     save_method = 'add';
     $('#form')[0].reset(); // reset form on modals
-    $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker bootstrap
+    $('.multi-select').multiSelect('refresh'); //reset selectcpicker bootstrap
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_servidor').modal('show'); // show bootstrap modal
@@ -168,7 +144,7 @@ function add_person() {
 function edit_person(id_servidor,id_unidade) {
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
-    $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker bootstrap
+    $('.multi-select').multiSelect('refresh'); //reset selectcpicker bootstrap
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
 
@@ -178,9 +154,8 @@ function edit_person(id_servidor,id_unidade) {
         type: "GET",
         dataType: "JSON",
         success: function(data) {
-            $('[name="id"]').val(data.id_usuario);
-            $('[name="nome"]').selectpicker('val', data.id_usuario);
-            $('[name="unidade[]"]').selectpicker('val', data.id_unidade);
+            $('[name="nome"]').multiSelect('select',data.id_usuario);
+            $('[name="unidade[]"]').multiSelect('select',data.id_unidade);
 
             $('#modal_servidor').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Editar servidor'); // Set title to Bootstrap modal title
@@ -191,7 +166,7 @@ function edit_person(id_servidor,id_unidade) {
     });
 }
 
-function reload_table(){
+function reload_table() {
     table.ajax.reload(null,false); //reload datatable ajax
 }
 
@@ -237,7 +212,7 @@ function delete_person(id_servidor,id_unidade){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/servidor_delete/"+id_servidor+"/"+id_unidade,
+            url : server+"/servidor_delete/"+id_servidor,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

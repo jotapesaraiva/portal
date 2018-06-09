@@ -41,19 +41,10 @@ $(document).ready(function() {
         table.button( '0-1' ).trigger();
     });
     //set input/textarea/select event when change value, remove class error and remove text help block
-    $("input").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $("textarea").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
-    $("select").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
-    });
+
 });
+
+$('.multi-select').multiSelect();
 
     function add_dynamic_input_field(count) {
         var button = '';
@@ -105,62 +96,42 @@ $(document).ready(function() {
             });
     }
 
-function modulo_group(id){
-    save_method = 'modulo';
-    $('#form')[0].reset(); // reset form on modals
-    $('.form-group').removeClass('has-error'); // clear error class
-    $('.help-block').empty(); // clear error string
-    //Ajax Load data from ajax
-    $.ajax({
-        url : server+"/perfil_modulo/"+id,
-        type: "GET",
-        dataType: "JSON",
-        success: function(data) {
-            $.each(data.modulo, function(index,item) {
-                // $('#modulo').html(data.modulo);
-                //     console.log(item.nome_modulo);
-                if(item.nome_modulo == 'tecnicos') {
-                    $('[name="tecnicos"]').bootstrapSwitch('state', true);
-                } else if(item.nome_modulo == 'servidores') {
-                    $('[name="servidores"]').bootstrapSwitch('state', true);
-                } else if(item.nome_modulo == 'fornecedores') {
-                    $('[name="fornecedores"]').bootstrapSwitch('state', true);
-                } else if(item.nome_modulo == 'contato') {
-                    $('[name="contato"]').bootstrapSwitch('state', true);
-                } else if(item.nome_modulo == 'voip') {
-                    $('[name="voip"]').bootstrapSwitch('state', true);
-                } else if(item.nome_modulo == 'perfil') {
-                    $('[name="perfil"]').bootstrapSwitch('state', true);
-                } else if(item.nome_modulo == 'link') {
-                    $('[name="link"]').bootstrapSwitch('state', true);
-                } else if (item.nome_modulo == 'unidade') {
-                    $('[name="unidade"]').bootstrapSwitch('state', true);
-                }
-            });
-            $('#modal_modulos').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Lista de modulos do grupo'); // Set title to Bootstrap modal title
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('Erro ao pegar os dados do ajax');
-        }
-    });
-}
+    function modulo_group(id){
+        save_method = 'modulo';
+        $('#form')[0].reset(); // reset form on modals
+        $('.multi-select').multiSelect('refresh');
+        $('.form-group').removeClass('has-error'); // clear error class
+        $('.help-block').empty(); // clear error string
+        //Ajax Load data from ajax
+        $.ajax({
+            url : server+"/perfil_modulo/"+id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                // console.log(data.id_modulo);
+                $('#grupo').val(data.id_grupo);
+                $('[name="modulo[]"]').multiSelect('select',data.id_modulo);
 
-function submit_modulo(){
+                $('#modal_modulos').modal('show'); // show bootstrap modal when complete loaded
+                $('.modal-title').text('Lista de modulos do grupo'); // Set title to Bootstrap modal title
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Erro ao pegar os dados do ajax');
+            }
+        });
+    }
 
-}
+    function add_person() {
+        save_method = 'add';
+        $('#form')[0].reset(); // reset form on modals
+        $('.form-group').removeClass('has-error'); // clear error class
+        $('.help-block').empty(); // clear error string
+        $('#modal_form').modal('show'); // show bootstrap modal
+        $('.modal-title').text('Adicionar tipo de perfil'); // Set Title to Bootstrap modal title
+    }
 
-function add_person() {
-    save_method = 'add';
-    $('#form')[0].reset(); // reset form on modals
-    $('.form-group').removeClass('has-error'); // clear error class
-    $('.help-block').empty(); // clear error string
-    $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Adicionar tipo de perfil'); // Set Title to Bootstrap modal title
-}
-
-function edit_person(id) {
-    save_method = 'update';
+function edit_perfil(id) {
+    save_method = 'update_perfil';
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
@@ -171,9 +142,9 @@ function edit_person(id) {
         type: "GET",
         dataType: "JSON",
         success: function(data) {
-            $('[name="id"]').val(data.id_perfil);
-            $('[name="nome"]').val(data.nome_perfil);
-            $('[name="comentario"]').val(data.comentario_perfil);
+            $('[name="id"]').val(data.id_grupo);
+            $('[name="nome"]').val(data.nome_grupo);
+            $('[name="comentario"]').val(data.decricao_grupo);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Editar tipo de perfil'); // Set title to Bootstrap modal title
         },
@@ -183,9 +154,9 @@ function edit_person(id) {
     });
 }
 
-function reload_table(){
-    table.ajax.reload(null,false); //reload datatable ajax
-}
+    function reload_table(){
+        table.ajax.reload(null,false); //reload datatable ajax
+    }
 
 function save(){
     $('#btnSave').text('Salvando...'); //change button text
@@ -194,12 +165,12 @@ function save(){
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
         url = server+"/perfil_add";
-    } else if(save_method == 'update') {
+    } else if(save_method == 'update_perfil') {
         url = server+"/perfil_update";
     } else if(save_method == 'membro') {
         url = server+"/perfil_add_membro";
     } else {
-        url = server+"/perfil_add_modulo";
+        url = server+"/modulo_update";
     }
 
     // ajax adding data to database
@@ -212,7 +183,8 @@ function save(){
             if(data.status){ //if success close modal and reload ajax table
                 $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>perfil adicionado com sucesso !!!</div>');
                 $("#myAlert").fadeOut(4000);
-                $('#modal_form').modal('hide');
+                $('#modal_modulos').modal('hide');
+                $('#modal_membros').modal('hide');
                 reload_table();
             } else {
                 for (var i = 0; i < data.inputerror.length; i++) {
