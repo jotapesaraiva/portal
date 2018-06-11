@@ -154,7 +154,7 @@ class Lista extends CI_Controller {
              if($exist->num_rows() != 1) {
                 $id_telefone = $this->telefonia_model->salvar_telefone($telefone);
              } else {
-                $id_telefone = $this->telefonia_model->id_telefone($telefone);
+                $id_telefone = $this->telefonia_model->id_telefone($tel);
              }
              $usuario_telefone = array (
                                    'id_telefone' => $id_telefone,

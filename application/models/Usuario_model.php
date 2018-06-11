@@ -243,7 +243,7 @@ class Usuario_model extends CI_Model{
 
     public function save_perfil($dados) {
         $portal_db = $this->load->database('default',true);
-        $portal_db->insert('tbl_grupos', $dados);
+        $portal_db->insert('tbl_perfil', $dados);
         return $portal_db->insert_id();
     }
 

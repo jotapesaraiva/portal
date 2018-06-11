@@ -279,6 +279,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor('links/calculo_multa', 'Cálculo Multa', 'class="nav-link"')?>
                             <?php if($this->uri->uri_string() == 'links/calculo_multa') { echo '<span class="selected"></span>'; } ?>
                         </li>
+                        <?php } if($this->auth_ad->level_access('consumo_banda',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <li class="nav-item <?php if($this->uri->uri_string() == 'links/consumo_banda') { echo 'active open'; } ?>">
+                            <?php echo anchor('links/consumo_banda', 'Consumo de Banda', 'class="nav-link"')?>
+                            <?php if($this->uri->uri_string() == 'links/consumo_banda') { echo '<span class="selected"></span>'; } ?>
+                        </li>
                         <?php } if($this->auth_ad->level_access('graficos_link',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php if($this->uri->segment(2) == 'graficos') { echo 'active open'; } ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
@@ -634,7 +639,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor('sistema/geral', 'Geral', 'class="nav-link"')?>
                             <?php if($this->uri->uri_string() == 'sistema/geral') { echo '<span class="selected"></span>'; } ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('conjob',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('cronjob',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/cronjob') { echo 'active open'; } ?>">
                             <?php echo anchor('sistema/cronjob', 'Cron Job', 'class="nav-link"')?>
                             <?php if($this->uri->uri_string() == 'sistema/cronjob') { echo '<span class="selected"></span>'; } ?>
