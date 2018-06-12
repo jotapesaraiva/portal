@@ -76,9 +76,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('tecnicos',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'gerencias/tecnico') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_link('tecnico'); ?>">
                             <?php echo anchor('gerencias/tecnico', 'Tecnicos', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'gerencias/tecnico') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_link('tecnico'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('fornecedores',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php if($this->uri->uri_string() == 'gerencias/fornecedor') { echo 'active open'; } ?>">

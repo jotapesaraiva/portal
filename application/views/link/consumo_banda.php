@@ -35,7 +35,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
-                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+
+                                <form method="post" action="<?php $_SERVER['PHP_SELF']?>">
+                                  <b>Pesquisar por Periodo:</b>
+                                  <select name="periodo_consumo" class="select" onchange='this.form.submit()'>
+
+                                    <option value="">Consumo Atual</option>
+                                    <option value="1 HOUR">1 Hora</option>
+                                    <option value="6 HOUR">6 Horas</option>
+                                    <option value="24 HOUR">24 Horas</option>
+                                    <option value="7 DAY">7 Dias</option>
+                                    <option value="30 DAY">30 Dias</option>
+                                  </select>
+                                </form>
+                              <noscript><input type="submit" value="Submit"></noscript>
+                            </div>
                             <div class="col-md-6">
                                 <div class="btn-group pull-right">
                                     <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Ferramentas
@@ -74,7 +89,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                </tr>
                            </thead>
                            <tbody>
-                            <?php echo $historico;?>
+                            <?php echo $consumo;?>
                            </tbody>
                        </table>
                    </div>

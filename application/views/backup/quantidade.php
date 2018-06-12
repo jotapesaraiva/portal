@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <!-- <a href="" class="remove"> </a> -->
                       </div>
                    </div>
-                   <div class="portlet-body">
+                  <div class="portlet-body">
                     <form id="grafico" name="grafico" method="post" action="<?php $_SERVER['PHP_SELF']?>">
                         <div class="form-group">
                             <div class="col-md-offset-5 col-md-2">
@@ -47,12 +47,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </select>
                             </div>
                             <noscript><input type="submit" value="Submit"></noscript>
-                            </div>
+                        </div>
+                      </form>
                       <div id="container"></div>
-              </div>
+                  </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
 <!-- /* End of file quantidade.php */ -->
 <!-- /* Location: ./application/views/backup/quantidade.php */ -->
