@@ -116,6 +116,8 @@ class Consumo_banda extends CI_Controller {
     }
 
     public function teste() {
+      echo $this->router->fetch_class();
+      echo $this->router->fetch_method();
       echo $this->table_consumo('7 HOUR');
        // $interval =  $this->consumo_model->consumo_atual('7 HOUR');
        // vd($interval->result_array());

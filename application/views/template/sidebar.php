@@ -76,24 +76,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('tecnicos',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_link('tecnico'); ?>">
+                        <li class="nav-item <?php echo active_class('tecnico'); ?>">
                             <?php echo anchor('gerencias/tecnico', 'Tecnicos', 'class="nav-link"')?>
-                            <?php echo span_link('tecnico'); ?>
+                            <?php echo span_class('tecnico'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('fornecedores',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'gerencias/fornecedor') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('fornecedor'); ?>">
                             <?php echo anchor('gerencias/fornecedor', 'Fornecedores', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'gerencias/fornecedor') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('fornecedor'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('contato',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'gerencias/contato') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('contato'); ?>">
                             <?php echo anchor('gerencias/contato', 'Contatos', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'gerencias/contato') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('contato'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('servidores',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'gerencias/servidor') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('servidor'); ?>">
                             <?php echo anchor('gerencias/servidor', 'Servidores', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'gerencias/servidor') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('servidor'); ?>
                         </li>
                         <?php }?>
                     </ul>
@@ -108,19 +108,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('sefa',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'ramais/sefa') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('sefa'); ?>">
                             <?php echo anchor('ramais/sefa', 'SEFA', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'ramais/sefa') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('sefa'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('dti',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'ramais/dti') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('dti'); ?>">
                             <?php echo anchor('ramais/dti', 'DTI', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'ramais/dti') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('dti'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('voip',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'ramais/voip') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('voip'); ?>">
                             <?php echo anchor('ramais/voip', 'VOIP', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'ramais/voip') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('voip'); ?>
                         </li>
                         <?php }?>
                     </ul>
@@ -135,14 +135,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('unidade',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'localidades/unidade') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('unidade'); ?>">
                             <?php echo anchor('localidades/unidade', 'Unidades', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'localidades/unidade') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('unidade'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('link',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'localidades/link') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('link'); ?>">
                             <?php echo anchor('localidades/link', 'Links', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'localidades/link') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('link'); ?>
                         </li>
                         <?php }?>
                     </ul>
@@ -161,14 +161,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('historico_bkp',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'backup/historico') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('historico'); ?>">
                             <?php echo anchor('backup/historico', 'Histórico', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'backup/historico') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('historico'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('janela_backup',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'backup/janela_backup') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('janela_backup'); ?>">
                             <?php echo anchor('backup/janela_backup', 'Janela de Backup', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'backup/janela_backup') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_link('janela_backup'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('fitas',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php if($this->uri->segment(2) == 'fitas') { echo 'active open'; } ?>">
@@ -178,17 +178,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'backup/fitas/diario') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_method('diario'); ?>">
                                     <?php echo anchor('backup/fitas/diario', 'Diário', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'backup/fitas/diario') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_method('diario'); ?>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'backup/fitas/mensal') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_method('mensal'); ?>">
                                     <?php echo anchor('backup/fitas/mensal', 'Mensal', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'backup/fitas/mensal') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_method('mensal'); ?>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'backup/fitas/poor') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_method('poor'); ?>">
                                     <?php echo anchor('backup/fitas/poor', 'Poor', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'backup/fitas/poor') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_method('poor'); ?>
                                 </li>
                             </ul>
                         </li>
@@ -207,19 +207,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="nav-item <?php if($this->uri->uri_string() == 'backup/graficos/crescimento/dia') { echo 'active open'; } ?>">
+                                        <li class="nav-item <?php echo active_method('dia'); ?>">
                                             <?php echo anchor('backup/graficos/crescimento/dia', 'Dia', 'class="nav-link"')?>
-                                            <?php if($this->uri->uri_string() == 'backup/graficos/crescimento/dia') { echo '<span class="selected"></span>'; } ?>
+                                            <?php echo span_method('dia'); ?>
                                         </li>
-                                        <li class="nav-item <?php if($this->uri->uri_string() == 'backup/graficos/crescimento/mes') { echo 'active open'; } ?>">
+                                        <li class="nav-item <?php echo active_method('mes'); ?>">
                                             <?php echo anchor('backup/graficos/crescimento/mes', 'Mês', 'class="nav-link"')?>
-                                            <?php if($this->uri->uri_string() == 'backup/graficos/crescimento/mes') { echo '<span class="selected"></span>'; } ?>
+                                            <?php echo span_method('mes'); ?>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->segment(3) == 'quantidade') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_class('quantidade'); ?>">
                                     <?php echo anchor('backup/graficos/quantidade', 'Quantidade', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'backup/graficos/quantidade') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_class('quantidade'); ?>
                                 </li>
                                 <li class="nav-item <?php if($this->uri->segment(3) == 'tempo') { echo 'active open'; } ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
@@ -228,14 +228,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                    <li class="nav-item <?php if($this->uri->uri_string() == 'backup/graficos/tempo/mes') { echo 'active open'; } ?>">
-                                        <?php echo anchor('backup/graficos/tempo/mes', 'Mês', 'class="nav-link"')?>
-                                        <?php if($this->uri->uri_string() == 'backup/graficos/tempo/mes') { echo '<span class="selected"></span>'; } ?>
-                                    </li>
-                                    <li class="nav-item <?php if($this->uri->uri_string() == 'backup/graficos/tempo/ano') { echo 'active open'; } ?>">
-                                        <?php echo anchor('backup/graficos/tempo/ano', 'Ano', 'class="nav-link"')?>
-                                        <?php if($this->uri->uri_string() == 'backup/graficos/tempo/ano') { echo '<span class="selected"></span>'; } ?>
-                                    </li>
+                                        <li class="nav-item <?php echo active_method('mes'); ?>">
+                                            <?php echo anchor('backup/graficos/tempo/mes', 'Mês', 'class="nav-link"')?>
+                                            <?php echo span_method('mes'); ?>
+                                        </li>
+                                        <li class="nav-item <?php echo active_method('ano'); ?>">
+                                            <?php echo anchor('backup/graficos/tempo/ano', 'Ano', 'class="nav-link"')?>
+                                            <?php echo span_method('ano'); ?>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item <?php if($this->uri->segment(3) == 'volume') { echo 'active open'; } ?>">
@@ -245,14 +245,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                    <li class="nav-item <?php if($this->uri->uri_string() == 'backup/graficos/volume/mes') { echo 'active open'; } ?>">
-                                        <?php echo anchor('backup/graficos/volume/mes', 'Mês', 'class="nav-link"')?>
-                                        <?php if($this->uri->uri_string() == 'backup/graficos/volume/mes') { echo '<span class="selected"></span>'; } ?>
-                                    </li>
-                                    <li class="nav-item <?php if($this->uri->uri_string() == 'backup/graficos/volume/ano') { echo 'active open'; } ?>">
-                                        <?php echo anchor('backup/graficos/volume/ano', 'Ano', 'class="nav-link"')?>
-                                        <?php if($this->uri->uri_string() == 'backup/graficos/volume/ano') { echo '<span class="selected"></span>'; } ?>
-                                    </li>
+                                        <li class="nav-item <?php echo active_method('mes'); ?>">
+                                            <?php echo anchor('backup/graficos/volume/mes', 'Mês', 'class="nav-link"')?>
+                                            <?php echo span_method('mes'); ?>
+                                        </li>
+                                        <li class="nav-item <?php echo active_method('ano'); ?>">
+                                            <?php echo anchor('backup/graficos/volume/ano', 'Ano', 'class="nav-link"')?>
+                                            <?php echo span_method('ano'); ?>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -270,19 +270,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('historico_link',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'links/historico') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('historico'); ?>">
                             <?php echo anchor('links/historico', 'Historico', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'links/historico') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('historico'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('calculo_multa',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'links/calculo_multa') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('calculo_multa'); ?>">
                             <?php echo anchor('links/calculo_multa', 'Cálculo Multa', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'links/calculo_multa') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('calculo_multa'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('consumo_banda',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'links/consumo_banda') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('consumo_banda'); ?>">
                             <?php echo anchor('links/consumo_banda', 'Consumo de Banda', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'links/consumo_banda') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('consumo_banda'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('graficos_link',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php if($this->uri->segment(2) == 'graficos') { echo 'active open'; } ?>">
@@ -293,84 +293,84 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                            <li class="nav-item <?php if($this->uri->segment(3) == 'consumo') { echo 'active open'; } ?>">
-                                <a href="javascript:;" class="nav-link nav-toggle">
-                                    <i class="icon-feed"></i>
-                                    <span class="title">Consumo</span>
-                                    <?php if($this->uri->segment(3) == 'consumo') { echo '<span class="selected"></span>'; } ?>
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'links/graficos/consumo/diario') { echo 'active open'; } ?>">
-                                    <?php echo anchor('links/graficos/consumo/diario', 'Diário', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'links/graficos/consumo/diario') { echo '<span class="selected"></span>'; } ?>
+                                <li class="nav-item <?php if($this->uri->segment(3) == 'consumo') { echo 'active open'; } ?>">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="icon-feed"></i>
+                                        <span class="title">Consumo</span>
+                                        <?php if($this->uri->segment(3) == 'consumo') { echo '<span class="selected"></span>'; } ?>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item <?php echo active_method('diario'); ?>">
+                                            <?php echo anchor('links/graficos/consumo/diario', 'Diário', 'class="nav-link"')?>
+                                            <?php echo span_method('diario'); ?>
+                                        </li>
+                                        <li class="nav-item <?php echo active_method('mensal'); ?>">
+                                            <?php echo anchor('links/graficos/consumo/mensal', 'Mensal', 'class="nav-link"')?>
+                                            <?php echo span_method('mensal'); ?>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'links/graficos/consumo/mensal') { echo 'active open'; } ?>">
-                                    <?php echo anchor('links/graficos/consumo/mensal', 'Mensal', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'links/graficos/consumo/mensal') { echo '<span class="selected"></span>'; } ?>
+                                <li class="nav-item <?php if($this->uri->segment(3) == 'localidade') { echo 'active open'; } ?>">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="icon-feed"></i>
+                                        <span class="title">Localidade</span>
+                                        <?php if($this->uri->segment(3) == 'localidade') { echo '<span class="selected"></span>'; } ?>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item <?php echo active_class('mensal'); ?>">
+                                            <?php echo anchor('links/graficos/localidade/mensal', 'Mensal', 'class="nav-link"')?>
+                                            <?php echo span_class('mensal'); ?>
+                                        </li>
+                                        <li class="nav-item <?php echo active_class('anual'); ?>">
+                                            <?php echo anchor('links/graficos/localidade/anual', 'Anual', 'class="nav-link"')?>
+                                            <?php echo span_class('anual'); ?>
+                                        </li>
+                                    </ul>
                                 </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item <?php if($this->uri->segment(3) == 'localidade') { echo 'active open'; } ?>">
-                                <a href="javascript:;" class="nav-link nav-toggle">
-                                    <i class="icon-feed"></i>
-                                    <span class="title">Localidade</span>
-                                    <?php if($this->uri->segment(3) == 'localidade') { echo '<span class="selected"></span>'; } ?>
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'links/graficos/localidade/mensal') { echo 'active open'; } ?>">
-                                    <?php echo anchor('links/graficos/localidade/mensal', 'Mensal', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'links/graficos/localidade/mensal') { echo '<span class="selected"></span>'; } ?>
+                                <li class="nav-item <?php if($this->uri->segment(3) == 'causa') { echo 'active open'; } ?>">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="icon-feed"></i>
+                                        <span class="title">Causa</span>
+                                        <?php if($this->uri->segment(3) == 'causa') { echo '<span class="selected"></span>'; } ?>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item <?php echo active_class('mensal'); ?>">
+                                            <?php echo anchor('links/graficos/causa/mensal', 'Mensal', 'class="nav-link"')?>
+                                            <?php echo span_class('mensal'); ?>
+                                        </li>
+                                        <li class="nav-item <?php echo active_class('anual'); ?>">
+                                            <?php echo anchor('links/graficos/causa/anual', 'Anual', 'class="nav-link"')?>
+                                            <?php echo span_class('anual'); ?>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'links/graficos/localidade/anual') { echo 'active open'; } ?>">
-                                    <?php echo anchor('links/graficos/localidade/anual', 'Anual', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'links/graficos/localidade/anual') { echo '<span class="selected"></span>'; } ?>
+                                <li class="nav-item <?php if($this->uri->segment(3) == 'ticket') { echo 'active open'; } ?>">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="icon-feed"></i>
+                                        <span class="title">Ticket</span>
+                                        <?php if($this->uri->segment(3) == 'ticket') { echo '<span class="selected"></span>'; } ?>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item <?php echo active_class('mensal'); ?>">
+                                            <?php echo anchor('links/graficos/ticket/mensal', 'Mensal', 'class="nav-link"')?>
+                                            <?php echo span_class('mensal'); ?>
+                                        </li>
+                                        <li class="nav-item <?php echo active_class('anual'); ?>">
+                                            <?php echo anchor('links/graficos/ticket/anual', 'Anual', 'class="nav-link"')?>
+                                            <?php echo span_class('anual'); ?>
+                                        </li>
+                                    </ul>
                                 </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item <?php if($this->uri->segment(3) == 'causa') { echo 'active open'; } ?>">
-                                <a href="javascript:;" class="nav-link nav-toggle">
-                                    <i class="icon-feed"></i>
-                                    <span class="title">Causa</span>
-                                    <?php if($this->uri->segment(3) == 'causa') { echo '<span class="selected"></span>'; } ?>
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'links/graficos/causa/mensal') { echo 'active open'; } ?>">
-                                    <?php echo anchor('links/graficos/causa/mensal', 'Mensal', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'links/graficos/causa/mensal') { echo '<span class="selected"></span>'; } ?>
-                                </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'links/graficos/causa/anual') { echo 'active open'; } ?>">
-                                    <?php echo anchor('links/graficos/causa/anual', 'Anual', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'links/graficos/causa/anual') { echo '<span class="selected"></span>'; } ?>
-                                </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item <?php if($this->uri->segment(3) == 'ticket') { echo 'active open'; } ?>">
-                                <a href="javascript:;" class="nav-link nav-toggle">
-                                    <i class="icon-feed"></i>
-                                    <span class="title">Ticket</span>
-                                    <?php if($this->uri->segment(3) == 'ticket') { echo '<span class="selected"></span>'; } ?>
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'links/graficos/ticket/mensal') { echo 'active open'; } ?>">
-                                    <?php echo anchor('links/graficos/ticket/mensal', 'Mensal', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'links/graficos/ticket/mensal') { echo '<span class="selected"></span>'; } ?>
-                                </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'links/graficos/ticket/anual') { echo 'active open'; } ?>">
-                                    <?php echo anchor('links/graficos/ticket/anual', 'Anual', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'links/graficos/ticket/anual') { echo '<span class="selected"></span>'; } ?>
-                                </li>
-                                </ul>
-                            </li>
                             </ul>
                         </li>
                         <?php } else if($this->auth_ad->level_access($this->uri->segment(2),$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'links/historico') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('historico'); ?>">
                             <?php echo anchor('links/historico', 'Historico', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'links/historico') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('historico'); ?>
                         </li>
                         <?php }?>
                     </ul>
@@ -635,24 +635,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('geral',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/geral') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('geral'); ?>">
                             <?php echo anchor('sistema/geral', 'Geral', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'sistema/geral') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('geral'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('cronjob',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/cronjob') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('cronjob'); ?>">
                             <?php echo anchor('sistema/cronjob', 'Cron Job', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'sistema/cronjob') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('cronjob'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('log',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/log') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('log'); ?>">
                             <?php echo anchor('sistema/log', 'Logs', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'sistema/log') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('log'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('ldap',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/ldap') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('ldap'); ?>">
                             <?php echo anchor('sistema/ldap', 'LDAP', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'sistema/ldap') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('ldap'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('consulta',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php if($this->uri->segment(2) == 'consulta') { echo 'active open'; } ?>">
@@ -662,44 +662,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/consulta/acesso') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_class('acesso'); ?>">
                                     <?php echo anchor('sistema/consulta/acesso', 'Tipo de Acesso', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'sistema/consulta/acesso') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_class('acesso'); ?>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/consulta/velocidade') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_class('velocidade'); ?>">
                                     <?php echo anchor('sistema/consulta/velocidade', 'Tipo de Velocidade', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'sistema/consulta/velocidade') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_class('velocidade'); ?>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/consulta/cidade') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_class('cidade'); ?>">
                                     <?php echo anchor('sistema/consulta/cidade', 'Cidade', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'sistema/consulta/cidade') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_class('cidade'); ?>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/consulta/expediente') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_class('expediente'); ?>">
                                     <?php echo anchor('sistema/consulta/expediente', 'Expediente', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'sistema/consulta/expediente') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_class('expediente'); ?>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/consulta/contexto_voip') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_class('contexto_voip'); ?>">
                                     <?php echo anchor('sistema/consulta/contexto_voip', 'Tipo Contexto Voip', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'sistema/consulta/contexto_voip') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_class('contexto_voip'); ?>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/consulta/equipamento_voip') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_class('equipamento_voip'); ?>">
                                     <?php echo anchor('sistema/consulta/equipamento_voip', 'Tipo Equipamento Voip', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'sistema/consulta/equipamento_voip') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_class('equipamento_voip'); ?>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/consulta/categoria_voip') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_class('categoria_voip'); ?>">
                                     <?php echo anchor('sistema/consulta/categoria_voip', 'Tipo Categoria Voip', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'sistema/consulta/categoria_voip') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_class('categoria_voip'); ?>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/consulta/categoria_tel') { echo 'active open'; } ?>">
+                                <li class="nav-item <?php echo active_class('categoria_tel'); ?>">
                                     <?php echo anchor('sistema/consulta/categoria_tel', 'Tipo Categoria Telefonia', 'class="nav-link"')?>
-                                    <?php if($this->uri->uri_string() == 'sistema/consulta/categoria_tel') { echo '<span class="selected"></span>'; } ?>
+                                    <?php echo span_class('categoria_tel'); ?>
                                 </li>
                             </ul>
                         </li>
                         <?php } if($this->auth_ad->level_access('zabbix',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'sistema/zabbix') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('zabbix'); ?>">
                             <?php echo anchor('sistema/zabbix', 'Zabbix', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'sistema/zabbix') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('zabbix'); ?>
                         </li>
                         <?php }?>
                     </ul>
@@ -714,34 +714,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('lista',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'usuarios/lista') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('lista'); ?>">
                             <?php echo anchor('usuarios/lista', 'Lista de Usuarios', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'usuarios/lista') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('lista'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('permissao',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'usuarios/permissao') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('permissao'); ?>">
                             <?php echo anchor('usuarios/permissao', 'Permissão', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'usuarios/permissao') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('permissao'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('grupos',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'usuarios/grupos') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('grupos'); ?>">
                              <?php echo anchor('usuarios/grupos', 'Grupos/Equipe', 'class="nav-link"')?>
-                             <?php if($this->uri->uri_string() == 'usuarios/grupos') { echo '<span class="selected"></span>'; } ?>
+                             <?php echo span_class('grupos'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('modulos',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'usuarios/modulos') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('modulos'); ?>">
                              <?php echo anchor('usuarios/modulos', 'Modulos', 'class="nav-link"')?>
-                             <?php if($this->uri->uri_string() == 'usuarios/modulos') { echo '<span class="selected"></span>'; } ?>
+                             <?php echo span_class('modulos'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('perfil',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'usuarios/perfil') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('perfil'); ?>">
                              <?php echo anchor('usuarios/perfil', 'Perfil', 'class="nav-link"')?>
-                             <?php if($this->uri->uri_string() == 'usuarios/perfil') { echo '<span class="selected"></span>'; } ?>
+                             <?php echo span_class('perfil'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('cargo',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'usuarios/cargo') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('cargo'); ?>">
                             <?php echo anchor('usuarios/cargo', 'Cargo', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'usuarios/cargo') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('cargo'); ?>
                         </li>
                         <?php }?>
                     </ul>
@@ -756,14 +756,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('configuracao',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'banco_de_dados/configuracao') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('configuracao'); ?>">
                             <?php echo anchor('banco_de_dados/configuracao', 'Configuração', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'banco_de_dados/configuracao') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('configuracao'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('backup',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->uri_string() == 'banco_de_dados/backup') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_class('backup'); ?>">
                             <?php echo anchor('banco_de_dados/backup', 'Backup', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'banco_de_dados/backup') { echo '<span class="selected"></span>'; } ?>
+                            <?php echo span_class('backup'); ?>
                         </li>
                         <?php }?>
                     </ul>
