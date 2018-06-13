@@ -35,11 +35,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
-                            <div class="col-md-6">
-
+                            <div class="col-md-offset-3 col-md-2"><label for="" class="control-label"><b>Pesquisar por Periodo:</b></label></div>
+                            <div class="col-md-2">
                                 <form method="post" name="myform" action="<?php $_SERVER['PHP_SELF']?>">
-                                  <b>Pesquisar por Periodo:</b>
-                                  <select name="periodo_consumo" name="myselect" class="select" onchange='this.form.submit()'>
+                                  <select name="periodo_consumo" name="myselect" class="selectpicker" onchange='this.form.submit()'>
                                     <option value="" <?php echo set_select('myselect', '', ($periodo_consumo == "") ? TRUE : FALSE ); ?>>Consumo Atual</option>
                                     <option value="1 HOUR" <?php echo set_select('myselect', '1 HOUR', ($periodo_consumo == "1 HOUR") ? TRUE : FALSE ); ?>>1 Hora</option>
                                     <option value="6 HOUR" <?php echo set_select('myselect', '6 HOUR', ($periodo_consumo == "6 HOUR") ? TRUE : FALSE ); ?>>6 Horas</option>
@@ -50,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </form>
                               <noscript><input type="submit" value="Submit"></noscript>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="btn-group pull-right">
                                     <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Ferramentas
                                         <i class="fa fa-angle-down"></i>
