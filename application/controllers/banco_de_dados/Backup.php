@@ -17,7 +17,7 @@ class Backup extends CI_Controller {
     }
 
     public function index() {
-        $this->output->enable_profiler(TRUE);
+        $this->output->enable_profiler(FALSE);
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
@@ -45,7 +45,7 @@ class Backup extends CI_Controller {
 
 
     public function manual($dado) {
-       $this->output->enable_profiler(TRUE);
+       $this->output->enable_profiler(FALSE);
        // Needed helpers
        $this->load->helper('download');
        $this->load->helper('file');
@@ -66,30 +66,19 @@ class Backup extends CI_Controller {
        // Load the download helper and send the file to your desktop
        force_download($db_name, $backup);
        //set_msg('msgOk','Backup realizado com sucesso !!!','sucesso');
-       $this->session->set_flashdata('msgOK', 'value');
-       $this->session->keep_flashdata('msgOK');
-       redirect();
+       redirect('banco_de_dados/backup');
     }
 
-    public function file_download($file_name ='') {
-        // $this->load->helper('download');
-        // $this->load->helper('file');
-        // // $filedown = $this->input->post('filedown');
-        // if($file_name) {
-        //   if($file_name){
-        //     $datas = file_get_contents(base_url() .'backups/' . $file_name); // Read the file's contents
-        //     force_download($file_name, $datas);
-        //   }
-        // }
-        $this->session->sess_create();
-        set_msg('msgOk','Arquivo excluido com sucesso !!!','sucesso');
-        redirect('banco_de_dados/backup', 'refresh');
+    public function file_download($file_name) {
+        $this->load->helper('download');
+        $this->load->helper('file');
+        force_download('/var/www/html/portal/backups/'.$file_name,null);
     }
 
-    public function file_delete($file_name='') {
+    public function file_delete($file_name) {
       $path = APPPATH.'../backups/'.$file_name;
       unlink($path);
-      set_msg('msgOk','Arquivo excluido com sucesso !!!','sucesso');
+      // set_msg('msgOk','Arquivo excluido com sucesso !!!','sucesso');
       redirect('banco_de_dados/backup');
     }
 
