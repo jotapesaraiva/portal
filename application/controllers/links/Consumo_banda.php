@@ -18,6 +18,10 @@ class Consumo_banda extends CI_Controller {
     }
 
     public function index() {
+        $css['headerinc'] = '
+            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
+            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
 
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
@@ -25,11 +29,6 @@ class Consumo_banda extends CI_Controller {
             <script src="' . base_url() . 'assets/custom/historico.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '';
-
-        $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
-            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
 
           $session['username'] = $this->session->userdata('username');
 
@@ -116,9 +115,11 @@ class Consumo_banda extends CI_Controller {
     }
 
     public function teste() {
-      echo $this->router->fetch_class();
-      echo $this->router->fetch_method();
-      echo $this->table_consumo('7 HOUR');
+
+
+      // echo $this->router->fetch_class();
+      // echo $this->router->fetch_method();
+      // echo $this->table_consumo('7 HOUR');
        // $interval =  $this->consumo_model->consumo_atual('7 HOUR');
        // vd($interval->result_array());
        // $this->output->enable_profiler(TRUE);

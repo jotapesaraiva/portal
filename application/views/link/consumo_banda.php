@@ -37,16 +37,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="row">
                             <div class="col-md-6">
 
-                                <form method="post" action="<?php $_SERVER['PHP_SELF']?>">
+                                <form method="post" name="myform" action="<?php $_SERVER['PHP_SELF']?>">
                                   <b>Pesquisar por Periodo:</b>
-                                  <select name="periodo_consumo" class="select" onchange='this.form.submit()'>
-
-                                    <option value="">Consumo Atual</option>
-                                    <option value="1 HOUR">1 Hora</option>
-                                    <option value="6 HOUR">6 Horas</option>
-                                    <option value="24 HOUR">24 Horas</option>
-                                    <option value="7 DAY">7 Dias</option>
-                                    <option value="30 DAY">30 Dias</option>
+                                  <select name="periodo_consumo" name="myselect" class="select" onchange='this.form.submit()'>
+                                    <option value="" <?php echo set_select('myselect', '', ($periodo_consumo == "") ? TRUE : FALSE ); ?>>Consumo Atual</option>
+                                    <option value="1 HOUR" <?php echo set_select('myselect', '1 HOUR', ($periodo_consumo == "1 HOUR") ? TRUE : FALSE ); ?>>1 Hora</option>
+                                    <option value="6 HOUR" <?php echo set_select('myselect', '6 HOUR', ($periodo_consumo == "6 HOUR") ? TRUE : FALSE ); ?>>6 Horas</option>
+                                    <option value="24 HOUR" <?php echo set_select('myselect', '24 HOUR', ($periodo_consumo == "4 HOUR") ? TRUE : FALSE ); ?>>24 Horas</option>
+                                    <option value="7 DAY" <?php echo set_select('myselect', '7 DAY', ($periodo_consumo == "7 DAY") ? TRUE : FALSE ); ?>>7 Dias</option>
+                                    <option value="30 DAY" <?php echo set_select('myselect', '30 DAY', ($periodo_consumo == "30 DAY") ? TRUE : FALSE ); ?>>30 Dias</option>
                                   </select>
                                 </form>
                               <noscript><input type="submit" value="Submit"></noscript>
