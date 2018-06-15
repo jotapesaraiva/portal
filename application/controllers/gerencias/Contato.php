@@ -55,7 +55,6 @@ class Contato extends CI_Controller {
 
         $this->load->view('gerencias/contatos');
         $this->load->view('modal/modal_contatos',$dados);
-        //$this->load->view('modal/modal_delete');
 
         $this->load->view('template/footer',$script);
     }
