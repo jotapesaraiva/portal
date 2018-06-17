@@ -69,6 +69,17 @@ $(document).ready(function() {
         table2.button( '0-1' ).trigger();
     });
 
+    $(".toggle-password").click(function() {
+
+      $(this).children().toggleClass("fa-eye fa-eye-slash");
+      var input = $($(this).attr("toggle"));
+      if (input.attr("type") == "password") {
+        input.attr("type", "text");
+      } else {
+        input.attr("type", "password");
+      }
+    });
+
 });
 
 
@@ -98,7 +109,8 @@ $(document).ready(function() {
                 $('[name="acesso"]').val(data.ip_servidor);
                 $('[name="responsavel"]').val(data.responsavel);
                 $('[name="usuario"]').val(data.usuario);
-                $('[name="senha"]').val(data.senha);
+                $('[name="senha"]').val(b64DecodeUnicode(data.senha));
+                $('[name="tipo"]').val(data.tipo);
 
                 $('#modal_acesso').modal('show'); // show bootstrap modal when complete loaded
                 $('.modal-title').text('Editar acesso'); // Set title to Bootstrap modal title
@@ -109,8 +121,26 @@ $(document).ready(function() {
         });
     }
 
+    function b64DecodeUnicode(str) {
+        // Going backwards: from bytestream, to percent-encoding, to original string.
+        return decodeURIComponent(atob(str).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+    }
+
+    function b64EncodeUnicode(str) {
+        // first we use encodeURIComponent to get percent-encoded UTF-8,
+        // then we convert the percent encodings into raw bytes which
+        // can be fed into btoa.
+        return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+            function toSolidBytes(match, p1) {
+                return String.fromCharCode('0x' + p1);
+        }));
+    }
+
     function reload_table() {
-        table.ajax.reload(null,false); //reload datatable ajax
+        table1.ajax.reload(null,false); //reload datatable ajax
+        table2.ajax.reload(null,false); //reload datatable ajax
     }
 
     function save() {

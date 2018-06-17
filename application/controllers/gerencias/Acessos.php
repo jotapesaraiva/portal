@@ -63,8 +63,20 @@ class Acessos extends CI_Controller {
             $html .= "  <td>".$servidor->ip_servidor."</td>\n";
             $html .= "  <td>".$servidor->responsavel."</td>\n";
             $html .= "  <td>".$servidor->usuario."</td>\n";
-            $html .= "  <td>".base64_decode($servidor->senha)."</td>\n";
-            $html .= "  <td><a class='btn yellow-mint btn-outline sbold' href='javascript:void(0)' title='Edit' onclick='edit_acesso(".$servidor->id.")'> <i class='glyphicon glyphicon-pencil'></i> Editar </a></td>\n";
+            $html .= "  <td>
+                            <input id=password-field-".$servidor->id." class='form-control' type='password' value='".base64_decode($servidor->senha)."'>
+                        </td>\n";
+            $html .= "  <td>
+                            <a class='btn blue btn-outline sbold toggle-password' title='Exibir' toggle='#password-field-".$servidor->id."'>
+                                <i class='fa fa-fw fa-eye field-icon '></i> Exibir
+                            </a>
+                            <a class='btn yellow-mint btn-outline sbold' href='javascript:void(0)' title='Edit' onclick='edit_acesso(".$servidor->id.")'>
+                                <i class='glyphicon glyphicon-pencil'></i> Editar
+                            </a>
+                            <a class='btn red-mint btn-outline sbold' href='javascript:void(0)' title='Deletar' onclick='delete_acesso(".$servidor->id.")'>
+                                <i class='glyphicon glyphicon-trash'></i> Deletar
+                            </a>
+                        </td>\n";
             $html .= "</tr>\n";
         }
         return $html;
@@ -80,23 +92,36 @@ class Acessos extends CI_Controller {
             $html .= "  <td>".$servidor->ip_servidor."</td>\n";
             $html .= "  <td>".$servidor->responsavel."</td>\n";
             $html .= "  <td>".$servidor->usuario."</td>\n";
-            $html .= "  <td>".base64_decode($servidor->senha)."</td>\n";
-            $html .= "  <td>".anchor('delete','Delete') ."/".anchor('alterar','Alterar')."</td>\n";
+            $html .= "  <td>
+                            <input id=password-field-".$servidor->id." class='form-control' type='password' value='".base64_decode($servidor->senha)."'>
+                        </td>\n";
+            $html .= "  <td>
+                            <a class='btn blue btn-outline sbold toggle-password' title='Exibir' toggle='#password-field-".$servidor->id."'>
+                                <i class='fa fa-fw fa-eye field-icon '></i> Exibir
+                            </a>
+                            <a class='btn yellow-mint btn-outline sbold' href='javascript:void(0)' title='Edit' onclick='edit_acesso(".$servidor->id.")'>
+                                <i class='glyphicon glyphicon-pencil'></i> Editar
+                            </a>
+                            <a class='btn red-mint btn-outline sbold' href='javascript:void(0)' title='Deletar' onclick='delete_acesso(".$servidor->id.")'>
+                                <i class='glyphicon glyphicon-trash'></i> Deletar
+                            </a>
+                        </td>\n";
             $html .= "</tr>\n";
         }
         return $html;
     }
 
-    public function acesso_add($id) {
+    public function acesso_add() {
         $this->acesso_validate();
         $data = array(
             'nome' => $this->input->post('nome'),
             'ip_servidor' => $this->input->post('acesso'),
             'responsavel' => $this->input->post('responsavel'),
             'usuario' => $this->input->post('usuario'),
-            'senha' => $this->input->post('senha')
+            'senha' => $this->input->post('senha'),
+            'tipo' => $this->input->post('tipo')
         );
-        $this->acessos_model->acesso_save($data);
+        $this->acessos_model->save_acesso($data);
         echo json_encode(array("status" => TRUE));
     }
 
@@ -107,7 +132,8 @@ class Acessos extends CI_Controller {
             'ip_servidor' => $this->input->post('acesso'),
             'responsavel' => $this->input->post('responsavel'),
             'usuario' => $this->input->post('usuario'),
-            'senha' => $this->input->post('senha')
+            'senha' => $this->input->post('senha'),
+            'tipo' => $this->input->post('tipo')
         );
         $this->acessos_model->acesso_update(array('id' => $this->input->post('id'), $data));
         echo json_encode(array("status" => TRUE));

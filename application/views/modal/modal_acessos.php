@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Serviço / Servidor :</label>
+                            <label class="control-label col-md-3">Serviço/Servidor :</label>
                             <div class="col-md-9">
                                 <input name="acesso" placeholder="Nome do Serviço / Servidor" class="form-control" type="text">
                                 <span class="help-block"></span>
@@ -42,6 +42,17 @@
                             <label class="control-label col-md-3">Senha :</label>
                             <div class="col-md-9">
                                 <input name="senha" placeholder="Senha" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">tipo :</label>
+                            <div class="col-md-9">
+                                <select name="tipo" >
+                                    <option value="">--Selecione uma opção--</option>
+                                    <option value="1"> Servidor </option>
+                                    <option value="0"> Serviço </option>
+                                </select>
                                 <span class="help-block"></span>
                             </div>
                         </div>
