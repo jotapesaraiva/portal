@@ -9,7 +9,7 @@ Class Nobreak_model extends CI_Model {
     }
     // Insert registration data in database
     public function consulta_nbk1() {
-        $portalm_db = $this->load->database('portalm',true);
+        $portalm_db = $this->load->database('portalmoni',true);
 
         $portalm_db->select('*');
         $portalm_db->from('tbl_temp_nobreak1');
@@ -17,20 +17,20 @@ Class Nobreak_model extends CI_Model {
         $portalm_db->order_by('ID', 'DESC');
         $portalm_db->limit(1);
         $query = $portalm_db->get();
-        return $query->result();
+        return $query->row();
        // "SELECT * FROM tbl_temp_nobreak1 WHERE ((outros_temp) <>0) ORDER BY ID DESC LIMIT 1 ";
     }
 
     public function consulta_nbk2() {
-        $portalm_db = $this->load->database('portalm',true);
+        $portalm_db = $this->load->database('portalmoni',true);
 
         $portalm_db->select('*');
         $portalm_db->from('tbl_temp_nobreak2');
-        $portalm_db->where('((outros_temp) <>0)');
+        $portalm_db->where('((outros_temp) <> 0)');
         $portalm_db->order_by('ID', 'DESC');
         $portalm_db->limit(1);
         $query = $portalm_db->get();
-        return $query->result_array();
+        return $query->row();
         //"SELECT * FROM tbl_temp_nobreak2 WHERE ((outros_temp) <>0) ORDER BY ID DESC LIMIT 1 ";
     }
 
@@ -99,6 +99,22 @@ Class Nobreak_model extends CI_Model {
                 return "erro";
                 break;
         }
+    }
+
+    public function query_nobreak() {
+        $portalm_db = $this->load->database('portalmoni',true);
+       return $portalm_db->query("SELECT date_format(hora, '%H.%i') AS hora,
+        avg(ent_freq) AS frequencia,
+        avg(ent_ten_rs) AS tensao_r_s,
+        avg(ent_ten_st) AS tensao_s_t,
+        avg(ent_ten_tr) AS tensao_t_r,
+        avg(sai_pot_apa_tot) AS potencia,
+        avg(sai_cor_r) AS corrente_r,
+        avg(sai_cor_s) AS corrente_s,
+        avg(sai_cor_t) AS corrente_t,
+        avg(ent_fat_pot) AS entrada_pot
+     FROM tbl_temp_nobreak1
+     WHERE data = '2018-06-18' GROUP BY hour(hora), minute(hora)");
     }
 /*     $querys_nbk = array(
      'Primario' =>

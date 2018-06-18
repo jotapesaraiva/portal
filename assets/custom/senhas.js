@@ -1,9 +1,7 @@
 var save_method; //for save method string
-var table1;
-var table2;
 var server = window.location.href;
 $(document).ready(function() {
-    table1 = $('#table1').DataTable({
+   var table1 = $('#table1').DataTable({
         "dom": "flrtip",
         "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
@@ -36,7 +34,7 @@ $(document).ready(function() {
         table1.button( '0-1' ).trigger();
     });
 
-    table2 = $('#table2').DataTable({
+   var table2 = $('#table2').DataTable({
         "dom": "flrtip",
         "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
@@ -81,7 +79,6 @@ $(document).ready(function() {
     });
 
 });
-
 
     function add_acesso() {
         save_method = 'add';
@@ -139,8 +136,11 @@ $(document).ready(function() {
     }
 
     function reload_table() {
-        table1.ajax.reload(null,false); //reload datatable ajax
-        table2.ajax.reload(null,false); //reload datatable ajax
+        // $('.table').ajax.reload(null,false); //reload datatable ajax
+        // table.ajax.reload(null,false); //reload datatable ajax
+        // $('.table').DataTable().ajax.reload();
+        // $(".table").DataTable().fnReloadAjax();
+        location.reload();
     }
 
     function save() {
@@ -164,7 +164,7 @@ $(document).ready(function() {
                 if(data.status) { //if success close modal and reload ajax table
                     $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Contato adicionado com sucesso !!!</div>');
                     $("#myAlert").fadeOut(4000);
-                    $('#modal_contato').modal('hide');
+                    $('#modal_acesso').modal('hide');
                     reload_table();
                 } else {
                     for (var i = 0; i < data.inputerror.length; i++) {
@@ -194,7 +194,7 @@ $(document).ready(function() {
                     //if success reload ajax table
                     $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Contato deletado com sucesso !!!</div>');
                     $("#myAlert").fadeOut(4000);
-                    $('#modal_contato').modal('hide');
+                    $('#modal_acesso').modal('hide');
                     reload_table();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

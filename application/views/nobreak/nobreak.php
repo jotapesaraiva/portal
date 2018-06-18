@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class="details">
                         <div class="number">
-                            <span data-counter="counterup" data-value="<?= $temps1['outros_temp'] ?> ºC" >0</span>
+                            <span data-counter="counterup" data-value="<?= $temps1['outros_temp'] ?>" >0</span>ºC
                         </div>
                         <div class="desc"> Nobreak Primário </div>
                     </div>
@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class="details">
                         <div class="number">
-                             <span data-counter="counterup" data-value="<?= $temps2['outros_temp'] ?> ºC" >0</span></div>
+                             <span data-counter="counterup" data-value="<?= $temps2['outros_temp'] ?>" >0</span>ºC</div>
                         <div class="desc"> Nobreak Secundario</div>
                     </div>
                         <a class="more" data-toggle="modal"  href="#modal_nbk2">  Detalhar Dados

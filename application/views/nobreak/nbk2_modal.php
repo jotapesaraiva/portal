@@ -24,10 +24,10 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                            <td><?=$temps2['hora']?></td>
-                                            <td><?=$temps2['outros_temp']?> º C</td>
-                                            <td><?=$temps2['ent_pot_apa_tot']?> KVA</td>
-                                            <td><?=$temps2['bat_car_atu']?> %</td>
+                                            <td><?=$temp2->hora ?></td>
+                                            <td><?=$temp2->outros_temp ?> º C</td>
+                                            <td><?=$temp2->ent_pot_apa_tot ?> KVA</td>
+                                            <td><?=$temp2->bat_car_atu ?> %</td>
                                             </tr>
                                         </tbody>
                                     </table>

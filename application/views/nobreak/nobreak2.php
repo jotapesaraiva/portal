@@ -8,15 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- BEGIN PAGE HEADER-->
         <!-- BEGIN PAGE BAR -->
         <div class="page-bar">
-            <ul class="page-breadcrumb">
-                <li>
-                    <a href="<?php echo base_url(); ?>">Home</a>
-                    <i class="fa fa-circle"></i>
-                </li>
-                <li>
-                    <span>Nobreak</span>
-                </li>
-            </ul>
+            <?php echo $this->breadcrumbs->show(); ?>
         </div>
         <!-- END PAGE BAR -->
         <!-- BEGIN PAGE TITLE-->
@@ -34,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class="details">
                         <div class="number">
-                            <span data-counter="counterup" data-value="xxxxxxxxxx ºC" >0</span>
+                            <span data-counter="counterup" data-value="<?= $temp1->outros_temp ?>">0</span> ºC
                         </div>
                         <div class="desc"> Nobreak Primário </div>
                     </div>
@@ -50,7 +42,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class="details">
                         <div class="number">
-                             <span data-counter="counterup" data-value="xxxxxxxxxx ºC" >0</span></div>
+                             <span data-counter="counterup" data-value="<?= $temp2->outros_temp ?>" >0</span> ºC
+                         </div>
                         <div class="desc"> Nobreak Secundario</div>
                     </div>
                         <a class="more" data-toggle="modal"  href="#modal_nbk2">  Detalhar Dados
@@ -67,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="portlet light ">
                         <div class="portlet-title">
                             <div class="caption font-red">
-                                <span class="caption-subject bold uppercase">Indicador de Evolução Diária da xxxxxxxxxxxx de Entrada do Nobreak </span>
+                                <span class="caption-subject bold uppercase">Indicador de Evolução Diária </span>
                                 <span class="caption-helper">(Mês Atual)</span>
                             </div>
                             <div class="actions">
@@ -80,12 +73,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                         </div>
                         <div class="portlet-body">
-                            <form id="grafico" name="grafico" method="post" action="xxxxxxxxxxxxxx">
+                            <form id="grafico" name="grafico" method="post" action="<?php $_SERVER['PHP_SELF']?>">
                                 <div  align="center">
                                     <b>Nobreak</b>
-                                    <select name="nobreak" class="select" onchange='this.form.submit()'>
-                                        <option value="Primario" xxxxxxxxxx> selected >Primário</option>
-                                        <option value="Secundario" xxxxxxxxxx> Secundário </option>
+                                    <select name="nobreak" class="selectpicker" onchange='this.form.submit()'>
+                                        <option value="Primario" <?= set_select('nobreak', 'Primario', ($nobreak == "Primario") ? TRUE : FALSE ) ?> > Primário</option>
+                                        <option value="Secundario" <?= set_select('nobreak', 'Secundario', ($nobreak == "Secundario") ? TRUE : FALSE ) ?> > Secundário </option>
                                     </select>
                                     <b>Dia</b>
                                     <select name="dia" class="select" onchange='this.form.submit()'>
@@ -100,17 +93,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </select>
                                     <b>Variável</b>
                                     <select name="variavel" class="select" onchange='this.form.submit()'>
-                                        <option  value='frequencia' xxxxxxxxxxxxx>Frequencia</option>
-                                        <option  value='potencia' xxxxxxxxxxxxxxx>Potencia Ap. Tot.</option>
-                                        <option  value='Tensao' xxxxxxxxxxxxxx>Tensão Entrada</option>
-                                        <option  value='Corrente' xxxxxxxxxxxxx>Corrente Saida</option>
-                                        <option  value='Potencia Entrada' xxxxxxxxxxxx>Potencia Entrada</option>
+                                        <option  value='frequencia' <?= set_select('variavel', 'frequencia', ($tipo_graf == "frequencia") ? TRUE : FALSE ) ?>>Frequencia</option>
+                                        <option  value='potencia' <?= set_select('variavel', 'potencia', ($tipo_graf == "potencia") ? TRUE : FALSE ) ?>>Potencia Ap. Tot.</option>
+                                        <option  value='tensao' <?= set_select('variavel', 'tensao', ($tipo_graf == "tensao") ? TRUE : FALSE ) ?>>Tensão Entrada</option>
+                                        <option  value='corrente' <?= set_select('variavel', 'corrente', ($tipo_graf == "corrente") ? TRUE : FALSE ) ?>>Corrente Saida</option>
+                                        <option  value='potencia' <?= set_select('variavel', 'potencia', ($tipo_graf == "potencia") ? TRUE : FALSE ) ?>>Potencia Entrada</option>
                                     </select>
                                     <br><br>
                                     <b>Tipo</b>
                                     <select name="tipo_graf" class="select" onchange='this.form.submit()'>
-                                        <option  value='diario' xxxxxxxxxxxxx>Diário</option>
-                                        <option  value='mensal'xxxxxxxxxxxxx>>Mensal</option>
+                                        <option  value='diario' <?= set_select('tipo_graf', 'diario', ($tipo_graf == "diario") ? TRUE : FALSE ) ?> >Diário</option>
+                                        <option  value='mensal' <?= set_select('tipo_graf', 'mensal', ($tipo_graf == "mensal") ? TRUE : FALSE ) ?>>Mensal</option>
                                     </select>
                                 </div>
                 <!-- Gr⧩co de Menu dos Gr⧩cos de Link-->

@@ -95,6 +95,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor('gerencias/servidor', 'Servidores', 'class="nav-link"')?>
                             <?php echo span_class('servidor'); ?>
                         </li>
+                        <?php } if($this->auth_ad->level_access('acessos',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <li class="nav-item <?php echo active_class('servidor'); ?>">
+                            <?php echo anchor('gerencias/acessos', 'Acessos', 'class="nav-link"')?>
+                            <?php echo span_class('acessos'); ?>
+                        </li>
                         <?php }?>
                     </ul>
                 </li>
