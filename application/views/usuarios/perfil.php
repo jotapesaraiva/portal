@@ -28,21 +28,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> Perfis </span>
+                        <span class="caption-subject bold uppercase"> Perfil </span>
                     </div>
                    </div>
                    <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
-                            <div class="col-md-6">
+    <!--                         <div class="col-md-6">
                                 <div class="btn-group">
                                   <button class="btn sbold green" onclick="add_person()"> Adicionar Novo
                                       <i class="fa fa-plus"></i>
                                   </button>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-6">
-                                <div class="btn-group pull-right">
+<!--                                 <div class="btn-group pull-right">
                                     <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Ferramentas
                                         <i class="fa fa-angle-down"></i>
                                     </button>
@@ -60,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                               <i class="fa fa-file-excel-o"></i> Exportar para Excel </a>
                                       </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

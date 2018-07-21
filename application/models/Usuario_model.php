@@ -235,7 +235,7 @@ class Usuario_model extends CI_Model{
 
     public function edit_perfil($id) {
         $portal_db = $this->load->database('default',true);
-        $portal_db->from('tbl_grupos');
+        $portal_db->from('tbl_perfil');
         $portal_db->where('id_grupo',$id);
         $query = $portal_db->get();
         return $query->row();
@@ -247,13 +247,13 @@ class Usuario_model extends CI_Model{
         return $portal_db->insert_id();
     }
 
-    public function update_perfil($where,$dados){
+    public function update_perfil($where,$dados) {
         $portal_db = $this->load->database('default',true);
         $portal_db->update('tbl_grupos', $dados, $where);
         return $portal_db->affected_rows();
     }
 
-    public function delete_perfil($id){
+    public function delete_perfil($id) {
         $portal_db = $this->load->database('default',true);
         $portal_db->where('id_grupos', $id);
         $portal_db->delete('tbl_grupo');
@@ -261,9 +261,11 @@ class Usuario_model extends CI_Model{
 
     public function membros_grupo($id) {
         $portal_db = $this->load->database('default',true);
-        return $query = $portal_db->query('SELECT u.nome_usuario, u.id_usuario
-                                    FROM tbl_usuario u
-                                    WHERE u.id_grupo='.$id.' ');
+        $portal_db->select('u.nome_usuario, u.id_usuario');
+        $portal_db->from('tbl_usuario u');
+        $portal_db->where('u.id_grupo',$id);
+        $query = $portal_db->get();
+        return $query->result_array();
     }
 
     public function modulos_grupo($id_group) {

@@ -22,28 +22,22 @@
                             <form class="form-horizontal" id="form_1" role="form">
                                 <div class="form-body">
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Nome: </label>
-                                        <div class="col-md-3">
+                                        <label class="col-md-1 control-label">Nome: </label>
+                                        <div class="col-md-5">
                                             <input name="nome_fornecedor" class="form-control" disabled="" type="text">
                                         </div>
                                         <label class="col-md-2 control-label">Email: </label>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <input name="email" class="form-control" disabled="" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Website: </label>
-                                        <div class="col-md-3">
+                                        <label class="col-md-1 control-label">Website: </label>
+                                        <div class="col-md-5">
                                             <input name="website" class="form-control" disabled="" type="text">
                                         </div>
-                                        <label class="col-md-2 control-label">Endereço: </label>
-                                        <div class="col-md-5">
-                                            <textarea name="endereco" class="form-control" disabled="" row="6"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="col-md-2 control-label">Tipo de serviço: </label>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <select class="selectpicker form-control" name="servico" disabled>
                                                 <option value=""></option>
                                                     <?php foreach($servicos->result() as $servico) : ?>
@@ -52,8 +46,14 @@
                                                 </select>
                                             </select>
                                         </div>
-                                        <label class="col-md-2 control-label">Comentário :</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 control-label">Endereço: </label>
                                         <div class="col-md-5">
+                                            <textarea name="endereco" class="form-control" disabled="" row="6"></textarea>
+                                        </div>
+                                        <label class="col-md-2 control-label">Comentário :</label>
+                                        <div class="col-md-4">
                                             <textarea name="comentario" class="form-control" disabled="" row="6"></textarea>
                                         </div>
                                     </div>
@@ -85,51 +85,28 @@
                             <form class="form-horizontal" id="form_2" role="form">
                                 <div class="form-body">
                                     <div class="form-group">
-                                       <label class="col-md-2 control-label">Nome: </label>
-                                       <div class="col-md-3">
-                                           <input name="nome" class="form-control" disabled="" type="text">
+                                       <label class="col-md-1 control-label">Nome: </label>
+                                       <div class="col-md-5">
+                                           <input name="nome_contato" class="form-control" disabled="" type="text">
                                        </div>
                                        <label class="col-md-2 control-label">Email: </label>
-                                       <div class="col-md-3">
-                                           <input name="email" class="form-control" disabled="" type="text">
+                                       <div class="col-md-4">
+                                           <input name="email_contato" class="form-control" disabled="" type="text">
                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Cargo: </label>
-                                        <div class="col-md-3">
-                                            <input name="cargo" type="text" class="form-control" disabled="" >
+                                        <label class="control-label col-md-1">Telefone :</label>
+                                        <div class="col-md-5">
+                                            <input class="form-control" name="telefone_contato[]" id="phone_with_ddd" disabled="" type="text">
                                         </div>
-                                        <label class="col-md-2 control-label">Fornecedor: </label>
-                                        <div class="col-md-3">
-                                            <select class="selectpicker form-control" name="fornecedor" disabled>
-                                                  <option value=""> </option>
-                                                <?php foreach($fornecedores->result() as $fornecedor) : ?>
-                                                <option value="<?=$fornecedor->id_fornecedor?>"><?=$fornecedor->nome_fornecedor?></option>
-                                                <?php endforeach ?>
-                                            </select>
+                                        <label class="control-label col-md-2">Celular :</label>
+                                        <div class="col-md-4">
+                                            <input class="form-control" name="celular_contato[]" id="cell" disabled="" type="text">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                            <div class="form-group">
-                                                <input type="hidden" name="id_telefone[]"/>
-                                                <label class="control-label col-md-2">Telefone :</label>
-                                                <div class="col-md-6">
-                                                    <input class="form-control" name="telefone[]" id="phone_with_ddd" disabled="" type="text">
-                                                </div>
-                                            </div>
-                                        <div id="view_telefone_add"></div>
-                                        <hr>
-                                            <div class="form-group">
-                                                <input type="hidden" name="id_celular[]"/>
-                                                <label class="control-label col-md-2">Celular :</label>
-                                                <div class="col-md-6">
-                                                    <input class="form-control" name="celular[]" id="cell" disabled="" type="text">
-                                                </div>
-                                            </div>
-                                        <div id="view_celular_add"></div>
-                                        <hr>
-                                    </div>
-                                    <div id="view_link_add"></div>
+
+                                    <div id="view_contato_add"></div>
+                                    <hr>
                                 </div>
                             </form>
                         </div>

@@ -61,15 +61,15 @@ class Ldap extends CI_Controller {
     }
 
     public function salvar() {
-        $this->config->load('auth_ad');
+        $this->config->load('auth_ad', TRUE);
         $admin_group = $this->input->post('admin_group');
         $port        = $this->input->post('port');
         $base_dn     = $this->input->post('base_dn');
         $ad_domain   = $this->input->post('ad_domain');
         $start_ou    = $this->input->post('start_ou');
-        print_r($this->input->post('port'));
-        $this->config->set_item('port', $port);
-        redirect('ldap');
+        // vd($this->input->post('admin_group'));
+        $this->config->set_item('admin_group', $admin_group, 'auth_add');
+        redirect('sistema/ldap');
     }
 }
 

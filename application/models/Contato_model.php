@@ -76,6 +76,18 @@ class Contato_model extends CI_Model {
         return $query->row();
     }
 
+    public function edit_contato_phone($id_contato,$phone){
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('*');
+        $portal_db->from('tbl_telefone t');
+        $portal_db->join('tbl_contato_telefone ct', 't.id_telefone=ct.id_telefone');
+        $portal_db->join('tbl_contato c', 'ct.id_contato=c.id_contato');
+        $portal_db->where('t.id_tipo_categoria_telefone ',$phone);
+        $portal_db->where('c.id_contato', $id_contato);
+        $query = $portal_db->get();
+        return $query->result();
+    }
+
     public function edit_contato_telefone($id_contato){
         $portal_db = $this->load->database('default',true);
         $portal_db->select('*');

@@ -62,6 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </li>
                             </ul>
                             <div class="tab-content">
+
                                 <div class="tab-pane active" id="tab_1">
                                     <form class="form-horizontal" id="basic" role="form">
                                         <div class="form-body">
@@ -98,7 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Class Extension Prefix: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="<?php echo $extension_pre; ?>"></input>
+                                                    <input type="text" class="form-control" value="<?php echo $extension_pre; ?>">
                                                 </div>
                                                 <label class="col-md-2 control-label">Composer auto-loading: </label>
                                                 <div class="col-md-3">
@@ -116,13 +117,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                     </form>
                                 </div>
+
                                 <div class="tab-pane" id="tab_2">
                                     <form class="form-horizontal" id="log" role="form">
                                         <div class="form-body">
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Error Logging Threshold: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="<?php echo $log_threshold; ?>" placeholder="Enter text">
+                                                    <input type="text" class="form-control" value="" placeholder="Enter text">
                                                 </div>
                                                 <label class="col-md-2 control-label">Error Logging Directory Path: </label>
                                                 <div class="col-md-3">
@@ -160,8 +162,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                     </form>
                                 </div>
+
                                 <div class="tab-pane" id="tab_3">
-                                    <form class="form-horizontal" id="cache" role="form">
+                                    <form class="form-horizontal" id="cache" role="form_cache">
                                         <div class="form-body">
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Cache Directory Path: </label>
@@ -184,6 +187,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                     </form>
                                 </div>
+
                                 <div class="tab-pane" id="tab_4">
                                     <form class="form-horizontal" id="session" role="form">
                                         <div class="form-body">
@@ -234,6 +238,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                     </form>
                                 </div>
+
                                 <div class="tab-pane" id="tab_5">
                                     <form class="form-horizontal" id="cookie" role="form">
                                         <div class="form-body">
@@ -274,6 +279,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                     </form>
                                 </div>
+
                                 <div class="tab-pane" id="tab_6">
                                     <form class="form-horizontal" id="cross" role="form">
                                         <div class="form-body">
@@ -318,13 +324,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                     </form>
                                 </div>
+
                                 <div class="tab-pane" id="tab_7">
                                 </div>
+
                                 <div class="tab-pane" id="tab_8">
                                 </div>
+
+                                <div class="tab-pane" id="tab_9">
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

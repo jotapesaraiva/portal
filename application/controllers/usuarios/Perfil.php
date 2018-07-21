@@ -34,12 +34,12 @@ class Perfil extends CI_Controller {
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/perfil.js" type="text/javascript"></script>
-        ';
+            <script src="' . base_url() . 'assets/custom/perfil.js" type="text/javascript"></script>';
         $script['script'] = '';
 
 
         $session['username'] = $this->session->userdata('username');
+        $modal['grupos'] = $this->usuario_model->listar_grupo();
         $modal['modulos'] = $this->usuario_model->list_modulos();
         $data['membros'] = $this->usuario_model->listar_usuarios();
 
@@ -52,7 +52,8 @@ class Perfil extends CI_Controller {
         $this->load->view('template/sidebar');
 
         $this->load->view('usuarios/perfil');
-        $this->load->view('modal/modal_form');
+
+        // $this->load->view('modal/modal_perfil',$modal);
         $this->load->view('modal/modal_modulos',$modal);
         $this->load->view('modal/modal_membros',$data);
 
@@ -76,7 +77,7 @@ class Perfil extends CI_Controller {
            $row[] = '<a href="javascript:void(0)" title="Modulo" onclick="membro_group('."'".$perfil->id_grupo."'".')"> Membros </a>';
            $row[] = '<a href="javascript:void(0)" title="Modulo" onclick="modulo_group('."'".$perfil->id_grupo."'".')"> Modulos </a>';
 
-           $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_perfil('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
+           $row[] = '
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_perfil('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
            $data[] = $row;
        }
@@ -94,7 +95,7 @@ class Perfil extends CI_Controller {
       $id_modulos = $this->usuario_model->modulos_grupo($id);
       if($id_modulos == null){
         $row[] ="";
-      } else{
+      } else {
           foreach ($id_modulos as $modulo) {
               $row[] = $modulo['id_modulo'];
           }
@@ -103,51 +104,43 @@ class Perfil extends CI_Controller {
         'id_modulo' => $row,
         'id_grupo' => $id
         );
+        // var_dump($id_modulos);
       echo json_encode($data);
     }
 
     public function perfil_membro($id) {
         $membros = $this->usuario_model->membros_grupo($id);
-        $html = '';
-        $count = 1;
-        foreach ($membros->result() as $membro) {
-            $button = '';
-            if($count > 1){
-                $button = '<button class="btn red remove" id="'.$count.'" type="button">
-                            <i class="fa fa-times"></i>
-                           </button>';
-            } else {
-                $button = '<button class="btn red remove" id="'.$count.'" type="button">
-                            <i class="fa fa-times"></i>
-                           </button>';
+        if($membros == null){
+          $id_usuario[] ="";
+          $nome_usuario[] ="";
+        } else {
+            foreach ($membros as $membro) {
+                $id_usuario[] =  $membro['id_usuario'];
+                $nome_usuario[] = $membro['nome_usuario'];
             }
-            $html .= '<div class="col-md-offset-1 col-md-8" id="row'.$count.'">';
-                $html .= '<div class="input-group">';
-                    $html .= '<input class="form-control" name="membros_grupo[]" id="'.$membro->id_usuario.'" value="'.$membro->nome_usuario.'" disabled="" type="text">';
-                    $html .= '<span class="input-group-btn">';
-                            $html .= $button;
-                    $html .= '</span>';
-                $html .= '</div>';
-            $html .= '</div>';
-            $count++;
         }
-        $output = array(
-            'membro' => $html
+        $data = array(
+            'id_usuario' => $id_usuario,
+            'nome_usuario' => $nome_usuario,
+            'id_grupo' => $id
         );
-        echo json_encode($output);
+        // var_dump($data);
+        echo json_encode($data);
     }
 
     public function membro_update() {
-
-      $this->input->post('membros_group');
-
-      $data = array(
-        'id_grupo' => $this->input->post('id'),
-        'membros' => $this->input->post('membros_group')
-      );
-      // $update = $this->unidade_model->update_membros($data);
-      // echo json_encode(array("status" => TRUE));
-      vd($data);
+        $membros = $this->input->post('membro');
+        $id_grupo = $this->input->post('id_grupo');
+        // vd($id_grupo);
+        if($membros != null){
+          foreach ($membros as $membro) {
+            $data = array( 'id_grupo' => $this->input->post('id_grupo') );
+            $this->usuario_model->update_usuario(array('id_usuario' => $membro), $data);
+          }
+          echo json_encode(array("status" => TRUE));
+        } else {
+          echo json_encode(array("nada" => TRUE));
+        }
     }
 
     public function modulo_update() {
@@ -163,35 +156,11 @@ class Perfil extends CI_Controller {
         echo json_encode(array("status" => TRUE));
     }
 
-    public function perfil_add() {
-       $this->perfil_validate();
-       $data = array(
-               'nome_grupo' => $this->input->post('nome'),
-               'descricao_grupo' => $this->input->post('comentario'),
-           );
-       $this->usuario_model->save_perfil($data);
-       echo json_encode(array("status" => TRUE));
-    }
-
     public function perfil_delete($id){
        $this->usuario_model->delete_perfil($id);
        echo json_encode(array("status" => TRUE));
     }
 
-    public function perfil_edit($id) {
-       $data = $this->usuario_model->edit_perfil($id);
-       echo json_encode($data);
-    }
-
-    public function perfil_update() {
-       $this->perfil_validate();
-       $data = array(
-               'nome_grupo' => $this->input->post('nome'),
-               'descricao_grupo' => $this->input->post('comentario'),
-           );
-       $this->usuario_model->update_perfil(array('id_grupo' => $this->input->post('id')), $data);
-       echo json_encode(array("status" => TRUE));
-    }
     private function perfil_validate() {
         $data = array();
         $data['error_string'] = array();

@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div>
                     <div class="portlet-body form">
-                        <form class="form-horizontal" action="ldap/salvar" method="post" role="form">
+                        <form class="form-horizontal" action="salvar" method="post" role="form">
                             <div class="form-body">
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">Admin Group: </label>

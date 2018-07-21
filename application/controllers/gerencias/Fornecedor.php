@@ -202,16 +202,62 @@ class Fornecedor extends CI_Controller {
        $telefone = $this->fornecedor_model->listar_fornecedor_telefone($id);
        $celular = $this->fornecedor_model->listar_fornecedor_celular($id);
        $contatos = $this->fornecedor_model->listar_contatos($id);
+       $contato = array();
+       foreach ($contatos->result() as $cont) {
+       if($cont->id_contato == null) {
+           $row = array(
+               'id_contato'       => '',
+               'nome_contato'     => '',
+               'email_contato'    => '',
+               'telefone_contato' => '',
+               'celular_contato'  => ''
+           );
+        } else {
+           $celulares = $this->contato_model->edit_contato_phone($cont->id_contato,2);
+           if($celulares == null) {
+               $cel = "";
+           } else {
+                 $cel = "";
+                 // vd($celulares);
+                 foreach($celulares as $cell) {
+                  $cel .= $cell->numero_telefone. ', ';
+                 }
+           }
+           $telefones = $this->contato_model->edit_contato_phone($cont->id_contato,1);
+           if($telefones == null) {
+               $tel = "";
+           } else {
+                 $tel = "";
+                 // vd($telefones);
+                 foreach($telefones as $telef) {
+                  $tel .= $telef->numero_telefone. ', ';
+                 }
+           }
+               $row = array(
+                   'id_contato'       => $cont->id_contato,
+                   'nome_contato'     => $cont->nome_contato,
+                   'email_contato'    => $cont->email_contato,
+                   'telefone_contato' => $tel,
+                   'celular_contato'  => $cel
+               );
+            }
+         $contato[] = $row;
+        }
 
        $data = array(
-        'fornecedor' => $fornecedor,
-        'telefone'   => $telefone->result_array(),
-        'celular'    => $celular->result_array(),
-        'contatos'   => $contatos->result_array());
+          'fornecedor' => $fornecedor,
+          'telefone'   => $telefone->result_array(),
+          'celular'    => $celular->result_array(),
+          'contato'   => $contato
+        );
        echo json_encode($data);
-       // vd($data);
+       // vd($telefone->result_array());
     }
 
+    public function listar_fornecedor(){
+        $data = $this->fornecedor_model->listar_fornecedor();
+        echo json_encode($data->result());
+    }
 
     public function fornecedor_update(){
        $this->fornecedor_validate();

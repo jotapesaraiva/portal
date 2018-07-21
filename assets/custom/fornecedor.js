@@ -296,16 +296,18 @@ function view_person(id) {
     $('#form_2')[0].reset(); // reset form on modals
 
     $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker bootstrap
-    // $("div[id*=remove_field]").remove();
+    $("div[id*=field_contato]").remove();
     // $('#remove_field_'+button_id+'').remove();
-    $("#field_telefone_1").remove();
-    $("#field_telefone_2").remove();
-    $("#field_telefone_3").remove();
-    $("#field_telefone_4").remove();
-    $("#field_celular_1").remove();
-    $("#field_celular_2").remove();
-    $("#field_celular_3").remove();
-    $("#field_celular_4").remove();
+    $("div[id*=field_telefone]").remove();
+    $("div[id*=field_celular]").remove();
+    // $("#field_telefone_1").remove();
+    // $("#field_telefone_2").remove();
+    // $("#field_telefone_3").remove();
+    // $("#field_telefone_4").remove();
+    // $("#field_celular_1").remove();
+    // $("#field_celular_2").remove();
+    // $("#field_celular_3").remove();
+    // $("#field_celular_4").remove();
 
     // $('.form-group').removeClass('has-error'); // clear error class
     // $('.help-block').empty(); // clear error string
@@ -358,7 +360,7 @@ function view_person(id) {
                }
            }
 
- //************************************************CELULAR**********************************************************************
+        //************************************************CELULAR**********************************************************************
          if(data.celular == null) {
              $('[name="celular[]"]').val('');
          } else {
@@ -387,6 +389,56 @@ function view_person(id) {
                  });
                  }
              }
+
+        //************************************************CONTATO**********************************************************************
+
+        if(data.contato == null) {
+          $('nome_contato').val('');
+          $('email_contato').val('');
+          $('cargo').val('');
+          $('fornecedor').val('');
+          $('telefone_contato').val('');
+          $('celular_contato').val('');
+        } else {
+            $.each(data.contato, function(indice,valor) {
+                if(indice == 0) {
+                    $('[name="nome_contato"]').val(valor.nome_contato);
+                    $('[name="email_contato"]').val(valor.email_contato);
+                    $('[name="cargo"]').val(valor.cargo);
+                    $('[name="fornecedor"]').val(valor.fornecedor);
+                    $('[name="telefone_contato"]').val(valor.telefone_contato);
+                    $('[name="celular_contato"]').val(valor.celular_contato);
+                } else {
+                // console.log(valor.nome_contato);
+                  var a = '';
+                  a += '<div  id="field_contato'+indice+'">';
+                  a += '<hr>';
+                  a += '<div class="form-group">';
+                  a += '    <input type="hidden" name="id_contato" value="'+valor.id_contato+'"/>';
+                  a += '    <label class="col-md-1 control-label">Nome: </label>';
+                  a += '    <div class="col-md-5">';
+                  a += '        <input type="text" name="nome_contato" value="'+valor.nome_contato+'" class="form-control" disabled="" >';
+                  a += '    </div>';
+                  a += '    <label class="col-md-2 control-label">Email: </label>';
+                  a += '    <div class="col-md-4">';
+                  a += '        <input type="text" name="email_contato" value="'+valor.email_contato+'" class="form-control" disabled="" >';
+                  a += '    </div>';
+                  a += '</div>';
+                  a += '<div class="form-group">';
+                  a += '    <label class="col-md-1 control-label">Telefone: </label>';
+                  a += '    <div class="col-md-5">';
+                  a += '        <input type="text" name="telefone_contato" value="'+valor.telefone_contato+'" class="form-control" disabled="" >';
+                  a += '    </div>';
+                  a += '    <label class="col-md-2 control-label">Celular: </label>';
+                  a += '    <div class="col-md-4">';
+                  a += '        <input type="text" name="celular_contato" value="'+valor.celular_contato+'" class="form-control" disabled="" >';
+                  a += '    </div>';
+                  a += '</div>';
+                  a += '</div>';
+                  $("#view_contato_add").append(a);
+                }
+            });
+        }
 
             $('#modal_fornecedor_view').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Informação da Empresa'); // Set title to Bootstrap modal title

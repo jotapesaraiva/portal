@@ -1,33 +1,26 @@
 <!-- Bootstrap modal -->
-<div class="modal fade" id="modal_membros" role="dialog">
-    <div class="modal-dialog">
+<div class="modal fade bs-modal-lg" id="modal_membros" role="dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h3 class="modal-title">Person Form</h3>
             </div>
             <div class="modal-body form">
-                <form action="#" id="form" class="form-horizontal" role="form">
+                <form action="#" id="form_membro" class="form-horizontal" role="form">
                     <div class="form-body">
-                        <div class="form-group">
-                            <div class="col-md-offset-1 col-md-8">
-                                <div class="input-group">
-                                    <select class="selectpicker form-control" name="voip[]" data-live-search="true">
-                                        <option value="">------Selecione um usuario-----</option>
-                                        <?php foreach($membros->result() as $membro) : ?>
-                                        <option value="<?=$membro->id_usuario?>"><?=$membro->nome_usuario?></option>
-                                        <?php endforeach ?>
+                          <div class="form-group">
+                            <input type="hidden" value="" id="grupo_membro" name="grupo"/>
+                            <div class="input-group">
+                                <label class="control-label col-md-2">Nome :</label>
+                                <div class="col-md-10">
+                                    <select id="membro" name="membro[]" multiple="multiple" >
+                                      <?php foreach ($membros->result() as $membro): ?>
+                                           <option value="<?=$membro->id_usuario?>"><?=$membro->nome_usuario?></option>
+                                      <?php endforeach ?>
                                     </select>
-                                    <span class="input-group-btn">
-                                        <button class="btn blue" id="" type="button">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group" id="membro">
-                           <!-- <div id="membro"></div> -->
                         </div>
                     </div>
                 </form>

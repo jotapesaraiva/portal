@@ -28,12 +28,12 @@
                             <form class="form-horizontal" id="form_1" role="form">
                                 <div class="form-body">
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Nome: </label>
-                                        <div class="col-md-3">
+                                        <label class="col-md-1 control-label">Nome: </label>
+                                        <div class="col-md-4">
                                             <input name="nome" class="form-control" disabled="" type="text">
                                         </div>
                                         <label class="col-md-2 control-label">Unidade responsável: </label>
-                                        <div class="col-md-3">
+                                        <div class="col-md-5">
                                             <select class="selectpicker form-control" name="unidade" disabled>
                                                 <option value=""></option>
                                                 <?php foreach($unidades->result() as $unidade) :?>
@@ -43,8 +43,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Cidade: </label>
-                                        <div class="col-md-3">
+                                        <label class="col-md-1 control-label">Cidade: </label>
+                                        <div class="col-md-4">
                                             <select class="selectpicker form-control" name="cidade" disabled>
                                                 <option value=""></option>
                                                 <?php foreach($cidades->result() as $cidade) :?>
@@ -58,8 +58,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Expediente: </label>
-                                        <div class="col-md-3">
+                                        <label class="col-md-1 control-label">Expediente: </label>
+                                        <div class="col-md-4">
                                             <select class="selectpicker form-control" name="expediente" disabled>
                                                 <option value=""></option>
                                                 <?php foreach($expedientes->result() as $expediente) : ?>

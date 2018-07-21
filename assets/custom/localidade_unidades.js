@@ -521,22 +521,27 @@ function view_person(id) {
     $('#form_3')[0].reset(); // reset form on modals
     $('#form_4')[0].reset(); // reset form on modals
     $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker bootstrap
-    // $("div[id*=remove_field]").remove();
+    $("div[id*=field_tecnico]").remove();
+    $("div[id*=field_servidor]").remove();
+    $("div[id*=field_voip]").remove();
+    $("div[id*=field_link]").remove();
+    $("div[id*=field_telefone]").remove();
+    $("div[id*=field_celular]").remove();
     // $('#remove_field_'+button_id+'').remove();
-    $("#field_voip_1").remove();
-    $("#field_voip_2").remove();
-    $("#field_voip_3").remove();
-    $("#field_voip_4").remove();
-    $("#field_link_1").remove();
-    $("#field_link_2").remove();
-    $("#field_telefone_1").remove();
-    $("#field_telefone_2").remove();
-    $("#field_telefone_3").remove();
-    $("#field_telefone_4").remove();
-    $("#field_celular_1").remove();
-    $("#field_celular_2").remove();
-    $("#field_celular_3").remove();
-    $("#field_celular_4").remove();
+    // $("#field_voip_1").remove();
+    // $("#field_voip_2").remove();
+    // $("#field_voip_3").remove();
+    // $("#field_voip_4").remove();
+    // $("#field_link_1").remove();
+    // $("#field_link_2").remove();
+    // $("#field_telefone_1").remove();
+    // $("#field_telefone_2").remove();
+    // $("#field_telefone_3").remove();
+    // $("#field_telefone_4").remove();
+    // $("#field_celular_1").remove();
+    // $("#field_celular_2").remove();
+    // $("#field_celular_3").remove();
+    // $("#field_celular_4").remove();
 
 
     // $('.form-group').removeClass('has-error'); // clear error class
@@ -559,6 +564,7 @@ function view_person(id) {
             $('[name="cidade"]').selectpicker('val', data.unidade.id_cidade);
             $('[name="expediente"]').selectpicker('val', data.unidade.id_expediente);
             $('[name="comentario"]').val(data.unidade.comentario_unidade);
+            /******************************************************VOIP*****************************************************************************/
             if(data.voip == null) {
                 $('[name="voip[]"]').selectpicker('val', '');
             } else {
@@ -600,7 +606,7 @@ function view_person(id) {
                 }
             }
 
-    /******************************************************************************************************************************************/
+            /******************************************************LINK*****************************************************************************/
 
             if (data.link == null) {
                 $('[name="link[]"]').selectpicker('val', '');
@@ -718,7 +724,7 @@ function view_person(id) {
                 }
             }
 
-//************************************************TELEFONE**********************************************************************
+      //************************************************TELEFONE**********************************************************************//
        if(data.telefone == null) {
            $('[name="telefone[]"]').val('');
        } else {
@@ -748,7 +754,7 @@ function view_person(id) {
                }
            }
 
- //************************************************CELULAR**********************************************************************
+        //************************************************CELULAR**********************************************************************//
 
          if(data.celular == null) {
              $('[name="celular[]"]').val('');
@@ -779,12 +785,12 @@ function view_person(id) {
                  }
              }
 
- //************************************************TECNICO**********************************************************************
+          //************************************************TECNICO**********************************************************************//
           if(data.tecnico == null) {
-            $('nome_tecnico').val('');
-            $('telefone_tecnico').val('');
-            $('celular_tecnico').val('');
-            $('voip_tecnico').val('');
+            $('[name="nome_tecnico"]').val('');
+            $('[name="telefone_tecnico"]').val('');
+            $('[name="celular_tecnico"]').val('');
+            $('[name="voip_tecnico"]').val('');
           } else {
               $.each(data.tecnico, function(indice,valor) {
                   if(indice == 0) {
@@ -794,8 +800,9 @@ function view_person(id) {
                     $('[name="celular_tecnico"]').val(valor.celular_tecnico);
                     $('[name="voip_tecnico"]').val(valor.voip_tecnico);
                   } else {
-                  // console.log(valor.nome_tecnico);
+
                     var a = '';
+                    a += '<div id=id="field_tecnico_'+indice+'">'
                     a += '<hr>';
                     a += '<div class="form-group">';
                     a += '    <input type="hidden" name="id_tecnico" value="'+valor.id_tecnico+'"/>';
@@ -818,16 +825,19 @@ function view_person(id) {
                     a += '        <input type="text" name="voip_tecnico" value="'+valor.voip_tecnico+'" class="form-control" disabled="" >';
                     a += '    </div>';
                     a += '</div>';
+                    a += '</div>';
                     $("#view_tecnico_add").append(a);
                   }
               });
           }
- //************************************************SERVIDORES Pub**********************************************************************
+
+          //************************************************SERVIDORES Pub**********************************************************************//
+
            if(data.servidor == null) {
-             $('nome_servidor').val('');
-             $('telefone_servidor').val('');
-             $('celular_servidor').val('');
-             $('voip_servidor').val('');
+             $('[name="nome_servidor"]').val('');
+             $('[name="telefone_servidor"]').val('');
+             $('[name="celular_servidor"]').val('');
+             $('[name="voip_servidor"]').val('');
            } else {
                $.each(data.servidor, function(indice,valor) {
                    if(indice == 0) {
@@ -839,6 +849,7 @@ function view_person(id) {
                    } else {
                   // console.log(valor.nome_servidor);
                     var a = '';
+                    a += '<div id="field_servidor'+indice+'">';
                     a += '<hr>';
                     a += '<div class="form-group">';
                     a += '    <input type="hidden" name="id_servidor" value="'+valor.id_servidor+'"/>';
@@ -860,6 +871,7 @@ function view_person(id) {
                     a += '    <div class="col-md-5">';
                     a += '        <input type="text" name="voip_servidor" value="'+valor.voip_servidor+'" class="form-control" disabled="" >';
                     a += '    </div>';
+                    a += '</div>';
                     a += '</div>';
                     $("#view_servidor_add").append(a);
                   }

@@ -34,6 +34,17 @@ class Fornecedor_model extends CI_Model {
         return $query;
     }
 
+    // public function listar_contatos($id) {
+    //     $portal_db = $this->load->database('default',true);
+    //     $portal_db->select('c.*, t.*');
+    //     $portal_db->from('tbl_contato c');
+    //     $portal_db->join('tbl_contato_telefone ct', 'ct.id_contato=c.id_contato');
+    //     $portal_db->join('tbl_telefone t', 't.id_telefone=ct.id_telefone');
+    //     $portal_db->where('c.id_fornecedor',$id);
+    //     $query = $portal_db->get();
+    //     return $query;
+    // }
+
     public function listar_fornecedor_telefone($id_fornecedor){
         $portal_db = $this->load->database('default',true);
         $portal_db->select('*');
