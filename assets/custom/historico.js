@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    table1 = $('#table1').DataTable({
+   var table1 = $('#table1').DataTable({
         "dom": "flrtip",
         "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
@@ -30,9 +30,5 @@ $(document).ready(function() {
     });
     $('#btn-excel').on('click', function() {
         table1.button( '0-1' ).trigger();
-    });
-
-    $('#reload_table').on('click', function() {
-        table1.ajax.reload(); //reload datatable ajax
     });
 });

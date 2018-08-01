@@ -63,11 +63,27 @@ class Backup extends CI_Controller {
        $save = '/var/www/html/portal/backups/'.$db_name;
        // Load the file helper and write the file to your server
        write_file($save, $backup);
+       // if(!write_file($save, $backup)){
+       //    set_msg('msgOk','Erro ao salvar backup no servidor.','erro');
+       //    redirect('banco_de_dados/backup/index');
+       // }
        // Load the download helper and send the file to your desktop
        force_download($db_name, $backup);
-       //set_msg('msgOk','Backup realizado com sucesso !!!','sucesso');
-       redirect('banco_de_dados/backup');
+       sleep(2);
+       set_msg('msgOk','Backup realizado com sucesso !!!','sucesso');
+       redirect('banco_de_dados/backup/index');
+       // $this->redirect_to(site_url('banco_de_dados/backup/index'));
+       // redirect(site_url('index'), 'refresh');
+       // echo "OK";
     }
+
+    // public function redirect_to($location){
+    //   if(!headers_sent())
+    //     header("Location: {$location}");
+    //   else
+    //     echo "<script>window.location.href='{$location}';</script>";
+    //   exit;
+    // }
 
     public function file_download($file_name) {
         $this->load->helper('download');

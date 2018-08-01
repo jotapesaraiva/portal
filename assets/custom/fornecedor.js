@@ -395,8 +395,6 @@ function view_person(id) {
         if(data.contato == null) {
           $('nome_contato').val('');
           $('email_contato').val('');
-          $('cargo').val('');
-          $('fornecedor').val('');
           $('telefone_contato').val('');
           $('celular_contato').val('');
         } else {
@@ -404,10 +402,8 @@ function view_person(id) {
                 if(indice == 0) {
                     $('[name="nome_contato"]').val(valor.nome_contato);
                     $('[name="email_contato"]').val(valor.email_contato);
-                    $('[name="cargo"]').val(valor.cargo);
-                    $('[name="fornecedor"]').val(valor.fornecedor);
-                    $('[name="telefone_contato"]').val(valor.telefone_contato);
-                    $('[name="celular_contato"]').val(valor.celular_contato);
+                    $('[name="telefone_contato[]"]').val(valor.telefone_contato);
+                    $('[name="celular_contato[]"]').val(valor.celular_contato);
                 } else {
                 // console.log(valor.nome_contato);
                   var a = '';

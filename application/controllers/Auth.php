@@ -206,24 +206,24 @@ class Auth extends CI_Controller{
 
         }
 
-        public function searchad($username) {
-            //$username = $_GET['name_startsWith'];
+        // public function searchad($username) {
+        //     //$username = $_GET['name_startsWith'];
 
-            $username = $this->input->get('name_startsWith');
-            // $user_search = $this->auth_ad->search_ad($username, array('samaccountname'));
-            $user_search = $this->auth_ad->auto_search($username);
-            $data = array();
-            for ($i=0; $i<$user_search["count"]; $i++) {
-                $row[] = $user_search[$i]["samaccountname"][0];
-                $data[] = $row;
-            }
-            if($i == 0){
-                echo "No matches found!";
-            }
-            // return json data;
-            // echo json_encode($data);
-            echo json_encode($user_search['count']);
-        }
+        //     $username = $this->input->get('name_startsWith');
+        //     // $user_search = $this->auth_ad->search_ad($username, array('samaccountname'));
+        //     $user_search = $this->auth_ad->auto_search($username);
+        //     $data = array();
+        //     for ($i=0; $i<$user_search["count"]; $i++) {
+        //         $row[] = $user_search[$i]["samaccountname"][0];
+        //         $data[] = $row;
+        //     }
+        //     if($i == 0){
+        //         echo "No matches found!";
+        //     }
+        //     // return json data;
+        //     echo json_encode($data);
+        //     // echo json_encode($user_search['count']);
+        // }
 
       public function info_user($username) {
             $info_full = $this->auth_ad->get_all_user_data($username);
@@ -231,6 +231,25 @@ class Auth extends CI_Controller{
             echo ('mail: '.$info_full['mail'][0]);
         }
 
+        public function pesquisar($username) {
+            // $result = $this->auth_ad->search_ad($username, array('dn'),TRUE);
+            $entries = $this->auth_ad->auto_search($username);
+            // vd($entries);
+            // echo json_encode($entries);
+            for ($x=0; $x<$entries['count']; $x++){
+                if (!empty($entries[$x]['givenname'][0]) &&
+                     !empty($entries[$x]['mail'][0]) &&
+                     !empty($entries[$x]['samaccountname'][0]) &&
+                     !empty($entries[$x]['sn'][0]) &&
+                     'Shop' !== $entries[$x]['sn'][0] &&
+                     'Account' !== $entries[$x]['sn'][0]){
+
+                    $ad_users[strtoupper(trim($entries[$x]['samaccountname'][0]))] = array('email' => strtolower(trim($entries[$x]['mail'][0])),'first_name' => trim($entries[$x]['givenname'][0]),'last_name' => trim($entries[$x]['sn'][0]));
+
+                }
+            }
+            vd($ad_users);
+        }
 
 
 }

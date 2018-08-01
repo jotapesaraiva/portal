@@ -1028,7 +1028,7 @@ class Auth_AD
      * root (default = false)
      * @return bool or array
      */
-    private function search_ad($account, $req_attrs = array('dn', 'cn'), $from_root = false) {
+    public function search_ad($account, $req_attrs = array('dn', 'cn'), $from_root = false) {
         // preset the result
         $result = array();
 
@@ -1095,7 +1095,7 @@ class Auth_AD
                 //$filter = '(&(objectCategory=person)(objectClass=user)' . ($activeOnly ? '(!(userAccountControl:1.2.840.113556.1.4.803:=2))' : '') . ')';
                 $filter = '(&(&(&(objectCategory=person)(objectClass=user)(name='.$username.'*))))';
 
-/*                    $req_attrs = array(
+                $req_attrs = array(
                     'displayname',
                     'dn',
                     'mail',
@@ -1106,10 +1106,10 @@ class Auth_AD
                     'description',
                     'lastlogontimestamp',
                     'physicaldeliveryofficename'
-                );*/
+                );
 
-                //if ($search = ldap_search($this -> _ldap_conn, $search_dn, $filter, $req_attrs)) {
-                if ($search = ldap_search($this -> _ldap_conn, $search_dn, $filter)) {
+                if ($search = ldap_search($this -> _ldap_conn, $search_dn, $filter, $req_attrs)) {
+                // if ($search = ldap_search($this -> _ldap_conn, $search_dn, $filter)) {
                     if (!$return = ldap_get_entries($this -> _ldap_conn, $search)) {
                         log_message('error', 'Auth_AD: in get_all_users() - no users found');
                     }
@@ -1156,7 +1156,7 @@ class Auth_AD
         // check for an active LDAP connection
         if (!$this -> _ldap_conn) {
             log_message('error', "Auth_AD: unable to connect to any AD servers.");
-            show_error('Error connecting to any Active Directory server(s). Please check your configuration and connections.');
+            show_error('Error connecting to any Active Directory server(s). Please check your configuration and connections.'.ldap_error($this->_ldap_conn));
             $continue = false;
         }
 

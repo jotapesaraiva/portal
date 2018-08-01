@@ -41,4 +41,34 @@ function dataEmPortugues($nmes){
 }
 
 
+
+/**
+ * More simplified date stuff
+ * by Bob Sawyer / Pixels and Code
+ *
+ * @access    public
+ * @param    string
+ * @param    integer
+ * @return    integer
+ */
+if ( ! function_exists('setDate'))
+{
+    function setDate($datestr = '',$format = 'long')
+    {
+        if ($datestr == '')
+            return '--';
+
+        $time = strtotime($datestr);
+        switch ($format) {
+            case 'short': $fmt = 'd/m/Y - g:iA'; break;
+            case 'long': $fmt = 'F j,Y - g:iA'; break;
+            case 'notime': $fmt = 'd/m/Y'; break;
+            case 'teste': $fmt = 'Y-m-d'; break;
+            // case 'outro': $fmt =
+        }
+        $newdate = date($fmt,$time);
+        return $newdate;
+    }
+}
+
 ?>
