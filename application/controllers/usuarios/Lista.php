@@ -26,16 +26,15 @@ class Lista extends CI_Controller {
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/usuarios_lista.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
-
-        ';
+            <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '
-        <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>';
+            <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>';
 
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
+            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+            <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">';
 
         $session['username'] = $this->session->userdata('username');
         $usuarios = $this->auth_ad->get_all_users();
