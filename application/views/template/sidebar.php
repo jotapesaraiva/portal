@@ -69,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <li class="nav-item <?php if($this->uri->segment(1) == 'gerencias') { echo 'active open'; } ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-diamond"></i>
+                        <i class="fa fa-users"></i>
                         <span class="title">Gerências</span>
                         <?php if($this->uri->segment(1) == 'gerencias') { echo '<span class="selected"></span>'; } ?>
                         <span class="arrow"></span>
@@ -106,7 +106,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <li class="nav-item <?php if($this->uri->segment(1) == 'ramais') { echo 'active open'; } ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-puzzle"></i>
+                        <i class="fa fa-phone"></i>
                         <span class="title">Ramais</span>
                         <?php if($this->uri->segment(1) == 'ramais') { echo '<span class="selected"></span>'; } ?>
                         <span class="arrow"></span>
@@ -133,7 +133,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <li class="nav-item <?php if($this->uri->segment(1) == 'localidades') { echo 'active open'; } ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-puzzle"></i>
+                        <i class="fa fa-map-marker"></i>
                         <span class="title">Localidades</span>
                         <?php if($this->uri->segment(1) == 'localidades') { echo '<span class="selected"></span>'; } ?>
                         <span class="arrow"></span>
@@ -152,7 +152,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php }?>
                     </ul>
                 </li>
-
 
                 <li class="heading">
                     <h3>ANALISE</h3>
@@ -268,7 +267,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <li class="nav-item <?php if($this->uri->segment(1) == 'links') { echo 'active open'; } ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-feed"></i>
+                        <i class="fa fa-link"></i>
                         <span class="title">Links</span>
                         <?php if($this->uri->segment(1) == 'links') { echo '<span class="selected"></span>'; } ?>
                         <span class="arrow"></span>
@@ -381,35 +380,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </ul>
                 </li>
 
-                <li class="nav-item <?php if($this->uri->segment(1) == 'nobreak') { echo 'active open'; } ?>">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-paper-plane"></i>
-                        <span class="title">Nobreak</span>
-                        <?php if($this->uri->segment(1) == 'nobreak') { echo '<span class="selected"></span>'; } ?>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li class="nav-item  ">
-                            <a href="layout_mega_menu_light.html" class="nav-link ">
-                                <span class="title">Light Mega Menu</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="layout_mega_menu_dark.html" class="nav-link ">
-                                <span class="title">Dark Mega Menu</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="layout_full_width.html" class="nav-link ">
-                                <span class="title">Full Width Layout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
                 <li class="nav-item <?php if($this->uri->segment(1) == 'email') { echo 'active open'; } ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class=" icon-wrench"></i>
+                        <i class="fa fa-envelope"></i>
                         <span class="title">Email</span>
                         <?php if($this->uri->segment(1) == 'email') { echo '<span class="selected"></span>'; } ?>
                         <span class="arrow"></span>
@@ -432,13 +405,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </ul>
                 </li>
 
-
                 <li class="heading">
                     <h3>LINKS / APPS</h3>
                 </li>
                 <li class="nav-item  ">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-puzzle"></i>
+                        <i class="fa fa-copy"></i>
                         <span class="title">Backup</span>
                         <span class="arrow"></span>
                     </a>
@@ -460,7 +432,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <li class="nav-item  ">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-puzzle"></i>
+                        <i class="fa fa-desktop"></i>
                         <span class="title">Vmware</span>
                         <span class="arrow"></span>
                     </a>
@@ -476,7 +448,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <li class="nav-item  ">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-puzzle"></i>
+                        <i class="fa fa-globe"></i>
                         <span class="title">Monitoramento</span>
                         <span class="arrow"></span>
                     </a>
@@ -538,7 +510,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <li class="nav-item  ">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-puzzle"></i>
+                        <i class="fa fa-server"></i>
                         <span class="title">WebLogic</span>
                         <span class="arrow"></span>
                     </a>
@@ -754,7 +726,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <li class="nav-item <?php if($this->uri->segment(1) == 'banco_de_dados') { echo 'active open'; } ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class=" icon-wrench"></i>
+                        <i class="fa fa-database"></i>
                         <span class="title">Banco de Dados</span>
                         <?php if($this->uri->segment(1) == 'banco_de_dados') { echo '<span class="selected"></span>'; } ?>
                         <span class="arrow"></span>

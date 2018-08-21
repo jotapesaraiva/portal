@@ -29,14 +29,15 @@ class Fornecedor extends CI_Controller {
             <script src="' . base_url() . 'assets/custom/fornecedor.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
-        ';
+            <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>';
         $script['script'] = '
             <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>';
 
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
+            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+            <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />';
 
         $fornecedores = $this->fornecedor_model->listar_fornecedor();
         $servicos = $this->servico_model->listar_servico();

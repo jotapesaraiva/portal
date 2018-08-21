@@ -110,7 +110,7 @@ class Servidor extends CI_Controller {
     }
 
     public function servidor_edit($id_servidor) {
-        $id_ = $this->tecnico_model->edit_unidade_tecnico($id_servidor);
+        $id_unidades = $this->tecnico_model->edit_unidade_tecnico($id_servidor);
         foreach ($id_unidades as $id_unidade) {
             $unidade[] = $id_unidade['id_unidade'];
         }

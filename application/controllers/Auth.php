@@ -234,24 +234,26 @@ class Auth extends CI_Controller{
         public function pesquisar($username) {
             // $result = $this->auth_ad->search_ad($username, array('dn'),TRUE);
             $entries = $this->auth_ad->auto_search($username);
-            vd($entries);
+            // vd($entries);
             // echo json_encode($entries);
-            // for ($x=0; $x<$entries['count']; $x++){
-            //     if (!empty($entries[$x]['givenname'][0]) &&
-            //          !empty($entries[$x]['mail'][0]) &&
-            //          !empty($entries[$x]['samaccountname'][0]) &&
-            //          !empty($entries[$x]['sn'][0]) &&
-            //          'Shop' !== $entries[$x]['sn'][0] &&
-            //          'Account' !== $entries[$x]['sn'][0]){
+            $ad_users = "";
+            for ($x=0; $x<$entries['count']; $x++) {
+                if (!empty($entries[$x]['givenname'][0]) &&
+                     !empty($entries[$x]['mail'][0]) &&
+                     !empty($entries[$x]['samaccountname'][0]) &&
+                     !empty($entries[$x]['sn'][0]) &&
+                     'Shop' !== $entries[$x]['sn'][0] &&
+                     'Account' !== $entries[$x]['sn'][0]){
 
-            //         $ad_users[strtoupper(trim($entries[$x]['samaccountname'][0]))] = array('email' => strtolower(trim($entries[$x]['mail'][0])),'first_name' => trim($entries[$x]['givenname'][0]),'last_name' => trim($entries[$x]['sn'][0]));
-            //         // $ad_users .= '<ul>
-            //         //                <li>'.strtoupper(trim($entries[$x]['samaccountname'][0])).'</li>
-            //         //             </ul>';
-            //     }
-            // }
+                    // $ad_users[strtoupper(trim($entries[$x]['samaccountname'][0]))] = array('email' => strtolower(trim($entries[$x]['mail'][0])),'first_name' => trim($entries[$x]['givenname'][0]),'last_name' => trim($entries[$x]['sn'][0]));
+                    $ad_users .= '<ul>
+                                   <li>'.strtoupper(trim($entries[$x]['samaccountname'][0])).'</li>
+                                </ul>';
+                }
+            }
             // vd($ad_users);
-            // echo $ad_users;
+            echo $ad_users;
+            // echo json_encode($ad_users);
         }
 
 

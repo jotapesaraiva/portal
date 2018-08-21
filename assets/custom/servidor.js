@@ -141,7 +141,7 @@ function add_person() {
     $('.modal-title').text('Adicionar servidor'); // Set Title to Bootstrap modal title
 }
 
-function edit_person(id_servidor,id_unidade) {
+function edit_person(id_servidor) {
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
     $('.multi-select').multiSelect('refresh'); //reset selectcpicker bootstrap
@@ -150,7 +150,7 @@ function edit_person(id_servidor,id_unidade) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/servidor_edit/"+id_servidor+"/"+id_unidade,
+        url : server+"/servidor_edit/"+id_servidor,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
