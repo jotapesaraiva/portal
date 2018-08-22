@@ -23,10 +23,8 @@ class Dash extends CI_Controller {
       $api_pass = $this->config->item('api_pass', 'zabbix');
       $reload_time = $this->config->item('reload_time', 'zabbix');
       $host_group_filter = $this->config->item('host_group_filter', 'zabbix');
-      // $api_url = 'https://x-oc-zabbix.sefa.pa.ipa/zabbix/api_jsonrpc.php';
-      // $api_user = 'zbx3';
-      // $api_pass = 'ISFaQGJiMXh4';
       $context = base_url() . 'assets';
+
         // connect to Zabbix Json API
         $api = new ZabbixApi($api_url, $api_user, base64_decode($api_pass));
         // $api = new ZabbixApi($api_url, $api_user, $api_pass);
@@ -104,7 +102,6 @@ class Dash extends CI_Controller {
 
             $triggers = $api->triggerGet(array(
                    'output' => array(
-                       'lastchange',
                        'priority',
                        'description'),
                    'selectHosts' => array('hostid'),
@@ -113,25 +110,27 @@ class Dash extends CI_Controller {
                        'only_true' => 1,
                        'monitored' => 1,
                        'withLastEventUnacknowledged' => 1,
-                       'sortfield' => 'priority',
-                       // 'sortfield' => array('lastchange', 'priority'),
+                       // 'sortfield' => 'priority',
+                       'sortfield' => array('lastchange', 'priority'),
                        'sortorder' => 'DESC',
                        'filter' => array('priority' => array('4','5'),'value' => '1' , '')
                ));
 
             foreach($triggers as $trigger) {
-                $data_alerta=strftime("%d %b %Y %H:%M:%S", strtotime(date('d M Y H:i:s', $trigger->lastchange)));
-                $age=time_elapsed_string(date('Y-m-d H:i:s', $trigger->lastchange), true);
                foreach($trigger->hosts as $host) {
                    $hostTriggers[$host->hostid][] = $trigger;
                }
             }
-
+            // verifica se o array não foi criado. caso não tenha seta a variavel vazio.
+            if(!isset($hostTriggers)){
+                $hostTriggers = "";
+            }
+            // var_dump($hostTriggers);
             // get all hosts from each groupid
                 foreach($groups as $group) {
                     $groupname = $group->name;
                     $hosts = $group->hosts;
-
+                    //ordena o array do menor para o maior ou em ordem alfabetica.
                     usort($hosts, function ($a, $b) {
                         if ($a->name == $b) return 0;
                         return ($a->name < $b->name ? -1 : 1);
@@ -157,9 +156,13 @@ class Dash extends CI_Controller {
                                 ));
                                 $ip = $hosts_interface[0]->ip;
 
-                                if (array_key_exists($hostid, $hostTriggers)) {
+                                if($hostTriggers != NULL){
+
+                                  if ( array_key_exists($hostid, $hostTriggers)) {
                                     // Highest Priority error
                                     $hostboxprio = $hostTriggers[$hostid][0]->priority;
+                                    $age=time_elapsed_string(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange), true);
+                                    // $age=date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange);
                                     //First filter the hosts that are in maintenance and assign the maintenance class if is true
                                     if ($maintenance != "0") {
                                         echo "<div class=\"hostbox maintenance\">";
@@ -167,7 +170,8 @@ class Dash extends CI_Controller {
                                         // If hosts are not in maintenance, check for trigger(s) and assign the appropriate class to the box
                                         echo "<div class=\"hostbox nok" . $hostboxprio . "\">";
                                     }
-                                    echo "<div class=\"title\">" . $hostname ." ". $ip . "</div><div class=\"hostid\">" . $hostid ." ". $age . "</div>";
+                                    echo "<div class=\"title\">" . $hostname ." <br>". $ip ." </div><div class=\"hostid\">" . $hostid ."</div>";
+                                    echo "<div> ". $age ."</div>";
                                     $count = "0";
                                     foreach ($hostTriggers[$hostid] as $event) {
                                         if ($count++ <= 2 ) {
@@ -184,7 +188,8 @@ class Dash extends CI_Controller {
                                         }
                                     }
                                     echo "</div>";
-                                } /*else {
+                                }
+                            } /*else {
                                     // If there are no trigger(s) for the host found, assign the "ok" class to the box
                                     echo "<div class=\"hostbox ok\">";
                                     echo "<div class=\"title\">" . $hostname . "</div>";

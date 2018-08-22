@@ -9,7 +9,7 @@ $config['api_user'] = 'zbx3';
 $config['api_pass'] = 'ISFaQGJiMXh4';
 // $api_pass = 'MDVhZG1pbjE4';
 # Time in milliseconds.  1000 = 1 second
-$config['reload_time'] = 60000;
+$config['reload_time'] = 30000;
 # path on web server
 $config['context'] = '/zabbix-dash2';
 # Host Group filter in Regex
