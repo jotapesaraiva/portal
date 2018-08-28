@@ -11,7 +11,7 @@ class Configuracao extends CI_Controller {
             $username = $this->session->userdata('username');
         } else {
             set_msg('loginErro','Efetue o login para acessar o sistema','erro');
-            redirect('auth/login');
+            redirect('auth/logout');
         }
     }
 

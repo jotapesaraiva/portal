@@ -13,11 +13,11 @@ class Tecnico extends CI_Controller {
         $this->load->model('tecnico_model');
         $this->load->model('voip_model');
         $this->load->library('Auth_AD');
-        if($this->auth_ad->is_authenticated()){
+        if($this->auth_ad->is_authenticated()) {
             $username = $this->session->userdata('username');
         } else {
             set_msg('loginErro','Efetue o login para acessar o sistema','erro');
-            redirect('auth/login');
+            redirect('auth/logout');
         }
     }
 

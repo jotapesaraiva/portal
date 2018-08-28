@@ -13,7 +13,7 @@ class Fitas extends CI_Controller {
         } else {
             // $data = array('error_message' => 'Efetue o login para acessar o sistema');
             set_msg('loginErro','Efetue o login para acessar o sistema','erro');
-            redirect('auth/login');
+            redirect('auth/logout');
         }
     }
 

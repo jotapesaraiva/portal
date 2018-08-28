@@ -39,7 +39,7 @@ class Welcome extends CI_Controller {
 		$username = $this->session->userdata('username');
 		$dados = array("username" => $username);
 		// $this->session->set_flashdata("loginOk","Logando com sucesso no sistema!!!.");
-		set_msg('loginOk','Logado com sucesso no sistema !!!','sucesso');
+		// set_msg('loginOk','Logado com sucesso no sistema !!!','sucesso');
 
 		$this->load->view('template/header',$css);
 		$this->load->view('template/navbar',$dados);

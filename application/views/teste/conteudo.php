@@ -16,7 +16,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <h3 class="page-title"> Dashboard
             <small>dashboard & statistics</small>
         </h3>
-        <?php get_msg('loginOk'); ?>
+        <?php
+            get_msg('loginOk');
+            get_msg('loginErro');
+        ?>
         <!-- END PAGE TITLE-->
         <!-- END PAGE HEADER-->
         <!-- BEGIN DASHBOARD STATS 1-->

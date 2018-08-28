@@ -8,18 +8,7 @@ class Perfil extends CI_Controller {
         //Do your magic here
         $this->load->model('usuario_model');
         $this->load->library('Auth_AD');
-        if($this->auth_ad->is_authenticated()) {
-            if($this->auth_ad->level_access($this->uri->segment(2),$this->session->userdata('physicaldeliveryofficename'))){
-                $username = $this->session->userdata('username');
-            } else {
-                set_msg('loginErro','Você não tem acesso a esse modulo.','erro');
-                redirect('welcome');
-            }
-        } else {
-          // $data = array('error_message' => 'Efetue o login para acessar o sistema');
-          set_msg('loginErro','Efetue o login para acessar o sistema','erro');
-          redirect('auth/login');
-        }
+        esta_logado();
     }
 
     public function index() {
@@ -37,6 +26,7 @@ class Perfil extends CI_Controller {
             <script src="' . base_url() . 'assets/custom/perfil.js" type="text/javascript"></script>';
         $script['script'] = '';
 
+        $this->output->enable_profiler(TRUE);
 
         $session['username'] = $this->session->userdata('username');
         $modal['grupos'] = $this->usuario_model->listar_grupo();

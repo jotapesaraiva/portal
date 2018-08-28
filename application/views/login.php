@@ -59,8 +59,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END SIDEBAR TOGGLER BUTTON -->
         <!-- BEGIN LOGO -->
         <div class="logo">
-            <a href="index.html">
-                <img src="<?php echo base_url(); ?>assets/pages/img/logo-big.png" alt="" /> </a>
+            <a href="#">
+                <img style="text-shadow: 0px 0px 5px black;" src="<?php echo base_url(); ?>/assets/pages/img/logo.png" alt="" width="10%" /> </a>
+                <h2 style="color: white;text-shadow: 3px 3px 5px #404040; "><b>Portal Produção<b></h2>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->

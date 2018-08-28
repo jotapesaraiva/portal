@@ -82,6 +82,7 @@ class Auth extends CI_Controller{
                 // $this->session->userdata('username') contains the username as processed
                 // $this->session->userdata('dn') contains the distinguished name from the AD
                 // $this->session->userdata('logged_in') contains a boolean (true)
+                set_msg('loginOk','Logado com sucesso no sistema !!!','sucesso');
                 redirect('welcome');
             } else {
                 // user could not be authenticated, whoops.

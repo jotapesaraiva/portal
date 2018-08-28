@@ -12,13 +12,13 @@
 ?>
 
 <!-- BEGIN HEADER -->
-<div class="page-header navbar navbar-fixed-top">
+<div style="height: 53px;" class="page-header navbar navbar-fixed-top">
     <!-- BEGIN HEADER INNER -->
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="index.html">
-                <img src="<?php echo base_url(); ?>assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" /> </a>
+            <a href="#">
+                <img src="<?php echo base_url(); ?>assets/layouts/layout/img/noc_logo.png" alt="logo" style="margin: 0 30px 0;" class="logo-default" /> </a>
             <div class="menu-toggler sidebar-toggler"> </div>
         </div>
         <!-- END LOGO -->
