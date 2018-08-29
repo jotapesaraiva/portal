@@ -9,13 +9,7 @@ class Lista extends CI_Controller {
         $this->load->model('voip_model');
         $this->load->model('telefonia_model');
         $this->load->library('Auth_AD');
-        if($this->auth_ad->is_authenticated()){
-            $username = $this->session->userdata('username');
-        } else {
-            set_msg('loginErro','Efetue o login para acessar o sistema','erro');
-            redirect('auth/logout');
-        }
-
+        esta_logado();
     }
 
     public function index() {

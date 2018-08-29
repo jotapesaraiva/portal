@@ -5,7 +5,7 @@ if ( ! function_exists('esta_logado')){
         $CI =& get_instance();
         $CI->load->library('session');
         if($CI->auth_ad->is_authenticated()) {
-            if($CI->auth_ad->level_access($CI->uri->segment(3),$CI->session->userdata('physicaldeliveryofficename'))){
+            if($CI->auth_ad->level_access($CI->uri->segment(2),$CI->session->userdata('physicaldeliveryofficename'))){
                 $username = $CI->session->userdata('username');
             } else {
                 set_msg('loginErro','Você não tem acesso a esse modulo.','erro');

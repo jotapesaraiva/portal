@@ -9,12 +9,7 @@ class Database extends CI_Controller {
         //$this->mysql_db=$this->load->database('default',true);
         //$this->myutil = $this->load->dbutil('oracle', TRUE);
         $this->load->library('Auth_AD');
-        if($this->auth_ad->is_authenticated()){
-            $username = $this->session->userdata('username');
-        } else {
-            set_msg('loginErro','Efetue o login para acessar o sistema','erro');
-            redirect('auth/logout');
-        }
+        esta_logado();
     }
      public function index() {
         //$data['teste'] = $this->link_model->listar();

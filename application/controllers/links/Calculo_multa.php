@@ -8,13 +8,7 @@ class Calculo_multa extends CI_Controller {
         $this->load->model('link_model');
         $this->load->library('Auth_AD');
         $this->load->library('breadcrumbs');
-        if($this->auth_ad->is_authenticated()){
-            $username = $this->session->userdata('username');
-        } else {
-            // $data = array('error_message' => 'Efetue o login para acessar o sistema');
-            set_msg('loginErro','Efetue o login para acessar o sistema','erro');
-            redirect('auth/logout');
-        }
+        esta_logado();
     }
 
     public function index() {

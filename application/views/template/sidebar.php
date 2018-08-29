@@ -166,7 +166,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('historico_bkp',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php echo active_class('historico'); ?>">
-                            <?php echo anchor('backup/historico', 'Histórico', 'class="nav-link"')?>
+                            <?php echo anchor('backup/historico_bkp', 'Histórico', 'class="nav-link"')?>
                             <?php echo span_class('historico'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('janela_backup',$this->session->userdata('physicaldeliveryofficename'))){?>
@@ -212,17 +212,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="nav-item <?php echo active_method('dia'); ?>">
-                                            <?php echo anchor('backup/graficos/crescimento/dia', 'Dia', 'class="nav-link"')?>
+                                            <?php echo anchor('backup/graficos_bkp/crescimento/dia', 'Dia', 'class="nav-link"')?>
                                             <?php echo span_method('dia'); ?>
                                         </li>
                                         <li class="nav-item <?php echo active_method('mes'); ?>">
-                                            <?php echo anchor('backup/graficos/crescimento/mes', 'Mês', 'class="nav-link"')?>
+                                            <?php echo anchor('backup/graficos_bkp/crescimento/mes', 'Mês', 'class="nav-link"')?>
                                             <?php echo span_method('mes'); ?>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item <?php echo active_class('quantidade'); ?>">
-                                    <?php echo anchor('backup/graficos/quantidade', 'Quantidade', 'class="nav-link"')?>
+                                    <?php echo anchor('backup/graficos_bkp/quantidade', 'Quantidade', 'class="nav-link"')?>
                                     <?php echo span_class('quantidade'); ?>
                                 </li>
                                 <li class="nav-item <?php if($this->uri->segment(3) == 'tempo') { echo 'active open'; } ?>">
@@ -233,11 +233,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="nav-item <?php echo active_method('mes'); ?>">
-                                            <?php echo anchor('backup/graficos/tempo/mes', 'Mês', 'class="nav-link"')?>
+                                            <?php echo anchor('backup/graficos_bkp/tempo/mes', 'Mês', 'class="nav-link"')?>
                                             <?php echo span_method('mes'); ?>
                                         </li>
                                         <li class="nav-item <?php echo active_method('ano'); ?>">
-                                            <?php echo anchor('backup/graficos/tempo/ano', 'Ano', 'class="nav-link"')?>
+                                            <?php echo anchor('backup/graficos_bkp/tempo/ano', 'Ano', 'class="nav-link"')?>
                                             <?php echo span_method('ano'); ?>
                                         </li>
                                     </ul>
@@ -250,11 +250,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="nav-item <?php echo active_method('mes'); ?>">
-                                            <?php echo anchor('backup/graficos/volume/mes', 'Mês', 'class="nav-link"')?>
+                                            <?php echo anchor('backup/graficos_bkp/volume/mes', 'Mês', 'class="nav-link"')?>
                                             <?php echo span_method('mes'); ?>
                                         </li>
                                         <li class="nav-item <?php echo active_method('ano'); ?>">
-                                            <?php echo anchor('backup/graficos/volume/ano', 'Ano', 'class="nav-link"')?>
+                                            <?php echo anchor('backup/graficos_bkp/volume/ano', 'Ano', 'class="nav-link"')?>
                                             <?php echo span_method('ano'); ?>
                                         </li>
                                     </ul>
@@ -275,7 +275,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('historico_link',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php echo active_class('historico'); ?>">
-                            <?php echo anchor('links/historico', 'Historico', 'class="nav-link"')?>
+                            <?php echo anchor('links/historico_link', 'Historico', 'class="nav-link"')?>
                             <?php echo span_class('historico'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('calculo_multa',$this->session->userdata('physicaldeliveryofficename'))){?>
@@ -306,11 +306,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="nav-item <?php echo active_method('diario'); ?>">
-                                            <?php echo anchor('links/graficos/consumo/diario', 'Diário', 'class="nav-link"')?>
+                                            <?php echo anchor('links/graficos_link/consumo/diario', 'Diário', 'class="nav-link"')?>
                                             <?php echo span_method('diario'); ?>
                                         </li>
                                         <li class="nav-item <?php echo active_method('mensal'); ?>">
-                                            <?php echo anchor('links/graficos/consumo/mensal', 'Mensal', 'class="nav-link"')?>
+                                            <?php echo anchor('links/graficos_link/consumo/mensal', 'Mensal', 'class="nav-link"')?>
                                             <?php echo span_method('mensal'); ?>
                                         </li>
                                     </ul>
@@ -324,11 +324,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="nav-item <?php echo active_class('mensal'); ?>">
-                                            <?php echo anchor('links/graficos/localidade/mensal', 'Mensal', 'class="nav-link"')?>
+                                            <?php echo anchor('links/graficos_link/localidade/mensal', 'Mensal', 'class="nav-link"')?>
                                             <?php echo span_class('mensal'); ?>
                                         </li>
                                         <li class="nav-item <?php echo active_class('anual'); ?>">
-                                            <?php echo anchor('links/graficos/localidade/anual', 'Anual', 'class="nav-link"')?>
+                                            <?php echo anchor('links/graficos_link/localidade/anual', 'Anual', 'class="nav-link"')?>
                                             <?php echo span_class('anual'); ?>
                                         </li>
                                     </ul>
@@ -342,11 +342,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="nav-item <?php echo active_class('mensal'); ?>">
-                                            <?php echo anchor('links/graficos/causa/mensal', 'Mensal', 'class="nav-link"')?>
+                                            <?php echo anchor('links/graficos_link/causa/mensal', 'Mensal', 'class="nav-link"')?>
                                             <?php echo span_class('mensal'); ?>
                                         </li>
                                         <li class="nav-item <?php echo active_class('anual'); ?>">
-                                            <?php echo anchor('links/graficos/causa/anual', 'Anual', 'class="nav-link"')?>
+                                            <?php echo anchor('links/graficos_link/causa/anual', 'Anual', 'class="nav-link"')?>
                                             <?php echo span_class('anual'); ?>
                                         </li>
                                     </ul>
@@ -360,11 +360,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="nav-item <?php echo active_class('mensal'); ?>">
-                                            <?php echo anchor('links/graficos/ticket/mensal', 'Mensal', 'class="nav-link"')?>
+                                            <?php echo anchor('links/graficos_link/ticket/mensal', 'Mensal', 'class="nav-link"')?>
                                             <?php echo span_class('mensal'); ?>
                                         </li>
                                         <li class="nav-item <?php echo active_class('anual'); ?>">
-                                            <?php echo anchor('links/graficos/ticket/anual', 'Anual', 'class="nav-link"')?>
+                                            <?php echo anchor('links/graficos_link/ticket/anual', 'Anual', 'class="nav-link"')?>
                                             <?php echo span_class('anual'); ?>
                                         </li>
                                     </ul>
