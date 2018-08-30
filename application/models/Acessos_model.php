@@ -5,43 +5,43 @@ class Acessos_model extends CI_Model {
 
 
     public function servidor_acesso() {
-        $portal_moni = $this->load->database('portalmoni',true);
-        $portal_moni->where('tipo','1');
-        $query = $portal_moni->get('tab_servidor_app');
+        $portal_db = $this->load->database('default',true);
+        $portal_db->where('tipo','1');
+        $query = $portal_db->get('tbl_senha_acesso');
         return $query;
     }
 
     public function servico_acesso() {
-        $portal_moni = $this->load->database('portalmoni',true);
-        $portal_moni->where('tipo','0');
-        $query = $portal_moni->get('tab_servidor_app');
+        $portal_db = $this->load->database('default',true);
+        $portal_db->where('tipo','0');
+        $query = $portal_db->get('tbl_senha_acesso');
         return $query;
     }
 
     public function save_acesso($dados) {
-        $portal_moni = $this->load->database('portalmoni',true);
-        $portal_moni->insert('tab_servidor_app', $dados);
-        return $portal_moni->insert_id();
+        $portal_db = $this->load->database('default',true);
+        $portal_db->insert('tbl_senha_acesso', $dados);
+        return $portal_db->insert_id();
     }
 
     public function edit_acesso($id) {
-        $portal_moni = $this->load->database('portalmoni',true);
-        $portal_moni->from('tab_servidor_app');
-        $portal_moni->where('id',$id);
-        $query = $portal_moni->get();
+        $portal_db = $this->load->database('default',true);
+        $portal_db->from('tbl_senha_acesso');
+        $portal_db->where('id',$id);
+        $query = $portal_db->get();
         return $query->row();
     }
 
     public function update_acesso($where,$dados) {
-        $portal_moni = $this->load->database('portalmoni',true);
-        $portal_moni->update('tab_servidor_app', $dados, $where);
+        $portal_db = $this->load->database('default',true);
+        $portal_db->update('tbl_senha_acesso', $dados, $where);
         return $portal_db->affected_rows();
     }
 
     public function delete_acesso($id) {
-        $portal_moni = $this->load->database('portalmoni',true);
-        $portal_moni->where('id',$id);
-        $portal_moni->delete('tab_servidor_app');
+        $portal_db = $this->load->database('default',true);
+        $portal_db->where('id',$id);
+        $portal_db->delete('tbl_senha_acesso');
     }
 
 }
