@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','form_validation','session', 'parser', 'email','breadcrumbs', 'Auth_AD');
+$autoload['libraries'] = array('database','form_validation','session', 'parser', 'email','breadcrumbs', 'highcharts', 'Auth_AD', 'Log_View');
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('form','url','funcoes', 'typography','alert', 'date','nav', 'accessControl');
+$autoload['helper'] = array('site_helper','file', 'form','url','funcoes', 'typography','alert', 'date','nav', 'accessControl');
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +132,19 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array(
+    'acessos_model',
+    'fitas_model',
+    'unidade_model',
+    'link_model',
+    'usuario_model',
+    'fornecedor_model',
+    'servidor_model',
+    'tecnico_model',
+    'consumo_model',
+    'contato_model',
+    'servico_model',
+    'voip_model',
+    'telefonia_model',
+    'indicadores_model',
+    'historico_model');

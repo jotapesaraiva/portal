@@ -5,10 +5,6 @@ class Lista extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('usuario_model');
-        $this->load->model('voip_model');
-        $this->load->model('telefonia_model');
-        $this->load->library('Auth_AD');
         esta_logado();
     }
 
@@ -109,7 +105,7 @@ class Lista extends CI_Controller {
       $id_telefone = $this->telefonia_model->id_telefone('(91) 3323-3853');
       vd($id_telefone);
     }
-
+    //FIXME: Falta finalizar o ADD VOIP!
     public function usuarios_add() {
       $this->usuarios_validate();
 
@@ -189,7 +185,7 @@ class Lista extends CI_Controller {
        $data = array('usuario' => $usuario, 'telefone' => $telefone, 'celular' => $celular);
        echo json_encode($data);
     }
-
+    //FIXME: Falta finalizar o UPDATE VOIP!
     public function usuarios_update() {
        $this->usuarios_validate();
       if($this->input->post('status') == 'on') {
@@ -282,7 +278,7 @@ class Lista extends CI_Controller {
 
        echo json_encode(array("status" => TRUE));
     }
-
+    // FIXME: Falta finalizar o delete VOIP!
     public function usuarios_delete($id) {
 
       $telefones = $this->usuario_model->listar_usuario_telefone($id);

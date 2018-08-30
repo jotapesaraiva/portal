@@ -8,7 +8,6 @@ class Database extends CI_Controller {
         //$this->oracle_db=$this->load->database('oracle',true);
         //$this->mysql_db=$this->load->database('default',true);
         //$this->myutil = $this->load->dbutil('oracle', TRUE);
-        $this->load->library('Auth_AD');
         esta_logado();
     }
      public function index() {

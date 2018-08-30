@@ -6,12 +6,6 @@ class Expediente extends CI_Controller {
     public function __construct() {
         parent::__construct();
         //Do your magic here
-        $this->load->model('unidade_model');
-        $this->load->model('link_model');
-        $this->load->model('fornecedor_model');
-        $this->load->model('telefonia_model');
-        $this->load->model('voip_model');
-        $this->load->library('Auth_AD');
         esta_logado();
     }
 

@@ -6,10 +6,8 @@ class Ldap extends CI_Controller {
     public function __construct() {
         parent::__construct();
         //Do your magic here
-        $this->load->config('auth_ad');
-
-        $this->load->library('Auth_AD');
         esta_logado();
+        $this->load->config('auth_ad');
     }
 
     public function index() {

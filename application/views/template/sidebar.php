@@ -75,12 +75,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <?php if($this->auth_ad->level_access('tecnicos',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('tecnico',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php echo active_class('tecnico'); ?>">
                             <?php echo anchor('gerencias/tecnico', 'Tecnicos', 'class="nav-link"')?>
                             <?php echo span_class('tecnico'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('fornecedores',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('fornecedor',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php echo active_class('fornecedor'); ?>">
                             <?php echo anchor('gerencias/fornecedor', 'Fornecedores', 'class="nav-link"')?>
                             <?php echo span_class('fornecedor'); ?>
@@ -90,13 +90,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor('gerencias/contato', 'Contatos', 'class="nav-link"')?>
                             <?php echo span_class('contato'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('servidores',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('servidor',$this->session->userdata('physicaldeliveryofficename'))){?>
                         <li class="nav-item <?php echo active_class('servidor'); ?>">
                             <?php echo anchor('gerencias/servidor', 'Servidores', 'class="nav-link"')?>
                             <?php echo span_class('servidor'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('acessos',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('servidor'); ?>">
+                        <li class="nav-item <?php echo active_class('acessos'); ?>">
                             <?php echo anchor('gerencias/acessos', 'Acessos', 'class="nav-link"')?>
                             <?php echo span_class('acessos'); ?>
                         </li>

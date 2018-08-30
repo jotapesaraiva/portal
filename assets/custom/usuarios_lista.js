@@ -1,6 +1,8 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var server = window.location.href; // https://portalh.sefa.pa.gov.br/usuarios/lista
+var base_url = window.location.origin; // https://portalh.sefa.pa.gov.br
+var host = window.location.host; // https://portalh.sefa.pa.gov.br
 $(document).ready(function() {
     table = $('#table').DataTable({
       "dom": "flrtip",
@@ -143,7 +145,7 @@ $("#add_voip").click(function(e) { //on add input button click
                             a += '<select class="selectpicker form-control" id="voip_'+i+'" name="voip[]" >';
                                 a += '<option value="">------Selecione um VoIP-----</option>';
                                 $.ajax({
-                                    url : "http://10.3.3.96/portal/unidade/listar_voip/",
+                                    url : "/portal/localidades/unidade/listar_voip/",
                                     type: "GET",
                                     dataType: "JSON",
                                     success: function(data) {

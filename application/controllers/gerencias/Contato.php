@@ -5,15 +5,6 @@ class Contato extends CI_Controller {
 
   public function __construct() {
       parent::__construct();
-      $this->load->model('fornecedor_model');
-      $this->load->model('telefonia_model');
-      $this->load->model('contato_model');
-      $this->load->model('servico_model');
-      $this->load->model('voip_model');
-      $this->load->library('breadcrumbs');
-      $this->load->library('Auth_AD');
-      $this->load->helper('funcoes');
-      $this->load->helper('site_helper');
       esta_logado();
   }
 

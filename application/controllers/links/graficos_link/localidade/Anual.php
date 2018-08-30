@@ -5,9 +5,6 @@ class Anual extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('link_model');
-        $this->load->library('Auth_AD');
-        $this->load->library('breadcrumbs');
         esta_logado();
     }
 
