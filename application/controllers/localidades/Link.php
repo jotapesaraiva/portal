@@ -74,8 +74,8 @@ class Link extends CI_Controller {
                 } else {
                  $row[] = '<span class="label label-sm label-danger"> Desativado. </span>';
                 }
-                $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$link->id_link."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
-                          <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$link->id_link."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+                $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Editar" onclick="edit_person('."'".$link->id_link."'".')"><i class="glyphicon glyphicon-pencil"></i></a>
+                          <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Deletar" onclick="delete_person('."'".$link->id_link."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
                 $data[] = $row;
             }
 

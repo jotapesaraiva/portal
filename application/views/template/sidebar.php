@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!-- BEGIN CONTAINER -->
+<!-- TODO: Fazer if em que - Se um usuario não tiver acesso a nem um modulo não exibir o nivel mais alto do menu.  -->
 <div class="page-container">
     <!-- BEGIN SIDEBAR -->
     <div class="page-sidebar-wrapper">
@@ -152,6 +153,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php }?>
                     </ul>
                 </li>
+
 
                 <li class="heading">
                     <h3>ANALISE</h3>
@@ -380,30 +382,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </ul>
                 </li>
 
-                <li class="nav-item <?php if($this->uri->segment(1) == 'email') { echo 'active open'; } ?>">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="fa fa-envelope"></i>
-                        <span class="title">Email</span>
-                        <?php if($this->uri->segment(1) == 'email') { echo '<span class="selected"></span>'; } ?>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li class="nav-item  <?php if($this->uri->uri_string() == 'email') { echo 'active open'; } ?>">
-                            <?php echo anchor('email', 'Analise Email', 'class="nav-link"')?>
-                            <?php if($this->uri->uri_string() == 'email') { echo '<span class="selected"></span>'; } ?>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="layout_full_height_portlet.html" class="nav-link ">
-                                <span class="title">Full Height Portlet</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="layout_full_height_content.html" class="nav-link ">
-                                <span class="title">Full Height Content</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
 
                 <li class="heading">
                     <h3>LINKS / APPS</h3>
