@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dash extends CI_Controller {
+class Dashboard extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -35,18 +35,19 @@ class Dash extends CI_Controller {
             ));
 
         # parse passed items
-        if (isset($_GET['gid'])) {
-            $groupids = explode(',', $_GET['gid']);
-        } else {
-            $groupids = array('1');
-        }
+        // if (isset($_GET['gid'])) {
+        //     $groupids = explode(',', $_GET['gid']);
+        // } else {
+        //     $groupids = array('1');
+        // }
+        $groupids = array(19,18);
 
-        if (isset($_GET['name'])) {
-            $dashboard = $_GET['name'];
-        } else {
-            $dashboard = " ";
-        }
-
+        // if (isset($_GET['name'])) {
+        //     $dashboard = $_GET['name'];
+        // } else {
+        //     $dashboard = " ";
+        // }
+        $dashboard = "Link";
 
         echo '    <!DOCTYPE html>';
         echo '    <html>';

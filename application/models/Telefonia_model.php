@@ -79,12 +79,12 @@ class Telefonia_model extends CI_Model{
         return $portal_db->insert_id();
     }
 
-    public function update_telefone($where, $dados){
+    public function update_telefone($where, $dados) {
         $portal_db = $this->load->database('default',true);
         $portal_db->update('tbl_telefone', $dados, $where);
         return $portal_db->affected_rows();
     }
-    public function delete_telefone($id_telefone){
+    public function delete_telefone($id_telefone) {
         // DELETE FROM `portal`.`tbl_telefone` WHERE `id_telefone`=39;
         $portal_db = $this->load->database('default',true);
         $portal_db->where('id_telefone', $id_telefone);
