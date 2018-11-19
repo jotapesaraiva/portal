@@ -37,7 +37,6 @@ class Acessos extends CI_Controller {
 
         $this->load->view('template/footer', $script);
 
-
     }
 
     public function teste() {
