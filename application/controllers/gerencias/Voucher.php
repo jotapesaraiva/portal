@@ -31,15 +31,21 @@ class Voucher extends CI_Controller {
             $data['mes'] = dataEmPortugues(date('n'));
         }
 
-        $this->output->enable_profiler(true);
+        $this->output->enable_profiler(FALSE);
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/senhas.js" type="text/javascript"></script>';
-        $script['script'] = '';
+            <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/voucher.js" type="text/javascript"></script>
+            ';
+        $script['script'] = '
+            <script src="' . base_url() . 'assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+        ';
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
+            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+            <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+            ';
         $session['username'] = $this->session->userdata('username');
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
@@ -49,41 +55,37 @@ class Voucher extends CI_Controller {
         $this->load->view('template/header', $css);
         $this->load->view('template/navbar', $session);
         $this->load->view('template/sidebar');
-
-        $data['historico'] = $this->table_historico($nmes,$nano,0);
+        $modal['usuario'] = $this->session->userdata('username');
+        $data['motoristas'] = $this->voucher_model->listar_motoristas();
+        $data['historico'] = $this->table_historico($nmes,$nano);
 
         $this->load->view('gerencias/voucher', $data);
+        $this->load->view('modal/modal_voucher', $modal);
 
         $this->load->view('template/footer', $script);
     }
 
 
-    public function table_historico($mes,$ano,$funcionario){
-        $historico = $this->voucher_model->historico_voucher($mes,$ano,$funcionario);
+    public function table_historico($mes,$ano){
+        $historico = $this->voucher_model->historico_voucher($mes,$ano);
         $html = "";
-        foreach ($historico->result() as $linha) {
+        foreach ($historico->result_array() as $linha) {
 
             $html.="<tr>";
             $html.="    <td>".$linha['id_historico']."</td>";
-            $html.="    <td>".$linha['data']."</td>";
-            $html.="    <td>".utf8_encode($linha['usuario_nome'])."</td>";
+            $html.="    <td>".date( 'd-m-Y', strtotime($linha['data']))."</td>";
+            $html.="    <td>".$linha['usuario']."</td>";
             $html.="    <td>".$linha['voucher']."</td>";
             $html.="    <td>R$ ".str_replace(".",",",$linha['valor'])."</td>";
             $html.="    <td>".$linha['motorista']."</td>";
             $html.="    <td>".$linha['observacao']."</td>";
-
             $html.="    <td>";
-            $html.="        <div class='btn-group'>";
-            $html.="        <a class='btn btn-link dropdown-toggle' data-toggle='dropdown' href='#'><span class='caret'></span></a>";
-            $html.="        <ul class='dropdown-menu'>";
-                    if($_SESSION['usuario_id']==$linha['usuario_id']):
-            $html.="            <a href=><i class='icon-pencil'></i> Editar</a>";
-            $html.="            <a href=><i class='icon-trash'></i> Deletar</a>";
-                    else:
-            $html.="            Somente o usuário que<br>cadastrou o voucher<br>pode alterar ou excluir.";
-                    endif;
-            $html.="        </ul>";
-            $html.="        </div>";
+            $html.="        <a class='btn yellow-mint btn-outline sbold' href='javascript:void(0)' title='Edit' onclick='edit_voucher(".$linha['id_historico'].")'>
+                                <i class='glyphicon glyphicon-pencil'></i> Editar
+                            </a>
+                            <a class='btn red-mint btn-outline sbold' href='javascript:void(0)' title='Deletar' onclick='delete_voucher(".$linha['id_historico'].")'>
+                                <i class='glyphicon glyphicon-trash'></i> Deletar
+                            </a>";
             $html.="    </td>";
             $html.="</tr>";
         }
@@ -91,41 +93,76 @@ class Voucher extends CI_Controller {
     }
 
 
-    public function historico_add() {
-        $this->acesso_validate();
+    public function voucher_list(){
+       // Datatables Variables
+       $draw = intval($this->input->get("draw"));
+       $start = intval($this->input->get("start"));
+       $length = intval($this->input->get("length"));
+
+       $historicos = $this->voucher_model->historico_voucher();
+
+       $data = array();
+
+       foreach($historicos->result() as $historico) {
+           $row = array();
+           $row[] = $historico->id_historico;
+           $row[] = date( 'd-M-Y', strtotime($historico->data));
+           $row[] = $historico->usuario;
+           $row[] = $historico->voucher;
+           $row[] = $historico->valor;
+           $row[] = $historico->motorista;
+           $row[] = $historico->observacao;
+           $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_voucher('."'".$historico->id_historico."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
+                     <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_voucher('."'".$historico->id_historico."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+           $data[] = $row;
+       }
+
+       $output = array(
+           "draw" => $draw,
+           "recordsTotal" => $historicos->num_rows(),
+           "recordsFiltered" => $historicos->num_rows(),
+           "data" => $data,
+       );
+       echo json_encode($output);
+    }
+
+
+
+    public function voucher_add() {
+        $this->historico_validate();
         $data = array(
-            'usuario_id' => $this->input->post('usuraio_id'),
-            'motorista_id' => $this->input->post('motorista_id'),
+            'usuario' => $this->input->post('usuario'),
+            'motorista_id' => $this->input->post('motorista'),
             'voucher' => $this->input->post('voucher'),
-            'data' => $this->input->post('data'),
-            'valor' => base64_encode($this->input->post('valor')),
+            'data' => date('Y-m-d', strtotime($this->input->post('data'))),
+            'valor' => $this->input->post('valor'),
             'observacao' => $this->input->post('observacao')
         );
-        $this->acessos_model->save_acesso($data);
+        $this->voucher_model->save_voucher($data);
         echo json_encode(array("status" => TRUE));
     }
 
-    public function historico_update() {
-        $this->acesso_validate();
+    public function voucher_update() {
+        $this->historico_validate();
         $data = array(
-            'usuario_id' => $this->input->post('usuraio_id'),
-            'motorista_id' => $this->input->post('motorista_id'),
+            'usuario' => $this->input->post('usuario'),
+            'motorista_id' => $this->input->post('motorista'),
             'voucher' => $this->input->post('voucher'),
-            'data' => $this->input->post('data'),
-            'valor' => base64_encode($this->input->post('valor')),
+            'data' => date('Y-m-d', strtotime($this->input->post('data'))),
+            'valor' => $this->input->post('valor'),
             'observacao' => $this->input->post('observacao')
         );
-        $this->acessos_model->update_acesso(array('id_historico' => $this->input->post('id_historico')), $data);
+        $this->voucher_model->update_voucher(array('id_historico' => $this->input->post('id_historico')), $data);
         echo json_encode(array("status" => TRUE));
     }
 
-    public function historico_edit($id) {
-        $data = $this->acessos_model->edit_acesso($id);
+    public function voucher_edit($id) {
+        $data = $this->voucher_model->edit_voucher($id);
         echo json_encode($data);
     }
 
-    public function historico_delete($id) {
-        $this->acessos_model->delete_acesso($id);
+    public function voucher_delete($id) {
+        $this->voucher_model->delete_voucher($id);
         echo json_encode(array("status" => TRUE));
     }
 

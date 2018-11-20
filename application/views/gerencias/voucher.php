@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="row">
                           <div class="col-md-6">
                               <div class="btn-group">
-                                <button class="btn sbold green" onclick="add_acesso()"> Adicionar Novo
+                                <button class="btn sbold green" onclick="add_voucher()"> Adicionar Novo
                                     <i class="fa fa-plus"></i>
                                 </button>
                               </div>
@@ -63,7 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                         </div>
                     </div>
-                       <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table1">
+                       <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table">
                            <thead>
                                <tr>
                                    <th> ID </th>
@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                </tr>
                            </thead>
                            <tbody>
-                            <?php echo $historico; ?>
+
                            </tbody>
                        </table>
                    </div>
