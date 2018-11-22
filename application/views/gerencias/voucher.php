@@ -72,6 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                    <th> Voucher </th>
                                    <th> Valor </th>
                                    <th> Motorista </th>
+                                   <th> Prefixo </th>
                                    <th> Observação </th>
                                    <th> Ações </th>
                                </tr>

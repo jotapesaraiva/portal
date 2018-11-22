@@ -5,11 +5,8 @@ class Voucher_model extends CI_Model {
 
     public function historico_voucher() {
         $portal_db = $this->load->database('default',true);
-        $portal_db->select('v.id_historico, v.motorista_id, v.usuario, m.nome as motorista, v.valor, v.data, v.voucher, v.observacao');
-        $portal_db->from('vch_historico v');
-        $portal_db->join('vch_motoristas m', 'v.motorista_id=m.id_motorista');
-
-
+        $portal_db->select('id_historico, usuario, motorista, prefixo, voucher, data, valor, observacao');
+        $portal_db->from('vch_historico');
         $query = $portal_db->get();
         return $query;
     }
@@ -39,16 +36,6 @@ class Voucher_model extends CI_Model {
         $portal_db->where('id_historico',$id);
         $portal_db->delete('vch_historico');
     }
-
-    public function listar_motoristas() {
-        $portal_db = $this->load->database('default', true);
-        $portal_db->select('*');
-        $portal_db->from('vch_motoristas');
-        $portal_db->order_by('nome', 'ASC');
-        $query = $portal_db->get();
-        return $query;
-    }
-
 
 }
 

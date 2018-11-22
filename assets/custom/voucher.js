@@ -80,7 +80,8 @@ function edit_voucher(id) {
         success: function(data) {
             $('[name="id_historico"]').val(data.id_historico);
             $('[name="usuario"]').val(data.usuario);
-            $('[name="motorista"]').val(data.motorista_id);
+            $('[name="motorista"]').val(data.motorista);
+            $('[name="prefixo"]').val(data.prefixo);
             $('[name="voucher"]').val(data.voucher);
             $('[name="data"]').val(data.data);
             $('[name="valor"]').val(data.valor);
@@ -108,7 +109,7 @@ function save(){
     } else {
         url = server+"/voucher_update";
     }
-    //console.log($('#form').serialize());
+    // console.log($('#form').serialize());
     // ajax adding data to database
     $.ajax({
         url : url,
@@ -131,7 +132,7 @@ function save(){
             $('#btnSave').attr('disabled',false); //set button enable
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('Error adding / update data');
+            alert('Error adding / update data'+errorThrown+ '  '+ jqXHR.responseText);
             $('#btnSave').text('Salvo'); //change button text
             $('#btnSave').attr('disabled',false); //set button enable
         }

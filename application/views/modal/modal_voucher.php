@@ -34,14 +34,15 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Motorista :</label>
                             <div class="col-md-9">
-                               <div class="input-group">
-                                   <select class="selectpicker form-control" name="motorista">
-                                       <option value="">------Selecione um motorista-----</option>
-                                       <?php foreach($motoristas->result() as $motorista) : ?>
-                                       <option value="<?=$motorista->id_motorista?>"> <?=$motorista->nome?> Prefixo:<?=$motorista->prefixo?></option>
-                                       <?php endforeach ?>
-                                   </select>
-                               </div>
+                                <input name="motorista" placeholder="Nome do motorista" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Prefixo :</label>
+                            <div class="col-md-9">
+                                <input name="prefixo" placeholder="Prefixo do motorista" class="form-control" type="text">
+                                <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">

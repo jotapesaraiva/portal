@@ -11,25 +11,6 @@ class Voucher extends CI_Controller {
     }
 
     public function index() {
-        $curr_year = date('Y');
-        $curr_mes = date('n');
-        if($this->input->post('ano')) {
-            $nano = $this->input->post('ano');
-            $data['nano'] = $nano;
-        } else {
-            $nano = date('Y');
-            $data['nano'] = date('Y');
-        }
-
-        if($this->input->post('mes')){
-            $nmes = $this->input->post('mes');
-            $data['nmes'] = $nmes;
-            $data['mes'] = dataEmPortugues($nmes);
-        } else {
-            $nmes = $curr_mes;
-            $data['nmes'] = date('n');
-            $data['mes'] = dataEmPortugues(date('n'));
-        }
 
         $this->output->enable_profiler(FALSE);
         $script['footerinc'] = '
@@ -47,6 +28,7 @@ class Voucher extends CI_Controller {
             <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
             ';
         $session['username'] = $this->session->userdata('username');
+        $modal['usuario'] = $this->session->userdata('username');
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
@@ -55,43 +37,12 @@ class Voucher extends CI_Controller {
         $this->load->view('template/header', $css);
         $this->load->view('template/navbar', $session);
         $this->load->view('template/sidebar');
-        $modal['usuario'] = $this->session->userdata('username');
-        $data['motoristas'] = $this->voucher_model->listar_motoristas();
-        $data['historico'] = $this->table_historico($nmes,$nano);
 
-        $this->load->view('gerencias/voucher', $data);
+        $this->load->view('gerencias/voucher');
         $this->load->view('modal/modal_voucher', $modal);
 
         $this->load->view('template/footer', $script);
     }
-
-
-    public function table_historico($mes,$ano){
-        $historico = $this->voucher_model->historico_voucher($mes,$ano);
-        $html = "";
-        foreach ($historico->result_array() as $linha) {
-
-            $html.="<tr>";
-            $html.="    <td>".$linha['id_historico']."</td>";
-            $html.="    <td>".date( 'd-m-Y', strtotime($linha['data']))."</td>";
-            $html.="    <td>".$linha['usuario']."</td>";
-            $html.="    <td>".$linha['voucher']."</td>";
-            $html.="    <td>R$ ".str_replace(".",",",$linha['valor'])."</td>";
-            $html.="    <td>".$linha['motorista']."</td>";
-            $html.="    <td>".$linha['observacao']."</td>";
-            $html.="    <td>";
-            $html.="        <a class='btn yellow-mint btn-outline sbold' href='javascript:void(0)' title='Edit' onclick='edit_voucher(".$linha['id_historico'].")'>
-                                <i class='glyphicon glyphicon-pencil'></i> Editar
-                            </a>
-                            <a class='btn red-mint btn-outline sbold' href='javascript:void(0)' title='Deletar' onclick='delete_voucher(".$linha['id_historico'].")'>
-                                <i class='glyphicon glyphicon-trash'></i> Deletar
-                            </a>";
-            $html.="    </td>";
-            $html.="</tr>";
-        }
-        return $html;
-    }
-
 
     public function voucher_list(){
        // Datatables Variables
@@ -106,11 +57,12 @@ class Voucher extends CI_Controller {
        foreach($historicos->result() as $historico) {
            $row = array();
            $row[] = $historico->id_historico;
-           $row[] = date( 'd-M-Y', strtotime($historico->data));
+           $row[] = date( 'd/M/Y', strtotime($historico->data));
            $row[] = $historico->usuario;
            $row[] = $historico->voucher;
            $row[] = $historico->valor;
            $row[] = $historico->motorista;
+           $row[] = $historico->prefixo;
            $row[] = $historico->observacao;
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_voucher('."'".$historico->id_historico."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_voucher('."'".$historico->id_historico."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
@@ -126,13 +78,12 @@ class Voucher extends CI_Controller {
        echo json_encode($output);
     }
 
-
-
     public function voucher_add() {
         $this->historico_validate();
         $data = array(
             'usuario' => $this->input->post('usuario'),
-            'motorista_id' => $this->input->post('motorista'),
+            'motorista' => $this->input->post('motorista'),
+            'prefixo' => $this->input->post('prefixo'),
             'voucher' => $this->input->post('voucher'),
             'data' => date('Y-m-d', strtotime($this->input->post('data'))),
             'valor' => $this->input->post('valor'),
@@ -146,7 +97,8 @@ class Voucher extends CI_Controller {
         $this->historico_validate();
         $data = array(
             'usuario' => $this->input->post('usuario'),
-            'motorista_id' => $this->input->post('motorista'),
+            'motorista' => $this->input->post('motorista'),
+            'prefixo' => $this->input->post('prefixo'),
             'voucher' => $this->input->post('voucher'),
             'data' => date('Y-m-d', strtotime($this->input->post('data'))),
             'valor' => $this->input->post('valor'),
@@ -178,9 +130,15 @@ class Voucher extends CI_Controller {
             $data['status'] = FALSE;
         }
 
-        if($this->input->post('data') == '') {
-            $data['inputerror'][] = 'data';
-            $data['error_string'][] = 'Selecione a data da corrida';
+        if($this->input->post('motorista') == '') {
+            $data['inputerror'][] = 'motorista';
+            $data['error_string'][] = 'Selecione a motorista da corrida';
+            $data['status'] = FALSE;
+        }
+
+        if($this->input->post('prefixo') == '') {
+            $data['inputerror'][] = 'prefixo';
+            $data['error_string'][] = 'Selecione a prefixo da corrida';
             $data['status'] = FALSE;
         }
 
