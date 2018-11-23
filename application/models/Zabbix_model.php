@@ -29,6 +29,11 @@ class Zabbix_model extends CI_Model {
     // AND status not in ('Fechado','Cancelado')
     // order by ticket DESC LIMIT 1
 
+    public function select_zabbix_grc() {
+        $portal_db = $this->load->database('default',true);
+        return $portal_db->get('zbx_link_fora');
+    }
+
     public function save_zabbix_grc($dados) {
         $portal_db = $this->load->database('default',true);
         $portal_db->insert('zbx_link_fora', $dados);
@@ -40,10 +45,10 @@ class Zabbix_model extends CI_Model {
         return $portal_db->replace('zbx_link_fora', $dados);
     }
 
-    public function delete_zabbix_grc($id) {
+    public function delete_zabbix_grc() {
         $portal_db = $this->load->database('default',true);
-        $portal_db->where_not_in('id', $id);
-        $portal_db->delete('zbx_link_fora');
+        $portal_db->truncate('zbx_link_fora');
+        // echo $portal_db->last_query();
     }
 
     public function update_zabbix_grc($dados,$designacao) {

@@ -13,7 +13,7 @@ class Zabbix_grc extends CI_Controller {
     }
 
     public function index() {
-        $this->output->enable_profiler(TRUE);
+        $this->output->enable_profiler(false);
         //Load config file
         $this->load->config('zabbix', TRUE);
         // Get breadcrumbs display options
@@ -44,13 +44,13 @@ class Zabbix_grc extends CI_Controller {
                 'expandDescription'           => 1,
                 'expandComment'               => 1,
                 'selectHosts'                 => array('hostname'),
-                'filter'                      => array('priority' => array('4','5'),'value' => '1' , '')
+                'filter'                      => array('priority' => array('5'),'value' => '1' , '')
           ));
         $alertas_atuais = "'0'";
-
+        $this->zabbix_model->delete_zabbix_grc();
         foreach($triggers as $trigger){
             $alertas_atuais .= ",'$trigger->triggerid'";
-             echo $alertas_atuais;
+             // echo $alertas_atuais;
             if (strpos($trigger->description, 'Link') !== false) {
 
                 $host_id = $trigger->hosts[0]->hostid;
@@ -68,23 +68,22 @@ class Zabbix_grc extends CI_Controller {
                 $data_atual_br = date('Y-m-d H');
 
                 $dados_alerta = array(
-                        'id'                      => $trigger->triggerid,
-                        'host_id'                 => $hosts[0]->hostid,
+                        'id'                      => $trigger->triggerid,//id da trigger no zabbix
+                        'host_id'                 => $hosts[0]->hostid,//id do host no zabbix
                         'servidor'                => $hosts[0]->name, //host
                         'servico'                 => $trigger->description, //designação
                         'detalhe'                 => $trigger->comments, // plano de açao
-                        'prioridade'              => $trigger->priority,
-                        'data_alerta'             => $data_alerta,
+                        'prioridade'              => $trigger->priority,//nivel de prioridade
+                        'data_alerta'             => $data_alerta,//
                         'data_ultima_verificacao' => $data_atual_br,
                         'situacao'                => 'PROBLEMA',
                         'ip'                      => $hosts_interface[0]->ip,
                         'designacao'              => $hosts[0]->description
                  );
-                 // echo "<pre>";
-                 // var_dump($dados_alerta);
-                 // echo "</pre>";
-
-                 // $this->zabbix_model->save_zabbix_grc($dados_alerta);
+                 echo "<pre>";
+                 var_dump($dados_alerta);
+                 echo "</pre>";
+                        $this->zabbix_model->save_zabbix_grc($dados_alerta);
                  // $this->zabbix_model->replace_zabbix_grc($dados_alerta);
 
                 // mysqli_query($con, "INSERT INTO tab_alertas_zabbix_link (id,host_id,servidor,servico,detalhe,prioridade,data_alerta,data_ultima_verificacao,situacao,ip,designacao)
@@ -115,7 +114,6 @@ class Zabbix_grc extends CI_Controller {
                 $empresa = explode(" - ",$localidade);
             } else {
                 $empresa = " ";
-
             }
 
             $mantis = ($linha['mantis']!='0') ? "<a href='http://intranet2.sefa.pa.gov.br/mantis/view.php?id=".$linha['mantis']."' target='_blank'>".$linha['mantis']." </a>" : "<a href='/?m=index&f=links_zabbix&a=alterar&aux=Indisponibilidade de Link&id=".htmlentities($linha['id'], ENT_QUOTES, 'ISO-8859-1')."'  style='color: rgb(0,0,255)'><font color='374E9E' ><button id='loc_botao_inserir'  class='btn btn-primary'>+</button> </font></a>";
