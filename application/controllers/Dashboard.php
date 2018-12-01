@@ -40,7 +40,7 @@ class Dashboard extends CI_Controller {
         // } else {
         //     $groupids = array('1');
         // }
-        $groupids = array(19,18);
+        // $groupids = array(19,18);
 
         // if (isset($_GET['name'])) {
         //     $dashboard = $_GET['name'];
@@ -84,126 +84,109 @@ class Dashboard extends CI_Controller {
         echo '    <!-- We could use the Zabbix HostGroup name here, but would not work in a nice way when using a dozen of hostgroups, yet! So we hardcoded it here. -->';
         echo '    <div id="sheetname">'. $dashboard .'</div>';
 
-            $groups = $api->hostgroupGet(array(
-                   'output' => array('name'),
-                   'selectHosts' => array(
-                           'flags',
-                           'hostid',
-                           'name',
-                           'maintenance_status'),
-                   'real_hosts ' => 1,
-                   'groupids' => $groupids,
-            #       'with_monitored_triggers' => 1,
-                   'sortfield' => 'name'
-                ));
+        $groups = $api->hostgroupGet(array(
+               'output' => array('name'),
+               'selectHosts' => array(
+                       'flags',
+                       'hostid',
+                       'name',
+                       'maintenance_status'),
+               'real_hosts ' => 1,
+               'groupids' => array(19,18),
+        #       'with_monitored_triggers' => 1,
+               'sortfield' => 'name'
+            ));
 
-            foreach($groups as $group) {
-               $groupIds[] = $group->groupid;
-            }
+        foreach($groups as $group) {
+           $groupIds[] = $group->groupid;
+        }
 
-            $triggers = $api->triggerGet(array(
-                   'output' => array(
-                       'priority',
-                       'description'),
-                   'selectHosts' => array('hostid'),
-                       'groupids' => $groupIds,
-                       'expandDescription' => 1,
-                       'only_true' => 1,
-                       'monitored' => 1,
-                       'withLastEventUnacknowledged' => 1,
-                       // 'sortfield' => 'priority',
-                       'sortfield' => array('lastchange', 'priority'),
-                       'sortorder' => 'DESC',
-                       'filter' => array('priority' => array('4','5'),'value' => '1' , '')
-               ));
+        $triggers = $api->triggerGet(array(
+             'output' => array(
+               'priority',
+               'description'),
+             'selectHosts' => array('hostid'),
+               'groupids' => $groupIds,
+               'expandDescription' => 1,
+               'only_true' => 1,
+               'monitored' => 1,
+               'withLastEventUnacknowledged' => 1,
+               'sortfield' => 'priority',
+               'sortorder' => 'DESC',
+                   'filter' => array('priority' => array('4','5'),'value' => '1' , '')
+           ));
 
-            foreach($triggers as $trigger) {
-               foreach($trigger->hosts as $host) {
-                   $hostTriggers[$host->hostid][] = $trigger;
-               }
-            }
-            // verifica se o array não foi criado. caso não tenha seta a variavel vazio.
-            if(!isset($hostTriggers)){
-                $hostTriggers = "";
-            }
-            // var_dump($hostTriggers);
-            // get all hosts from each groupid
-                foreach($groups as $group) {
-                    $groupname = $group->name;
-                    $hosts = $group->hosts;
-                    //ordena o array do menor para o maior ou em ordem alfabetica.
-                    usort($hosts, function ($a, $b) {
-                        if ($a->name == $b) return 0;
-                        return ($a->name < $b->name ? -1 : 1);
-                    });
-                    echo "<div class=\"groupbox\">"; // Again, we dont want to use the groupfunction yet
-                    echo "<div class=\"group-title\">" . strtoupper(preg_replace('/\//',' / ',$groupname)) . "</div>";
-                    echo "<div class=\"groupbox js-masonry\" data-masonry-options='{ \"itemSelector\": \".hostbox\" }'\">";
+        foreach($triggers as $trigger) {
+           foreach($trigger->hosts as $host) {
+             $hostTriggers[$host->hostid][] = $trigger;
+           }
+        }
 
-                    if ($hosts) {
+        // get all hosts from each groupid
+          foreach($groups as $group) {
+            $groupname = $group->name;
+                $hosts = $group->hosts;
 
-                        // print all host IDs
-                        foreach($hosts as $host) {
-                            // Check if host is not disabled, we don't want them! -- exibi só os ativos
-                            if ($host->flags == "0") {
+                usort($hosts, function ($a, $b) {
+                    if ($a->name == $b) return 0;
+                    return ($a->name < $b->name ? -1 : 1);
+                });
+            echo "<div class=\"groupbox\">"; // Again, we dont want to use the groupfunction yet
+            echo "<div class=\"group-title\">" . strtoupper(preg_replace('/\//',' / ',$groupname)) . "</div>";
+            echo "<div class=\"groupbox js-masonry\" data-masonry-options='{ \"itemSelector\": \".hostbox\" }'\">";
 
-                                $hostid = $host->hostid;
-                                $hostname = $host->name;
-                                $maintenance = $host->maintenance_status;
+                if ($hosts) {
 
-                                $hosts_interface = $api->hostinterfaceGet(array(
-                                  'output'=> 'extend',
-                                  'filter' => array('hostid' => $hostid)
-                                ));
-                                $ip = $hosts_interface[0]->ip;
+              // print all host IDs
+              foreach($hosts as $host) {
+                // Check if host is not disabled, we don't want them!
+                if ($host->flags == "0") {
 
-                                if($hostTriggers != NULL){
+                  $hostid = $host->hostid;
+                  $hostname = $host->name;
+                  $maintenance = $host->maintenance_status;
 
-                                  if ( array_key_exists($hostid, $hostTriggers)) {
-                                    // Highest Priority error
-                                    $hostboxprio = $hostTriggers[$hostid][0]->priority;
-                                    $age=time_elapsed_string(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange), true);
-                                    // $age=date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange);
-                                    //First filter the hosts that are in maintenance and assign the maintenance class if is true
-                                    if ($maintenance != "0") {
-                                        echo "<div class=\"hostbox maintenance\">";
-                                    } else {
-                                        // If hosts are not in maintenance, check for trigger(s) and assign the appropriate class to the box
-                                        echo "<div class=\"hostbox nok" . $hostboxprio . "\">";
-                                    }
-                                    echo "<div class=\"title\">" . $hostname ." <br>". $ip ." </div><div class=\"hostid\">" . $hostid ."</div>";
-                                    echo "<div> ". $age ."</div>";
-                                    $count = "0";
-                                    foreach ($hostTriggers[$hostid] as $event) {
-                                        if ($count++ <= 2 ) {
-                                            $priority = $event->priority;
-                                            $description = $event->description;
-
-                                            // Remove hostname or host.name in description
-                                            $search = array('{HOSTNAME}', '{HOST.NAME}');
-                                            $description = str_replace($search, "", $description);
-                                            // View
-                                            echo "<div class=\"description nok" . $priority ."\" title=\"" . $description . "\">" . $description . "</div>";
-                                        } else {
-                                            break;
-                                        }
-                                    }
-                                    echo "</div>";
-                                }
-                            } /*else {
-                                    // If there are no trigger(s) for the host found, assign the "ok" class to the box
-                                    echo "<div class=\"hostbox ok\">";
-                                    echo "<div class=\"title\">" . $hostname . "</div>";
-                                    echo "</div>";
-                                }*/
-                            }
-                        }
-                        echo "</div></div>";
+                  if (array_key_exists($hostid, $hostTriggers)) {
+                    // Highest Priority error
+                    $hostboxprio = $hostTriggers[$hostid][0]->priority;
+                    //First filter the hosts that are in maintenance and assign the maintenance class if is true
+                    if ($maintenance != "0") {
+                      echo "<div class=\"hostbox maintenance\">";
+                    } else {
+                      // If hosts are not in maintenance, check for trigger(s) and assign the appropriate class to the box
+                      echo "<div class=\"hostbox nok" . $hostboxprio . "\">";
                     }
+                    // ".$ip."
+                                echo "<div class=\"title\">" . $hostname . "</div><div class=\"hostid\">" . $hostid . "</div>";
+                    $count = "0";
+                    foreach ($hostTriggers[$hostid] as $event) {
+                      if ($count++ <= 2 ) {
+                        $priority = $event->priority;
+                        $description = $event->description;
+
+                        // Remove hostname or host.name in description
+                        $search = array('{HOSTNAME}', '{HOST.NAME}');
+                        $description = str_replace($search, "", $description);
+                        // View
+                        echo "<div class=\"description nok" . $priority ."\" title=\"" . $description . "\">" . $description . "</div>";
+                      } else {
+                        break;
+                      }
+                    }
+                    echo "</div>";
+                  } /*else {
+                    // If there are no trigger(s) for the host found, assign the "ok" class to the box
+                    echo "<div class=\"hostbox ok\">";
+                    echo "<div class=\"title\">" . $hostname . "</div>";
+                    echo "</div>";
+                  }*/
                 }
-                #$api->userLogout(); # commented out due to a bug in php and Zabbix
-        echo '    </body>';
-        echo '    </html>';
+              }
+              echo "</div></div>";
+            }
+          }
+          echo "</body>";
+        echo "</html>";
   }
 }
 

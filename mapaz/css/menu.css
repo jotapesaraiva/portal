@@ -1,0 +1,79 @@
+/* CSS RESET */
+
+*{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+
+#side_bar{
+	width: 300px;
+	/*
+			 float: left;
+			 width: 15em;
+			 height:61%;
+			 margin: 18px 0 0 14px;
+			 font-size:smaller;
+	overflow-y:auto;
+	
+	#98FB98 verde
+	#FF6666 vermelho
+	*/
+}
+
+#side_bar ul li a {
+	/*border: 1px solid black;
+	display: block;
+	color: black;*/
+	width: 300px;
+	text-decoration: none;
+/*	background-color: #FF6666;
+	color:#000000;*/
+	text-align: left;
+	margin-top: 2px;
+	margin-left: 5px;
+	
+	float: left;
+	/*padding: 10px 20px;*/
+}
+
+#side_bar ul li a:hover {
+	background-color: #555555;
+	color: #fff;
+	cursor:pointer;
+	cursor:hand;
+}
+/*
+#side_bar ul li a:active{
+	background-color: yellow;
+	color: red;
+}
+*/
+#side_bar ul li{
+	/*float: left;*/
+	padding:10px;
+	
+}
+div.rotulo{
+	width: 292px;
+	background-color: #696969;
+	color: #FFFFFF;
+	font-weight: bold;
+	
+	text-align: left;
+	margin-left: 15px;
+	margin-bottom: 0;
+	
+	float: left;
+	padding: 4px;
+}
+/*.normal { 
+	background-color: #FF6666 !important; color:#000000 !important;}*/
+.focus {
+	background-color: #555555 !important;	color: #fff !important; }
+.up{
+	background-color: #98FB98 !important; color:#000000 !important;
+}	
+.down{
+	background-color: #FF6666 !important; color:#000000 !important;
+}

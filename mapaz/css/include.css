@@ -1,0 +1,23 @@
+/* Fix for the infamous IE 6 background image flicker bug.
+ To take effect it requires at least SP 1.
+ This hack should only get applied to IE 6. */
+* html {
+ filter:expression(document.execCommand("BackgroundImageCache", false, true));
+}
+
+.include a {
+ float: left;
+ font-size:80%;
+ width:105px;
+ height:20px;
+ line-height:20px;
+ background:url(../img/include-icon.gif) no-repeat;
+ text-decoration:none;
+ margin-top: 0px;
+ margin-right:20px;
+ padding:0;
+ color:#3f76a4;
+ text-align:center;
+}
+
+h2, h3 { margin-left: 14px; }

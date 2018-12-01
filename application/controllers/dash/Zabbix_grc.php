@@ -63,10 +63,9 @@ class Zabbix_grc extends CI_Controller {
                     'output' => 'extend',
                     'filter' => array('hostid' => $host_id)
                 ));
-
                 $data_alerta   = date('Y-m-d H:i:s' ,$trigger->lastchange);
                 $data_atual_br = date('Y-m-d H');
-
+                echo $hosts[0]->name;
                 $dados_alerta = array(
                         'id'                      => $trigger->triggerid,//id da trigger no zabbix
                         'host_id'                 => $hosts[0]->hostid,//id do host no zabbix
@@ -94,6 +93,7 @@ class Zabbix_grc extends CI_Controller {
                 //                     ) ON DUPLICATE KEY UPDATE data_ultima_verificacao = '".$dados_alerta['data_ultima_verificacao']."';");
                         }
         }
+
         echo $alertas_atuais;
 
         // $delete = $this->zabbix_model->delete_zabbix_grc($alertas_atuais);
@@ -101,6 +101,7 @@ class Zabbix_grc extends CI_Controller {
         $alertas = $this->zabbix_model->list_zabbix_grc();
         $html1 = "";
         foreach ($alertas->result_array() as $linha) {
+            //Desnecessario o zabbix já possui um campo que mostra o tempo que o link ficou fora.
             $data_alerta_tratada = new DateTime($linha['data_alerta']);
             $hora_atual = new DateTime();
             $tempo_alerta = $data_alerta_tratada->diff($hora_atual);

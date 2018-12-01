@@ -1,0 +1,6 @@
+.sprite { 
+ display:inline-block;
+ height: 32px;
+ width: 32px;
+ background: url('http://sites.google.com/site/mxamples/icons-dot.png') no-repeat;
+}

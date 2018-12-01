@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<meta charset="UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/fluid.css" />
+<link rel="stylesheet" type="text/css" href="css/swingmenu.css" />
+<link rel="stylesheet" type="text/css" href="css/swingbox.css" />
+<link rel="stylesheet" type="text/css" href="css/button.css" />
+<link rel="stylesheet" type="text/css" href="css/include.css" />
+<link rel="stylesheet" type="text/css" href="css/menu.css" />
+
+<title>Mapa de Monitoramento de Links - SEFA PA </title>
+
+<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=weather,places"></script> -->
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyABymwhvTD8qgfQ3g6iZBWyC_muA2qNU_o&v=3.exp&sensor=false&libraries=weather,places"></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJ9XX2ZvRKCJcFRrl-lRanEtFUow4piM&sensor=false&libraries=weather,places"></script>-->
+<!-- key=ABQIAAAA_KNcKfoyaTskjEp-kSSEjxSsDbTxMRg-JrUcPZT14QWonZA5mxRqx3ct_DbeHVelXNr1WbKEEJ5k-A& -->
+</head>
+<body>
+
+<!-- map minimizer -->
+<div id="minimize" style="position:absolute; top:0; left:-1px; width: 21px; height: 21px; cursor: pointer; display: none; z-index: 100">
+<img src="img/right_arrow.gif" onclick="togglePanel();return false" title="Mostra painel" />
+</div>
+
+<div id="body-top">
+<!--<div align="rignt"><img SRC = "img/para.jpg" height = "40"></div>-->
+<form onsubmit="showAddress(this.addr.value);return false">
+<table class="search" style="width: 100%;height:1.4em; margin-top:5px;" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td style="width: 20%;">
+			<div align="center"><img SRC = "img/brasao_sefa_black.png" height = "60px"></div>
+		</td>
+		<td style="text-align: center; width: 50%;">
+			<input id="addr" name="addr" type="text" style="width: 90%;" placeholder="" />
+		</td>
+		<td style="width: 5%;">
+			<button id="qq" type="submit"></button>
+		</td>
+		<td style="width: 21%;">
+			<div align="center">
+				<label>Usar refresh:</label>
+			<!--<input type="checkbox" name="refresh" onclick="clearOverlays()" checked="checked">  -->
+				<input type="checkbox" id="chbx" onclick="clearOverlays()" checked="checked">
+			</div>
+		</td>
+		<td style="width: 10%;">
+				<span class="include">
+					<a href="/">Voltar</a>
+				</span>
+		</td>
+	</tr>
+</table>
+</form>
+
+</div><!-- end body-top -->
+
+
+<div id="wrapper" style="position:absolute; top:70px; left:0; width:100%; height:100%">
+
+			<div id="swingmenu" class="s">
+			<a href="javascript:void(0)" onclick="storePos()">Gravar</a><br />
+			<a href="javascript:void(0)" onclick="showPos()">Mostrar</a><hr />
+			<a href="javascript:void(0)" onclick="showPos('latlng')">Padrao</a>
+			</div>
+			<!--<div id="outer_more">
+
+			<form>
+			<div id="swingbox" class="button">
+
+			<input name="box" id="weather" type="checkbox" onclick="switchLayer(this.checked, this.id)" /> Tempo <br />
+			<input name="box" id="clouds" type="checkbox" onclick="switchLayer(this.checked, this.id)" /> Nuvem <br />
+
+			<hr />
+			<a id="remover" href="javascript:void(0)" onclick="hideAll()">Ocultar todos</a>
+
+			</div></form>
+			</div>-->
+
+<div id="gmap"></div>
+
+<div id="leftpanel">
+<div id="panel-tabs">
+
+<!-- map maximizer -->
+<img src="img/left_arrow.gif" onclick="togglePanel('left');return false" alt="Hide panel" title="Ocultar painel" style="float:right; margin:0 8px 4px 0; width:12px; height:22px;cursor: pointer;" />
+
+<span class="p-tab one" onclick="flipTab('listing')">Status</span>
+<span class="p-tab" onclick="flipTab('mysearches')">Regiões</span>
+
+</div><!-- end panel-tabs-->
+
+
+<div id="allpanelCards">
+
+
+<div id="listing" style="margin-bottom: 90px; padding: 0 15px 0 20px;">
+
+<p class="tab-title">
+  <center><b>Status dos links:</b></center>
+  <hr>
+</p>
+			<table id="desc" border ="0">
+				<tr>
+					<td>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="sprite" style="background-position:-96px -32px;"></span>Up:<input type="checkbox" id="upbox" name = "loc_sel" onclick="boxclick(this,'up')" /> &nbsp;
+						<span class="sprite" style="background-position:0 0;"></span>Down:<input type="checkbox" id="downbox" name = "loc_sel" onclick="boxclick(this,'down')" />
+					</td>
+				</tr>
+
+			</table>
+			<hr>
+		  <div id="side_bar"></div>
+</div><!-- end listing -->
+
+<div id="mysearches" style="padding: 0 15px 0 20px; display: none;">
+
+<p class="tab-title">
+  <center><b>Mesoregioes:</b></center>
+  <hr>
+</p>
+<br>
+<br>
+<br>
+<div id="Mesoregioes"></div>
+</div>
+
+
+</div></div></div><!-- end allpanelCards, leftpanel, wrapper -->
+
+
+<div id="panel-foot">
+&copy; 2012-2013 Version 5.8<br />
+&reg; By Code: Joao Saraiva, <a onclick="location.href='mail'+'to'+':'+'operadores'+unescape('%40')+'sefa.pa.gov.br';return false;" href="mailto:operadores@sefa.pa.gov.br">Opera&ccedil;&atilde;o</a>
+
+</div>
+
+		<!-- Jquery API Javascript -->
+		<script src="js/jquery.min.js"></script>
+
+        <!-- Agrupamento dos marcadores -->
+		<script src="js/markerclusterer.js"></script>
+
+		<!-- Agrupamento dos marcadores -->
+		<script src="js/function.js"></script>
+
+</body>
+</html>

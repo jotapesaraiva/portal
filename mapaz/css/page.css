@@ -1,0 +1,226 @@
+body, html { height:100%; width: 100%; }
+			body { font-family: Verdana; }
+			
+			#mapa {
+			 float: left;
+			 margin: 0 25px 10px 14px;
+			 width: 75%;
+			 height: 85%;
+			 -webkit-border-radius: 5px;
+			 -moz-border-radius: 5px;
+			 border-radius: 5px;
+			 border:1px solid #666;/*border: 1px solid gray;*/
+			 margin-bottom:1em;
+			 box-shadow: 0px 0px 10px #333;
+			}
+
+			#desc {
+			 float: left;
+			 width:13em;
+			 white-space:nowrap;
+			 margin-top: -37px;
+			}
+			
+			#search {
+			 position: absolute;
+			 top:2%; left:50%;
+			 white-space: nowrap;
+			}
+
+			#search input {
+			 font-size: 1.1em;
+			}
+
+			#addr {
+			  width: 90%;
+			}
+			
+			#side_bar {
+			 float: left;
+			 width: 15em;
+			 height:61%;
+			 margin: 18px 0 0 14px;
+			 font-size:smaller;
+			 overflow-y:auto;
+			}
+			
+			button#qq {
+			 width: 81px;
+			 height: 36px;
+			 vertical-align: middle;
+			 background: url('../img/search.gif') no-repeat;
+			 border: none;
+			}
+
+			.normal { background-color:#FFF; }
+			.focus { background-color:#CCCCCC; }
+
+
+			.sprite { 
+			 display:inline-block;
+			 height: 32px;
+			 width: 32px;
+			 background: url('http://sites.google.com/site/mxamples/icons-dot.png') no-repeat;
+			}
+
+			@media screen and (max-width: 890px) {
+
+			 #mapa {
+			  width: 93%;
+			  height: 50%;
+			  margin: 0 14px;
+			 }
+
+			 #desc {
+			  margin: 14px;
+			  width: 93%;
+			 }
+			 #side_bar {
+			  margin: 0 24px;
+			 }
+			  .include >b {
+			  float: left;
+			  margin-top: 17px;
+			 }
+			 #search {
+			  top: 77%;
+			  left: 28%;
+			 }
+			 #addr {
+			  width: 60%;
+			 }
+			}
+			
+			#swingbox {
+				display: none;
+				position: absolute;
+				top:23px; left:0px;
+				margin-top:-2px;
+				padding: 6px 4px;
+				text-align: left;
+				width:102px;
+				background-color: #fff;
+				cursor:default;
+				z-index:-1;
+			}
+
+			#swingbox hr { 
+				height:1px;
+				border:1px;
+				color:#e2e2e2;
+				background-color:#e2e2e2;
+				margin: 1px 0;
+			}
+
+			*+html #swingbox hr {
+			/* IE 7 hr bug fix */
+			 display:block; margin: -5px 0;
+			}
+
+			* html #swingbox hr {
+			/* IE 6 hr bug fix */
+			 display:block; margin: -5px 0;
+			}
+
+			#remover { color: #a5a5a5;
+				text-decoration: none;
+				cursor: default;
+				text-align: center;
+				display: block;
+			}
+
+			#remover.highlight { color: #0000cd;
+				text-decoration: underline;
+				cursor: pointer;
+			}
+			
+			#swingmenu { 
+				display: none;
+				position:absolute;
+				top:100%; left:0px;
+				margin-top:-5px;
+				padding: 5px 4px;
+				text-align:left;
+				width:84px;
+				background-color: #FFFFFE;
+				border: 1px solid #A9BBDF;
+				border-top:1px solid #e2e2e2;
+				z-index:-1;
+			}
+			
+			#swingmenu a {
+				text-decoration: none;
+				margin-left: 3px;
+				font-weight: normal;
+			}
+
+			#swingmenu hr {
+				height:1px;
+				border:1px;
+				color:#e2e2e2;
+				background-color:#e2e2e2;
+				margin:2px 2px 0 2px;
+			}
+
+			*+html #swingmenu hr {
+			/* IE 7 hr bug fix */
+			 display:block; margin: -7px 0;
+			}
+
+			* html #swingmenu hr {
+			/* IE 6 hr bug fix */
+			 display:block; margin: -7px 0;
+			}
+
+			/*
+			CSS for v3 buttons stolen from:
+			 http://gmaps-samples-v3.googlecode.com/svn/trunk/controls/index.html
+			*/
+
+			 .button, .button-selected,.s {
+			   margin: 5px;
+			   cursor: pointer;
+			   font-family: Arial, sanf-serif;
+			   font-size: 12px;
+			   line-height: 160%;
+			   padding: 0 6px;
+			   overflow: hidden;
+			   text-align: center;
+			   border-radius: 2px;
+			   -moz-border-radius: 2px;
+			   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+			   -moz-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+			   -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+			   -webkit-user-select: none;
+			   -moz-user-select: none;
+			 }
+
+			 .button {
+			   color: #000;
+			   border: 1px solid #A9BBDF;
+			   /* old browsers */
+			   background: #FEFEFE;
+			   /* firefox */
+			   background: -moz-linear-gradient(top, #FEFEFE 0%, #F3F3F3 100%);
+			   /* webkit */
+			   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FEFEFE), color-stop(100%,#F3F3F3));
+			   /* ie */
+			   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FEFEFE', endColorstr='#F3F3F3',GradientType=0);
+			 }
+
+			 .button-selected, .button:hover {
+				border: 1px solid #678AC7;
+			 }
+
+			 .button-selected {
+			   font-weight: bold;
+			   color: #fff;
+			   /* old browsers */
+			   background: #6D8ACC;
+			   /* firefox */
+			   background: -moz-linear-gradient(top, #6D8ACC 0%, #7B98D9 100%);
+			   /* webkit */
+			   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6D8ACC), color-stop(100%,#7B98D9));
+			   /* ie */
+			   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6D8ACC, endColorstr='#7B98D9',GradientType=0);
+			 }
