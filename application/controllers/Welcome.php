@@ -22,6 +22,7 @@ class Welcome extends CI_Controller {
 		parent::__construct();
 		// Load form validation library
 		$this->load->library('Auth_AD');
+
 		if($this->auth_ad->is_authenticated()){
 		    $username = $this->session->userdata('username');
 		} else {
@@ -31,18 +32,21 @@ class Welcome extends CI_Controller {
 	}
 	public function index()	{
 
-		$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(FALSE);
 		$css['headerinc'] = '';
-		$script['script'] = '<script>$("#myAlert").fadeOut(4000);</script>';
-		$script['footerinc'] = '';
+		$script['script'] = '<script>$("#myAlert").fadeOut(4000);</script>
+		';
+		$script['footerinc'] = '
+		<script src="' . base_url() . 'assets/custom/link_indisponivel.js" type="text/javascript"></script>';
 
 		$username = $this->session->userdata('username');
-		$dados = array("username" => $username);
+		$user = array("username" => $username);
+		// $dados = $this->load->controller('dash/server');
 		// $this->session->set_flashdata("loginOk","Logando com sucesso no sistema!!!.");
 		// set_msg('loginOk','Logado com sucesso no sistema !!!','sucesso');
 
 		$this->load->view('template/header',$css);
-		$this->load->view('template/navbar',$dados);
+		$this->load->view('template/navbar',$user);
 		$this->load->view('template/sidebar');
 		$this->load->view('teste/conteudo');
 		$this->load->view('template/footer',$script);

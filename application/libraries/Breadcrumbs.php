@@ -24,8 +24,7 @@ class Breadcrumbs {
 	  * @access	public
 	  *
 	  */
-	public function __construct()
-	{
+	public function __construct(){
 		$this->ci =& get_instance();
 		// Load config file
 		$this->ci->load->config('breadcrumbs');

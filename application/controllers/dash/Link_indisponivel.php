@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Map_link extends CI_Controller {
+class Link_indisponivel extends CI_Controller {
+
 
     public function __construct() {
         parent::__construct();
@@ -36,10 +37,11 @@ class Map_link extends CI_Controller {
           'sortfield' => 'name',
               // 'selectGroups'=> 'extend',
           'selectInterfaces' => array('ip'),
-          'selectInventory' => array('location_lat','location_lon'),
+          'selectInventory' => array('location_lat','location_lon','vendor'),
+          // 'selectInventory' => 'extend',
           'groupids' => array(19,18)
         ));
-
+        // echo vd($hosts);
             foreach ($hosts as $host) {
                 $host_id[] = $host->hostid;
             }
@@ -49,7 +51,6 @@ class Map_link extends CI_Controller {
                        'priority',
                        'description'),
                    'selectHosts' => array('hostid'),
-                       // 'groupids' => $groupIds,
                        'hostids' => $host_id,
                        'expandDescription' => 1,
                        'only_true' => 1,
@@ -73,9 +74,11 @@ class Map_link extends CI_Controller {
                 $hoststatus = $host->status;
                 $hostip = $host->interfaces[0]->ip;
                 if($host->inventory != NULL){
+                    $hostvendor = $host->inventory->vendor;
                     $hostlat = $host->inventory->location_lat;
                     $hostlon = $host->inventory->location_lon;
                 } else{
+                    $hostvendor = "";
                     $hostlat = "";
                     $hostlon = "";
                 }
@@ -86,8 +89,13 @@ class Map_link extends CI_Controller {
                         $count = "0";
                         foreach ($hostTriggers[$hostid] as $event) {
                             if ($count++ <= 2 ) {
-                                // $priority = $event->priority;
-                                // $description = $event->description;
+                                $priority = $event->priority;
+                                $description = $event->description;
+                                // Remove hostname or host.name in description
+                                $search = array('{HOSTNAME}', '{HOST.NAME}');
+                                $description = str_replace($search, "", $description);
+                                // View
+                                // echo "<div class=\"description nok" . $priority ."\" title=\"" . $description . "\">" . $description . "</div>";
                                 $duration = $tempo_fora;
                                 $priority ="down";
 
@@ -95,10 +103,6 @@ class Map_link extends CI_Controller {
                                 break;
                             }
                         }
-                    } else {
-                        $duration = "00:00:00";
-                        $priority = "up";
-                    }
                     $result = array(
                       'id' => $hostid,
                       'name' => $hostname,
@@ -106,18 +110,25 @@ class Map_link extends CI_Controller {
                       'latitude' => $hostlat,
                       'longitude' => $hostlon,
                       'duration' => $duration,
-                      'type' => $priority
+                      'type' => $priority,
+                      'vendor' => $hostvendor
                     );
                     array_push($retorno,$result);
-      //       echo "<pre>";
-      //       echo $hostid."\n";
-      //       echo $hostname."\n";
-      //       echo $hostip."\n";
-      //       echo $hostlat."\n";
-      //       echo $hostlon."\n";
-      //       echo $duration."\n";
-      //       echo $priority."\n";
-        // echo "</pre>";
+                    // echo "<pre>";
+                    // echo $hostid."\n";
+                    // echo $hostname."\n";
+                    // echo $hostip."\n";
+                    // echo $hostlat."\n";
+                    // echo $hostlon."\n";
+                    // echo $duration."\n";
+                    // echo $priority."\n";
+                    // echo $description."\n";
+                    // echo $hostvendor."\n";
+                    // echo "</pre>";
+                    } else {
+                        $duration = "00:00:00";
+                        $priority = "up";
+                    }
                 }
             }
             echo json_encode($retorno);
@@ -125,5 +136,5 @@ class Map_link extends CI_Controller {
 
 }
 
-/* End of file Map_link.php */
-/* Location: ./application/controllers/dash/Map_link.php */
+/* End of file Link_indisponivel.php */
+/* Location: ./application/controllers/dash/Link_indisponivel.php */

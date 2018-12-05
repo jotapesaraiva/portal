@@ -26,12 +26,13 @@ function time_elapsed_string($datetime, $full = false) {
 }
 
 function time2string($timeline) {
-    $periods = array('dia' => 86400, 'hora' => 3600, 'minuto' => 60, 'segundo' => 1);
+    $periods = array('d' => 86400, 'h' => 3600, 'm' => 60, 's' => 1);
     $ret = "";
     foreach($periods AS $name => $seconds){
         $num = floor($timeline / $seconds);
         $timeline -= ($num * $seconds);
-        $ret .= $num.' '.$name.(($num > 1) ? 's' : '').' ';
+        // $ret .= $num.' '.$name.(($num > 1) ? 's' : '').' ';
+        $ret .= $num.''.$name.' ';
     }
 
     return trim($ret);
