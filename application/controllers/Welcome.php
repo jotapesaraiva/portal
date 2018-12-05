@@ -37,7 +37,8 @@ class Welcome extends CI_Controller {
 		$script['script'] = '<script>$("#myAlert").fadeOut(4000);</script>
 		';
 		$script['footerinc'] = '
-		<script src="' . base_url() . 'assets/custom/link_indisponivel.js" type="text/javascript"></script>';
+        <script src="' . base_url() . 'assets/custom/link_indisponivel.js" type="text/javascript"></script>
+		<script src="' . base_url() . 'assets/custom/server.js" type="text/javascript"></script>';
 
 		$username = $this->session->userdata('username');
 		$user = array("username" => $username);
