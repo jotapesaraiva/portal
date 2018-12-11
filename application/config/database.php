@@ -145,15 +145,16 @@ $db['portalmoni'] = array(
 	'save_queries' => TRUE
 );
 
-/*$active_group = 'oracle';
-$query_builder = TRUE;*/
+$active_group = 'oracle';
+// $query_builder = TRUE;
 
-/*$db['oracle'] = array(
-	'dsn'	   => '',
-	'hostname' => '(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = exa01-scan.sefa.pa.gov.br)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = monitoramento.util.sefa.pa.gov.br) ))',
+$db['oracle'] = array(
+	'dsn'	   => '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=exa01-scan.sefa.pa.gov.br)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=monitoramento.util.sefa.pa.gov.br)))',
+	'hostname' => '',
 	'username' => 'USR_QRY_INDICADORES',
 	'password' => 'indicaUSR',
-	'database' => 'AL32UTF8',
+	// 'database' => 'AL32UTF8',
+	'database' => '',
 	'dbdriver' => 'oci8',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
@@ -168,4 +169,4 @@ $query_builder = TRUE;*/
 	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE
-);*/
+);

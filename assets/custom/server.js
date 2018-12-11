@@ -15,7 +15,7 @@ atualiza_alertas_servidor();
            dataType: 'json',
            success: function (data) {
             // console.log(data);
-            var output ='<table class="table table-hover"><thead><tr class="uppercase"><th>Servidor</th><th>Serviço</th><th>IP</th><th>Tempo</th><th>Mantis</th></thead><tbody>';
+            var output ='<table class="table table-hover"><thead><tr class="uppercase"><th>Serviço</th><th>Servidor</th><th>IP</th><th>Tempo</th><th>Mantis</th></thead><tbody>';
                     for (var i in data) {
                       output +=
                         "<tr><td>" +

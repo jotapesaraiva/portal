@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="number">
                             <span data-counter="counterup" data-value="549">18</span>°C
                         </div>
-                        <div class="desc"> CPD </div>
+                        <div class="desc"> Data Center </div>
                     </div>
                     <a class="more" href="javascript:;"> View more
                         <i class="m-icon-swapright m-icon-white"></i>
@@ -91,103 +91,119 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="clearfix"></div>
         <!-- END DASHBOARD STATS 1-->
         <div class="row">
-            <div class="col-md-6 col-sm-6">
-                <!-- BEGIN PORTLET-->
-                <div class="portlet light bordered">
+            <div class="col-md-6 col-sm-6"> <!-- Tabela Monitora -->
+                <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="icon-bar-chart font-green"></i>
-                            <span class="caption-subject font-green bold uppercase">Site Visits</span>
-                            <span class="caption-helper">weekly stats...</span>
+                            <i class="icon-share font-green-haze hide"></i>
+                            <span class="caption-subject font-green bold uppercase">Monitora</span>
+                            <span class="caption-helper">Alertas</span>
                         </div>
                         <div class="actions">
-                            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                <label class="btn red btn-outline btn-circle btn-sm active">
-                                    <input type="radio" name="options" class="toggle" id="option1">New</label>
-                                <label class="btn red btn-outline btn-circle btn-sm">
-                                    <input type="radio" name="options" class="toggle" id="option2">Returning</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <div id="site_statistics_loading">
-                            <img src="../assets/global/img/loading.gif" alt="loading" /> </div>
-                        <div id="site_statistics_content" class="display-none">
-                            <div id="site_statistics" class="chart"> </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END PORTLET-->
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <!-- BEGIN PORTLET-->
-                <div class="portlet light bordered">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="icon-share font-red-sunglo hide"></i>
-                            <span class="caption-subject font-red-sunglo bold uppercase">Revenue</span>
-                            <span class="caption-helper">monthly stats...</span>
-                        </div>
-                        <div class="actions">
-                            <div class="btn-group">
-                                <a href="" class="btn dark btn-outline btn-circle btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Filter Range
-                                    <span class="fa fa-angle-down"> </span>
+                            <!-- <div class="btn-group">
+                                <a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> More
+                                    <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu pull-right">
                                     <li>
-                                        <a href="javascript:;"> Q1 2014
-                                            <span class="label label-sm label-default"> past </span>
+                                        <a href="javascript:;"> All Project </a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                        <a href="javascript:;"> AirAsia </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> Cruise </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> HSBC </a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                        <a href="javascript:;"> Pending
+                                            <span class="badge badge-danger"> 4 </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:;"> Q2 2014
-                                            <span class="label label-sm label-default"> past </span>
-                                        </a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="javascript:;"> Q3 2014
-                                            <span class="label label-sm label-success"> current </span>
+                                        <a href="javascript:;"> Completed
+                                            <span class="badge badge-success"> 12 </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:;"> Q4 2014
-                                            <span class="label label-sm label-warning"> upcoming </span>
+                                        <a href="javascript:;"> Overdue
+                                            <span class="badge badge-warning"> 9 </span>
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
+                            <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div id="site_activities_loading">
-                            <img src="../assets/global/img/loading.gif" alt="loading" /> </div>
-                        <div id="site_activities_content" class="display-none">
-                            <div id="site_activities" style="height: 228px;"> </div>
+                        <div id="monitora_down_loading">
+                            <img src="../assets/global/img/loading.gif" alt="loading" />
                         </div>
-                        <div style="margin: 20px 0 10px 30px">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                    <span class="label label-sm label-success"> Revenue: </span>
-                                    <h3>$13,234</h3>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                    <span class="label label-sm label-info"> Tax: </span>
-                                    <h3>$134,900</h3>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                    <span class="label label-sm label-danger"> Shipment: </span>
-                                    <h3>$1,134</h3>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                    <span class="label label-sm label-warning"> Orders: </span>
-                                    <h3>235090</h3>
-                                </div>
-                            </div>
-                        </div>
+                        <div id="monitora_down_content" class="table-scrollable table-scrollable-borderless"></div>
                     </div>
                 </div>
-                <!-- END PORTLET-->
-            </div>
+            </div><!-- FIM da Tabela Monitora -->
+            <div class="col-md-6 col-sm-6"> <!-- Tabela link indisponivel -->
+                <div class="portlet light tasks-widget bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-share font-green-haze hide"></i>
+                            <span class="caption-subject font-green bold uppercase">Links</span>
+                            <span class="caption-helper">Indisponíveis</span>
+                        </div>
+                        <div class="actions">
+                            <!-- <div class="btn-group">
+                                <a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> More
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="javascript:;"> All Project </a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                        <a href="javascript:;"> AirAsia </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> Cruise </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> HSBC </a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                        <a href="javascript:;"> Pending
+                                            <span class="badge badge-danger"> 4 </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> Completed
+                                            <span class="badge badge-success"> 12 </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> Overdue
+                                            <span class="badge badge-warning"> 9 </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div> -->
+                            <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="links_down_loading">
+                            <img src="../assets/global/img/loading.gif" alt="loading" />
+                        </div>
+                        <div id="links_down_content" class="table-scrollable table-scrollable-borderless"></div>
+                    </div>
+                </div>
+            </div><!-- FIM da Tabela link indisponivel -->
+
         </div>
         <div class="row">
             <div class="col-md-6 col-sm-6"> <!-- Tabela Servidores -->
@@ -246,13 +262,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
             </div><!-- FIM da Tabela Servidores -->
-            <div class="col-md-6 col-sm-6"> <!-- Tabela link indisponivel -->
+            <div class="col-md-6 col-sm-6"> <!-- Tabela Backupsl -->
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-share font-green-haze hide"></i>
-                            <span class="caption-subject font-green bold uppercase">Links</span>
-                            <span class="caption-helper">Indisponíveis</span>
+                            <span class="caption-subject font-green bold uppercase">Backups</span>
+                            <span class="caption-helper">Falhos</span>
                         </div>
                         <div class="actions">
                             <!-- <div class="btn-group">
@@ -295,17 +311,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div id="links_down_loading">
+                        <div id="backups_down_loading">
                             <img src="../assets/global/img/loading.gif" alt="loading" />
                         </div>
-                        <div id="links_down_content" class="table-scrollable table-scrollable-borderless"></div>
+                        <div id="backups_down_content" class="table-scrollable table-scrollable-borderless"></div>
                     </div>
                 </div>
-            </div><!-- FIM da Tabela link indisponivel -->
+            </div><!-- FIM da Tabela Backupsl -->
         </div>
-    <pre>
-
-    </pre>
+    <!-- <pre>
+    </pre> -->
     </div>
     <!-- END CONTENT BODY -->
 </div>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Server extends CI_Controller {
+class Monitora extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -37,9 +37,9 @@ class Server extends CI_Controller {
               // 'selectGroups'=> 'extend',
           'selectInterfaces' => array('ip'),
           // 'selectInventory' => array('location_lat','location_lon'),
-          'groupids' => array(8,11,14)
+          'groupids' => array(35)
         ));
-
+        // echo vd($hosts);
           foreach ($hosts as $host) {
               $host_id[] = $host->hostid;
           }
@@ -61,6 +61,7 @@ class Server extends CI_Controller {
                      'priority' => array('4','5'),
                      'value' => '1')
              ));
+           // vd($triggers);
           foreach($triggers as $trigger) {
              foreach($trigger->hosts as $host) {
                  $hostTriggers[$host->hostid][] = $trigger;
@@ -72,14 +73,14 @@ class Server extends CI_Controller {
               $hostname = $host->name;
               $hoststatus = $host->status;
               $hostip = $host->interfaces[0]->ip;
-
-              if($hoststatus == 0){
+              // vd($hosts);
+              if($hoststatus == 0) {
                   if (array_key_exists($hostid, $hostTriggers)) {
-                      $tempo_fora=time2string(time()-strtotime(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange)));
                       $detalhe = $hostTriggers[$hostid][0]->comments;
                       $count = "0";
                       foreach ($hostTriggers[$hostid] as $event) {
                           if ($count++ <= 5 ) {
+                              $tempo_fora=time2string(time()-strtotime(date('Y-m-d H:i:s', $event->lastchange)));
                               $priority = $event->priority;
                               $description = $event->description;
                               // Remove hostname or host.name in description
@@ -131,5 +132,5 @@ class Server extends CI_Controller {
 
 }
 
-/* End of file Server.php */
-/* Location: ./application/controllers/dash/Server.php */
+/* End of file Monitora.php */
+/* Location: ./application/controllers/dash/Monitora.php */
