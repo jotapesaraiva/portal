@@ -14,22 +14,23 @@ atualiza_alertas_zabbix_link();
            url: "https://producaoh.sefa.pa.gov.br/portal/dash/link_indisponivel/",
            dataType: 'json',
            success: function (data) {
-            // console.log(data);
+            console.log(data);
             var output ='<table class="table table-hover"><thead><tr class="uppercase"><th>TICKET</th><th>NOME</th><th>FORNECEDOR</th><th>IP</th><th>TEMPO</th><th>MANTIS</th></thead><tbody>';
                     for (var i in data) {
                       output +=
-                        "<tr><td>" +
-                        "<a href='http://webebt04.embratel.com.br/PORTALGRCTST/troubleticket/tkt_listarhistorico.php?vcontacle=44j5+A0CKaiKEZKgf5bMeVZfqsvrl0AJ4teFsjZMZi/b4=ZS8ec8e/xbFOxpBipHMZ&vlogin=44vvmukhQGO39kGXjMmIMpE5FQV9pRxF4VmouSLb1DRyw=X9FM11Jt0L8=&id_ticket="+data[i].id+"' target='_blank'>"+data[i].id+"</a>"+
+                        "<tr "+data[i].flag+"><td>" +
+                        "<a href='http://webebt04.embratel.com.br/PORTALGRCTST/troubleticket/tkt_listarhistorico.php?vcontacle=44j5+A0CKaiKEZKgf5bMeVZfqsvrl0AJ4teFsjZMZi/b4=ZS8ec8e/xbFOxpBipHMZ&vlogin=44vvmukhQGO39kGXjMmIMpE5FQV9pRxF4VmouSLb1DRyw=X9FM11Jt0L8=&id_ticket="+data[i].ticket+"' target='_blank'>"+data[i].ticket+"</a>"+
                         "</td><td>" +
-                        data[i].name +
+                        data[i].servidor +
                         "</td><td>" +
                         data[i].vendor +
                         "</td><td>" +
-                        "<a href='https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]="+data[i].id+"' target='_blank'>"+data[i].ip+"</a>"+
+                        "<a href='https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]="+data[i].hostid+"' target='_blank'>"+data[i].ip+"</a>"+
                         "</td><td>" +
                         data[i].duration +
                         "</td><td>" +
-                        "<a href='http://intranet2.sefa.pa.gov.br/mantis/view.php?id="+data[i].id+"' target='_blank'>"+data[i].type+"</a>"+
+                            // "<a class='btn blue btn-outline sbold' href='alertas/enviar' title='Criar Mantis'><i class='fa fa-plus'></i></a>" +;
+                            "<a href='http://intranet2.sefa.pa.gov.br/mantis/view.php?id="+data[i].mantis+"' target='_blank'>"+data[i].mantis+"</a>"+
                         "</td><tr>";
                     }
                     output += "</tbody></table>";

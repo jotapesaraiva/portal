@@ -31,7 +31,13 @@ class Zabbix_model extends CI_Model {
 
     public function select_zabbix_grc() {
         $portal_db = $this->load->database('default',true);
-        return $portal_db->get('zbx_link_fora');
+        $query = $portal_db->get('zbx_link_fora');
+        return $query->result_array();
+    }
+
+    public function duplicate_zabbix_grc($dados) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->on_duplicate('zbx_link_fora', $dados);
     }
 
     public function save_zabbix_grc($dados) {
@@ -40,14 +46,15 @@ class Zabbix_model extends CI_Model {
         return $portal_db->insert_id();
     }
 
-    public function replace_zabbix_grc($dados) {
-        $portal_db = $this->load->database('default',true);
-        return $portal_db->replace('zbx_link_fora', $dados);
-    }
+    // public function replace_zabbix_grc($dados) {
+    //     $portal_db = $this->load->database('default',true);
+    //     return $portal_db->replace('zbx_link_fora', $dados);
+    // }
 
-    public function delete_zabbix_grc() {
+    public function delete_zabbix_grc($id) {
         $portal_db = $this->load->database('default',true);
-        $portal_db->truncate('zbx_link_fora');
+        $portal_db->where_not_in('id',$id);
+        $portal_db->delete('zbx_link_fora');
         // echo $portal_db->last_query();
     }
 

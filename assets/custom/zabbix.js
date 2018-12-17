@@ -1,20 +1,20 @@
 var server = window.location.href;
 $(document).ready(function () {
-atualiza_alertas_monitora();
+atualiza_alertas_zabbix();
 });
-    function atualiza_alertas_monitora() {
+    function atualiza_alertas_zabbix() {
 
-        $('#monitora_down_loading').hide();
-        $('#monitora_down_content').show();
+        $('#zabbix_down_loading').hide();
+        $('#zabbix_down_content').show();
 
-        var displayResources = $("#monitora_down_content");
+        var displayResources = $("#zabbix_down_content");
         // displayResources.text("Loading data from JSON source...");
 
         $.ajax({
-           url: "https://producaoh.sefa.pa.gov.br/portal/dash/monitora/",
+           url: "https://producaoh.sefa.pa.gov.br/portal/dash/zabbix/",
            dataType: 'json',
            success: function (data) {
-            console.log(data);
+            // console.log(data);
             var output ='<table class="table table-hover"><thead><tr class="uppercase"><th>Serviço</th><th>Servidor</th><th>Tempo</th><th>IP</th><th>Mantis</th></thead><tbody>';
                     for (var i in data) {
                       output +=
@@ -34,5 +34,5 @@ atualiza_alertas_monitora();
             displayResources.html(output);
            }
         });
-            setTimeout('atualiza_alertas_monitora()', 30000);
+            setTimeout('atualiza_alertas_zabbix()', 30000);
     }

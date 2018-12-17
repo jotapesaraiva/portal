@@ -30,47 +30,73 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                         <!-- BEGIN SAMPLE FORM PORTLET-->
                         <div class="portlet light bordered">
-                            <div class="portlet-title">
+<!--                             <div class="portlet-title">
                                 <div class="caption">
                                     <i class="icon-settings font-dark"></i>
                                     <span class="caption-subject font-dark sbold uppercase">Horizontal Form</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="portlet-body form">
                                 <form class="form-horizontal" role="form">
                                     <div class="form-body">
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Email Address</label>
-                                            <div class="col-md-9">
+                                            <label class="col-md-2 control-label">Alerta</label>
+                                            <div class="col-md-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-envelope"></i>
                                                     </span>
-                                                    <input type="email" class="form-control" placeholder="Email Address"> </div>
+                                                    <input type="text" class="form-control" placeholder="Alerta"> </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Password</label>
-                                            <div class="col-md-9">
+                                            <label class="col-md-2 control-label">Origem</label>
+                                            <div class="col-md-8">
                                                 <div class="input-group">
-                                                    <input type="password" class="form-control" placeholder="Password">
                                                     <span class="input-group-addon">
-                                                        <i class="fa fa-user"></i>
+                                                        <i class="fa fa-envelope"></i>
                                                     </span>
-                                                </div>
+                                                    <input type="text" class="form-control" placeholder="Origem"> </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Input With Spinner</label>
-                                            <div class="col-md-9">
-                                                <input type="password" class="form-control spinner" placeholder="Password"> </div>
+                                            <label class="col-md-2 control-label">Plano de Ação</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-envelope"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="Plano de Ação"> </div>
+                                            </div>
                                         </div>
 
+
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Dropdown</label>
-                                            <div class="col-md-9">
+                                            <label class="col-md-2 control-label">Responsavel</label>
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-envelope"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="Responsavel"> </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Descrição</label>
+                                            <div class="col-md-8">
+                                                <textarea class="form-control" rows="3"></textarea>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Email</label>
+                                            <div class="col-md-8">
                                                 <select class="form-control">
                                                     <option>Option 1</option>
                                                     <option>Option 2</option>
@@ -82,8 +108,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Textarea</label>
-                                            <div class="col-md-9">
+                                            <label class="col-md-2 control-label">Log do Erro</label>
+                                            <div class="col-md-8">
                                                 <textarea class="form-control" rows="3"></textarea>
                                             </div>
                                         </div>
@@ -93,8 +119,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <div class="form-actions">
                                         <div class="row">
                                             <div class="col-md-offset-3 col-md-9">
-                                                <button type="submit" class="btn green">Submit</button>
-                                                <button type="button" class="btn default">Cancel</button>
+                                                <button type="submit" class="btn green">Enviar</button>
+                                                <button type="button" class="btn default">Cancelar</button>
                                             </div>
                                         </div>
                                     </div>

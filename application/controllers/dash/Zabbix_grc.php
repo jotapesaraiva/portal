@@ -79,9 +79,9 @@ class Zabbix_grc extends CI_Controller {
                         'ip'                      => $hosts_interface[0]->ip,
                         'designacao'              => $hosts[0]->description
                  );
-                 echo "<pre>";
-                 var_dump($dados_alerta);
-                 echo "</pre>";
+                 // echo "<pre>";
+                 // var_dump($dados_alerta);
+                 // echo "</pre>";
                         $this->zabbix_model->save_zabbix_grc($dados_alerta);
                  // $this->zabbix_model->replace_zabbix_grc($dados_alerta);
 

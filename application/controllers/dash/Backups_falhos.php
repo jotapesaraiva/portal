@@ -17,18 +17,22 @@ class Backups_falhos extends CI_Controller {
         foreach ($falhos as $falho) {
             if($falho['mantis'] == 0) {
                 $status_mantis = 0;
+                $flag = 'class="danger"';
                 $mantis = '
                         <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar" title="Criar Mantis">
                             <i class="fa fa-plus"></i>
                         </a>';
             } else {
+                $flag = '';
                 $row = $this->backups_model->mantis($falho['mantis']);
                 $status_mantis = $row->STATUS;
-                $mantis = $falho['mantis'];
+                $array_color = array(50 => "primary", 10 => " danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
+                // $mantis = $falho['mantis'];
+                $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$falho['mantis'].'" class = "label label-'. $array_color[$status_mantis].'" target="_blank">'.$falho['mantis'].'</a>';
             }
 
             if($status_mantis != '80' AND $status_mantis != '90') {
-                $data = $falho['session_id'];
+                $data   = $falho['session_id'];
                 $inicio = $falho['start_time'];
                 $status = $falho['status'];
                 $backup = $falho['specification'];
@@ -46,6 +50,7 @@ class Backups_falhos extends CI_Controller {
                   'inicio' => $inicio,
                   'status' => $status,
                   'backup' => $backup,
+                  'flag'   => $flag,
                   'mantis' => $mantis
                 );
                 array_push($retorno,$result);
@@ -57,9 +62,9 @@ class Backups_falhos extends CI_Controller {
     }
 
 
-    public function mantis($mantis) {
-        $mantis = $this->backups_model->mantis($mantis);
-        echo $mantis;
+    public function teste() {
+        $mantis = $this->backups_model->abertura();
+        vd($mantis);
         // $mantis = $this->backups_model->mantis();
         // vd($mantis);
         // echo $mantis->status;

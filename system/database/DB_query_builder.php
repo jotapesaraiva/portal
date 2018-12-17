@@ -2808,7 +2808,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 	/**
 		* On Duplicate Key Update
-		*
+		* https://apps.badjoerichards.com/apps/developerhack/add-duplicate-key-insert-query-builder-codeigniter-3/
 		* Compiles an on duplicate key update string and runs the query
 		*
 		* @author    Chris Miller <chrismill03@hotmail.com>
@@ -2826,7 +2826,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		        $this->set($set);
 		    }
 
-		    if (count($this->ar_set) == 0)
+		    if (count($this->qb_set) == 0)
 		    {
 		            if ($this->db_debug)
 		        {
@@ -2837,7 +2837,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 		    if ($table == '')
 		    {
-		        if ( ! isset($this->ar_from[0]))
+		        if ( ! isset($this->qb_from[0]))
 		        {
 		            if ($this->db_debug)
 		            {
@@ -2846,11 +2846,11 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		            return FALSE;
 		        }
 
-		        $table = $this->ar_from[0];
+		        $table = $this->qb_from[0];
 		    }
 
 
-		    $sql = $this->_duplicate_insert($this->_protect_identifiers($this->dbprefix.$table), $this->ar_set );
+		    $sql = $this->_duplicate_insert($this->protect_identifiers($this->dbprefix.$table), $this->qb_set );
 
 		    $this->_reset_write();
 		    return $this->query($sql);

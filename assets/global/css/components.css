@@ -7636,6 +7636,24 @@ Customized Bootstrap Labels
   .label-danger[href]:focus {
     background-color: #e73d4a; }
 
+.label-retorno {
+  background-color: #e43a45; }
+  .label-danger[href]:hover,
+  .label-danger[href]:focus {
+    background-color: #D91E18; }
+
+.label-autorizado {
+  background-color: #F4D03F; }
+  .label-danger[href]:hover,
+  .label-danger[href]:focus {
+    background-color: #f3c200; }
+
+.label-impedido {
+  background-color: #9B59B6; }
+  .label-danger[href]:hover,
+  .label-danger[href]:focus {
+    background-color: #8E44AD; }
+
 /***
 Iconic labels
 ***/

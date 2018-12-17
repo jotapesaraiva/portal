@@ -14,11 +14,11 @@ atualiza_alertas_backups();
            url: "https://producaoh.sefa.pa.gov.br/portal/dash/backups_falhos/",
            dataType: 'json',
            success: function (data) {
-            console.log(data);
+            // console.log(data);
             var output ='<table class="table table-hover"><thead><tr class="uppercase"><th>Sessão</th><th>Inicio</th><th>Status</th><th>Backup</th><th>Mantis</th></thead><tbody>';
                     for (var i in data) {
                       output +=
-                        "<tr><td>" +
+                        "<tr "+data[i].flag+"><td>" +
                         data[i].data+
                         "</td><td>" +
                         data[i].inicio +

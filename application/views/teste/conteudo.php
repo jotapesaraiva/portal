@@ -96,7 +96,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-share font-green-haze hide"></i>
-                            <span class="caption-subject font-green bold uppercase">Monitora</span>
+                            <span class="caption-subject font-green bold uppercase">Zabbix</span>
                             <span class="caption-helper">Alertas</span>
                         </div>
                         <div class="actions">
@@ -140,10 +140,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div id="monitora_down_loading">
+                        <div id="zabbix_down_loading">
                             <img src="../assets/global/img/loading.gif" alt="loading" />
                         </div>
-                        <div id="monitora_down_content" class="table-scrollable table-scrollable-borderless"></div>
+                        <div id="zabbix_down_content" class="table-scrollable table-scrollable-borderless"></div>
                     </div>
                 </div>
             </div><!-- FIM da Tabela Monitora -->
@@ -318,6 +318,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
             </div><!-- FIM da Tabela Backupsl -->
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6"> <!-- Tabela Servidores -->
+                <div class="portlet light tasks-widget bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-share font-green-haze hide"></i>
+                            <span class="caption-subject font-green bold uppercase">Monitora</span>
+                            <span class="caption-helper">Alertas</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="monitora_down_loading">
+                            <img src="../assets/global/img/loading.gif" alt="loading" />
+                        </div>
+                        <div id="monitora_down_content" class="table-scrollable table-scrollable-borderless"></div>
+                    </div>
+                </div>
+            </div><!-- FIM da Tabela Servidores -->
+<!--             <div class="col-md-6 col-sm-6">
+                <div class="portlet light tasks-widget bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-share font-green-haze hide"></i>
+                            <span class="caption-subject font-green bold uppercase">Backups</span>
+                            <span class="caption-helper">Falhos</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="backups_down_loading">
+                            <img src="../assets/global/img/loading.gif" alt="loading" />
+                        </div>
+                        <div id="backups_down_content" class="table-scrollable table-scrollable-borderless"></div>
+                    </div>
+                </div>
+            </div> -->
         </div>
     <!-- <pre>
     </pre> -->

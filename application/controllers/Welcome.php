@@ -40,7 +40,8 @@ class Welcome extends CI_Controller {
         <script src="' . base_url() . 'assets/custom/link_indisponivel.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/server.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/backups_falhos.js" type="text/javascript"></script>
-		<script src="' . base_url() . 'assets/custom/monitora.js" type="text/javascript"></script>';
+		<script src="' . base_url() . 'assets/custom/zabbix.js" type="text/javascript"></script>
+		<script src="' . base_url() . 'assets/custom/antigo_monitora.js" type="text/javascript"></script>';
 
 		$username = $this->session->userdata('username');
 		$user = array("username" => $username);

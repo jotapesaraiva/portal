@@ -95,16 +95,16 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
-$active_group = 'portalm';
+$active_group = 'monitora';
 /*$query_builder = TRUE;*/
 
-$db['portalm'] = array(
+$db['monitora'] = array(
 	'dsn'	=> '',
-	'hostname' => '10.3.1.142',
-	'username' => 'root',
-	'password' => '!!GR&m10!',
-	'database' => 'producao',
-	'dbdriver' => 'mysqli',
+	'hostname' => '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=exa01-scan.sefa.pa.gov.br)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=monitoramento.util.sefa.pa.gov.br)))',
+	'username' => 'USR_MONITORAMENTO',
+	'password' => 'monitoraUSR',
+	// 'database' => '',
+	'dbdriver' => 'oci8',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
@@ -145,10 +145,10 @@ $db['portalmoni'] = array(
 	'save_queries' => TRUE
 );
 
-$active_group = 'oracle';
+$active_group = 'mantis';
 // $query_builder = TRUE;
 
-$db['oracle'] = array(
+$db['mantis'] = array(
 	'dsn'	   => '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=exa01-scan.sefa.pa.gov.br)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=monitoramento.util.sefa.pa.gov.br)))',
 	'hostname' => '',
 	'username' => 'USR_QRY_INDICADORES',
