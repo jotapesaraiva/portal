@@ -19,7 +19,7 @@ class Backups_falhos extends CI_Controller {
                 $status_mantis = 0;
                 $flag = 'class="danger"';
                 $mantis = '
-                        <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar" title="Criar Mantis">
+                        <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar/backup/'.$falho['id'].'" title="Criar Mantis">
                             <i class="fa fa-plus"></i>
                         </a>';
             } else {

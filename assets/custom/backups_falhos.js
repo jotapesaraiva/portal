@@ -27,7 +27,7 @@ atualiza_alertas_backups();
                         "</td><td>" +
                         data[i].backup +
                         "</td><td>" +
-                        "<a href='http://intranet2.sefa.pa.gov.br/mantis/view.php?id="+data[i].mantis+"' target='_blank'>"+data[i].mantis+"</a>"+
+                        data[i].mantis+
                         "</td><tr>";
                     }
                     output += "</tbody></table>";

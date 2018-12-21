@@ -29,8 +29,7 @@ atualiza_alertas_zabbix_link();
                         "</td><td>" +
                         data[i].duration +
                         "</td><td>" +
-                            // "<a class='btn blue btn-outline sbold' href='alertas/enviar' title='Criar Mantis'><i class='fa fa-plus'></i></a>" +;
-                            "<a href='http://intranet2.sefa.pa.gov.br/mantis/view.php?id="+data[i].mantis+"' target='_blank'>"+data[i].mantis+"</a>"+
+                        data[i].mantis+
                         "</td><tr>";
                     }
                     output += "</tbody></table>";

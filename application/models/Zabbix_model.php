@@ -3,14 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Zabbix_model extends CI_Model {
 
-    public function list_zabbix_grc() {
+    public function select_link($id) {
         $portal_db = $this->load->database('default',true);
         // return $portal_db->get('zbx_link_fora');
         $portal_db->select('*');
         $portal_db->from('zbx_link_fora');
-        $portal_db->order_by('data_alerta','DESC');
+        $portal_db->where('host_id', $id);
         $query = $portal_db->get();
-        return $query;
+        return $query->result_array();
     }
 
     public function list_grc_link($designacao) {

@@ -173,7 +173,7 @@ class Link_indisponivel extends CI_Controller {
               if($link['mantis'] == 0){
                   $flag = 'class="danger"';
                   $mantis = '
-                          <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar" title="Criar Mantis">
+                          <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar/link/'.$hostid.'" title="Criar Mantis">
                               <i class="fa fa-plus"></i>
                           </a>';
               } else {

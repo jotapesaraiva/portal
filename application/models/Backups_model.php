@@ -23,6 +23,19 @@ class Backups_model extends CI_Model {
     // AND (timestamp(concat(day_time,' ',start_time)) > (NOW()-interval 30 DAY))
     // GROUP BY mantis, specification
     // ORDER BY id DESC
+    public function select_backup($id){
+        $portal = $this->load->database('default',true);
+        $portal->select('*');
+        $portal->from('dp_backups');
+        $portal->where('id',$id);
+        $query = $portal->get();
+        // echo $portal->last_query();
+        return $query->result_array();
+    }
+
+
+
+
     public function mantis($mantis) {
         $portal_m = $this->load->database('mantis',true);
         $query = $portal_m->query('
