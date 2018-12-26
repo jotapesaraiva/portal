@@ -33,7 +33,12 @@ class Backups_model extends CI_Model {
         return $query->result_array();
     }
 
-
+    public function update_num_mantis($num,$session_id) {
+        $portal = $this->load->database('default',true);
+        $portal->update('dp_backups', $num, $session_id);
+        // echo $portal->last_query();
+        return $portal->affected_rows();
+    }
 
 
     public function mantis($mantis) {

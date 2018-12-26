@@ -67,6 +67,14 @@ class Zabbix_model extends CI_Model {
     // SET ticket='".$ticket."',posicionamento='".$posicionamento."'
     // WHERE designacao ='".$linha['designacao']."'";
 
+
+    public function update_num_mantis($num,$session_id) {
+        $portal = $this->load->database('default',true);
+        $portal->update('zbx_link_fora', $num, $session_id);
+        // echo $portal->last_query();
+        return $portal->affected_rows();
+    }
+
 }
 
 /* End of file ZabbixGrc_model.php */

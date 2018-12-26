@@ -31,12 +31,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <!-- BEGIN SAMPLE FORM PORTLET-->
                         <div class="portlet light bordered">
                             <div class="portlet-body form">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-body">
 
                                         <?php
                                         switch ($form) {
                                             case 'backup': ?>
+                                            <?php  echo form_open('alertas/enviar/abrir_mantis', array('class' => 'form-horizontal'));?>
+                                             <div class="form-body">
+                                                <?php echo form_hidden('projeto', $projeto);?>
+                                                <?php echo form_hidden('categoria', $categoria);?>
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label">Alerta</label>
                                                     <div class="col-md-8">
@@ -87,7 +89,67 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 </div>
                                         <?php break;
                                             case 'link':?>
-                                                LINK
+                                            <?php  echo form_open('alertas/enviar/abrir_mantis_link', array('class' => 'form-horizontal'));?>
+                                             <div class="form-body">
+                                                <?php echo form_hidden('projeto', $projeto);?>
+                                                <?php echo form_hidden('categoria', $categoria);?>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Alerta</label>
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            <input type="text" name="alerta" class="form-control" placeholder="Alerta" value="<?php echo $status; ?>"> </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Plano de Ação</label>
+                                                      <div class="col-md-8">
+                                                          <textarea class="form-control" name="plano" rows="3"><?php echo $plano; ?></textarea>
+                                                      </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">IP</label>
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            <input type="text" name="mode" class="form-control" placeholder="Responsavel" value="<?php echo $mode; ?>"> </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Ticket</label>
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            <input type="text" name="ticket" class="form-control" placeholder="Responsavel" value="<?php echo $ticket; ?>"> </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Inicio do Chamado</label>
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            <input type="text" name="inicio_chamado" class="form-control" placeholder="Responsavel" value="<?php echo $inicio_chamado; ?>"> </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Posicionamento</label>
+                                                    <div class="col-md-8">
+                                                        <textarea class="form-control" name="log" rows="3"><?php echo $log; ?></textarea>
+                                                    </div>
+                                                </div>
                                         <?php break;
                                             default:?>
                                             TESTE
@@ -100,12 +162,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <div class="form-actions">
                                         <div class="row">
                                             <div class="col-md-offset-3 col-md-9">
-                                                <button type="submit" class="btn green">Enviar</button>
-                                                <button type="button" class="btn default">Cancelar</button>
+                                                <?php echo form_submit(array('class'=> 'btn green','id' => 'submit', 'value' => 'Enviar')); ?>
+                                                <?php echo form_button(array('type' => 'button', 'class' => 'btn default', 'content' => 'Cancelar', 'onClick' => "window.location.href='https://producaoh.sefa.pa.gov.br/portal/welcome'")); ?>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                <!-- </form> -->
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                         <!-- END SAMPLE FORM PORTLET-->

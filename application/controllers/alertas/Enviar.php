@@ -32,12 +32,33 @@ class Enviar extends CI_Controller {
 
     public function link($id) {
         $detalhes = $this->zabbix_model->select_link($id);
-        //abrir mantis
+        foreach ($detalhes as $detalhe) {
+            $dados['status'] = 'Problema de Link: '.$detalhe['ticket'].' - '.$detalhe['servidor'].' ';
+            $dados['plano'] = $detalhe['detalhe'];
+            $dados['mode'] = $detalhe['ip'];
+            $dados['log'] = $detalhe['posicionamento'];
+            $dados['ticket'] = $detalhe['ticket'];
+            $dados['inicio_chamado'] = date('d/m/Y H:i' ,strtotime($detalhe['data_alerta']));
+        }
+        $dados['projeto'] = "Chamado de Link";
+        $dados['categoria'] = "DADOS";
+        $dados['form'] = "link";
 
-        //update o numero do mantis na tabela backups_model
-        //enviar email
-        //retorno dashboard
+        $script['footerinc'] = '';
+        $script['script'] = '';
+        $css['headerinc'] = '';
+        $session['username'] = $this->session->userdata('username');
 
+        $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
+        $this->breadcrumbs->push('<span>Dashboard</span>', '/welcome');
+
+        $this->load->view('template/header', $css);
+        $this->load->view('template/navbar', $session);
+        $this->load->view('template/sidebar');
+
+        $this->load->view('alertas/enviar', $dados);
+
+        $this->load->view('template/footer', $script);
     }
 
     public function backup($id) {
@@ -51,7 +72,9 @@ class Enviar extends CI_Controller {
         // $output = shell_exec("/opt/omni/bin/omnirpt -report dl_info | grep -E 'DIARIO|SEMANA|MENSAL|ANUAL' | grep -v _ANUAL | grep -v EXTRA | awk {'print $3'} | sort");
         // $dados['jobs'] = preg_split("#[\r\n]+#", $output);
         $dados['plano'] = "Analisar os log da session ".  $dados['sessao']. " caso seja necessario abrir mantis para equipe responsavel e relacionar com esse mantis.";
-        $dados['form'] = "link";
+        $dados['projeto'] = "Ambiente de Backup";
+        $dados['categoria'] = "Relatório de Falha de Backup";
+        $dados['form'] = "backup";
 
         $script['footerinc'] = '';
         $script['script'] = '';
@@ -74,21 +97,52 @@ class Enviar extends CI_Controller {
     public function abrir_mantis() {
         $this->load->model('mantis_model');
         //puxar os valores do input e armazenar numa variavel
+        if($this->input->post('log') == null){
+            $detalhe = 'sem log';
+        } else {
+            $detalhe = $this->input->post('log');//descriçao do mantis
+        }
         $params = array(
         'usuario' => $this->session->userdata('username'),//nome do usuario
-        'projeto' => $this->input->post('alerta'),//projeto mantis
+        'projeto' => $this->input->post('projeto'),//projeto mantis
         'servico' => $this->input->post('alerta'),//resumo do mantis
-        'detalhe' => $this->input->post('alerta'),//descriçao do mantis
-        'categoria' => $this->input->post('alerta')//categoria do projeto mantis
+        'detalhe' => $detalhe,//descriçao do mantis
+        'categoria' => $this->input->post('categoria')//categoria do projeto mantis
     );
         //load da procedore passando as variaveis e armazenando em uma variavel
         $this->mantis_model->abrir_mantis($params);
         $resultado = $this->mantis_model->select_num_mantis($params);
         //atualizo a tabela do backup ou zabbix com o numero do mantis
-        $this->backups_model->insert_num_mantis($resultado,$session_id);
+        $this->backups_model->update_num_mantis(array('mantis' => $resultado), array('session_id' => $this->input->post('sessao')));
         //retorno para dashboard
-        redirect('portal/welcome');
+        redirect('welcome');
+    }
 
+    public function abrir_mantis_link() {
+        $this->load->model('mantis_model');
+        //puxar os valores do input e armazenar numa variavel
+        if($this->input->post('log') == null){
+            $detalhe = 'sem log';
+        } else {
+            $detalhe = $this->input->post('log');//descriçao do mantis
+        }
+        $params = array(
+        'usuario' => $this->session->userdata('username'),//nome do usuario
+        'projeto' => $this->input->post('projeto'),//projeto mantis
+        'servico' => $this->input->post('alerta'),//resumo do mantis
+        'detalhe' => $detalhe,//descriçao do mantis
+        'categoria' => $this->input->post('categoria'),//categoria do projeto mantis
+        'ticket' => $this->input->post('ticket'), //ticket campo personalizado
+        'inicio_chamado' => strtotime(str_replace('/', '-',$this->input->post('inicio_chamado'))) //inicio chamado campo personalizado
+    );
+        // vd($params);
+        //load da procedore passando as variaveis e armazenando em uma variavel
+        $this->mantis_model->abrir_mantis_link($params);
+        $resultado = $this->mantis_model->select_num_mantis($params);
+        //atualizo a tabela do backup ou zabbix com o numero do mantis
+        $this->zabbix_model->update_num_mantis(array('mantis' => $resultado), array('ip' => $this->input->post('mode')));
+        //retorno para dashboard
+        redirect('welcome');
     }
 
 }
