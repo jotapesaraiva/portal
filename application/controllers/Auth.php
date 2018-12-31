@@ -65,15 +65,17 @@ class Auth extends CI_Controller{
             // check the login
             if($this->auth_ad->login($username, $password)) {
                 $data = array(
-                    'nome_usuario' => $this->session->userdata('displayname'),
-                    'login_usuario' => $username,
-                    'email_usuario' => $this->session->userdata('mail'),
-                    'senha_usuario' => $password,
-                    'status_usuario' => '1',
-                    'id_permissao' => '1',
-                    'id_cargo' => '1',
-                    'celula_equipe' => $this->session->userdata('physicaldeliveryofficename')
+                    'nome_usuario'       => $this->session->userdata('displayname'),
+                    'login_usuario'      => $username,
+                    'email_usuario'      => $this->session->userdata('mail'),
+                    'senha_usuario'      => $password,
+                    'status_usuario'     => '1',// campo verificador se o usuario esta ativo.
+                    'sobreaviso_usuario' => '0',
+                    'id_permissao'       => '1',// campo verificador nivel de permissão.
+                    'id_cargo'           => '1',// compo verificador cargo do usuario.
+                    'id_grupo'           => '1'
                 );
+                    // 'celula_equipe'  => $this->session->userdata('physicaldeliveryofficename')
                 $alterado = $this->login_database->registration_update($data);
                 // echo 'OK';
                 // the login was succesful, do your thing here

@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <noscript><input type="submit" value="Submit"></noscript>
                         </div>
                       </form>
-                      <div id="container"></div>
+                      <div id="grafico"></div>
                   </div>
                 </div>
             </div>

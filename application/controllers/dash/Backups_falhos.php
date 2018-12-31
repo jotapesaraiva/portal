@@ -26,7 +26,7 @@ class Backups_falhos extends CI_Controller {
                 $flag = '';
                 $row = $this->backups_model->mantis($falho['mantis']);
                 $status_mantis = $row->STATUS;
-                $array_color = array(50 => "primary", 10 => " danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
+                $array_color = array(50 => "primary", 10 => "danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
                 // $mantis = $falho['mantis'];
                 $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$falho['mantis'].'" class = "label label-'. $array_color[$status_mantis].'" target="_blank">'.$falho['mantis'].'</a>';
             }

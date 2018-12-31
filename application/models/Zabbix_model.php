@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Zabbix_model extends CI_Model {
 
-    public function select_link($id) {
+    public function select_zabbix_link($id) {
         $portal_db = $this->load->database('default',true);
         // return $portal_db->get('zbx_link_fora');
         $portal_db->select('*');
@@ -75,6 +75,36 @@ class Zabbix_model extends CI_Model {
         return $portal->affected_rows();
     }
 
+
+
+
+
+    public function duplicate_zabbix_server($dados) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->on_duplicate('zbx_server_fora', $dados);
+    }
+
+    public function save_zabbix_server($dados) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->insert('zbx_server_fora', $dados);
+        return $portal_db->insert_id();
+    }
+
+    public function select_zabbix_server($id=null) {
+        $portal_db = $this->load->database('default',true);
+        $query = $portal_db->get('zbx_server_fora');
+        if($id != null){
+            $portal_db->where('host_id', $id);
+        }
+        return $query->result_array();
+    }
+
+    public function delete_zabbix_server($id) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->where_not_in('id',$id);
+        $portal_db->delete('zbx_server_fora');
+        // echo $portal_db->last_query();
+    }
 }
 
 /* End of file ZabbixGrc_model.php */

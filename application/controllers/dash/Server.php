@@ -25,6 +25,7 @@ class Server extends CI_Controller {
         $host_group_filter = $this->config->item('host_group_filter', 'zabbix');
         // $context = base_url() . 'assets';
         $result ="";
+        $alert = array();
         $retorno = array();
         // connect to Zabbix Json API
         $api = new ZabbixApi($api_url, $api_user, base64_decode($api_pass));
@@ -76,9 +77,11 @@ class Server extends CI_Controller {
               if($hoststatus == 0){
                   if (array_key_exists($hostid, $hostTriggers)) {
                       $tempo_fora=time2string(time()-strtotime(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange)));
+                      $data_alerta = date('Y-m-d H:i:s' ,$hostTriggers[$hostid][0]->lastchange);
                       $detalhe = $hostTriggers[$hostid][0]->comments;
                       $count = "0";
                       foreach ($hostTriggers[$hostid] as $event) {
+                              $id = $event->triggerid;
                           if ($count++ <= 5 ) {
                               $priority = $event->priority;
                               $description = $event->description;
@@ -87,31 +90,23 @@ class Server extends CI_Controller {
                               $description = str_replace($search, "", $description);
                               // View
                               // echo "<div class=\"description nok" . $priority ."\" title=\"" . $description . "\">" . $description . "</div>";
-                              $duration = $tempo_fora;
+                              $duration = $data_alerta;
                               $priority ="down";
-                              // echo "<pre>";
-                              // echo $hostid."\n";
-                              // echo $hostname."\n";
-                              // echo $hostip."\n";
-                              // // echo $hostlat."\n";
-                              // // echo $hostlon."\n";
-                              // echo $detalhe."\n";
-                              // echo $duration."\n";
-                              // echo $priority."\n";
-                              // echo $description."\n";
-                              // echo "</pre>";
-                              $result = array(
-                                'id' => $hostid,
-                                'name' => $hostname,
+                              $save_db = array(
+                                'id' => $id,
+                                'host_id' => $hostid,
+                                'servidor' => $hostname,
+                                'servico' => $description,
+                                'detalhe' => $detalhe,
+                                'data_alerta' => $duration,
+                                'data_ultima_verificacao' => date('Y-m-d H'),
                                 'ip' => $hostip,
-                                // 'latitude' => $hostlat,
-                                // 'longitude' => $hostlon,
-                                'detalhe' =>$detalhe,
-                                'duration' => $duration,
-                                'type' => $priority,
-                                'description' => $description
+                                'mantis' => '0',
+                                'duration' => $tempo_fora
                               );
-                              array_push($retorno,$result);
+                              array_push($alert,$id);
+                              //salvar os servidores fora no banco zbx_server_fora
+                              $this->zabbix_model->duplicate_zabbix_server($save_db);
                           } else {
                               break;
                           }
@@ -125,6 +120,46 @@ class Server extends CI_Controller {
 
               }
           }
+          //deleta todos que não estão alertando
+          $this->zabbix_model->delete_zabbix_server($alert);
+          //consultar novamente a tabela do banco zbx_server_fora
+          $servers_fora = $this->zabbix_model->select_zabbix_server();
+
+          // vd($servers_fora);
+          //percorrer o array da consulta
+          foreach ($servers_fora as $server) {
+              $hostid   = $server['host_id'];
+              $ip       = $server['ip'];
+              $duration = $server['duration'];
+              $servico   = $server['servico'];
+              $servidor = $server['servidor'];
+              if($server['mantis'] == 0){ //verificar se já possui mantis
+                  $flag = 'class="danger"';
+                  $mantis = '
+                          <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar/server/'.$hostid.'" title="Criar Mantis">
+                              <i class="fa fa-plus"></i>
+                          </a>';
+              } else { //se não possui mantis
+                  $status = $this->backups_model->mantis($server['mantis']);
+                  $array_color = array(50 => "primary", 10 => "danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
+                  //10-novo-vermelho  20-retorno-vermelho escuro  30-impedido-roxo  40-autorizado-amarelo  50-atribuido-azul  80-realizado-laranja
+                  $flag = '';
+                  $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$server['mantis'].'" class = "label label-'. $array_color[$status->STATUS].'" target="_blank">'.$server['mantis'].'</a>';
+              }
+              //criar um novo array para exibir no dashboard
+              $result = array(
+                'hostid'   => $hostid,
+                'ip'       => $ip,
+                'duration' => $duration,
+                'servico'   => $servico,
+                'servidor' => $servidor,
+                'flag'     => $flag,
+                'mantis'   => $mantis
+              );
+              //inserir todos os alertas no mesmo array
+              array_push($retorno,$result);
+            }
+          //passar para tabela server via json.
           echo json_encode($retorno);
 
     }

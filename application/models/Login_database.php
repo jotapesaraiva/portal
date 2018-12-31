@@ -47,7 +47,7 @@ public function registration_update($data) {
         'senha_usuario' => $data['senha_usuario'],
         'status_usuario' => '1',
         'id_cargo' => '1',
-        'celula_equipe' => $data['celula_equipe']
+
     );
     $mysql_db->where('login_usuario', $data['login_usuario']);
     $mysql_db->update('tbl_usuario', $update);

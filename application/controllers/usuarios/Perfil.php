@@ -24,7 +24,7 @@ class Perfil extends CI_Controller {
             <script src="' . base_url() . 'assets/custom/perfil.js" type="text/javascript"></script>';
         $script['script'] = '';
 
-        $this->output->enable_profiler(TRUE);
+        $this->output->enable_profiler(false);
 
         $session['username'] = $this->session->userdata('username');
         $modal['grupos'] = $this->usuario_model->listar_grupo();

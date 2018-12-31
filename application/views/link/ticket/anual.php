@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       </div>
                    </div>
                    <div class="portlet-body">
-                   <div id="container"></div>
+                   <div id="grafico"></div>
               </div>
         </div>
     </div>

@@ -1,4 +1,3 @@
-
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
@@ -78,9 +77,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <i class="fa fa-globe"></i>
                     </div>
                     <div class="details">
-                        <div class="number"> +
-                            <span data-counter="counterup" data-value="89"></span>% </div>
-                        <div class="desc"> Brand Popularity </div>
+                        <div class="number">
+                            <span data-counter="counterup" data-value="89"></span>5</div>
+                        <div class="desc"> Mantis </div>
                     </div>
                     <a class="more" href="javascript:;"> View more
                         <i class="m-icon-swapright m-icon-white"></i>
@@ -91,62 +90,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="clearfix"></div>
         <!-- END DASHBOARD STATS 1-->
         <div class="row">
-            <div class="col-md-6 col-sm-6"> <!-- Tabela Monitora -->
+
+            <div class="col-md-6 col-sm-6"> <!-- Tabela Monitora antigo -->
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-share font-green-haze hide"></i>
-                            <span class="caption-subject font-green bold uppercase">Zabbix</span>
+                            <span class="caption-subject font-green bold uppercase">Monitora</span>
                             <span class="caption-helper">Alertas</span>
                         </div>
                         <div class="actions">
-                            <!-- <div class="btn-group">
-                                <a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> More
-                                    <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li>
-                                        <a href="javascript:;"> All Project </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> AirAsia </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Cruise </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> HSBC </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> Pending
-                                            <span class="badge badge-danger"> 4 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Completed
-                                            <span class="badge badge-success"> 12 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Overdue
-                                            <span class="badge badge-warning"> 9 </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> -->
                             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div id="zabbix_down_loading">
+                        <div id="monitora_down_loading">
                             <img src="../assets/global/img/loading.gif" alt="loading" />
                         </div>
-                        <div id="zabbix_down_content" class="table-scrollable table-scrollable-borderless"></div>
+                        <div id="monitora_down_content" class="table-scrollable table-scrollable-borderless"></div>
                     </div>
                 </div>
-            </div><!-- FIM da Tabela Monitora -->
+            </div><!-- FIM da Tabela Monitora antigo -->
+
             <div class="col-md-6 col-sm-6"> <!-- Tabela link indisponivel -->
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
@@ -156,42 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="caption-helper">Indisponíveis</span>
                         </div>
                         <div class="actions">
-                            <!-- <div class="btn-group">
-                                <a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> More
-                                    <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li>
-                                        <a href="javascript:;"> All Project </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> AirAsia </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Cruise </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> HSBC </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> Pending
-                                            <span class="badge badge-danger"> 4 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Completed
-                                            <span class="badge badge-success"> 12 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Overdue
-                                            <span class="badge badge-warning"> 9 </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> -->
+
                             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>
@@ -215,42 +145,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="caption-helper">SEFA/PRODEPA</span>
                         </div>
                         <div class="actions">
-                            <!-- <div class="btn-group">
-                                <a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> More
-                                    <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li>
-                                        <a href="javascript:;"> All Project </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> AirAsia </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Cruise </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> HSBC </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> Pending
-                                            <span class="badge badge-danger"> 4 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Completed
-                                            <span class="badge badge-success"> 12 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Overdue
-                                            <span class="badge badge-warning"> 9 </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> -->
+
                             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>
@@ -271,42 +166,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="caption-helper">Falhos</span>
                         </div>
                         <div class="actions">
-                            <!-- <div class="btn-group">
-                                <a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> More
-                                    <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li>
-                                        <a href="javascript:;"> All Project </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> AirAsia </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Cruise </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> HSBC </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> Pending
-                                            <span class="badge badge-danger"> 4 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Completed
-                                            <span class="badge badge-success"> 12 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Overdue
-                                            <span class="badge badge-warning"> 9 </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> -->
+
                             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>
@@ -320,46 +180,71 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div><!-- FIM da Tabela Backupsl -->
         </div>
         <div class="row">
-            <div class="col-md-6 col-sm-6"> <!-- Tabela Servidores -->
+
+            <div class="col-md-6 col-sm-6"> <!-- Tabela Zabbix -->
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-share font-green-haze hide"></i>
-                            <span class="caption-subject font-green bold uppercase">Monitora</span>
+                            <span class="caption-subject font-green bold uppercase">Zabbix</span>
                             <span class="caption-helper">Alertas</span>
                         </div>
                         <div class="actions">
+
                             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div id="monitora_down_loading">
+                        <div id="zabbix_down_loading">
                             <img src="../assets/global/img/loading.gif" alt="loading" />
                         </div>
-                        <div id="monitora_down_content" class="table-scrollable table-scrollable-borderless"></div>
+                        <div id="zabbix_down_content" class="table-scrollable table-scrollable-borderless"></div>
                     </div>
                 </div>
-            </div><!-- FIM da Tabela Servidores -->
-<!--             <div class="col-md-6 col-sm-6">
+            </div><!-- FIM da Tabela Zabbix -->
+
+            <div class="col-md-6 col-sm-6"> <!-- Tabela Alertas mantis -->
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-share font-green-haze hide"></i>
-                            <span class="caption-subject font-green bold uppercase">Backups</span>
-                            <span class="caption-helper">Falhos</span>
+                            <span class="caption-subject font-green bold uppercase">Mantis</span>
+                            <span class="caption-helper">Alertas</span>
                         </div>
                         <div class="actions">
+
                             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div id="backups_down_loading">
+                        <div id="zabbix_down_loading">
                             <img src="../assets/global/img/loading.gif" alt="loading" />
                         </div>
-                        <div id="backups_down_content" class="table-scrollable table-scrollable-borderless"></div>
+                        <div id="mantis_down_content" class="table-scrollable table-scrollable-borderless"></div>
                     </div>
                 </div>
-            </div> -->
+            </div><!-- FIM da Tabela Alertas mantis -->
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="portlet light tasks-widget bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-share font-green-haze hide"></i>
+                            <span class="caption-subject font-green bold uppercase">Mapa</span>
+                            <span class="caption-helper">Links</span>
+                        </div>
+                        <div class="actions">
+
+                            <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="mapa"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     <!-- <pre>
     </pre> -->

@@ -8,6 +8,7 @@ class Enviar extends CI_Controller {
         //Do your magic here
         $this->load->model('zabbix_model');
         $this->load->model('backups_model');
+        $this->load->model('mantis_model');
     }
 
     public function index() {
@@ -29,9 +30,40 @@ class Enviar extends CI_Controller {
         $this->load->view('template/footer', $script);
     }
 
+    public function server($id) {
+        $detalhes = $this->zabbix_model->select_zabbix_server($id);
+        foreach ($detalhes as $detalhe) {
+            $dados['status'] = $detalhe['servidor'];
+            $dados['plano'] = $detalhe['detalhe'];
+            $dados['mode'] = $detalhe['ip'];
+            $dados['inicio_chamado'] = date('d/m/Y H:i' ,strtotime($detalhe['data_alerta']));
+        }
+        $dados['projetos'] = $this->select_option($this->mantis_model->equipes_mantis());
+
+        $dados['form'] = "server";
+
+        $script['footerinc'] = '';
+        $script['script'] = '
+        <script src="'.base_url().'assets/custom/menu/menu_mantis.js" type="text/javascript"></script>
+        ';
+        $css['headerinc'] = '';
+        $session['username'] = $this->session->userdata('username');
+
+        $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
+        $this->breadcrumbs->push('<span>Dashboard</span>', '/welcome');
+
+        $this->load->view('template/header', $css);
+        $this->load->view('template/navbar', $session);
+        $this->load->view('template/sidebar');
+
+        $this->load->view('alertas/enviar', $dados);
+
+        $this->load->view('template/footer', $script);
+    }
+
 
     public function link($id) {
-        $detalhes = $this->zabbix_model->select_link($id);
+        $detalhes = $this->zabbix_model->select_zabbix_link($id);
         foreach ($detalhes as $detalhe) {
             $dados['status'] = 'Problema de Link: '.$detalhe['ticket'].' - '.$detalhe['servidor'].' ';
             $dados['plano'] = $detalhe['detalhe'];
@@ -145,6 +177,25 @@ class Enviar extends CI_Controller {
         redirect('welcome');
     }
 
+
+
+    public function select_option($dados) {
+        $html = "";
+        foreach ($dados as $dado) {
+            $html .= "<option value='".$dado['ID']."' >".$dado['NAME']."</option>";
+        }
+        return $html;
+    }
+
+    public function projeto($id) {
+        $projetos = $this->mantis_model->projetos_mantis($id);
+        echo json_encode($projetos);
+    }
+
+    public function categoria($id) {
+        $projetos = $this->mantis_model->categorias_mantis($id);
+        echo json_encode($projetos);
+    }
 }
 
 /* End of file Enviar.php */

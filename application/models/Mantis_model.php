@@ -147,7 +147,7 @@ join mantis_user_tb c on a.reporter_id=c.id
 where c.username = '".$params['usuario']."' and b.name='".$params['projeto']."' and a.summary='".$params['servico']."' and a.category = '".$params['categoria']."'
 and a.status not in ('80','90')";
         $stmt = oci_parse($mantis->conn_id,$sql);
-            oci_execute($stmt);
+            oci_execute($stmt, OCI_NO_AUTO_COMMIT);
             while ($row = oci_fetch_array($stmt, OCI_ASSOC+OCI_RETURN_NULLS)) {
                 foreach ($row as $item) {
                     // echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
@@ -156,9 +156,49 @@ and a.status not in ('80','90')";
             }
 
     }
-        // $query = $mantis->call_function('MANTIS.PKG_CASO_MANTIS.STP_RELT_CASO_PROJETO_CATEG',
-        // $usuario,$projeto,$sevico,$detalhe,$categoria);
-        // return $query->result_id;
+
+    public function equipes_mantis() {
+        // $array = array();
+        $mantis = $this->load->database('monitora', true);
+        $sql = "SELECT A.ID, A.NAME from mantis.mantis_project_tb a left join mantis.mantis_project_hierarchy_tb b on a.id = b.child_id
+        WHERE B.CHILD_ID IS NULL AND A.ENABLED = 1";
+        $stmt = oci_parse($mantis->conn_id,$sql);
+        oci_execute($stmt, OCI_NO_AUTO_COMMIT);
+        // $nrows = oci_fetch_all($stmt, $res);
+        // echo "$nrows rows fetched<br>\n";
+        // var_dump($res);
+        // oci_fetch_all($stmt, $res);//cria array apartir das colunas
+        oci_fetch_all($stmt, $res,null, null, OCI_FETCHSTATEMENT_BY_ROW);//cria array apartir das linhas
+        return $res;
+        // while ($row = oci_fetch_array($stmt, OCI_ASSOC)) {
+            // foreach ($row as $item) {
+            //     array_push($array,$item);
+            //     return $item;
+            // }
+        // }
+    }
+
+    public function projetos_mantis($id) {
+        $mantis = $this->load->database('monitora', true);
+        $sql = "SELECT A.ID, A.NAME from mantis.mantis_project_tb a left join mantis.mantis_project_hierarchy_tb b on a.id = b.child_id
+                WHERE A.ENABLED = 1
+                start with a.id = ".$id."
+                connect by b.parent_id = prior a.id";
+        $stmt = oci_parse($mantis->conn_id,$sql);
+        oci_execute($stmt, OCI_NO_AUTO_COMMIT);
+        oci_fetch_all($stmt,$equip,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+        return $equip;
+    }
+
+
+    public function categorias_mantis($id) {
+        $mantis = $this->load->database('monitora', true);
+        $sql = "SELECT * FROM MANTIS.MANTIS_PROJECT_CATEGORY_TB WHERE PROJECT_ID = ".$id;
+        $stmt = oci_parse($mantis->conn_id,$sql);
+        oci_execute($stmt, OCI_NO_AUTO_COMMIT);
+        oci_fetch_all($stmt,$catego,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+        return $catego;
+    }
 
 }
 

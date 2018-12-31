@@ -124,11 +124,11 @@ class Link_indisponivel extends CI_Controller {
                           'situacao' => 'PROBLEMA',
                           'vendor' => $hostvendor,
                           'duration' => $tempo_fora
-                        );
+                        );//salva os link fora na tabela zbx_link_fora.
                         $this->zabbix_model->duplicate_zabbix_grc($save_db);
 
                         array_push($alert,$id);
-
+                        //consulta na tabela dp_backups
                         $grc = $this->zabbix_model->list_grc_link($hostdesignacao);
 
                         foreach ($grc as $linha_grc) {
@@ -137,7 +137,7 @@ class Link_indisponivel extends CI_Controller {
                             $designacao_update = array(
                                 'ticket'         => $ticket,
                                 'posicionamento' => $posicionamento
-                            );
+                            );// atualiza a tabela zbx_link_fora com o numero do ticket e o ultimo posicionamento do GRC
                             $this->zabbix_model->update_zabbix_grc($designacao_update,$hostdesignacao);
                         }
 
@@ -147,7 +147,7 @@ class Link_indisponivel extends CI_Controller {
                     }
                 }
             }
-
+            // deleta todos que não estão alertando
             $this->zabbix_model->delete_zabbix_grc($alert);
                     //
                     // echo "<pre>";
@@ -161,41 +161,44 @@ class Link_indisponivel extends CI_Controller {
                     // echo $description."\n";
                     // echo $hostvendor."\n";
                     // echo "</pre>";
+            //consulta novamente a tabela zbx_link_fora para exibir na tabela link do dashboard.
             $links_fora = $this->zabbix_model->select_zabbix_grc();
-
+            //percorrer o array da consulta
             foreach ($links_fora as $link) {
-              $ticket   = $link['ticket'];
-              $hostid   = $link['host_id'];
-              $ip       = $link['ip'];
-              $duration = $link['duration'];
-              $vendor   = $link['vendor'];
-              $servidor = $link['servidor'];
-              if($link['mantis'] == 0){
-                  $flag = 'class="danger"';
-                  $mantis = '
-                          <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar/link/'.$hostid.'" title="Criar Mantis">
-                              <i class="fa fa-plus"></i>
-                          </a>';
-              } else {
-                  $status = $this->backups_model->mantis($link['mantis']);
-                  $array_color = array(50 => "primary", 10 => " danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
-                  //10-novo-vermelho  20-retorno-vermelho escuro  30-impedido-roxo  40-autorizado-amarelo  50-atribuido-azul  80-realizado-laranja
-                  $flag = '';
-                  $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$link['mantis'].'" class = "label label-'. $array_color[$status->STATUS].'" target="_blank">'.$link['mantis'].'</a>';
+                $ticket   = $link['ticket'];
+                $hostid   = $link['host_id'];
+                $ip       = $link['ip'];
+                $duration = $link['duration'];
+                $vendor   = $link['vendor'];
+                $servidor = $link['servidor'];
+                if($link['mantis'] == 0){ //verificar se já possui mantis
+                    $flag = 'class="danger"';
+                    $mantis = '
+                            <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar/link/'.$hostid.'" title="Criar Mantis">
+                                <i class="fa fa-plus"></i>
+                            </a>';
+                } else { //se não possui mantis
+                    $status = $this->backups_model->mantis($link['mantis']);
+                    $array_color = array(50 => "primary", 10 => "danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
+                    //10-novo-vermelho  20-retorno-vermelho escuro  30-impedido-roxo  40-autorizado-amarelo  50-atribuido-azul  80-realizado-laranja
+                    $flag = '';
+                    $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$link['mantis'].'" class = "label label-'. $array_color[$status->STATUS].'" target="_blank">'.$link['mantis'].'</a>';
+                }
+                //criar um novo array para exibir no dashboard
+                $result = array(
+                  'ticket'   => $ticket,
+                  'hostid'   => $hostid,
+                  'ip'       => $ip,
+                  'duration' => $duration,
+                  'vendor'   => $vendor,
+                  'servidor' => $servidor,
+                  'flag'     => $flag,
+                  'mantis'   => $mantis
+                );
+                //inserir todos os alertas no mesmo array
+                array_push($retorno,$result);
               }
-              $result = array(
-                'ticket'   => $ticket,
-                'hostid'   => $hostid,
-                'ip'       => $ip,
-                'duration' => $duration,
-                'vendor'   => $vendor,
-                'servidor' => $servidor,
-                'flag'     => $flag,
-                'mantis'   => $mantis
-              );
-              array_push($retorno,$result);
-            }
-            // echo json_encode($links_fora->result_array());
+            //passar para tabela server via json.
             echo json_encode($retorno);
     }
 

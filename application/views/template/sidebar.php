@@ -34,11 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <ul class="sub-menu">
                         <?php if($this->session->userdata('physicaldeliveryofficename') == 'CGRE-Produção') : ?>
                         <li class="nav-item start active open">
-                            <a href="dashboard/producao" class="nav-link ">
-                                <i class="icon-bar-chart"></i>
-                                <span class="title">Dashboard Produção</span>
-                                <span class="selected"></span>
-                            </a>
+                            <?php echo anchor('welcome', '
+                            <i class="icon-bar-chart"></i><span class="title">  Dashboard Produção</span>', 'class="nav-link"')?>
                         </li>
                         <?php elseif($this->session->userdata('physicaldeliveryofficename') == 'CGRE-Rede') : ?>
                         <li class="nav-item start">
@@ -67,202 +64,230 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class="heading">
                     <h3>CONSULTA</h3>
                 </li>
-
-                <li class="nav-item <?php if($this->uri->segment(1) == 'gerencias') { echo 'active open'; } ?>">
+                <!--############# ABA GERENCIA ############-->
+                <li class="nav-item <?php echo active_segment(1,'gerencias'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-users"></i>
                         <span class="title">Gerências</span>
-                        <?php if($this->uri->segment(1) == 'gerencias') { echo '<span class="selected"></span>'; } ?>
+                        <?php echo span_segment(1,'gerencias'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
+                        <!--############# ABA GERENCIA > Tecnicos ############-->
                         <?php if($this->auth_ad->level_access('tecnico',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('tecnico'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'tecnico'); ?>">
                             <?php echo anchor('gerencias/tecnico', 'Tecnicos', 'class="nav-link"')?>
-                            <?php echo span_class('tecnico'); ?>
+                            <?php echo span_segment(2,'tecnico'); ?>
                         </li>
+                        <!--############# ABA GERENCIA > Fornecedores ############-->
                         <?php } if($this->auth_ad->level_access('fornecedor',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('fornecedor'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'fornecedor'); ?>">
                             <?php echo anchor('gerencias/fornecedor', 'Fornecedores', 'class="nav-link"')?>
-                            <?php echo span_class('fornecedor'); ?>
+                            <?php echo span_segment(2,'fornecedor'); ?>
                         </li>
+                        <!--############# ABA GERENCIA > Contatos ############-->
                         <?php } if($this->auth_ad->level_access('contato',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('contato'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'contato'); ?>">
                             <?php echo anchor('gerencias/contato', 'Contatos', 'class="nav-link"')?>
-                            <?php echo span_class('contato'); ?>
+                            <?php echo span_segment(2,'contato'); ?>
                         </li>
+                        <!--############# ABA GERENCIA > Servidores ############-->
                         <?php } if($this->auth_ad->level_access('servidor',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('servidor'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'servidor'); ?>">
                             <?php echo anchor('gerencias/servidor', 'Servidores', 'class="nav-link"')?>
-                            <?php echo span_class('servidor'); ?>
+                            <?php echo span_segment(2,'servidor'); ?>
                         </li>
+                        <!--############# ABA GERENCIA > Acessos ############-->
                         <?php } if($this->auth_ad->level_access('acessos',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('acessos'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'acessos'); ?>">
                             <?php echo anchor('gerencias/acessos', 'Acessos', 'class="nav-link"')?>
-                            <?php echo span_class('acessos'); ?>
+                            <?php echo span_segment(2,'acessos'); ?>
                         </li>
+                        <!--############# ABA GERENCIA > Voucher ############-->
                         <?php } if($this->auth_ad->level_access('voucher',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('voucher'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'voucher'); ?>">
                             <?php echo anchor('gerencias/voucher', 'Voucher', 'class="nav-link"')?>
-                            <?php echo span_class('voucher'); ?>
+                            <?php echo span_segment(2,'voucher'); ?>
                         </li>
                         <?php }?>
                     </ul>
                 </li>
-
-                <li class="nav-item <?php if($this->uri->segment(1) == 'ramais') { echo 'active open'; } ?>">
+                <!--############# ABA RAMAIS ############-->
+                <li class="nav-item <?php echo active_segment(1,'ramais'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-phone"></i>
                         <span class="title">Ramais</span>
-                        <?php if($this->uri->segment(1) == 'ramais') { echo '<span class="selected"></span>'; } ?>
+                        <?php echo span_segment(1,'ramais'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
+                        <!--############# ABA RAMAIS > Sefa ############-->
                         <?php if($this->auth_ad->level_access('sefa',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('sefa'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'sefa'); ?>">
                             <?php echo anchor('ramais/sefa', 'SEFA', 'class="nav-link"')?>
-                            <?php echo span_class('sefa'); ?>
+                            <?php echo span_segment(2,'sefa'); ?>
                         </li>
+                        <!--############# ABA RAMAIS > DTI ############-->
                         <?php } if($this->auth_ad->level_access('dti',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('dti'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'dti'); ?>">
                             <?php echo anchor('ramais/dti', 'DTI', 'class="nav-link"')?>
-                            <?php echo span_class('dti'); ?>
+                            <?php echo span_segment(2,'dti'); ?>
                         </li>
+                        <!--############# ABA RAMAIS > Voi´p ############-->
                         <?php } if($this->auth_ad->level_access('voip',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('voip'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'voip'); ?>">
                             <?php echo anchor('ramais/voip', 'VOIP', 'class="nav-link"')?>
-                            <?php echo span_class('voip'); ?>
+                            <?php echo span_segment(2,'voip'); ?>
                         </li>
                         <?php }?>
                     </ul>
                 </li>
-
-                <li class="nav-item <?php if($this->uri->segment(1) == 'localidades') { echo 'active open'; } ?>">
+                <!--############# ABA LOCALIDADES ############-->
+                <li class="nav-item <?php echo active_segment(1,'localidades'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-map-marker"></i>
                         <span class="title">Localidades</span>
-                        <?php if($this->uri->segment(1) == 'localidades') { echo '<span class="selected"></span>'; } ?>
+                        <?php echo span_segment(1,'localidades'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
+                        <!--############# ABA LOCALIDADES > Unidades ############-->
                         <?php if($this->auth_ad->level_access('unidade',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('unidade'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'unidade'); ?>">
                             <?php echo anchor('localidades/unidade', 'Unidades', 'class="nav-link"')?>
-                            <?php echo span_class('unidade'); ?>
+                            <?php echo span_segment(2,'unidade'); ?>
                         </li>
+                        <!--############# ABA LOCALIDADES > Links ############-->
                         <?php } if($this->auth_ad->level_access('link',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('link'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'link'); ?>">
                             <?php echo anchor('localidades/link', 'Links', 'class="nav-link"')?>
-                            <?php echo span_class('link'); ?>
+                            <?php echo span_segment(2,'link'); ?>
                         </li>
                         <?php }?>
                     </ul>
                 </li>
-
 
                 <li class="heading">
                     <h3>ANALISE</h3>
                 </li>
-                <li class="nav-item <?php if($this->uri->segment(1) == 'backup') { echo 'active open'; } ?>">
+                <!--############# ABA BACKUPS ############-->
+                <li class="nav-item <?php echo active_segment(1,'backup'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="icon-layers"></i>
                         <span class="title">Backup</span>
-                        <?php if($this->uri->segment(1) == 'backup') { echo '<span class="selected"></span>'; } ?>
+                        <?php echo span_segment(1,'backup'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
+                        <!--############# ABA BACKUPS > Historico de backups ############-->
                         <?php if($this->auth_ad->level_access('historico_bkp',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('historico'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'historico'); ?>">
                             <?php echo anchor('backup/historico_bkp', 'Histórico', 'class="nav-link"')?>
-                            <?php echo span_class('historico'); ?>
+                            <?php echo span_segment(2,'historico'); ?>
                         </li>
+                        <!--############# ABA BACKUPS > Janela de bakcups ############-->
                         <?php } if($this->auth_ad->level_access('janela_backup',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('janela_backup'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'janela_backup'); ?>">
                             <?php echo anchor('backup/janela_backup', 'Janela de Backup', 'class="nav-link"')?>
-                            <?php echo span_link('janela_backup'); ?>
+                            <?php echo span_segment(2,'janela_backup'); ?>
                         </li>
+                        <!--############# ABA BACKUPS > fitas ############-->
                         <?php } if($this->auth_ad->level_access('fitas',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->segment(2) == 'fitas') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_segment(2,'fitas'); ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <span class="title">Fitas</span>
-                                <?php if($this->uri->segment(2) == 'fitas') { echo '<span class="selected"></span>'; } ?>
+                                <?php echo span_segment(2,'fitas'); ?>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item <?php echo active_method('diario'); ?>">
+                                <!--############# ABA BACKUPS > fitas > diario ############-->
+                                <li class="nav-item <?php echo active_segment(3,'diario'); ?>">
                                     <?php echo anchor('backup/fitas/diario', 'Diário', 'class="nav-link"')?>
-                                    <?php echo span_method('diario'); ?>
+                                    <?php echo span_segment(3,'diario'); ?>
                                 </li>
-                                <li class="nav-item <?php echo active_method('mensal'); ?>">
+                                <!--############# ABA BACKUPS > fitas > mensal ############-->
+                                <li class="nav-item <?php echo active_segment(3,'mensal'); ?>">
                                     <?php echo anchor('backup/fitas/mensal', 'Mensal', 'class="nav-link"')?>
-                                    <?php echo span_method('mensal'); ?>
+                                    <?php echo span_segment(3,'mensal'); ?>
                                 </li>
-                                <li class="nav-item <?php echo active_method('poor'); ?>">
+                                <!--############# ABA BACKUPS > fitas > poor ############-->
+                                <li class="nav-item <?php echo active_segment(3,'poor'); ?>">
                                     <?php echo anchor('backup/fitas/poor', 'Poor', 'class="nav-link"')?>
-                                    <?php echo span_method('poor'); ?>
+                                    <?php echo span_segment(3,'poor'); ?>
                                 </li>
                             </ul>
                         </li>
+                        <!--############# ABA BACKUPS > graficos ############-->
                         <?php } if($this->auth_ad->level_access('graficos_bkp',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->segment(2) == 'graficos') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_segment(2,'graficos_bkp'); ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <span class="title">Gráficos</span>
-                                <?php if($this->uri->segment(2) == 'grafico') { echo '<span class="selected"></span>'; } ?>
+                                <?php echo span_segment(2,'graficos_bkp'); ?>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item <?php if($this->uri->segment(3) == 'crescimento') { echo 'active open'; } ?>">
+                                <!--############# ABA BACKUPS > Graficos > Crescimento############-->
+                                <li class="nav-item <?php echo active_segment(3,'crescimento'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
                                         <span class="title">Crescimento</span>
-                                        <?php if($this->uri->segment(3) == 'crescimento') { echo '<span class="selected"></span>'; } ?>
+                                        <?php echo span_segment(3,'crescimento'); ?>
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="nav-item <?php echo active_method('dia'); ?>">
+                                        <!--############# ABA BACKUPS > Graficos > Crescimento > dia ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'dia'); ?>">
                                             <?php echo anchor('backup/graficos_bkp/crescimento/dia', 'Dia', 'class="nav-link"')?>
-                                            <?php echo span_method('dia'); ?>
+                                            <?php echo span_segment(4,'dia'); ?>
                                         </li>
-                                        <li class="nav-item <?php echo active_method('mes'); ?>">
+                                        <!--############# ABA BACKUPS > graficos > Crescimento > Mes ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'mes'); ?>">
                                             <?php echo anchor('backup/graficos_bkp/crescimento/mes', 'Mês', 'class="nav-link"')?>
-                                            <?php echo span_method('mes'); ?>
+                                            <?php echo span_segment(4,'mes'); ?>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item <?php echo active_class('quantidade'); ?>">
+                                <!--############# ABA BACKUPS > graficos > Quantidade ############-->
+                                <li class="nav-item <?php echo active_segment(3,'quantidade'); ?>">
                                     <?php echo anchor('backup/graficos_bkp/quantidade', 'Quantidade', 'class="nav-link"')?>
-                                    <?php echo span_class('quantidade'); ?>
+                                    <?php echo span_segment(3,'quantidade'); ?>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->segment(3) == 'tempo') { echo 'active open'; } ?>">
+                                <!--############# ABA BACKUPS > graficos > Tempo ############-->
+                                <li class="nav-item <?php echo active_segment(3,'tempo'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
                                         <span class="title">Tempo</span>
-                                        <?php if($this->uri->segment(3) == 'tempo') { echo '<span class="selected"></span>'; } ?>
+                                        <?php echo span_segment(3,'tempo'); ?>
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="nav-item <?php echo active_method('mes'); ?>">
+                                        <!--############# ABA BACKUPS > graficos > Tempo > mes ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'mes'); ?>">
                                             <?php echo anchor('backup/graficos_bkp/tempo/mes', 'Mês', 'class="nav-link"')?>
-                                            <?php echo span_method('mes'); ?>
+                                            <?php echo span_segment(4,'mes'); ?>
                                         </li>
-                                        <li class="nav-item <?php echo active_method('ano'); ?>">
+                                        <!--############# ABA BACKUPS > graficos > Tempo > ano ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'ano'); ?>">
                                             <?php echo anchor('backup/graficos_bkp/tempo/ano', 'Ano', 'class="nav-link"')?>
-                                            <?php echo span_method('ano'); ?>
+                                           <?php echo span_segment(4,'ano'); ?>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->segment(3) == 'volume') { echo 'active open'; } ?>">
+                                <!--############# ABA BACKUPS > graficos > Volume ############-->
+                                <li class="nav-item <?php echo active_segment(3,'volume'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
                                         <span class="title">Volume</span>
-                                        <?php if($this->uri->segment(3) == 'volume') { echo '<span class="selected"></span>'; } ?>
+                                        <?php echo span_segment(3,'volume'); ?>
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="nav-item <?php echo active_method('mes'); ?>">
+                                        <!--############# ABA BACKUPS > graficos > Volume > mes ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'mes'); ?>">
                                             <?php echo anchor('backup/graficos_bkp/volume/mes', 'Mês', 'class="nav-link"')?>
-                                            <?php echo span_method('mes'); ?>
+                                            <?php echo span_segment(4,'mes'); ?>
                                         </li>
-                                        <li class="nav-item <?php echo active_method('ano'); ?>">
+                                        <!--############# ABA BACKUPS > graficos > Volume > ano ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'ano'); ?>">
                                             <?php echo anchor('backup/graficos_bkp/volume/ano', 'Ano', 'class="nav-link"')?>
-                                            <?php echo span_method('ano'); ?>
+                                            <?php echo span_segment(4,'ano'); ?>
                                         </li>
                                     </ul>
                                 </li>
@@ -271,126 +296,137 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php }?>
                     </ul>
                 </li>
-
-                <li class="nav-item <?php if($this->uri->segment(1) == 'links') { echo 'active open'; } ?>">
+                <!--############# ABA LINKS ############-->
+                <li class="nav-item <?php echo active_segment(1,'links'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-link"></i>
                         <span class="title">Links</span>
-                        <?php if($this->uri->segment(1) == 'links') { echo '<span class="selected"></span>'; } ?>
+                        <?php echo span_segment(1,'links'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
+                        <!--############# ABA LINKS > Historico ############-->
                         <?php if($this->auth_ad->level_access('historico_link',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('historico'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'historico'); ?>">
                             <?php echo anchor('links/historico_link', 'Historico', 'class="nav-link"')?>
-                            <?php echo span_class('historico'); ?>
+                            <?php echo span_segment(2,'historico'); ?>
                         </li>
+                        <!--############# ABA LINKS > Calculo de multa ############-->
                         <?php } if($this->auth_ad->level_access('calculo_multa',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('calculo_multa'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'calculo_multa'); ?>">
                             <?php echo anchor('links/calculo_multa', 'Cálculo Multa', 'class="nav-link"')?>
-                            <?php echo span_class('calculo_multa'); ?>
+                            <?php echo span_segment(2,'calculo_multa'); ?>
                         </li>
+                        <!--############# ABA LINKS > Consumo de banda ############-->
                         <?php } if($this->auth_ad->level_access('consumo_banda',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('consumo_banda'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'consumo_banda'); ?>">
                             <?php echo anchor('links/consumo_banda', 'Consumo de Banda', 'class="nav-link"')?>
-                            <?php echo span_class('consumo_banda'); ?>
+                            <?php echo span_segment(2,'consumo_banda'); ?>
                         </li>
+                        <!--############# ABA LINKS > Graficos ############-->
                         <?php } if($this->auth_ad->level_access('graficos_link',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->segment(2) == 'graficos') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_segment(2,'graficos_link'); ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-feed"></i>
                                 <span class="title">Gráficos</span>
-                                <?php if($this->uri->segment(2) == 'graficos') { echo '<span class="selected"></span>'; } ?>
+                                <?php echo span_segment(2,'graficos_link'); ?>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item <?php if($this->uri->segment(3) == 'consumo') { echo 'active open'; } ?>">
+                                <!--############# ABA LINKS > Graficos > consumo ############-->
+<!--                                 <li class="nav-item <?php echo active_segment(3,'consumo'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
                                         <i class="icon-feed"></i>
                                         <span class="title">Consumo</span>
-                                        <?php if($this->uri->segment(3) == 'consumo') { echo '<span class="selected"></span>'; } ?>
+                                        <?php echo span_segment(3,'consumo'); ?>
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="nav-item <?php echo active_method('diario'); ?>">
+                                        ############# ABA LINKS > Graficos > consumo > diario ############
+                                        <li class="nav-item <?php echo active_segment(4,'diario'); ?>">
                                             <?php echo anchor('links/graficos_link/consumo/diario', 'Diário', 'class="nav-link"')?>
-                                            <?php echo span_method('diario'); ?>
+                                            <?php echo span_segment(4,'diario'); ?>
                                         </li>
-                                        <li class="nav-item <?php echo active_method('mensal'); ?>">
+                                        ############# ABA LINKS > Graficos > mensal ############
+                                        <li class="nav-item <?php echo active_segment(4,'mensal'); ?>">
                                             <?php echo anchor('links/graficos_link/consumo/mensal', 'Mensal', 'class="nav-link"')?>
-                                            <?php echo span_method('mensal'); ?>
+                                            <?php echo span_segment(4,'mensal'); ?>
                                         </li>
                                     </ul>
-                                </li>
-                                <li class="nav-item <?php if($this->uri->segment(3) == 'localidade') { echo 'active open'; } ?>">
+                                </li> -->
+                                <!--############# ABA LINKS > Graficos > Localidade ############-->
+                                <li class="nav-item <?php echo active_segment(3,'localidade'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
                                         <i class="icon-feed"></i>
                                         <span class="title">Localidade</span>
-                                        <?php if($this->uri->segment(3) == 'localidade') { echo '<span class="selected"></span>'; } ?>
+                                        <?php echo span_segment(3,'localidade'); ?>
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="nav-item <?php echo active_class('mensal'); ?>">
+                                        <!--############# ABA LINKS > Graficos > Localidade > mensal ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'mensal'); ?>">
                                             <?php echo anchor('links/graficos_link/localidade/mensal', 'Mensal', 'class="nav-link"')?>
-                                            <?php echo span_class('mensal'); ?>
+                                            <?php echo span_segment(4,'mensal'); ?>
                                         </li>
-                                        <li class="nav-item <?php echo active_class('anual'); ?>">
+                                        <!--############# ABA LINKS > Graficos > Localidade > anual ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'anual'); ?>">
                                             <?php echo anchor('links/graficos_link/localidade/anual', 'Anual', 'class="nav-link"')?>
-                                            <?php echo span_class('anual'); ?>
+                                            <?php echo span_segment(4,'anual'); ?>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->segment(3) == 'causa') { echo 'active open'; } ?>">
+                                <!--############# ABA LINKS > Graficos > Causa ############-->
+                                <li class="nav-item <?php echo active_segment(3,'causa'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
                                         <i class="icon-feed"></i>
                                         <span class="title">Causa</span>
-                                        <?php if($this->uri->segment(3) == 'causa') { echo '<span class="selected"></span>'; } ?>
+                                        <?php echo span_segment(3,'causa'); ?>
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="nav-item <?php echo active_class('mensal'); ?>">
+                                        <!--############# ABA LINKS > Graficos > Causa > mensal############-->
+                                        <li class="nav-item <?php echo active_segment(4,'mensal'); ?>">
                                             <?php echo anchor('links/graficos_link/causa/mensal', 'Mensal', 'class="nav-link"')?>
-                                            <?php echo span_class('mensal'); ?>
+                                            <?php echo span_segment(4,'mensal'); ?>
                                         </li>
-                                        <li class="nav-item <?php echo active_class('anual'); ?>">
+                                        <!--############# ABA LINKS > Graficos > Causa > anual ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'anual'); ?>">
                                             <?php echo anchor('links/graficos_link/causa/anual', 'Anual', 'class="nav-link"')?>
-                                            <?php echo span_class('anual'); ?>
+                                            <?php echo span_segment(4,'anual'); ?>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item <?php if($this->uri->segment(3) == 'ticket') { echo 'active open'; } ?>">
+                                <!--############# ABA LINKS > Graficos > Ticket ############-->
+                                <li class="nav-item <?php echo active_segment(3,'ticket'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
                                         <i class="icon-feed"></i>
                                         <span class="title">Ticket</span>
-                                        <?php if($this->uri->segment(3) == 'ticket') { echo '<span class="selected"></span>'; } ?>
+                                        <?php echo span_segment(3,'ticket'); ?>
                                         <span class="arrow"></span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="nav-item <?php echo active_class('mensal'); ?>">
+                                        <!--############# ABA LINKS > Graficos > Ticket > mensal ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'mensal'); ?>">
                                             <?php echo anchor('links/graficos_link/ticket/mensal', 'Mensal', 'class="nav-link"')?>
-                                            <?php echo span_class('mensal'); ?>
+                                            <?php echo span_segment(4,'mensal'); ?>
                                         </li>
-                                        <li class="nav-item <?php echo active_class('anual'); ?>">
+                                        <!--############# ABA LINKS > Graficos > Ticket > anual ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'anual'); ?>">
                                             <?php echo anchor('links/graficos_link/ticket/anual', 'Anual', 'class="nav-link"')?>
-                                            <?php echo span_class('anual'); ?>
+                                            <?php echo span_segment(4,'anual'); ?>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
-                        <?php } else if($this->auth_ad->level_access($this->uri->segment(2),$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('historico'); ?>">
-                            <?php echo anchor('links/historico', 'Historico', 'class="nav-link"')?>
-                            <?php echo span_class('historico'); ?>
-                        </li>
                         <?php }?>
                     </ul>
                 </li>
-
 
                 <li class="heading">
                     <h3>LINKS / APPS</h3>
                 </li>
+
                 <li class="nav-item  ">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-copy"></i>
@@ -582,148 +618,148 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </ul>
                 </li>
 
-
                 <li class="heading">
                     <h3>CONFIGURAÇÕES</h3>
                 </li>
-                <li class="nav-item <?php if($this->uri->segment(1) == 'sistema') { echo 'active open'; } ?>">
+
+                <li class="nav-item <?php echo active_segment(1,'sistema'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="icon-settings"></i>
                         <span class="title">Sistema</span>
-                        <?php if($this->uri->segment(1) == 'sistema') { echo '<span class="selected"></span>'; } ?>
+                        <?php echo span_segment(1,'sistema'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('geral',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('geral'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'geral'); ?>">
                             <?php echo anchor('sistema/geral', 'Geral', 'class="nav-link"')?>
-                            <?php echo span_class('geral'); ?>
+                            <?php echo span_segment(2,'geral'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('cronjob',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('cronjob'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'cronjob'); ?>">
                             <?php echo anchor('sistema/cronjob', 'Cron Job', 'class="nav-link"')?>
-                            <?php echo span_class('cronjob'); ?>
+                            <?php echo span_segment(2,'cronjob'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('log',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('log'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'log'); ?>">
                             <?php echo anchor('sistema/log', 'Logs', 'class="nav-link"')?>
-                            <?php echo span_class('log'); ?>
+                            <?php echo span_segment(2,'log'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('ldap',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('ldap'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'ldap'); ?>">
                             <?php echo anchor('sistema/ldap', 'LDAP', 'class="nav-link"')?>
-                            <?php echo span_class('ldap'); ?>
+                            <?php echo span_segment(2,'ldap'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('consulta',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php if($this->uri->segment(2) == 'consulta') { echo 'active open'; } ?>">
+                        <li class="nav-item <?php echo active_segment(2,'consulta'); ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <span class="title">Itens da consulta</span>
-                                <?php if($this->uri->segment(2) == 'consulta') { echo '<span class="selected"></span>'; } ?>
+                                <?php echo span_segment(2,'consulta'); ?>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item <?php echo active_class('acesso'); ?>">
+                                <li class="nav-item <?php echo active_segment(3,'acesso'); ?>">
                                     <?php echo anchor('sistema/consulta/acesso', 'Tipo de Acesso', 'class="nav-link"')?>
-                                    <?php echo span_class('acesso'); ?>
+                                    <?php echo span_segment(3,'acesso'); ?>
                                 </li>
-                                <li class="nav-item <?php echo active_class('velocidade'); ?>">
+                                <li class="nav-item <?php echo active_segment(3,'velocidade'); ?>">
                                     <?php echo anchor('sistema/consulta/velocidade', 'Tipo de Velocidade', 'class="nav-link"')?>
-                                    <?php echo span_class('velocidade'); ?>
+                                    <?php echo span_segment(3,'velocidade'); ?>
                                 </li>
-                                <li class="nav-item <?php echo active_class('cidade'); ?>">
+                                <li class="nav-item <?php echo active_segment(3,'cidade'); ?>">
                                     <?php echo anchor('sistema/consulta/cidade', 'Cidade', 'class="nav-link"')?>
-                                    <?php echo span_class('cidade'); ?>
+                                    <?php echo span_segment(3,'cidade'); ?>
                                 </li>
-                                <li class="nav-item <?php echo active_class('expediente'); ?>">
+                                <li class="nav-item <?php echo active_segment(3,'expediente'); ?>">
                                     <?php echo anchor('sistema/consulta/expediente', 'Expediente', 'class="nav-link"')?>
-                                    <?php echo span_class('expediente'); ?>
+                                    <?php echo span_segment(3,'expediente'); ?>
                                 </li>
-                                <li class="nav-item <?php echo active_class('contexto_voip'); ?>">
+                                <li class="nav-item <?php echo active_segment(3,'contexto_voip'); ?>">
                                     <?php echo anchor('sistema/consulta/contexto_voip', 'Tipo Contexto Voip', 'class="nav-link"')?>
-                                    <?php echo span_class('contexto_voip'); ?>
+                                    <?php echo span_segment(3,'contexto_voip'); ?>
                                 </li>
-                                <li class="nav-item <?php echo active_class('equipamento_voip'); ?>">
+                                <li class="nav-item <?php echo active_segment(3,'equipamento_voip'); ?>">
                                     <?php echo anchor('sistema/consulta/equipamento_voip', 'Tipo Equipamento Voip', 'class="nav-link"')?>
-                                    <?php echo span_class('equipamento_voip'); ?>
+                                    <?php echo span_segment(3,'equipamento_voip'); ?>
                                 </li>
-                                <li class="nav-item <?php echo active_class('categoria_voip'); ?>">
+                                <li class="nav-item <?php echo active_segment(3,'categoria_voip'); ?>">
                                     <?php echo anchor('sistema/consulta/categoria_voip', 'Tipo Categoria Voip', 'class="nav-link"')?>
-                                    <?php echo span_class('categoria_voip'); ?>
+                                    <?php echo span_segment(3,'categoria_voip'); ?>
                                 </li>
-                                <li class="nav-item <?php echo active_class('categoria_tel'); ?>">
+                                <li class="nav-item <?php echo active_segment(3,'categoria_tel'); ?>">
                                     <?php echo anchor('sistema/consulta/categoria_tel', 'Tipo Categoria Telefonia', 'class="nav-link"')?>
-                                    <?php echo span_class('categoria_tel'); ?>
+                                    <?php echo span_segment(3,'categoria_tel'); ?>
                                 </li>
                             </ul>
                         </li>
                         <?php } if($this->auth_ad->level_access('zabbix',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('zabbix'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'zabbix'); ?>">
                             <?php echo anchor('sistema/zabbix', 'Zabbix', 'class="nav-link"')?>
-                            <?php echo span_class('zabbix'); ?>
+                            <?php echo span_segment(2,'zabbix'); ?>
                         </li>
                         <?php }?>
                     </ul>
                 </li>
 
-                <li class="nav-item <?php if($this->uri->segment(1) == 'usuarios') { echo 'active open'; } ?>">
+                <li class="nav-item <?php echo active_segment(1,'usuarios'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class=" icon-wrench"></i>
                         <span class="title">Usuarios</span>
-                        <?php if($this->uri->segment(1) == 'usuarios') { echo '<span class="selected"></span>'; } ?>
+                        <?php echo span_segment(1,'usuarios'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('lista',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('lista'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'lista'); ?>">
                             <?php echo anchor('usuarios/lista', 'Lista de Usuarios', 'class="nav-link"')?>
-                            <?php echo span_class('lista'); ?>
+                            <?php echo span_segment(2,'lista'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('permissao',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('permissao'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'permissao'); ?>">
                             <?php echo anchor('usuarios/permissao', 'Permissão', 'class="nav-link"')?>
-                            <?php echo span_class('permissao'); ?>
+                            <?php echo span_segment(2,'permissao'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('grupos',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('grupos'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'grupos'); ?>">
                              <?php echo anchor('usuarios/grupos', 'Grupos/Equipe', 'class="nav-link"')?>
-                             <?php echo span_class('grupos'); ?>
+                             <?php echo span_segment(2,'grupos'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('modulos',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('modulos'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'modulos'); ?>">
                              <?php echo anchor('usuarios/modulos', 'Modulos', 'class="nav-link"')?>
-                             <?php echo span_class('modulos'); ?>
+                             <?php echo span_segment(2,'modulos'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('perfil',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('perfil'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'perfil'); ?>">
                              <?php echo anchor('usuarios/perfil', 'Perfil', 'class="nav-link"')?>
-                             <?php echo span_class('perfil'); ?>
+                             <?php echo span_segment(2,'perfil'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('cargo',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('cargo'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'cargo'); ?>">
                             <?php echo anchor('usuarios/cargo', 'Cargo', 'class="nav-link"')?>
-                            <?php echo span_class('cargo'); ?>
+                            <?php echo span_segment(2,'cargo'); ?>
                         </li>
                         <?php }?>
                     </ul>
                 </li>
 
-                <li class="nav-item <?php if($this->uri->segment(1) == 'banco_de_dados') { echo 'active open'; } ?>">
+                <li class="nav-item <?php echo active_segment(1,'banco_de_dados'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-database"></i>
                         <span class="title">Banco de Dados</span>
-                        <?php if($this->uri->segment(1) == 'banco_de_dados') { echo '<span class="selected"></span>'; } ?>
+                        <?php echo span_segment(1,'banco_de_dados'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('configuracao',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('configuracao'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'configuracao'); ?>">
                             <?php echo anchor('banco_de_dados/configuracao', 'Configuração', 'class="nav-link"')?>
-                            <?php echo span_class('configuracao'); ?>
+                            <?php echo span_segment(2,'configuracao'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('backup',$this->session->userdata('physicaldeliveryofficename'))){?>
-                        <li class="nav-item <?php echo active_class('backup'); ?>">
+                        <li class="nav-item <?php echo active_segment(2,'backup'); ?>">
                             <?php echo anchor('banco_de_dados/backup', 'Backup', 'class="nav-link"')?>
-                            <?php echo span_class('backup'); ?>
+                            <?php echo span_segment(2,'backup'); ?>
                         </li>
                         <?php }?>
                     </ul>

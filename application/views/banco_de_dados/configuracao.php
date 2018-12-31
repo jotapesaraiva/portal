@@ -41,13 +41,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
                                     <a href="#tab_1" data-toggle="tab" aria-expanded="true"> Local </a>
                                 </li>
                                 <li class="">
-                                    <a href="#tab_2" data-toggle="tab" aria-expanded="false"> Portalm </a>
+                                    <a href="#tab_2" data-toggle="tab" aria-expanded="false"> Monitora </a>
                                 </li>
                                 <li class="">
                                     <a href="#tab_3" data-toggle="tab" aria-expanded="false"> Portalmoni </a>
                                 </li>
                                 <li class="">
-                                    <a href="#tab_4" data-toggle="tab" aria-expanded="false"> Oracle </a>
+                                    <a href="#tab_4" data-toggle="tab" aria-expanded="false"> Mantis </a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -97,27 +97,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Hostname: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="<?php echo $portalm_hostname; ?>">
+                                                    <input type="text" class="form-control" value="<?php echo $monitora_hostname; ?>">
                                                 </div>
                                                 <label class="col-md-2 control-label">Database: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="<?php echo $portalm_database; ?>">
+                                                    <input type="text" class="form-control" value="<?php echo $monitora_database; ?>">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Username: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="<?php echo $portalm_username; ?>">
+                                                    <input type="text" class="form-control" value="<?php echo $monitora_username; ?>">
                                                 </div>
                                                 <label class="col-md-2 control-label">Password: </label>
                                                 <div class="col-md-3">
-                                                    <input type="password" class="form-control" value="<?php echo $portalm_password; ?>">
+                                                    <input type="password" class="form-control" value="<?php echo $monitora_password; ?>">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Dbdriver: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="<?php echo $portalm_dbdriver; ?>">
+                                                    <input type="text" class="form-control" value="<?php echo $monitora_dbdriver; ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -177,27 +177,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Hostname: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="<?php echo $oracle_hostname; ?>">
+                                                    <input type="text" class="form-control" value="<?php echo $mantis_hostname; ?>">
                                                 </div>
                                                 <label class="col-md-2 control-label">Database: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="<?php echo $oracle_database; ?>">
+                                                    <input type="text" class="form-control" value="<?php echo $mantis_database; ?>">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Username: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="<?php echo $oracle_username; ?>">
+                                                    <input type="text" class="form-control" value="<?php echo $mantis_username; ?>">
                                                 </div>
                                                 <label class="col-md-2 control-label">Password: </label>
                                                 <div class="col-md-3">
-                                                    <input type="password" class="form-control" value="<?php echo $oracle_password; ?>">
+                                                    <input type="password" class="form-control" value="<?php echo $mantis_password; ?>">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Dbdriver: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="<?php echo $oracle_dbdriver; ?>">
+                                                    <input type="text" class="form-control" value="<?php echo $mantis_dbdriver; ?>">
                                                 </div>
                                             </div>
                                         </div>

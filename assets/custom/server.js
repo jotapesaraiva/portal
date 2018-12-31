@@ -18,16 +18,16 @@ atualiza_alertas_servidor();
             var output ='<table class="table table-hover"><thead><tr class="uppercase"><th>Serviço</th><th>Servidor</th><th>IP</th><th>Tempo</th><th>Mantis</th></thead><tbody>';
                     for (var i in data) {
                       output +=
-                        "<tr><td>" +
-                        data[i].description+
+                        "<tr "+data[i].flag+"><td>" +
+                        data[i].servico+
                         "</td><td>" +
-                        data[i].name +
+                        data[i].servidor +
                         "</td><td>" +
-                        "<a href='https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]="+data[i].id+"' target='_blank'>"+data[i].ip+"</a>"+
+                        "<a href='https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]="+data[i].hostid+"' target='_blank'>"+data[i].ip+"</a>"+
                         "</td><td>" +
                         data[i].duration +
                         "</td><td>" +
-                        "<a href='http://intranet2.sefa.pa.gov.br/mantis/view.php?id="+data[i].id+"' target='_blank'>"+data[i].type+"</a>"+
+                         data[i].mantis+
                         "</td><tr>";
                     }
                     output += "</tbody></table>";

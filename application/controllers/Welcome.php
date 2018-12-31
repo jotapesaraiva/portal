@@ -2,22 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
 	public function __construct() {
 		parent::__construct();
 		// Load form validation library
@@ -34,21 +18,22 @@ class Welcome extends CI_Controller {
 
 		$this->output->enable_profiler(FALSE);
 		$css['headerinc'] = '';
-		$script['script'] = '<script>$("#myAlert").fadeOut(4000);</script>
-		';
+		$script['script'] = '<script>$("#myAlert").fadeOut(4000);</script>';
 		$script['footerinc'] = '
         <script src="' . base_url() . 'assets/custom/link_indisponivel.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/server.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/backups_falhos.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/zabbix.js" type="text/javascript"></script>
-		<script src="' . base_url() . 'assets/custom/antigo_monitora.js" type="text/javascript"></script>';
+		<script src="' . base_url() . 'assets/custom/antigo_monitora.js" type="text/javascript"></script>
+
+		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyABymwhvTD8qgfQ3g6iZBWyC_muA2qNU_o&v=3.exp&sensor=false&libraries=weather,places" type="text/javascript" ></script>
+		<script src="'.base_url().'assets/custom/maps/teste.js" type="text/javascript"></script>';
 
 		$username = $this->session->userdata('username');
 		$user = array("username" => $username);
 		// $dados = $this->load->controller('dash/server');
 		// $this->session->set_flashdata("loginOk","Logando com sucesso no sistema!!!.");
 		// set_msg('loginOk','Logado com sucesso no sistema !!!','sucesso');
-
 		$this->load->view('template/header',$css);
 		$this->load->view('template/navbar',$user);
 		$this->load->view('template/sidebar');

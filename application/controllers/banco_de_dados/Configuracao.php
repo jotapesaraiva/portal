@@ -28,11 +28,11 @@ class Configuracao extends CI_Controller {
         $dados['default_password'] = $db['default']['password'];
         $dados['default_dbdriver'] = $db['default']['dbdriver'];
 
-        $dados['portalm_hostname'] = $db['portalm']['hostname'];
-        $dados['portalm_database'] = $db['portalm']['database'];
-        $dados['portalm_username'] = $db['portalm']['username'];
-        $dados['portalm_password'] = $db['portalm']['password'];
-        $dados['portalm_dbdriver'] = $db['portalm']['dbdriver'];
+        $dados['monitora_hostname'] = $db['monitora']['hostname'];
+        $dados['monitora_database'] = $db['monitora']['database'];
+        $dados['monitora_username'] = $db['monitora']['username'];
+        $dados['monitora_password'] = $db['monitora']['password'];
+        $dados['monitora_dbdriver'] = $db['monitora']['dbdriver'];
 
         $dados['portalmoni_hostname'] = $db['portalmoni']['hostname'];
         $dados['portalmoni_database'] = $db['portalmoni']['database'];
@@ -40,11 +40,12 @@ class Configuracao extends CI_Controller {
         $dados['portalmoni_password'] = $db['portalmoni']['password'];
         $dados['portalmoni_dbdriver'] = $db['portalmoni']['dbdriver'];
 
-        // $dados['oracle_hostname'] = $db['oracle']['hostname'];
-        // $dados['oracle_database'] = $db['oracle']['database'];
-        // $dados['oracle_username'] = $db['oracle']['username'];
-        // $dados['oracle_password'] = $db['oracle']['password'];
-        // $dados['oracle_dbdriver'] = $db['oracle']['dbdriver'];
+        $dados['mantis_hostname'] = $db['mantis']['hostname'];
+        $dados['mantis_database'] = $db['mantis']['database'];
+        $dados['mantis_username'] = $db['mantis']['username'];
+        $dados['mantis_password'] = $db['mantis']['password'];
+        $dados['mantis_dbdriver'] = $db['mantis']['dbdriver'];
+
 
         $dados['oracle_hostname'] = '';
         $dados['oracle_database'] = '';

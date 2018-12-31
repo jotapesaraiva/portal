@@ -19,6 +19,7 @@ class Mes extends CI_Controller {
             $nano = date('Y');
             $data['nano'] = date('Y');
         }
+
         if($this->input->post('mes')){
             $nmes = $this->input->post('mes');
             $data['nmes'] = $nmes;
@@ -39,13 +40,15 @@ class Mes extends CI_Controller {
 
         $script['footerinc'] = '
         <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/pareto.js"></script>
+        <script src="' . base_url() . 'assets/js/highcharts/highcharts.js"></script>
+        <script src="' . base_url() . 'assets/js/highcharts/exporting.js"></script>
+        <script src="' . base_url() . 'assets/js/highcharts/export-data.js"></script>
+        <script src="' . base_url() . 'assets/js/highcharts/pareto.js"></script>
         ';
         $script['script']    = '
         <script type="text/javascript">
             $(function () {
-                $("#container").highcharts({
+                $("#grafico").highcharts({
                 chart: {
                     zoomType: "xy"
                 },
@@ -54,7 +57,7 @@ class Mes extends CI_Controller {
                 },
                 xAxis: {
                     categories: '. json_encode($array_dados['specification']).',
-                    crosshair: true
+                    crosshair : true
                 },
                 yAxis: [{
                     title: {
@@ -69,38 +72,38 @@ class Mes extends CI_Controller {
                     },
                     minPadding: 0,
                     maxPadding: 0,
-                    max: 100,
-                    min: 0,
-                    opposite: true,
-                    labels: {
+                    max       : 100,
+                    min       : 0,
+                    opposite  : true,
+                    labels    : {
                         format: "{value}%"
                     }
                 }],
                  legend: {
-                        align: "right",
-                        x: -70,
-                        verticalAlign: "top",
-                        y: -5,
-                        floating: true,
+                        align          : "right",
+                        x              : -70,
+                        verticalAlign  : "top",
+                        y              : -5,
+                        floating       : true,
                         backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || "white",
-                        borderColor: "#CCC",
-                        borderWidth: 1,
-                        shadow: false
+                        borderColor    : "#CCC",
+                        borderWidth    : 1,
+                        shadow         : false
                 },
                 series: [{
-                    name: "Porcentagem",
-                    type: "pareto",
-                    yAxis: 1,
-                    zIndex: 10,
+                    name   : "Porcentagem",
+                    type   : "pareto",
+                    yAxis  : 1,
+                    zIndex : 10,
                     tooltip: {
                         valueDecimals: 1,
-                        valueSuffix: " %"
+                        valueSuffix  : " %"
                     },
                     baseSeries: 1
                 }, {
-                    name: "Tempo",
-                    type: "column",
-                    zIndex: 2,
+                    name   : "Tempo",
+                    type   : "column",
+                    zIndex : 2,
                     tooltip: {
                        valueSuffix: " Hs"
                     },

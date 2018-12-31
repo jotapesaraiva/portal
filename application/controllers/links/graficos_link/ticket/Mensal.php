@@ -28,11 +28,13 @@ class Mensal extends CI_Controller {
 
         $script['footerinc'] = '
         <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
-        <script src="' . base_url() . 'assets/global/plugins/highcharts/js/highcharts.js"></script>';
+        <script src="' . base_url() . 'assets/js/highcharts/highcharts.js"></script>
+        <script src="' . base_url() . 'assets/js/highcharts/exporting.js"></script>
+        <script src="' . base_url() . 'assets/js/highcharts/export-data.js"></script>';
         $script['script'] = '
         <script type="text/javascript">
             $(function () {
-                $("#container").highcharts({
+                $("#grafico").highcharts({
                     chart: {
                         zoomType: "xy"
                     },
