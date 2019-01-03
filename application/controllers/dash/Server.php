@@ -123,7 +123,7 @@ class Server extends CI_Controller {
           //deleta todos que não estão alertando
           $this->zabbix_model->delete_zabbix_server($alert);
           //consultar novamente a tabela do banco zbx_server_fora
-          $servers_fora = $this->zabbix_model->select_zabbix_server();
+          $servers_fora = $this->zabbix_model->list_zabbix_server();
 
           // vd($servers_fora);
           //percorrer o array da consulta
@@ -135,10 +135,9 @@ class Server extends CI_Controller {
               $servidor = $server['servidor'];
               if($server['mantis'] == 0){ //verificar se já possui mantis
                   $flag = 'class="danger"';
-                  $mantis = '
-                          <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar/server/'.$hostid.'" title="Criar Mantis">
-                              <i class="fa fa-plus"></i>
-                          </a>';
+                  $mantis = ' <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar/server/'.$hostid.'" title="Criar Mantis">
+                                  <i class="fa fa-plus"></i>
+                              </a>';
               } else { //se não possui mantis
                   $status = $this->backups_model->mantis($server['mantis']);
                   $array_color = array(50 => "primary", 10 => "danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");

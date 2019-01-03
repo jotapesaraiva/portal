@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!-- BEGIN CONTAINER -->
-<!-- TODO: Fazer if em que - Se um usuario não tiver acesso a nem um modulo não exibir o nivel mais alto do menu.  -->
+<!-- TODO: OK Fazer if em que - Se um usuario não tiver acesso a nem um modulo não exibir o nivel mais alto do menu.  -->
 <div class="page-container">
     <!-- BEGIN SIDEBAR -->
     <div class="page-sidebar-wrapper">
@@ -32,26 +32,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="arrow open"></span>
                     </a>
                     <ul class="sub-menu">
-                        <?php if($this->session->userdata('physicaldeliveryofficename') == 'CGRE-Produção') : ?>
+                        <?php if(group_session($this->session->userdata('username')) == 'CGRE-Produção') : ?>
                         <li class="nav-item start active open">
                             <?php echo anchor('welcome', '
                             <i class="icon-bar-chart"></i><span class="title">  Dashboard Produção</span>', 'class="nav-link"')?>
                         </li>
-                        <?php elseif($this->session->userdata('physicaldeliveryofficename') == 'CGRE-Rede') : ?>
+                        <?php elseif(group_session($this->session->userdata('username')) == 'CGRE-Rede') : ?>
                         <li class="nav-item start">
                             <a href="dashboard/rede_infra" class="nav-link ">
                                 <i class="icon-bar-chart"></i>
                                 <span class="title">Dashboard Rede / Infra</span>
                             </a>
                         </li>
-                        <?php elseif($this->session->userdata('physicaldeliveryofficename') == 'CGPS') : ?>
+                        <?php elseif(group_session($this->session->userdata('username')) == 'CGPS') : ?>
                         <li class="nav-item start ">
                             <a href="dashboard/cgps" class="nav-link ">
                                 <i class="icon-bar-chart"></i>
                                 <span class="title">Dashboard CGPS</span>
                             </a>
                         </li>
-                        <?php elseif($this->session->userdata('physicaldeliveryofficename') == 'Administrativo') : ?>
+                        <?php elseif(group_session($this->session->userdata('username')) == 'Administrativo') : ?>
                         <li class="nav-item start ">
                             <a href="dashboard/administrativo" class="nav-link ">
                                 <i class="icon-bar-chart"></i>
@@ -67,46 +67,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!--############# ABA GERENCIA ############-->
                 <li class="nav-item <?php echo active_segment(1,'gerencias'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-briefcase"></i>
                         <span class="title">Gerências</span>
                         <?php echo span_segment(1,'gerencias'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
                         <!--############# ABA GERENCIA > Tecnicos ############-->
-                        <?php if($this->auth_ad->level_access('tecnico',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('tecnico', group_session($this->session->userdata('username')) )){?>
                         <li class="nav-item <?php echo active_segment(2,'tecnico'); ?>">
-                            <?php echo anchor('gerencias/tecnico', 'Tecnicos', 'class="nav-link"')?>
+                            <?php echo anchor('gerencias/tecnico', '<i class=" icon-wrench"></i> Tecnicos', 'class="nav-link"')?>
                             <?php echo span_segment(2,'tecnico'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Fornecedores ############-->
-                        <?php } if($this->auth_ad->level_access('fornecedor',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('fornecedor',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'fornecedor'); ?>">
-                            <?php echo anchor('gerencias/fornecedor', 'Fornecedores', 'class="nav-link"')?>
+                            <?php echo anchor('gerencias/fornecedor', '<i class="fa fa-industry"></i> Fornecedores', 'class="nav-link"')?>
                             <?php echo span_segment(2,'fornecedor'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Contatos ############-->
-                        <?php } if($this->auth_ad->level_access('contato',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('contato',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'contato'); ?>">
-                            <?php echo anchor('gerencias/contato', 'Contatos', 'class="nav-link"')?>
+                            <?php echo anchor('gerencias/contato', '<i class="fa fa-phone"></i> Contatos', 'class="nav-link"')?>
                             <?php echo span_segment(2,'contato'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Servidores ############-->
-                        <?php } if($this->auth_ad->level_access('servidor',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('servidor',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'servidor'); ?>">
-                            <?php echo anchor('gerencias/servidor', 'Servidores', 'class="nav-link"')?>
+                            <?php echo anchor('gerencias/servidor', '<i class="fa fa-institution"></i> Servidores', 'class="nav-link"')?>
                             <?php echo span_segment(2,'servidor'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Acessos ############-->
-                        <?php } if($this->auth_ad->level_access('acessos',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('acessos',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'acessos'); ?>">
-                            <?php echo anchor('gerencias/acessos', 'Acessos', 'class="nav-link"')?>
+                            <?php echo anchor('gerencias/acessos', '<i class="fa fa-user-secret"></i> Acessos', 'class="nav-link"')?>
                             <?php echo span_segment(2,'acessos'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Voucher ############-->
-                        <?php } if($this->auth_ad->level_access('voucher',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('voucher',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'voucher'); ?>">
-                            <?php echo anchor('gerencias/voucher', 'Voucher', 'class="nav-link"')?>
+                            <?php echo anchor('gerencias/voucher', '<i class="fa fa-cab"></i> Voucher', 'class="nav-link"')?>
                             <?php echo span_segment(2,'voucher'); ?>
                         </li>
                         <?php }?>
@@ -122,21 +122,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <!--############# ABA RAMAIS > Sefa ############-->
-                        <?php if($this->auth_ad->level_access('sefa',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('sefa',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'sefa'); ?>">
                             <?php echo anchor('ramais/sefa', 'SEFA', 'class="nav-link"')?>
                             <?php echo span_segment(2,'sefa'); ?>
                         </li>
                         <!--############# ABA RAMAIS > DTI ############-->
-                        <?php } if($this->auth_ad->level_access('dti',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('dti',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'dti'); ?>">
                             <?php echo anchor('ramais/dti', 'DTI', 'class="nav-link"')?>
                             <?php echo span_segment(2,'dti'); ?>
                         </li>
                         <!--############# ABA RAMAIS > Voi´p ############-->
-                        <?php } if($this->auth_ad->level_access('voip',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('voip',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'voip'); ?>">
-                            <?php echo anchor('ramais/voip', 'VOIP', 'class="nav-link"')?>
+                            <?php echo anchor('ramais/voip', '<i class="glyphicon glyphicon-phone-alt"></i> VOIP', 'class="nav-link"')?>
                             <?php echo span_segment(2,'voip'); ?>
                         </li>
                         <?php }?>
@@ -145,22 +145,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!--############# ABA LOCALIDADES ############-->
                 <li class="nav-item <?php echo active_segment(1,'localidades'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="fa fa-map-marker"></i>
+                        <i class="fa fa-map"></i>
                         <span class="title">Localidades</span>
                         <?php echo span_segment(1,'localidades'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
                         <!--############# ABA LOCALIDADES > Unidades ############-->
-                        <?php if($this->auth_ad->level_access('unidade',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('unidade',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'unidade'); ?>">
-                            <?php echo anchor('localidades/unidade', 'Unidades', 'class="nav-link"')?>
+                            <?php echo anchor('localidades/unidade', '<i class="fa fa-map-marker"></i> Unidades', 'class="nav-link"')?>
                             <?php echo span_segment(2,'unidade'); ?>
                         </li>
                         <!--############# ABA LOCALIDADES > Links ############-->
-                        <?php } if($this->auth_ad->level_access('link',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('link',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'link'); ?>">
-                            <?php echo anchor('localidades/link', 'Links', 'class="nav-link"')?>
+                            <?php echo anchor('localidades/link', '<i class="fa fa-link"></i> Links', 'class="nav-link"')?>
                             <?php echo span_segment(2,'link'); ?>
                         </li>
                         <?php }?>
@@ -180,21 +180,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <!--############# ABA BACKUPS > Historico de backups ############-->
-                        <?php if($this->auth_ad->level_access('historico_bkp',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('historico_bkp',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'historico'); ?>">
-                            <?php echo anchor('backup/historico_bkp', 'Histórico', 'class="nav-link"')?>
+                            <?php echo anchor('backup/historico_bkp', '<i class="fa fa-history"></i> Histórico', 'class="nav-link"')?>
                             <?php echo span_segment(2,'historico'); ?>
                         </li>
                         <!--############# ABA BACKUPS > Janela de bakcups ############-->
-                        <?php } if($this->auth_ad->level_access('janela_backup',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('janela_backup',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'janela_backup'); ?>">
                             <?php echo anchor('backup/janela_backup', 'Janela de Backup', 'class="nav-link"')?>
                             <?php echo span_segment(2,'janela_backup'); ?>
                         </li>
                         <!--############# ABA BACKUPS > fitas ############-->
-                        <?php } if($this->auth_ad->level_access('fitas',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('fitas',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'fitas'); ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-hdd-o"></i>
                                 <span class="title">Fitas</span>
                                 <?php echo span_segment(2,'fitas'); ?>
                                 <span class="arrow"></span>
@@ -218,9 +219,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </ul>
                         </li>
                         <!--############# ABA BACKUPS > graficos ############-->
-                        <?php } if($this->auth_ad->level_access('graficos_bkp',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('graficos_bkp',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'graficos_bkp'); ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-bar-chart"></i>
                                 <span class="title">Gráficos</span>
                                 <?php echo span_segment(2,'graficos_bkp'); ?>
                                 <span class="arrow"></span>
@@ -229,6 +231,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <!--############# ABA BACKUPS > Graficos > Crescimento############-->
                                 <li class="nav-item <?php echo active_segment(3,'crescimento'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="fa fa-line-chart"></i>
                                         <span class="title">Crescimento</span>
                                         <?php echo span_segment(3,'crescimento'); ?>
                                         <span class="arrow"></span>
@@ -248,12 +251,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </li>
                                 <!--############# ABA BACKUPS > graficos > Quantidade ############-->
                                 <li class="nav-item <?php echo active_segment(3,'quantidade'); ?>">
-                                    <?php echo anchor('backup/graficos_bkp/quantidade', 'Quantidade', 'class="nav-link"')?>
+                                    <?php echo anchor('backup/graficos_bkp/quantidade', '<i class="fa fa-area-chart"></i> Quantidade', 'class="nav-link"')?>
                                     <?php echo span_segment(3,'quantidade'); ?>
                                 </li>
                                 <!--############# ABA BACKUPS > graficos > Tempo ############-->
                                 <li class="nav-item <?php echo active_segment(3,'tempo'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="fa fa-clock-o"></i>
                                         <span class="title">Tempo</span>
                                         <?php echo span_segment(3,'tempo'); ?>
                                         <span class="arrow"></span>
@@ -274,6 +278,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <!--############# ABA BACKUPS > graficos > Volume ############-->
                                 <li class="nav-item <?php echo active_segment(3,'volume'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="fa fa-bar-chart"></i>
                                         <span class="title">Volume</span>
                                         <?php echo span_segment(3,'volume'); ?>
                                         <span class="arrow"></span>
@@ -306,28 +311,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <!--############# ABA LINKS > Historico ############-->
-                        <?php if($this->auth_ad->level_access('historico_link',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('historico_link',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'historico'); ?>">
-                            <?php echo anchor('links/historico_link', 'Historico', 'class="nav-link"')?>
+                            <?php echo anchor('links/historico_link', '<i class="fa fa-history"></i> Historico', 'class="nav-link"')?>
                             <?php echo span_segment(2,'historico'); ?>
                         </li>
                         <!--############# ABA LINKS > Calculo de multa ############-->
-                        <?php } if($this->auth_ad->level_access('calculo_multa',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('calculo_multa',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'calculo_multa'); ?>">
-                            <?php echo anchor('links/calculo_multa', 'Cálculo Multa', 'class="nav-link"')?>
+                            <?php echo anchor('links/calculo_multa', '<i class="fa fa-calculator"></i> Cálculo Multa', 'class="nav-link"')?>
                             <?php echo span_segment(2,'calculo_multa'); ?>
                         </li>
                         <!--############# ABA LINKS > Consumo de banda ############-->
-                        <?php } if($this->auth_ad->level_access('consumo_banda',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('consumo_banda',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'consumo_banda'); ?>">
-                            <?php echo anchor('links/consumo_banda', 'Consumo de Banda', 'class="nav-link"')?>
+                            <?php echo anchor('links/consumo_banda', '<i class="fa fa-bar-chart"></i> Consumo de Banda', 'class="nav-link"')?>
                             <?php echo span_segment(2,'consumo_banda'); ?>
                         </li>
                         <!--############# ABA LINKS > Graficos ############-->
-                        <?php } if($this->auth_ad->level_access('graficos_link',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('graficos_link',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'graficos_link'); ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="icon-feed"></i>
+                                <i class="icon-bar-chart"></i>
                                 <span class="title">Gráficos</span>
                                 <?php echo span_segment(2,'graficos_link'); ?>
                                 <span class="arrow"></span>
@@ -357,7 +362,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <!--############# ABA LINKS > Graficos > Localidade ############-->
                                 <li class="nav-item <?php echo active_segment(3,'localidade'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
-                                        <i class="icon-feed"></i>
+                                        <i class="fa fa-map"></i>
                                         <span class="title">Localidade</span>
                                         <?php echo span_segment(3,'localidade'); ?>
                                         <span class="arrow"></span>
@@ -378,7 +383,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <!--############# ABA LINKS > Graficos > Causa ############-->
                                 <li class="nav-item <?php echo active_segment(3,'causa'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
-                                        <i class="icon-feed"></i>
+                                        <i class="fa fa-exclamation-triangle"></i>
                                         <span class="title">Causa</span>
                                         <?php echo span_segment(3,'causa'); ?>
                                         <span class="arrow"></span>
@@ -399,7 +404,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <!--############# ABA LINKS > Graficos > Ticket ############-->
                                 <li class="nav-item <?php echo active_segment(3,'ticket'); ?>">
                                     <a href="javascript:;" class="nav-link nav-toggle">
-                                        <i class="icon-feed"></i>
+                                        <i class="fa fa-ticket"></i>
                                         <span class="title">Ticket</span>
                                         <?php echo span_segment(3,'ticket'); ?>
                                         <span class="arrow"></span>
@@ -630,29 +635,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <?php if($this->auth_ad->level_access('geral',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('geral',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'geral'); ?>">
-                            <?php echo anchor('sistema/geral', 'Geral', 'class="nav-link"')?>
+                            <?php echo anchor('sistema/geral', '<i class="icon-social-dribbble"></i> Geral', 'class="nav-link"')?>
                             <?php echo span_segment(2,'geral'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('cronjob',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('cronjob',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'cronjob'); ?>">
-                            <?php echo anchor('sistema/cronjob', 'Cron Job', 'class="nav-link"')?>
+                            <?php echo anchor('sistema/cronjob', '<i class="fa fa-tasks"></i> Cron Job', 'class="nav-link"')?>
                             <?php echo span_segment(2,'cronjob'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('log',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('log',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'log'); ?>">
-                            <?php echo anchor('sistema/log', 'Logs', 'class="nav-link"')?>
+                            <?php echo anchor('sistema/log', '<i class="fa fa-code"></i> Logs', 'class="nav-link"')?>
                             <?php echo span_segment(2,'log'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('ldap',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('ldap',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'ldap'); ?>">
-                            <?php echo anchor('sistema/ldap', 'LDAP', 'class="nav-link"')?>
+                            <?php echo anchor('sistema/ldap', '<i class="fa fa-windows"></i> LDAP', 'class="nav-link"')?>
                             <?php echo span_segment(2,'ldap'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('consulta',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('consulta',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'consulta'); ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-gears"></i>
                                 <span class="title">Itens da consulta</span>
                                 <?php echo span_segment(2,'consulta'); ?>
                                 <span class="arrow"></span>
@@ -692,7 +698,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </li>
                             </ul>
                         </li>
-                        <?php } if($this->auth_ad->level_access('zabbix',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('zabbix',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'zabbix'); ?>">
                             <?php echo anchor('sistema/zabbix', 'Zabbix', 'class="nav-link"')?>
                             <?php echo span_segment(2,'zabbix'); ?>
@@ -703,40 +709,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <li class="nav-item <?php echo active_segment(1,'usuarios'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class=" icon-wrench"></i>
+                        <i class="fa fa-group"></i>
                         <span class="title">Usuarios</span>
                         <?php echo span_segment(1,'usuarios'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <?php if($this->auth_ad->level_access('lista',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('lista',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'lista'); ?>">
-                            <?php echo anchor('usuarios/lista', 'Lista de Usuarios', 'class="nav-link"')?>
+                            <?php echo anchor('usuarios/lista', '<i class="fa fa-list-ul"></i> Lista de Usuarios', 'class="nav-link"')?>
                             <?php echo span_segment(2,'lista'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('permissao',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('permissao',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'permissao'); ?>">
-                            <?php echo anchor('usuarios/permissao', 'Permissão', 'class="nav-link"')?>
+                            <?php echo anchor('usuarios/permissao', '<i class="fa fa-unlock-alt"></i> Permissão', 'class="nav-link"')?>
                             <?php echo span_segment(2,'permissao'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('grupos',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('grupos',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'grupos'); ?>">
-                             <?php echo anchor('usuarios/grupos', 'Grupos/Equipe', 'class="nav-link"')?>
+                             <?php echo anchor('usuarios/grupos', '<i class="fa fa-object-group"></i> Grupos/Equipe', 'class="nav-link"')?>
                              <?php echo span_segment(2,'grupos'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('modulos',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('modulos',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'modulos'); ?>">
-                             <?php echo anchor('usuarios/modulos', 'Modulos', 'class="nav-link"')?>
+                             <?php echo anchor('usuarios/modulos', '<i class="fa fa-plug"></i> Modulos', 'class="nav-link"')?>
                              <?php echo span_segment(2,'modulos'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('perfil',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('perfil',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'perfil'); ?>">
-                             <?php echo anchor('usuarios/perfil', 'Perfil', 'class="nav-link"')?>
+                             <?php echo anchor('usuarios/perfil', '<i class="fa fa-list"></i> Perfil', 'class="nav-link"')?>
                              <?php echo span_segment(2,'perfil'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('cargo',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('cargo',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'cargo'); ?>">
-                            <?php echo anchor('usuarios/cargo', 'Cargo', 'class="nav-link"')?>
+                            <?php echo anchor('usuarios/cargo', '<i class="fa fa-certificate"></i> Cargo', 'class="nav-link"')?>
                             <?php echo span_segment(2,'cargo'); ?>
                         </li>
                         <?php }?>
@@ -751,14 +757,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <?php if($this->auth_ad->level_access('configuracao',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php if($this->auth_ad->level_access('configuracao',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'configuracao'); ?>">
-                            <?php echo anchor('banco_de_dados/configuracao', 'Configuração', 'class="nav-link"')?>
+                            <?php echo anchor('banco_de_dados/configuracao', '<i class="icon-settings"></i> Configuração', 'class="nav-link"')?>
                             <?php echo span_segment(2,'configuracao'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('backup',$this->session->userdata('physicaldeliveryofficename'))){?>
+                        <?php } if($this->auth_ad->level_access('backup',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'backup'); ?>">
-                            <?php echo anchor('banco_de_dados/backup', 'Backup', 'class="nav-link"')?>
+                            <?php echo anchor('banco_de_dados/backup', '<i class="fa fa-copy"></i> Backup', 'class="nav-link"')?>
                             <?php echo span_segment(2,'backup'); ?>
                         </li>
                         <?php }?>

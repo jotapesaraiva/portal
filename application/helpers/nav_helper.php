@@ -24,9 +24,6 @@ if ( ! function_exists('active_method')) {
     }
 }
 
-
-
-
 if ( ! function_exists('span_class')) {
     function span_class($controller){
         $CI =& get_instance();
@@ -43,8 +40,6 @@ if ( ! function_exists('span_method')) {
     }
 }
 
-
-
 if ( ! function_exists('active_segment')) {
     function active_segment($segmento,$name){
         $CI =& get_instance();
@@ -52,6 +47,17 @@ if ( ! function_exists('active_segment')) {
         return ($method == $name) ? 'active open' : '';
     }
 }
+
+if ( ! function_exists('group_session')) {
+    function group_session($username){
+        $CI =& get_instance();
+        $CI->load->model('usuario_model');
+        $grupo =$CI->usuario_model->usuario_grupo($username);
+        return $grupo->nome_grupo;
+    }
+}
+
+
 
 
 if ( ! function_exists('span_segment')) {

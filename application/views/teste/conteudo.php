@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="dashboard-stat blue">
                     <div class="visual">
-                        <i class="fa fa-comments"></i>
+                        <i class="fa fa-battery-full"></i>
                     </div>
                     <div class="details">
                         <div class="number">
@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="dashboard-stat red">
                     <div class="visual">
-                        <i class="fa fa-bar-chart-o"></i>
+                        <i class="fa fa-battery-full"></i>
                     </div>
                     <div class="details">
                         <div class="number">
@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="dashboard-stat green">
                     <div class="visual">
-                        <i class="fa fa-shopping-cart"></i>
+                        <i class="fa fa-building-o"></i>
                     </div>
                     <div class="details">
                         <div class="number">
@@ -74,7 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="dashboard-stat purple">
                     <div class="visual">
-                        <i class="fa fa-globe"></i>
+                        <i class="fa fa-ticket"></i>
                     </div>
                     <div class="details">
                         <div class="number">
@@ -95,7 +95,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="icon-share font-green-haze hide"></i>
+                            <i class="fa fa-database font-green-haze"></i>
                             <span class="caption-subject font-green bold uppercase">Monitora</span>
                             <span class="caption-helper">Alertas</span>
                         </div>
@@ -116,7 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="icon-share font-green-haze hide"></i>
+                            <i class="icon-globe font-green-haze"></i>
                             <span class="caption-subject font-green bold uppercase">Links</span>
                             <span class="caption-helper">Indisponíveis</span>
                         </div>
@@ -140,7 +140,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="icon-share font-green-haze hide"></i>
+                            <i class="fa fa-server font-green-haze"></i>
                             <span class="caption-subject font-green bold uppercase">Servidores</span>
                             <span class="caption-helper">SEFA/PRODEPA</span>
                         </div>
@@ -161,7 +161,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="icon-share font-green-haze hide"></i>
+                            <i class="fa fa-copy font-green-haze"></i>
                             <span class="caption-subject font-green bold uppercase">Backups</span>
                             <span class="caption-helper">Falhos</span>
                         </div>
@@ -185,7 +185,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="icon-share font-green-haze hide"></i>
+                            <i class="fa fa-desktop font-green-haze hide"></i>
                             <span class="caption-subject font-green bold uppercase">Zabbix</span>
                             <span class="caption-helper">Alertas</span>
                         </div>

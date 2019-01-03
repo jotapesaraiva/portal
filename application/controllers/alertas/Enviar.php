@@ -32,21 +32,19 @@ class Enviar extends CI_Controller {
 
     public function server($id) {
         $detalhes = $this->zabbix_model->select_zabbix_server($id);
-        foreach ($detalhes as $detalhe) {
-            $dados['status'] = $detalhe['servidor'];
-            $dados['plano'] = $detalhe['detalhe'];
-            $dados['mode'] = $detalhe['ip'];
-            $dados['inicio_chamado'] = date('d/m/Y H:i' ,strtotime($detalhe['data_alerta']));
-        }
+        $dados['alerta'] = "Alerta ".$detalhes->servico;
+        $dados['servidor'] = $detalhes->servidor;
+        $dados['plano'] = $detalhes->detalhe;
+        $dados['mode'] = $detalhes->ip;
+        $dados['inicio_chamado'] = date('d/m/Y H:i' ,strtotime($detalhes->data_alerta));
         $dados['projetos'] = $this->select_option($this->mantis_model->equipes_mantis());
-
         $dados['form'] = "server";
 
         $script['footerinc'] = '';
-        $script['script'] = '
-        <script src="'.base_url().'assets/custom/menu/menu_mantis.js" type="text/javascript"></script>
-        ';
+        $script['script'] = '<script src="'.base_url().'assets/custom/menu/menu_mantis.js" type="text/javascript"></script>';
+
         $css['headerinc'] = '';
+
         $session['username'] = $this->session->userdata('username');
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
@@ -177,11 +175,34 @@ class Enviar extends CI_Controller {
         redirect('welcome');
     }
 
-
+    public function abrir_mantis_server() {
+        $this->load->model('mantis_model');
+        //puxar os valores do input e armazenar numa variavel
+        if($this->input->post('plano') == null){
+            $detalhe = 'sem plano de ação.';
+        } else {
+            $detalhe = $this->input->post('plano');//descriçao do mantis
+        }
+        $params = array(
+        'usuario' => $this->session->userdata('username'),//nome do usuario
+        'projeto' => $this->input->post('projeto'),//projeto mantis
+        'servico' => $this->input->post('alerta')." - Servidor".$this->input->post('servidor'),//resumo do mantis
+        'detalhe' => $detalhe,//descriçao do mantis
+        'categoria' => $this->input->post('categoria')//categoria do projeto mantis
+    );
+        // vd($params);
+        //load da procedore passando as variaveis e armazenando em uma variavel
+        $this->mantis_model->abrir_mantis_server($params);
+        $resultado = $this->mantis_model->select_num_mantis($params);
+        //atualizo a tabela do backup ou zabbix com o numero do mantis
+        // $this->zabbix_model->update_num_mantis(array('mantis' => $resultado), array('ip' => $this->input->post('mode')));
+        //retorno para dashboard
+        redirect('welcome');
+    }
 
     public function select_option($dados) {
         $html = "";
-        foreach ($dados as $dado) {
+        foreach ($dados as $key => $dado) {
             $html .= "<option value='".$dado['ID']."' >".$dado['NAME']."</option>";
         }
         return $html;

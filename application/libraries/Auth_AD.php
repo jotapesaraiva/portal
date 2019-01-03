@@ -188,7 +188,11 @@ class Auth_AD
 
     public function level_access($segment,$group) {
         $this->ci->load->model('usuario_model');
-        $membros = $this->ci->usuario_model->modulos_grupo_nome($group);
+        if(isset($group)){
+            $membros = $this->ci->usuario_model->modulos_grupo_nome($group);
+        } else {
+            $membros = "Sem Grupo";
+        }
         // vd($membros->result());
         $mod = array();
         foreach ($membros->result() as $mem) {

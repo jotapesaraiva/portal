@@ -33,43 +33,73 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                         <?php
                                         switch ($form) {
+                                                case 'monitora': ?>
+                                                <?php  echo form_open('alertas/enviar/abrir_mantis_monitora', array('class' => 'form-horizontal'));?>
+                                                 <div class="form-body">
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">Alerta</label>
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                <input type="text" name="alerta" class="form-control" placeholder="Alerta" value="<?php echo $status; ?>"> </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">IP</label>
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-envelope"></i>
+                                                                </span>
+                                                                <input type="text" name="mode" class="form-control" placeholder="Responsavel" value="<?php echo $mode; ?>"> </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">Plano de Ação</label>
+                                                        <div class="col-md-8">
+                                                                <textarea class="form-control" name="plano" rows="3"><?php echo $plano; ?></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">Equipe</label>
+                                                        <div class="col-md-8">
+                                                                <select name="equipe" id="equipe" class="form-control" onchange="projeto_selecionada()">
+                                                                    <option>Selecione uma Equipe</option>
+                                                                    <?php echo $projetos; ?>
+                                                                </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">Projeto</label>
+                                                        <div class="col-md-8">
+                                                                <select id="projeto" name="projeto" class="form-control" onchange="categoria_selecionada()">
+                                                                    <option>Selecione um Projeto</option>
+                                                                </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">Categoria</label>
+                                                        <div class="col-md-8">
+                                                                <select id="categoria" name="categoria" class="form-control">
+                                                                    <option>Selecione uma Categoria</option>
+                                                                </select>
+                                                        </div>
+                                                    </div>
+
+                                            <?php break;
                                             case 'server': ?>
-                                            <?php  echo form_open('alertas/enviar/abrir_mantis', array('class' => 'form-horizontal'));?>
+                                            <?php  echo form_open('alertas/enviar/abrir_mantis_server', array('class' => 'form-horizontal'));?>
                                              <div class="form-body">
-                                                <div class="form-group">
-                                                    <label class="col-md-2 control-label">Equipe</label>
-                                                    <div class="col-md-8">
-
-                                                            <select name="equipe" id="equipe" class="form-control" onchange="projeto_selecionada()">
-                                                                <option>Selecione uma Equipe</option>
-                                                                <?php echo $projetos; ?>
-                                                            </select>
-                                                                                                            </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="col-md-2 control-label">Projeto</label>
-                                                    <div class="col-md-8">
-
-                                                            <select id="projeto" name="projeto" class="form-control" onchange="categoria_selecionada()">
-                                                                <option>Selecione um Projeto</option>
-                                                            </select>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="col-md-2 control-label">Categoria</label>
-                                                    <div class="col-md-8">
-
-                                                            <select id="categoria" name="categoria" class="form-control">
-                                                                <option>Selecione uma Categoria</option>
-                                                            </select>
-
-                                                    </div>
-                                                </div>
-
-                                                <hr>
 
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label">Alerta</label>
@@ -78,7 +108,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             <span class="input-group-addon">
                                                                 <i class="fa fa-envelope"></i>
                                                             </span>
-                                                            <input type="text" name="alerta" class="form-control" placeholder="Alerta" value="<?php echo $status; ?>"> </div>
+                                                            <input type="text" name="alerta" class="form-control" placeholder="Alerta" value="<?php echo $alerta; ?>"> </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Servidor</label>
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-envelope"></i>
+                                                            </span>
+                                                            <input type="text" name="servidor" class="form-control" placeholder="Responsavel" value="<?php echo $servidor; ?>"> </div>
                                                     </div>
                                                 </div>
 
@@ -97,6 +138,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <label class="col-md-2 control-label">Plano de Ação</label>
                                                     <div class="col-md-8">
                                                             <textarea class="form-control" name="plano" rows="3"><?php echo $plano; ?></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Equipe</label>
+                                                    <div class="col-md-8">
+                                                            <select name="equipe" id="equipe" class="form-control" onchange="projeto_selecionada()">
+                                                                <option>Selecione uma Equipe</option>
+                                                                <?php echo $projetos; ?>
+                                                            </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Projeto</label>
+                                                    <div class="col-md-8">
+                                                            <select id="projeto" name="projeto" class="form-control" onchange="categoria_selecionada()">
+                                                                <option>Selecione um Projeto</option>
+                                                            </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Categoria</label>
+                                                    <div class="col-md-8">
+                                                            <select id="categoria" name="categoria" class="form-control">
+                                                                <option>Selecione uma Categoria</option>
+                                                            </select>
                                                     </div>
                                                 </div>
 

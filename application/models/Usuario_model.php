@@ -268,6 +268,16 @@ class Usuario_model extends CI_Model{
         return $query->result_array();
     }
 
+    public function usuario_grupo($username) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('g.nome_grupo');
+        $portal_db->from('tbl_usuario u');
+        $portal_db->join('tbl_grupos g','u.id_grupo=g.id_grupo');
+        $portal_db->where('u.login_usuario',$username);
+        $query = $portal_db->get();
+        return $query->row();
+    }
+
     public function modulos_grupo($id_group) {
         $portal_db = $this->load->database('default',true);
         $portal_db->select('m.id_modulo');
@@ -277,6 +287,7 @@ class Usuario_model extends CI_Model{
         $query = $portal_db->get();
         return $query->result_array();
     }
+
     public function modulos_grupo_nome($nome_group) {
         $portal_db = $this->load->database('default',true);
         $portal_db->select('*');

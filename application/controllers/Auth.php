@@ -64,16 +64,28 @@ class Auth extends CI_Controller{
         } else {
             // check the login
             if($this->auth_ad->login($username, $password)) {
+                $group = $this->login_database->numero_grupo($this->session->userdata('physicaldeliveryofficename'));
+                if(isset($group)){
+                    $group = $group->id_grupo;
+                } else {
+                    $group = '11';
+                }
+                $status = $this->login_database->status_user($this->session->userdata('displayname'));
+                if(isset($status)){
+                    $status = $status->status_usuario;
+                }else{
+                    $status = '0';
+                }
                 $data = array(
                     'nome_usuario'       => $this->session->userdata('displayname'),
                     'login_usuario'      => $username,
                     'email_usuario'      => $this->session->userdata('mail'),
-                    'senha_usuario'      => $password,
-                    'status_usuario'     => '1',// campo verificador se o usuario esta ativo.
+                    'senha_usuario'      => md5($password),
+                    'status_usuario'     => $status,// campo verificador se o usuario esta ativo.
                     'sobreaviso_usuario' => '0',
                     'id_permissao'       => '1',// campo verificador nivel de permissão.
                     'id_cargo'           => '1',// compo verificador cargo do usuario.
-                    'id_grupo'           => '1'
+                    'id_grupo'           => $group
                 );
                     // 'celula_equipe'  => $this->session->userdata('physicaldeliveryofficename')
                 $alterado = $this->login_database->registration_update($data);
@@ -94,6 +106,12 @@ class Auth extends CI_Controller{
             }
         }
 	}
+
+    public function teste() {
+        $row = $this->login_database->numero_grupo($this->session->userdata('physicaldeliveryofficename'));
+        $user = $this->login_database->status_user($this->session->userdata('displayname'));
+        vd($row);
+    }
 
 	public function logout() {
 		// perform the logout

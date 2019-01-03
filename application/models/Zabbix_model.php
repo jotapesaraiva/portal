@@ -90,13 +90,18 @@ class Zabbix_model extends CI_Model {
         return $portal_db->insert_id();
     }
 
-    public function select_zabbix_server($id=null) {
+    public function list_zabbix_server() {
         $portal_db = $this->load->database('default',true);
         $query = $portal_db->get('zbx_server_fora');
-        if($id != null){
-            $portal_db->where('host_id', $id);
-        }
         return $query->result_array();
+    }
+    public function select_zabbix_server($id) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('*');
+        $portal_db->from('zbx_server_fora');
+        $portal_db->where('host_id',$id);
+        $query = $portal_db->get();
+        return $query->row();
     }
 
     public function delete_zabbix_server($id) {

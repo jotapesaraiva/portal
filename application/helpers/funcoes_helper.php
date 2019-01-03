@@ -53,7 +53,6 @@ function vd($valor){
     die();
 }
 
-
 /**
 * Converts bytes into human readable file size.
 *

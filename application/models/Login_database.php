@@ -44,10 +44,7 @@ public function registration_update($data) {
         'nome_usuario' => $data['nome_usuario'],
         'login_usuario' => $data['login_usuario'],
         'email_usuario' => $data['email_usuario'],
-        'senha_usuario' => $data['senha_usuario'],
-        'status_usuario' => '1',
-        'id_cargo' => '1',
-
+        'senha_usuario' => $data['senha_usuario']
     );
     $mysql_db->where('login_usuario', $data['login_usuario']);
     $mysql_db->update('tbl_usuario', $update);
@@ -100,6 +97,24 @@ public function read_user_information($username) {
         return false;
     }
 }
+
+    public function numero_grupo($nome_group) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('id_grupo');
+        $portal_db->from('tbl_grupos');
+        $portal_db->where('nome_grupo',$nome_group);
+        $query = $portal_db->get();
+        return $query->row();
+    }
+
+    public function status_user($usuario) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('status_usuario');
+        $portal_db->from('tbl_usuario');
+        $portal_db->where('nome_usuario',$usuario);
+        $query = $portal_db->get();
+        return $query->row();
+    }
 
 }
 
