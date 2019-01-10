@@ -9,7 +9,7 @@ class Lista extends CI_Controller {
     }
 
     public function index() {
-        $this->output->enable_profiler(TRUE);
+        $this->output->enable_profiler(FALSE);
         $script['footerinc'] = '
             <script src="'. base_url() .'assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
             <script src="'. base_url() .'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>

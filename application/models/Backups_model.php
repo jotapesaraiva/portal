@@ -33,14 +33,6 @@ class Backups_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function update_num_mantis($num,$session_id) {
-        $portal = $this->load->database('default',true);
-        $portal->update('dp_backups', $num, $session_id);
-        // echo $portal->last_query();
-        return $portal->affected_rows();
-    }
-
-
     public function mantis($mantis) {
         $portal_m = $this->load->database('mantis',true);
         $query = $portal_m->query('
@@ -55,28 +47,6 @@ class Backups_model extends CI_Model {
   //   JOIN mantis.mantis_bug_status_tb s
   //     ON b.status = s.status
   //  WHERE b.id = ".$mantis.
-
-
-    public function monitora() {
-        $monitora = $this->load->database('monitora',true);
-        $query = $monitora->query('
-           SELECT DISTINCT(DESC_ALERTA), ORIGEM, METRICA_ATUAL, PLANO_ACAO, TIPO_ALERTA, RESPONSAVEL, ACIONAMENTO, INTERROMPER, DESC_SERVICO, INFO_ADICIONAL FROM monitoramento.tab_alerta_servico');
-        // echo $portal_ora->last_query();
-        return $query->result_array();
-    }
-
-    public function alerta_repetido($alerta,$origem) {
-        $portal_moni = $this->load->database('portalmoni',true);
-        $query = $portal_moni->query('
-            SELECT COUNT(ID) AS quantidade,id
-            FROM (
-                SELECT id, tipo, servico, servidor
-                FROM tbl_monitora_alertas
-                WHERE servico = "'.$alerta.'"
-                AND servidor="'.$origem.'"
-                AND data_fim > NOW() - INTERVAL "15" MINUTE ) AS TEMPO ');
-        return $query->result_array();
-    }
 
     // public function inserir_alerta($dados) {
     //     $portal_db = $this->load->database('default',true)

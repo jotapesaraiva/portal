@@ -91,6 +91,7 @@ class Indicadores_model extends CI_Model {
         }
         $portal_moni->group_by('Month(day_time)');
         $query = $portal_moni->get();
+        // echo $portal_moni->last_query();
         return $query->result_array();
     }
 

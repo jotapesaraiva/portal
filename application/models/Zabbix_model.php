@@ -67,18 +67,6 @@ class Zabbix_model extends CI_Model {
     // SET ticket='".$ticket."',posicionamento='".$posicionamento."'
     // WHERE designacao ='".$linha['designacao']."'";
 
-
-    public function update_num_mantis($num,$session_id) {
-        $portal = $this->load->database('default',true);
-        $portal->update('zbx_link_fora', $num, $session_id);
-        // echo $portal->last_query();
-        return $portal->affected_rows();
-    }
-
-
-
-
-
     public function duplicate_zabbix_server($dados) {
         $portal_db = $this->load->database('default',true);
         $portal_db->on_duplicate('zbx_server_fora', $dados);

@@ -3,6 +3,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mantis_model extends CI_Model {
 
+
+    public function abrir_mantis_teste($params,$procedore,$personalizado) {
+        $mantis = $this->load->database('monitora', true);
+        $sql = "DECLARE
+                    NUM_CASO NUMBER;
+                    BEGIN MANTIS.PKG_CASO_MANTIS.".$procedore."(
+                        IN_NM_USUARIO => '".$params['usuario']."',
+                        IN_NM_PROJETO => '".$params['projeto']."',
+                        IN_RESUMO => '".$params['servico']."',
+                        IN_DESCRICAO => '".$params['detalhe']."',
+                        IN_CATEGORIA => '".$params['categoria']."',
+                        ".$personalizado."
+                        OUT_NUMERO => NUM_CASO);
+                    DBMS_OUTPUT.PUT_LINE(NUM_CASO);
+                END;";
+        $stmt = oci_parse($mantis->conn_id,$sql);
+
+        oci_execute($stmt);
+
+        return $stmt;
+    }
+
     public function abrir_mantis($params) {
         $mantis = $this->load->database('monitora', true);
         $sql = "DECLARE
@@ -23,27 +45,6 @@ class Mantis_model extends CI_Model {
         return $stmt;
     }
 
-    public function abrir_mantis_link($params) {
-        $mantis = $this->load->database('monitora', true);
-        $sql = "DECLARE
-                    NUM_CASO NUMBER;
-                    BEGIN MANTIS.PKG_CASO_MANTIS.STP_RELT_CASO_DEMANDAS_LINK(
-                        IN_NM_USUARIO => '".$params['usuario']."',
-                        IN_NM_PROJETO => '".$params['projeto']."',
-                        IN_RESUMO => '".$params['servico']."',
-                        IN_DESCRICAO => '".$params['detalhe']."',
-                        IN_CATEGORIA => '".$params['categoria']."',
-                        IN_CF_TICKET => '".$params['ticket']."',
-                        IN_CF_INICIO_CHAMADO => '".$params['inicio_chamado']."',
-                        OUT_NUMERO => NUM_CASO);
-                    DBMS_OUTPUT.PUT_LINE(NUM_CASO);
-                END;";
-        $stmt = oci_parse($mantis->conn_id,$sql);
-
-        oci_execute($stmt);
-
-        return $stmt;
-    }
 
     public function select_num_mantis($params) {
         $mantis = $this->load->database('monitora', true);
@@ -65,6 +66,69 @@ class Mantis_model extends CI_Model {
                 }
             }
 
+    }
+
+    public function update_num_mantis($table,$num,$session_id) {
+        $portal = $this->load->database('default',true);
+        $portal->update($table, $num, $session_id);
+        // echo $portal->last_query();
+        return $portal->affected_rows();
+    }
+
+    public function monitora() {
+        $monitora = $this->load->database('monitora',true);
+        $query = $monitora->query('
+           SELECT DISTINCT(DESC_ALERTA), ORIGEM, METRICA_ATUAL, PLANO_ACAO, TIPO_ALERTA, RESPONSAVEL, ACIONAMENTO, INTERROMPER, DESC_SERVICO, INFO_ADICIONAL
+           FROM monitoramento.tab_alerta_servico');
+        // echo $portal_ora->last_query();
+        return $query->result_array();
+    }
+
+
+   public function alerta_repetido($alerta,$origem) {
+        $portal = $this->load->database('default',true);
+        $query = $portal->query('
+            SELECT COUNT(ID) AS quantidade,id FROM (
+            SELECT id, tipo_alerta, desc_alerta, origem
+            FROM mnt_alertas
+            WHERE desc_alerta="'.$alerta.'"
+            AND origem="'.$origem.'"
+            AND data_fim > NOW() - INTERVAL "15" MINUTE ) AS TEMPO ');
+        // echo $portal->last_query();
+        return $query->result_array();
+    }
+
+
+    // SELECT COUNT(ID) AS quantidade,id FROM (
+    //  SELECT id, tipo_alerta, desc_alerta, origem
+    //  FROM mnt_alertas WHERE desc_alerta="Falha na execução do Job J_STOP_ESTATISTICAS_TAXPAF." AND origem="CORP" AND data_fim > NOW() - INTERVAL "15" MINUTE ) AS TEMPO
+
+    public function duplicate_mnt_alerta($dados) {
+        $portal = $this->load->database('default',true);
+        $portal->on_duplicate('mnt_alertas', $dados);
+    }
+
+    public function insert_mnt_alerta($dados) {
+        $portal = $this->load->database('default',true);
+        $portal->insert('mnt_alertas', $dados);
+        // echo $portal->last_query();
+        return $portal->insert_id();
+    }
+
+    public function update_mnt_alerta($id, $dados) {
+        $portal = $this->load->database('default',true);
+        $portal->update('mnt_alertas', $dados, $id);
+        // echo $portal->last_query();
+        return $portal->affected_rows();
+    }
+
+    public function select_mnt_alerta() {
+        $portal = $this->load->database('default',true);
+        $portal->select('*');
+        $portal->from('mnt_alertas');
+        $portal->where('data_fim > NOW() - INTERVAL "10" MINUTE');
+        $query = $portal->get();
+        return $query->result_array();
     }
 
     public function equipes_mantis() {

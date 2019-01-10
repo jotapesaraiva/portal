@@ -11,7 +11,7 @@ class Enviar extends CI_Controller {
         $this->load->model('mantis_model');
     }
 
-    public function index() {
+    public function index($dados) {
         $script['footerinc'] = '';
         $script['script'] = '';
         $css['headerinc'] = '';
@@ -19,183 +19,167 @@ class Enviar extends CI_Controller {
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Dashboard</span>', '/welcome');
-        // $this->breadcrumbs->push('<span>Unidades</span>', '/localidades/unidades');
 
         $this->load->view('template/header', $css);
         $this->load->view('template/navbar', $session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('alertas/enviar');
+        $this->load->view('alertas/enviar', $dados);
 
         $this->load->view('template/footer', $script);
     }
 
     public function server($id) {
         $detalhes = $this->zabbix_model->select_zabbix_server($id);
-        $dados['alerta'] = "Alerta ".$detalhes->servico;
-        $dados['servidor'] = $detalhes->servidor;
-        $dados['plano'] = $detalhes->detalhe;
-        $dados['mode'] = $detalhes->ip;
-        $dados['inicio_chamado'] = date('d/m/Y H:i' ,strtotime($detalhes->data_alerta));
-        $dados['projetos'] = $this->select_option($this->mantis_model->equipes_mantis());
-        $dados['form'] = "server";
+        $dados['id'] = $detalhes->id;
+        $dados['alerta'] = "Alerta: ".$detalhes->servico;
+        $dados['detalhe'] = "Alerta: ".$detalhes->servico."
+        \nServidor: ".$detalhes->servidor."
+        \nIP:".$detalhes->ip."
+        \n".$detalhes->detalhe."
+        \nInicio do Chamado:".date('d/m/Y H:i' ,strtotime($detalhes->data_alerta));
+        $dados['projetos'] = $this->select_option(
+            $projetos = array(
+                        array('ID' => '1','NAME' => 'CGDA'),
+                        array('ID' => '2','NAME' => 'CGPS - Sustentação'),
+                        array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
+                        array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
+                        array('ID' => '5','NAME' => 'CGRE - Rede'),
+                        array('ID' => '6','NAME' => 'CGRE - Infra')
+            ));
+        $dados['form'] = "modelo_cprojeto";
 
-        $script['footerinc'] = '';
-        $script['script'] = '<script src="'.base_url().'assets/custom/menu/menu_mantis.js" type="text/javascript"></script>';
-
-        $css['headerinc'] = '';
-
-        $session['username'] = $this->session->userdata('username');
-
-        $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Dashboard</span>', '/welcome');
-
-        $this->load->view('template/header', $css);
-        $this->load->view('template/navbar', $session);
-        $this->load->view('template/sidebar');
-
-        $this->load->view('alertas/enviar', $dados);
-
-        $this->load->view('template/footer', $script);
+        $this->index($dados);
     }
-
 
     public function link($id) {
         $detalhes = $this->zabbix_model->select_zabbix_link($id);
         foreach ($detalhes as $detalhe) {
-            $dados['status'] = 'Problema de Link: '.$detalhe['ticket'].' - '.$detalhe['servidor'].' ';
-            $dados['plano'] = $detalhe['detalhe'];
-            $dados['mode'] = $detalhe['ip'];
-            $dados['log'] = $detalhe['posicionamento'];
+            $dados['id'] = $detalhe['id'];
+            $dados['alerta'] = 'Problema de Link: '.$detalhe['ticket'].' - '.$detalhe['servidor'].' ';
+
+            $dados['detalhe'] = "Link: ".$detalhe['servidor']."
+            \nIP: ".$detalhe['ip']."
+            \n".$detalhe['detalhe']."
+            \nUltimo Posicionamento: ".$detalhe['posicionamento'];
+
             $dados['ticket'] = $detalhe['ticket'];
             $dados['inicio_chamado'] = date('d/m/Y H:i' ,strtotime($detalhe['data_alerta']));
         }
-        $dados['projeto'] = "Chamado de Link";
-        $dados['categoria'] = "DADOS";
+        $dados['projeto'] = "7";
         $dados['form'] = "link";
 
-        $script['footerinc'] = '';
-        $script['script'] = '';
-        $css['headerinc'] = '';
-        $session['username'] = $this->session->userdata('username');
-
-        $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Dashboard</span>', '/welcome');
-
-        $this->load->view('template/header', $css);
-        $this->load->view('template/navbar', $session);
-        $this->load->view('template/sidebar');
-
-        $this->load->view('alertas/enviar', $dados);
-
-        $this->load->view('template/footer', $script);
+        $this->index($dados);
     }
 
     public function backup($id) {
         $detalhes = $this->backups_model->select_backup($id);
         foreach ($detalhes as $detalhe) {
-            $dados['mode'] = $detalhe['mode'];
-            $dados['status'] = "Backup ".$detalhe['status'] ." - ".$detalhe['specification'];
-            $dados['sessao'] = $detalhe['session_id'];
-            $dados['log'] = $detalhe['erro_backup'];
+            $dados['id'] = $detalhe['id'];
+            $dados['alerta'] = "Backup ".$detalhe['status'] ." - ".$detalhe['specification'];
+            $dados['detalhe'] = "Backup: ".$detalhe['specification']."
+Sessão: ".$detalhe['session_id']."
+Modo: ".$detalhe['mode']."
+\nEquipe Responsável: CGRE - Produção.
+Plano de Ação: Analisar os log da session ".$detalhe['session_id'].".
+Email: operadores@sefa.pa.gov.br
+Ramal: 4994/4984
+\nLogo de Erro: ".$detalhe['erro_backup'];
         }
-        // $output = shell_exec("/opt/omni/bin/omnirpt -report dl_info | grep -E 'DIARIO|SEMANA|MENSAL|ANUAL' | grep -v _ANUAL | grep -v EXTRA | awk {'print $3'} | sort");
-        // $dados['jobs'] = preg_split("#[\r\n]+#", $output);
-        $dados['plano'] = "Analisar os log da session ".  $dados['sessao']. " caso seja necessario abrir mantis para equipe responsavel e relacionar com esse mantis.";
-        $dados['projeto'] = "Ambiente de Backup";
-        $dados['categoria'] = "Relatório de Falha de Backup";
-        $dados['form'] = "backup";
+        $dados['projeto'] = "8";
+        $dados['form'] = "modelo_sprojeto";
 
-        $script['footerinc'] = '';
-        $script['script'] = '';
-        $css['headerinc'] = '';
-        $session['username'] = $this->session->userdata('username');
-
-        $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Dashboard</span>', '/welcome');
-
-        $this->load->view('template/header', $css);
-        $this->load->view('template/navbar', $session);
-        $this->load->view('template/sidebar');
-
-        $this->load->view('alertas/enviar', $dados);
-
-        $this->load->view('template/footer', $script);
-
+        $this->index($dados);
     }
 
     public function abrir_mantis() {
         $this->load->model('mantis_model');
         //puxar os valores do input e armazenar numa variavel
-        if($this->input->post('log') == null){
-            $detalhe = 'sem log';
-        } else {
-            $detalhe = $this->input->post('log');//descriçao do mantis
+        switch ($this->input->post('projeto')) {
+            case '1'://CGDA
+                $projeto   = 'Monitoramento';
+                $categoria = 'Acionamento';
+                $procedore = 'STP_RELT_PROJETO_CATEG_CGDA';
+                $parametros = '';
+                $table ='mnt_alerta';
+                break;
+            case '2'://CGPS - Sustentação
+                $projeto   = 'Sustentação';
+                $categoria = 'Alertas de Produção';
+                $procedore = 'STP_RELT_CASO_DEMANDAS_CGPS';
+                $parametros = 'IN_CF_TIPO_DEMAND => "Manutenção Corretiva",
+                               IN_CF_SOLICITANTE => "Equipe de Produção",';
+                $table ='mnt_alerta';
+                break;
+            case '3'://CGPS - Proj. Manu. Assistida
+                $projeto   = 'Projetos/Man.Assistida';
+                $categoria = 'Alertas de Produção';
+                $procedore = 'STP_RELT_CASO_DEMANDAS_CGPS';
+                $parametros = 'IN_CF_TIPO_DEMAND => "Manutenção Corretiva",
+                               IN_CF_SOLICITANTE => "Equipe de Produção",';
+                $table ='mnt_alerta';
+                break;
+            case '4'://CGPS - Gestão de Configuração
+                $projeto   = 'Infraestrutura';
+                $categoria = 'Análise';
+                $procedore = 'STP_RELT_CASO_DEMANDAS_CONFIG';
+                $parametros = 'IN_CF_ESCOPO => "Sustentação/Produção",
+                               IN_CF_NOAMBIENTE => "Produção",
+                               IN_CF_APLICACOES => "",';
+                $table ='mnt_alerta';
+                break;
+            case '5'://CGRE - Rede
+                $projeto   = 'Suporte a Servidores';
+                $categoria = 'Verificar servidor';
+                $procedore = 'STP_RELT_CASO_PROJETO_CATEG';
+                $parametros = '';
+                $table ='zbx_server_fora';
+                break;
+            case '6'://CGRE - Infra
+                $projeto   = 'Equipamentos de Rede';
+                $categoria = 'No-Break Servidores';
+                $procedore = '';
+                $parametros = '';
+                $table ='tbl_';
+                break;
+            case '7'://CGRE - Produção link
+                $projeto   = 'Chamado de Link';
+                $categoria = 'DADOS';
+                $procedore = 'STP_RELT_CASO_DEMANDAS_LINK';
+                $parametros = "IN_CF_TICKET => '".$this->input->post('ticket')."',
+                               IN_CF_INICIO_CHAMADO => '".strtotime(str_replace("/", "-",$this->input->post("inicio_chamado")))."',";
+                $table ='zbx_link_fora';
+                break;
+            case '8'://CGRE - Produção Backup
+                $projeto   = 'Ambiente de Backup';
+                $categoria = 'Relatório de Falha de Backup';
+                $procedore = 'STP_RELT_CASO_PROJETO_CATEG';
+                $parametros = '';
+                $table ='dp_backups';
+                break;
+            default://CGRE - Produção
+                $projeto   = 'Ambiente de Backup';//Chamado de Link
+                $categoria = 'Relatório de Falha de Backup';//DADOS
+                $procedore ='STP_RELT_CASO_PROJETO_CATEG';
+                $parametros = '';
+                $table ='tbl_';
+                break;
         }
-        $params = array(
-        'usuario' => $this->session->userdata('username'),//nome do usuario
-        'projeto' => $this->input->post('projeto'),//projeto mantis
-        'servico' => $this->input->post('alerta'),//resumo do mantis
-        'detalhe' => $detalhe,//descriçao do mantis
-        'categoria' => $this->input->post('categoria')//categoria do projeto mantis
-    );
-        //load da procedore passando as variaveis e armazenando em uma variavel
-        $this->mantis_model->abrir_mantis($params);
-        $resultado = $this->mantis_model->select_num_mantis($params);
-        //atualizo a tabela do backup ou zabbix com o numero do mantis
-        $this->backups_model->update_num_mantis(array('mantis' => $resultado), array('session_id' => $this->input->post('sessao')));
-        //retorno para dashboard
-        redirect('welcome');
-    }
 
-    public function abrir_mantis_link() {
-        $this->load->model('mantis_model');
-        //puxar os valores do input e armazenar numa variavel
-        if($this->input->post('log') == null){
-            $detalhe = 'sem log';
-        } else {
-            $detalhe = $this->input->post('log');//descriçao do mantis
-        }
         $params = array(
-        'usuario' => $this->session->userdata('username'),//nome do usuario
-        'projeto' => $this->input->post('projeto'),//projeto mantis
-        'servico' => $this->input->post('alerta'),//resumo do mantis
-        'detalhe' => $detalhe,//descriçao do mantis
-        'categoria' => $this->input->post('categoria'),//categoria do projeto mantis
-        'ticket' => $this->input->post('ticket'), //ticket campo personalizado
-        'inicio_chamado' => strtotime(str_replace('/', '-',$this->input->post('inicio_chamado'))) //inicio chamado campo personalizado
-    );
+            'usuario'   => $this->session->userdata('username'),//nome do usuario
+            'projeto'   => $projeto,//projeto mantis
+            'categoria' => $categoria,//categoria do projeto mantis
+            'servico'   => $this->input->post('alerta'),//resumo do mantis
+            'detalhe'   => $this->input->post('detalhe')//descriçao do mantis
+        );
+        // echo $parametros;
         // vd($params);
         //load da procedore passando as variaveis e armazenando em uma variavel
-        $this->mantis_model->abrir_mantis_link($params);
+        $this->mantis_model->abrir_mantis_teste($params,$procedore,$parametros);
         $resultado = $this->mantis_model->select_num_mantis($params);
         //atualizo a tabela do backup ou zabbix com o numero do mantis
-        $this->zabbix_model->update_num_mantis(array('mantis' => $resultado), array('ip' => $this->input->post('mode')));
-        //retorno para dashboard
-        redirect('welcome');
-    }
-
-    public function abrir_mantis_server() {
-        $this->load->model('mantis_model');
-        //puxar os valores do input e armazenar numa variavel
-        if($this->input->post('plano') == null){
-            $detalhe = 'sem plano de ação.';
-        } else {
-            $detalhe = $this->input->post('plano');//descriçao do mantis
-        }
-        $params = array(
-        'usuario' => $this->session->userdata('username'),//nome do usuario
-        'projeto' => $this->input->post('projeto'),//projeto mantis
-        'servico' => $this->input->post('alerta')." - Servidor".$this->input->post('servidor'),//resumo do mantis
-        'detalhe' => $detalhe,//descriçao do mantis
-        'categoria' => $this->input->post('categoria')//categoria do projeto mantis
-    );
-        // vd($params);
-        //load da procedore passando as variaveis e armazenando em uma variavel
-        $this->mantis_model->abrir_mantis_server($params);
-        $resultado = $this->mantis_model->select_num_mantis($params);
-        //atualizo a tabela do backup ou zabbix com o numero do mantis
-        // $this->zabbix_model->update_num_mantis(array('mantis' => $resultado), array('ip' => $this->input->post('mode')));
+        $this->mantis_model->update_num_mantis($table,array('mantis' => $resultado), array('id' => $this->input->post('id')));
         //retorno para dashboard
         redirect('welcome');
     }
@@ -207,6 +191,8 @@ class Enviar extends CI_Controller {
         }
         return $html;
     }
+
+//###########################################################TESTE######################################################
 
     public function projeto($id) {
         $projetos = $this->mantis_model->projetos_mantis($id);

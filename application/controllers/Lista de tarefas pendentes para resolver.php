@@ -9,13 +9,13 @@ Lista de tarefas pendentes para resolver
 
 //FIXME: OK Endereço no menu link grafico consumo não tem nada --- retirar do perfil
 
-//FIXME: Corrigir erros na pagina banco de dados>configuração
+//FIXME: OK Corrigir erros na pagina banco de dados>configuração
 
-// FIXME: Dashboard link não está atualizando o numero dos tickets
+// FIXME: OK Dashboard link não está atualizando o numero dos tickets
 
 // FIXME: Dashboard link na coluna tempo quando o link cai aparece negativo e errado.
 
-// FIXME: na pagina backup >grafico>quantidade está apresentando erro de variavel indefinida mes abortados.
+// FIXME: OK na pagina backup >grafico>quantidade está apresentando erro de variavel indefinida mes abortados.
 
 //FIXME: OK desativar profiler das paginas usuario>perfil
 
@@ -23,7 +23,7 @@ Lista de tarefas pendentes para resolver
 
 //TODO: OK Criar menu para download dos graficos.
 
-//TODO: Adicionar os icones nos menus do siderbar.
+//TODO: OK Adicionar os icones nos menus do siderbar.
 
 //TODO: Criar tabela dos alertas do monitora no banco do portal
 
@@ -39,7 +39,11 @@ Lista de tarefas pendentes para resolver
 
 //TODO: Implementar o autocomplete dos campos quando for cadastrar um novo usuario.
 
-//TODO: implementar md5 no password.
+//TODO: OK implementar md5 no password.
+
+//TODO: Implementar opção nos graficos o menu de mes e ano.
+
+//TODO: Implementação Abertura de mantis para os alertas.
 
 //NOTE: Verificar se há a necessidade de ter
 

@@ -20,6 +20,13 @@ class Quantidade extends CI_Controller {
         }
 
         $abort = $this->indicadores_model->quantidade_status('abortados',$nano);
+        if($abort == null){
+            $abortados = array(
+                'Mes' => 1,
+                'abortados' => 0
+            );
+            array_push($abort,$abortados);
+        }
         $array_abort = array();
         foreach ($abort as $key => $value) {
                 $array_abort['Mes'][$key] = $abort[$key]['Mes'];

@@ -55,8 +55,11 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'REQUEST_URI';
-
+// $config['uri_protocol']	= 'REQUEST_URI';
+/* Set to 'AUTO' */
+$config['uri_protocol'] = 'AUTO';
+/* Anything But 'AUTO' */
+$config['uri_protocol'] = isset($_SERVER['REQUEST_URI']) ? 'PATH_INFO' : 'CLI';
 /*
 |--------------------------------------------------------------------------
 | URL suffix
@@ -237,7 +240,8 @@ $config['log_threshold'] = array(1,2);
 | application/logs/ directory. Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = FCPATH . '/application/logs/';
+// $config['log_path'] = FCPATH . '/application/logs/';
+$config['log_path'] = FCPATH . 'application/logs/';
 
 /*
 |--------------------------------------------------------------------------
