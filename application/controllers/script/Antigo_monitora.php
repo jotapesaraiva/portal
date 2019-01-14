@@ -7,14 +7,14 @@ class Antigo_monitora extends CI_Controller {
         parent::__construct();
         //this controller can only be called from the command line
         // if(!$this->input->is_cli_request()) show_error('Direct access is not allowed');
+        $this->load->model('modulos_model');
+        $this->load->model('monitora_model');
 
         // is_cli() OR show_404(); // If cronjob !
         //Do your magic here
     }
 
     public function index() {
-        $this->load->model('mantis_model');
-        $this->load->model('modulos_model');
 
         $modulo = $this->modulos_model->site_modulo('monitora');
         // vd($modulo[0]['status']);
@@ -22,7 +22,7 @@ class Antigo_monitora extends CI_Controller {
         if($modulo[0]['status'] == 1) {
             $result ="";
             $retorno = array();
-            $monitoras = $this->mantis_model->monitora();
+            $monitoras = $this->monitora_model->monitora();
             // vd($monitoras);
             foreach ($monitoras as $monitora) {
                 $desc_alerta    = $monitora['DESC_ALERTA'];
@@ -55,10 +55,10 @@ class Antigo_monitora extends CI_Controller {
                 echo $desc_alerta."<br>";
                 echo $origem."<br>";
 
-                $consulta = $this->mantis_model->alerta_repetido($monitora['DESC_ALERTA'],$monitora['ORIGEM']);
+                $consulta = $this->monitora_model->alerta_repetido($monitora['DESC_ALERTA'],$monitora['ORIGEM']);
                 // echo $consulta[0]['quantidade'];
                 if($consulta[0]['quantidade'] == 0){
-                  $this->mantis_model->insert_mnt_alerta($result);
+                  $this->monitora_model->insert_mnt_alerta($result);
                   echo "Insert <br>";
                   echo "  ";
                 //   pr($result);
@@ -69,7 +69,7 @@ class Antigo_monitora extends CI_Controller {
                     'metrica_atual' => $metrica_atual,
                     'info_adicional' => $info_adicional
                   );
-                  $this->mantis_model->update_mnt_alerta(array('id' => $consulta[0]['id']),$where);
+                  $this->monitora_model->update_mnt_alerta(array('id' => $consulta[0]['id']),$where);
                   echo "Update <br>";
                   echo "  ";
                 //   pr($result);

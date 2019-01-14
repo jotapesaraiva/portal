@@ -34,22 +34,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
                       </div>
                    </div>
                    <div class="portlet-body">
-                    <form id="grafico" name="grafico" method="post" action="<?php $_SERVER['PHP_SELF']?>">
-                        <div class="form-group">
-                            <div class="col-md-offset-5 col-md-2">
-                                <label class="control-label"><b>Ano :</b></label>
-                                <select class="selectpicker form-control input-small" name="ano" onchange='this.form.submit()'>
-                                    <option value="<?php print $nano;?>" ><?php print $nano;?></option>
-                                    <?php
-                                        for($a = 2012; $a <= date('Y'); $a++ ) {
-                                            echo "<option value='".$a."' >".$a."</option>";
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <noscript><input type="submit" value="Submit"></noscript>
-                            </div>
+                    <div class="row">
+                      <form id="graph" name="graph" method="post" action="<?php $_SERVER['PHP_SELF']?>">
+                          <div class="form-group">
+                              <div class="col-md-offset-5 col-md-2">
+                                  <label class="control-label"><b>Ano :</b></label>
+                                  <select class="selectpicker form-control input-small" name="ano" onchange='this.form.submit()'>
+                                      <option value="<?php print $nano;?>" ><?php print $nano;?></option>
+                                      <?php
+                                          for($a = 2012; $a <= date('Y'); $a++ ) {
+                                              echo "<option value='".$a."' >".$a."</option>";
+                                          }
+                                      ?>
+                                  </select>
+                              </div>
+                              <noscript><input type="submit" value="Submit"></noscript>
+                          </div>
+                      </form>
+                    </div>
+                    <div class="row">
                       <div id="grafico"></div>
+                    </div>
               </div>
         </div>
     </div>

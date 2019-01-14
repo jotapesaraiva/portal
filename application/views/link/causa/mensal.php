@@ -31,40 +31,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       </div>
                    </div>
                    <div class="portlet-body">
-                    <form id="grafico" name="grafico" method="post" action="<?php $_SERVER['PHP_SELF']?>">
-                        <div class="form-group">
-                            <div class="col-md-offset-4 col-md-2">
-                                  <label class="control-label"><b>Mês :</b></label>
-                                  <select class="selectpicker form-control input-small" name="mes" onchange='this.form.submit()'>
-                                      <option value="<?php echo $nmes;?>" ><?php echo $mes;?></option>
-                                      <option value="01" >Janeiro</option>
-                                      <option value="02" >Fevereiro</option>
-                                      <option value="03" >Março</option>
-                                      <option value="04" >Abril</option>
-                                      <option value="05" >Maio</option>
-                                      <option value="06" >Junho</option>
-                                      <option value="07" >Julho</option>
-                                      <option value="08" >Agosto</option>
-                                      <option value="09" >Setembro</option>
-                                      <option value="10" >Outubro</option>
-                                      <option value="11" >Novembro</option>
-                                      <option value="12" >Dezembro</option>
-                                  </select>
-                              </div>
-                              <div class="col-md-2">
-                                  <label class="control-label"><b>Ano :</b></label>
-                                  <select class="selectpicker form-control input-small" name="ano" onchange='this.form.submit()'>
-                                      <option value="<?php print $nano;?>" ><?php print $nano;?></option>
-                                      <?php
-                                          for($a = 2012; $a <= date('Y'); $a++ ) {
-                                              echo "<option value='".$a."' >".$a."</option>";
-                                          }
-                                      ?>
-                                  </select>
-                              </div>
-                            <noscript><input type="submit" value="Submit"></noscript>
-                            </div>
+                    <div class="row">
+                      <form id="graph" name="graph" method="post" action="<?php $_SERVER['PHP_SELF']?>">
+                          <div class="form-group">
+                              <div class="col-md-offset-4 col-md-2">
+                                    <label class="control-label"><b>Mês :</b></label>
+                                    <select class="selectpicker form-control input-small" name="mes" onchange='this.form.submit()'>
+                                        <option value="<?php echo $nmes;?>" ><?php echo $mes;?></option>
+                                        <option value="01" >Janeiro</option>
+                                        <option value="02" >Fevereiro</option>
+                                        <option value="03" >Março</option>
+                                        <option value="04" >Abril</option>
+                                        <option value="05" >Maio</option>
+                                        <option value="06" >Junho</option>
+                                        <option value="07" >Julho</option>
+                                        <option value="08" >Agosto</option>
+                                        <option value="09" >Setembro</option>
+                                        <option value="10" >Outubro</option>
+                                        <option value="11" >Novembro</option>
+                                        <option value="12" >Dezembro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label"><b>Ano :</b></label>
+                                    <select class="selectpicker form-control input-small" name="ano" onchange='this.form.submit()'>
+                                        <option value="<?php print $nano;?>" ><?php print $nano;?></option>
+                                        <?php
+                                            for($a = 2012; $a <= date('Y'); $a++ ) {
+                                                echo "<option value='".$a."' >".$a."</option>";
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                              <noscript><input type="submit" value="Submit"></noscript>
+                          </div>
+                      </form>
+                    </div>
+                    <div class="row">
                       <div id="grafico"></div>
+                    </div>
               </div>
         </div>
     </div>

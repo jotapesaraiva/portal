@@ -63,7 +63,9 @@ class Log extends CI_Controller {
         $data['logs'] = $logs;
         $data['files'] =  $files;
         $data['currentFile'] = basename($currentFile);
-        return $this->load->view('sistema/log', $data);
+        vd($currentFile);
+        // return $this->load->view('sistema/log', $data);
+        return $data;
     }
 
 

@@ -10,6 +10,7 @@ class Server extends CI_Controller {
         include APPPATH . 'third_party/zabbix/ZabbixApi.class.php';
         include APPPATH . 'third_party/zabbix/date_function.php';
         $this->load->model('zabbix_model');
+        $this->load->model('mantis_model');
     }
 
     public function index() {
@@ -139,7 +140,7 @@ class Server extends CI_Controller {
                                   <i class="fa fa-plus"></i>
                               </a>';
               } else { //se não possui mantis
-                  $status = $this->backups_model->mantis($server['mantis']);
+                  $status = $this->mantis_model->mantis($server['mantis']);
                   $array_color = array(50 => "primary", 10 => "danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
                   //10-novo-vermelho  20-retorno-vermelho escuro  30-impedido-roxo  40-autorizado-amarelo  50-atribuido-azul  80-realizado-laranja
                   $flag = '';

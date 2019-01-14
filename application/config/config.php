@@ -23,10 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-$config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
-$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-
+// $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+// $config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
+// $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$config['base_url'] = 'https://producaoh.sefa.pa.gov.br/portal/';
 
 /*
 |--------------------------------------------------------------------------
@@ -55,11 +55,11 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-// $config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol']	= 'REQUEST_URI';
 /* Set to 'AUTO' */
-$config['uri_protocol'] = 'AUTO';
-/* Anything But 'AUTO' */
-$config['uri_protocol'] = isset($_SERVER['REQUEST_URI']) ? 'PATH_INFO' : 'CLI';
+// $config['uri_protocol'] = 'AUTO';
+// /* Anything But 'AUTO' */
+// $config['uri_protocol'] = isset($_SERVER['REQUEST_URI']) ? 'PATH_INFO' : 'CLI';
 /*
 |--------------------------------------------------------------------------
 | URL suffix

@@ -31,7 +31,10 @@ class Zabbix_model extends CI_Model {
 
     public function select_zabbix_grc() {
         $portal_db = $this->load->database('default',true);
-        $query = $portal_db->get('zbx_link_fora');
+        $portal_db->select('*');
+        $portal_db->from('zbx_link_fora');
+        $portal_db->order_by('data_alerta', 'DESC');
+        $query = $portal_db->get();
         return $query->result_array();
     }
 
@@ -80,7 +83,10 @@ class Zabbix_model extends CI_Model {
 
     public function list_zabbix_server() {
         $portal_db = $this->load->database('default',true);
-        $query = $portal_db->get('zbx_server_fora');
+        $portal_db->select('*');
+        $portal_db->from('zbx_server_fora');
+        $portal_db->order_by('data_alerta', 'DESC');
+        $query = $portal_db->get();
         return $query->result_array();
     }
     public function select_zabbix_server($id) {

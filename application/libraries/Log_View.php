@@ -89,7 +89,7 @@ class Log_View {
          * @params logs. The raw logs as read from the log file
          * @return array. An [[], [], [] ...] where each element is a processed log line
          * */
-        private function processLogs($logs) {
+        public function processLogs($logs) {
             if(is_null($logs)) {
                 return null;
             }
@@ -206,7 +206,7 @@ class Log_View {
          * Download a particular file to local disk
          * @param $fileName
          * */
-        private function downloadFile($fileName) {
+        public function downloadFile($fileName) {
             $file = self::LOG_FOLDER_PREFIX . "/" . $fileName;
             if (file_exists($file)) {
                 header('Content-Description: File Transfer');

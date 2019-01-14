@@ -33,32 +33,6 @@ class Backups_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function mantis($mantis) {
-        $portal_m = $this->load->database('mantis',true);
-        $query = $portal_m->query('
-            SELECT status
-              FROM mantis_bug_tb b
-             WHERE b.id = '.$mantis);
-        // echo $portal_ora->last_query();
-        return $query->row();
-    }
-  // SELECT s.status_description
-  //   FROM mantis.mantis_bug_tb b
-  //   JOIN mantis.mantis_bug_status_tb s
-  //     ON b.status = s.status
-  //  WHERE b.id = ".$mantis.
-
-    // public function inserir_alerta($dados) {
-    //     $portal_db = $this->load->database('default',true)
-    //     $portal_db->insert('mn_alerta', $dados);
-    //     return $portal_db->insert_id();
-    // }
-
-    // public function update_alerta($id,$where) {
-    //     $portal_db = $this->load->database('default',true);
-    //     $portal_db->update('mn_alerta', $id, $where);
-    //     return $portal_db->affected_rows();
-    // }
 }
 /* End of file Backups_model.php */
 /* Location: ./application/models/Backups_model.php */

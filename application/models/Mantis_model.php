@@ -3,6 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mantis_model extends CI_Model {
 
+    public function mantis($mantis) {
+        $portal_m = $this->load->database('mantis',true);
+        $query = $portal_m->query('
+            SELECT status
+              FROM mantis_bug_tb b
+             WHERE b.id = '.$mantis);
+        // echo $portal_ora->last_query();
+        return $query->row();
+    }
 
     public function abrir_mantis_teste($params,$procedore,$personalizado) {
         $mantis = $this->load->database('monitora', true);
@@ -74,63 +83,6 @@ class Mantis_model extends CI_Model {
         // echo $portal->last_query();
         return $portal->affected_rows();
     }
-
-    public function monitora() {
-        $monitora = $this->load->database('monitora',true);
-        $query = $monitora->query('
-           SELECT DISTINCT(DESC_ALERTA), ORIGEM, METRICA_ATUAL, PLANO_ACAO, TIPO_ALERTA, RESPONSAVEL, ACIONAMENTO, INTERROMPER, DESC_SERVICO, INFO_ADICIONAL
-           FROM monitoramento.tab_alerta_servico');
-        // echo $portal_ora->last_query();
-        return $query->result_array();
-    }
-
-
-   public function alerta_repetido($alerta,$origem) {
-        $portal = $this->load->database('default',true);
-        $query = $portal->query('
-            SELECT COUNT(ID) AS quantidade,id FROM (
-            SELECT id, tipo_alerta, desc_alerta, origem
-            FROM mnt_alertas
-            WHERE desc_alerta="'.$alerta.'"
-            AND origem="'.$origem.'"
-            AND data_fim > NOW() - INTERVAL "15" MINUTE ) AS TEMPO ');
-        // echo $portal->last_query();
-        return $query->result_array();
-    }
-
-
-    // SELECT COUNT(ID) AS quantidade,id FROM (
-    //  SELECT id, tipo_alerta, desc_alerta, origem
-    //  FROM mnt_alertas WHERE desc_alerta="Falha na execução do Job J_STOP_ESTATISTICAS_TAXPAF." AND origem="CORP" AND data_fim > NOW() - INTERVAL "15" MINUTE ) AS TEMPO
-
-    public function duplicate_mnt_alerta($dados) {
-        $portal = $this->load->database('default',true);
-        $portal->on_duplicate('mnt_alertas', $dados);
-    }
-
-    public function insert_mnt_alerta($dados) {
-        $portal = $this->load->database('default',true);
-        $portal->insert('mnt_alertas', $dados);
-        // echo $portal->last_query();
-        return $portal->insert_id();
-    }
-
-    public function update_mnt_alerta($id, $dados) {
-        $portal = $this->load->database('default',true);
-        $portal->update('mnt_alertas', $dados, $id);
-        // echo $portal->last_query();
-        return $portal->affected_rows();
-    }
-
-    public function select_mnt_alerta() {
-        $portal = $this->load->database('default',true);
-        $portal->select('*');
-        $portal->from('mnt_alertas');
-        $portal->where('data_fim > NOW() - INTERVAL "10" MINUTE');
-        $query = $portal->get();
-        return $query->result_array();
-    }
-
     public function equipes_mantis() {
         // $array = array();
         $mantis = $this->load->database('monitora', true);
@@ -154,8 +106,7 @@ class Mantis_model extends CI_Model {
         $mantis = $this->load->database('monitora', true);
         $sql = "SELECT A.ID, A.NAME
                 FROM mantis.mantis_project_tb a
-                LEFT JOIN mantis.mantis_project_hierarchy_tb b
-                ON a.id = b.child_id
+                LEFT JOIN mantis.mantis_project_hierarchy_tb b ON a.id = b.child_id
                 WHERE A.ENABLED = 1
                 start with a.id = ".$id."
                 connect by b.parent_id = prior a.id";
@@ -173,6 +124,49 @@ class Mantis_model extends CI_Model {
         oci_fetch_all($stmt,$catego,null,null,OCI_FETCHSTATEMENT_BY_ROW);
         return $catego;
     }
+
+    public function widget_mantis($flag) {
+        $sql = "";
+        $mantis = $this->load->database('mantis', true);
+        if($flag == 'quantidade'){
+           $sql .= "SELECT COUNT(MBT.ID) as Qtd_Mantis ";
+        } else {
+          $sql .=  "SELECT MBT.id, MUT.USERNAME, MUT2.USERNAME, MBT.summary, MBT.date_submitted, MBT.status, round(SYSDATE - MBT.LAST_UPDATED) as ultima_atualizacao ";
+        }
+       $sql .= "FROM mantis_bug_tb MBT ";
+       if($flag == 'quantidade'){
+            $sql .= "JOIN mantis_bug_status_tb MBS ON MBT.status = MBS.STATUS ";
+       } else {
+            $sql .= "LEFT JOIN mantis_user_tb mut on MBT.reporter_id = mut.id
+            LEFT JOIN mantis_user_tb mut2 on MBT.handler_id = mut2.id ";
+       }
+         $sql .= "
+         where MBT.PROJECT_ID in (SELECT A.ID FROM mantis_project_tb a
+            LEFT JOIN mantis_project_hierarchy_tb b ON a.id = b.child_id
+            WHERE A.ENABLED = 1
+            start with a.id = 4041
+            connect by b.parent_id = prior a.id) ";
+        if ($flag == 'quantidade'){
+            $sql .= "AND MBT.status = 10 ";
+        } else {
+            $sql .=  "AND MBT.status not in (60, 90, 80) ";
+        }
+        $sql .= "AND extract(month from MBT.DATE_SUBMITTED) = extract(month from sysdate)";
+        // vd($sql);
+        $stmt = oci_parse($mantis->conn_id,$sql);
+        oci_execute($stmt, OCI_NO_AUTO_COMMIT);
+        oci_fetch_all($stmt,$catego,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+        return $catego;
+        // $stmt = oci_parse($mantis->conn_id,$sql);
+        //     oci_execute($stmt, OCI_NO_AUTO_COMMIT);
+        //     while ($row = oci_fetch_array($stmt, OCI_ASSOC+OCI_RETURN_NULLS)) {
+        //         foreach ($row as $item) {
+        //             // echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+        //             return $item;
+        //         }
+        //     }
+    }
+
 
 //######################################################Procedure para adicionar anotação no mantis###########################################################
     // BEGIN

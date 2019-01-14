@@ -33,7 +33,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       </div>
                    </div>
                    <div class="portlet-body">
-                    <form id="grafico" name="grafico" method="post" action="<?php $_SERVER['PHP_SELF']?>">
+                    <div class="row">
+                    <form id="graph" name="graph" method="post" action="<?php $_SERVER['PHP_SELF']?>">
                         <div class="form-group">
                             <div class="col-md-offset-4 col-md-2">
                                   <label class="control-label"><b>Mês :</b></label>
@@ -67,9 +68,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <noscript><input type="submit" value="Submit"></noscript>
                             </div>
                         </form>
-                        <div class="form-group">
+                    </div>
+                    <div class="row">
                           <div id="grafico"></div>
-                        </div>
+                    </div>
               </div>
         </div>
     </div>

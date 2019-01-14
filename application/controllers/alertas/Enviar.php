@@ -9,6 +9,7 @@ class Enviar extends CI_Controller {
         $this->load->model('zabbix_model');
         $this->load->model('backups_model');
         $this->load->model('mantis_model');
+        $this->load->model('monitora_model');
     }
 
     public function index($dados) {
@@ -27,6 +28,36 @@ class Enviar extends CI_Controller {
         $this->load->view('alertas/enviar', $dados);
 
         $this->load->view('template/footer', $script);
+    }
+
+    public function monitora($id) {
+        $alertas = $this->monitora_model->select_mnt($id);
+        foreach ($alertas as $alerta) {
+            $dados['id'] = $alerta['id'];
+            $dados['alerta'] = $alerta['desc_alerta'].' ';
+
+            $dados['detalhe'] = $alerta['desc_alerta']."
+                                \nOrigem: ".$alerta['origem']."
+                                \nMetrica: ".$alerta['metrica_atual']."
+                                \nPlano de ação: ".$alerta['plano_acao']."
+                                \nResponsavel: ".$alerta['responsavel']."
+                                \nAcionamento: ".$alerta['acionamento']."
+                                \nPode Interromper: ".$alerta['interromper']."
+                                \nDescrição de Serviço: ".$alerta['desc_servico']."
+                                \nInformação Adicional:".$alerta['info_adicional'];
+        }
+        $dados['projetos'] = $this->select_option(
+            $projetos = array(
+                        array('ID' => '1','NAME' => 'CGDA'),
+                        array('ID' => '2','NAME' => 'CGPS - Sustentação'),
+                        array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
+                        array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
+                        array('ID' => '5','NAME' => 'CGRE - Rede'),
+                        array('ID' => '6','NAME' => 'CGRE - Infra')
+            ));
+        $dados['form'] = "modelo_cprojeto";
+
+        $this->index($dados);
     }
 
     public function server($id) {
@@ -117,7 +148,7 @@ Ramal: 4994/4984
                 $procedore = 'STP_RELT_CASO_DEMANDAS_CGPS';
                 $parametros = 'IN_CF_TIPO_DEMAND => "Manutenção Corretiva",
                                IN_CF_SOLICITANTE => "Equipe de Produção",';
-                $table ='mnt_alerta';
+                $table ='mnt_alertas';
                 break;
             case '4'://CGPS - Gestão de Configuração
                 $projeto   = 'Infraestrutura';
@@ -126,7 +157,7 @@ Ramal: 4994/4984
                 $parametros = 'IN_CF_ESCOPO => "Sustentação/Produção",
                                IN_CF_NOAMBIENTE => "Produção",
                                IN_CF_APLICACOES => "",';
-                $table ='mnt_alerta';
+                $table ='mnt_alertas';
                 break;
             case '5'://CGRE - Rede
                 $projeto   = 'Suporte a Servidores';

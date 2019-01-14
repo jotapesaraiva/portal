@@ -181,7 +181,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div class="row">
 
-            <div class="col-md-6 col-sm-6"> <!-- Tabela Zabbix -->
+<!--             <div class="col-md-6 col-sm-6">
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -201,9 +201,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div id="zabbix_down_content" class="table-scrollable table-scrollable-borderless"></div>
                     </div>
                 </div>
-            </div><!-- FIM da Tabela Zabbix -->
+            </div> -->
 
-            <div class="col-md-6 col-sm-6"> <!-- Tabela Alertas mantis -->
+<!--             <div class="col-md-6 col-sm-6">
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -223,9 +223,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div id="mantis_down_content" class="table-scrollable table-scrollable-borderless"></div>
                     </div>
                 </div>
-            </div><!-- FIM da Tabela Alertas mantis -->
-
-        </div>
+            </div>
+ -->
+<!--         </div>
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <div class="portlet light tasks-widget bordered">
@@ -245,7 +245,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     <!-- <pre>
     </pre> -->
     </div>
