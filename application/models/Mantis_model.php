@@ -102,6 +102,27 @@ class Mantis_model extends CI_Model {
         return $res;
     }
 
+    public function mantis_projetos() {
+        $mantis = $this->load->database('mantis', true);
+        $sql = "select b.id numero_chamado, b.summary resumo,
+                case when b.project_id = 4006 then 'Monitoramento'
+                        when b.project_id = 1502 then 'Sustentação'
+                        when b.project_id = 4121 then 'Projetos/Man.Assistida'
+                        when b.project_id = 4041 then 'CGRE - Produção'
+                        when b.project_id = 3922 then 'Suporte a Servidores'
+
+                   end projeto
+                from mantis.mantis_bug_tb b
+                where b.status not in (60,80,90)
+                and b.project_id in (4006,1502,4121,4041,3922)
+
+                ORDER BY numero_chamado DESC";
+        $stmt = oci_parse($mantis->conn_id,$sql);
+        oci_execute($stmt, OCI_NO_AUTO_COMMIT);
+        oci_fetch_all($stmt,$equip,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+        return $equip;
+    }
+
     public function projetos_mantis($id) {
         $mantis = $this->load->database('monitora', true);
         $sql = "SELECT A.ID, A.NAME
@@ -131,14 +152,15 @@ class Mantis_model extends CI_Model {
         if($flag == 'quantidade'){
            $sql .= "SELECT COUNT(MBT.ID) as Qtd_Mantis ";
         } else {
-          $sql .=  "SELECT MBT.id, MUT.USERNAME, MUT2.USERNAME, MBT.summary, MBT.date_submitted, MBT.status, round(SYSDATE - MBT.LAST_UPDATED) as ultima_atualizacao ";
+          $sql .=  "SELECT MBT.id, MUT.USERNAME as
+          RELATOR, MUT2.USERNAME as ATRIBUIDO, MBT.summary, MBT.date_submitted, MBT.status, round(SYSDATE - MBT.LAST_UPDATED) as ultima_atualizacao ";
         }
        $sql .= "FROM mantis_bug_tb MBT ";
        if($flag == 'quantidade'){
             $sql .= "JOIN mantis_bug_status_tb MBS ON MBT.status = MBS.STATUS ";
        } else {
-            $sql .= "LEFT JOIN mantis_user_tb mut on MBT.reporter_id = mut.id
-            LEFT JOIN mantis_user_tb mut2 on MBT.handler_id = mut2.id ";
+            $sql .= "LEFT JOIN mantis_user_tb MUT on MBT.reporter_id = MUT.id
+            LEFT JOIN mantis_user_tb MUT2 on MBT.handler_id = MUT2.id ";
        }
          $sql .= "
          where MBT.PROJECT_ID in (SELECT A.ID FROM mantis_project_tb a
@@ -152,10 +174,14 @@ class Mantis_model extends CI_Model {
             $sql .=  "AND MBT.status not in (60, 90, 80) ";
         }
         $sql .= "AND extract(month from MBT.DATE_SUBMITTED) = extract(month from sysdate)";
+        if ($flag == 'chamados'){
+            $sql .= " ORDER BY MBT.date_submitted ASC";
+        }
         // vd($sql);
         $stmt = oci_parse($mantis->conn_id,$sql);
         oci_execute($stmt, OCI_NO_AUTO_COMMIT);
-        oci_fetch_all($stmt,$catego,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+        oci_fetch_all($stmt,$catego,null,null,OCI_FETCHSTATEMENT_BY_ROW + OCI_NUM);
+        // oci_fetch_all($stmt,$catego);
         return $catego;
         // $stmt = oci_parse($mantis->conn_id,$sql);
         //     oci_execute($stmt, OCI_NO_AUTO_COMMIT);

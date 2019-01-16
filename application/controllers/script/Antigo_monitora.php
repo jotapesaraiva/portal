@@ -9,6 +9,7 @@ class Antigo_monitora extends CI_Controller {
         // if(!$this->input->is_cli_request()) show_error('Direct access is not allowed');
         $this->load->model('modulos_model');
         $this->load->model('monitora_model');
+        $this->load->model('mantis_model');
 
         // is_cli() OR show_404(); // If cronjob !
         //Do your magic here
@@ -63,6 +64,13 @@ class Antigo_monitora extends CI_Controller {
                   echo "  ";
                 //   pr($result);
                 } else {
+                  $projetos = $this->mantis_model->mantis_projetos();
+                  foreach ($projetos as $projeto) {
+                    if($projeto['resumo'] == $desc_alerta){
+                        //update tabela com numeo mantis
+                        //$this->monitora_model->update_num_mantis($projeto['numero_chamado']);
+                    }
+                  }
                   $where = array(
                     'desc_alerta'    => $desc_alerta,
                     'data_fim' => date("Y-m-d H:i:s"),

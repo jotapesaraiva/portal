@@ -10,12 +10,17 @@ class Chamados_mantis extends CI_Controller {
     }
 
     public function index() {
-        $quantidade = $this->mantis_model->widget_mantis('outro');
-        vd($quantidade);
+        $quantidade = $this->mantis_model->widget_mantis('quantidade');
+        echo json_encode($quantidade);
     }
 
     public function mantis_producao() {
-        # code...
+        $chamados = $this->mantis_model->widget_mantis('chamados');
+        // vd($chamados);
+        // foreach ($chamados as $chamado) {
+
+        // }
+        echo '{ "data":'.json_encode($chamados).'}';
     }
 
 }

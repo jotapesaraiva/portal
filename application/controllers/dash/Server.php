@@ -39,7 +39,7 @@ class Server extends CI_Controller {
               // 'selectGroups'=> 'extend',
           'selectInterfaces' => array('ip'),
           // 'selectInventory' => array('location_lat','location_lon'),
-          'groupids' => array(8,11,14)
+          'groupids' => array(8,11,14,21,31)
         ));
 
           foreach ($hosts as $host) {
