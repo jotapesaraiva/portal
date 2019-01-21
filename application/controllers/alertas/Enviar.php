@@ -132,7 +132,7 @@ Ramal: 4994/4984
                 $categoria = 'Acionamento';
                 $procedore = 'STP_RELT_PROJETO_CATEG_CGDA';
                 $parametros = '';
-                $table ='mnt_alerta';
+                $table ='mnt_alertas';
                 break;
             case '2'://CGPS - Sustentação
                 $projeto   = 'Sustentação';
@@ -140,7 +140,7 @@ Ramal: 4994/4984
                 $procedore = 'STP_RELT_CASO_DEMANDAS_CGPS';
                 $parametros = 'IN_CF_TIPO_DEMAND => "Manutenção Corretiva",
                                IN_CF_SOLICITANTE => "Equipe de Produção",';
-                $table ='mnt_alerta';
+                $table ='mnt_alertas';
                 break;
             case '3'://CGPS - Proj. Manu. Assistida
                 $projeto   = 'Projetos/Man.Assistida';

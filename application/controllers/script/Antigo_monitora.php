@@ -64,13 +64,23 @@ class Antigo_monitora extends CI_Controller {
                   echo "  ";
                 //   pr($result);
                 } else {
-                  $projetos = $this->mantis_model->mantis_projetos();
-                  foreach ($projetos as $projeto) {
-                    if($projeto['resumo'] == $desc_alerta){
-                        //update tabela com numeo mantis
-                        //$this->monitora_model->update_num_mantis($projeto['numero_chamado']);
+                  //consultar todos os alertas da tabela mnt_alertas no banco portal
+                  $alertas = $this->monitora_model->select_mnt_alerta();
+                  // vd($alertas);
+                  foreach($alertas as $alerta){
+                    //consultar todos os alertas da tabela bug_tb no banco mantis
+                    $projetos = $this->mantis_model->mantis_projetos();
+                    // vd($projetos);
+                    foreach ($projetos as $projeto) {
+                      if("servidor {$alerta['origem']} - servico {$alerta['desc_alerta']}" == $projeto['RESUMO']){
+                      // if($projeto['resumo'] == $alertas['desc_alerta']){
+                          //update tabela com numeo mantis
+                          $this->monitora_model->update_mnt_alerta(array('id'=> $alerta['id']),array('mantis' => $projeto['NUMERO_CHAMADO']));
+                      }
                     }
                   }
+
+
                   $where = array(
                     'desc_alerta'    => $desc_alerta,
                     'data_fim' => date("Y-m-d H:i:s"),

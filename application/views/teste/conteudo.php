@@ -24,33 +24,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- BEGIN DASHBOARD STATS 1-->
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="dashboard-stat blue">
+                <div id="nbk01" class="dashboard-stat">
                     <div class="visual">
                         <i class="fa fa-battery-full"></i>
                     </div>
                     <div class="details">
                         <div class="number">
-                            <span data-counter="counterup" data-value="1349">22</span>°C
+                            <span id="nobreak01" data-counter="counterup" data-value="0">0</span>°C
                         </div>
                         <div class="desc"> Nobreak Primário </div>
                     </div>
-                    <a class="more" href="javascript:;"> View more
+                    <a class="more" href="https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10567" target="_blank"> Mais info
                         <i class="m-icon-swapright m-icon-white"></i>
                     </a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="dashboard-stat red">
+                <div id="nbk02" class="dashboard-stat">
                     <div class="visual">
                         <i class="fa fa-battery-full"></i>
                     </div>
                     <div class="details">
                         <div class="number">
-                            <span data-counter="counterup" data-value="12,5">21</span>°C
+                            <span id="nobreak02" data-counter="counterup" data-value="0">0</span>°C
                         </div>
                         <div class="desc"> Nobreak Secundário </div>
                     </div>
-                    <a class="more" href="javascript:;"> View more
+                    <a class="more" href="https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10595" target="_blank"> Mais info
                         <i class="m-icon-swapright m-icon-white"></i>
                     </a>
                 </div>

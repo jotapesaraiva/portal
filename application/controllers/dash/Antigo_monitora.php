@@ -36,8 +36,7 @@ class Antigo_monitora extends CI_Controller {
                 //10-novo-vermelho  20-retorno-vermelho escuro  30-impedido-roxo  40-autorizado-amarelo  50-atribuido-azul  80-realizado-laranja
                 $flag = '';
                 $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id=
-                '.$alerta['mantis'].'" class = "label label-
-                '.$array_color[$status->STATUS].'" target="_blank">
+                '.$alerta['mantis'].'" class = "label label-'.$array_color[$status->STATUS].'" target="_blank">
                 '.$alerta['mantis'].'</a>';
             }
             //criar um novo array para exibir no dashboard

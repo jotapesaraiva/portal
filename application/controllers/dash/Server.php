@@ -63,6 +63,7 @@ class Server extends CI_Controller {
                      'priority' => array('4','5'),
                      'value' => '1')
              ));
+          // vd($triggers);
           foreach($triggers as $trigger) {
              foreach($trigger->hosts as $host) {
                  $hostTriggers[$host->hostid][] = $trigger;

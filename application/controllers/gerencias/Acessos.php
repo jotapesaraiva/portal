@@ -109,7 +109,7 @@ class Acessos extends CI_Controller {
             'ip_servidor' => $this->input->post('acesso'),
             'responsavel' => $this->input->post('responsavel'),
             'usuario' => $this->input->post('usuario'),
-            'senha' => $this->input->post('senha'),
+            'senha' => base64_encode($this->input->post('senha')),
             'tipo' => $this->input->post('tipo')
         );
         $this->acessos_model->save_acesso($data);

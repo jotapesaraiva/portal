@@ -14,7 +14,6 @@
                                 <th>Atribuido</th>
                                 <th>Resumo</th>
                                 <th>Abertura</th>
-                                <th>Status</th>
                                 <th>Ultima Atualização</th>
                             </tr>
                         </thead>

@@ -180,7 +180,8 @@ class Mantis_model extends CI_Model {
         // vd($sql);
         $stmt = oci_parse($mantis->conn_id,$sql);
         oci_execute($stmt, OCI_NO_AUTO_COMMIT);
-        oci_fetch_all($stmt,$catego,null,null,OCI_FETCHSTATEMENT_BY_ROW + OCI_NUM);
+        oci_fetch_all($stmt,$catego,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+        // oci_fetch_all($stmt,$catego,null,null,OCI_FETCHSTATEMENT_BY_ROW + OCI_NUM);
         // oci_fetch_all($stmt,$catego);
         return $catego;
         // $stmt = oci_parse($mantis->conn_id,$sql);

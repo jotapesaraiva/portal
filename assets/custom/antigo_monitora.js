@@ -14,7 +14,7 @@ atualiza_alertas_monitora();
            url: "https://producaoh.sefa.pa.gov.br/portal/dash/antigo_monitora/",
            dataType: 'json',
            success: function (data) {
-            console.log(data);
+            // console.log(data);
             var output ='<table class="table table-hover"><thead><tr class="uppercase"><th>Serviço</th><th>Servidor</th><th>Alerta</th><th>Tempo</th><th>Mantis</th></thead><tbody>';
                     for (var i in data) {
                       output +=

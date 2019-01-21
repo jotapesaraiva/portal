@@ -26,12 +26,14 @@ class Welcome extends CI_Controller {
 		<script src="'. base_url() .'assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
 		<script src="'. base_url() .'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
 		<script src="'. base_url() .'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+
         <script src="' . base_url() . 'assets/custom/link_indisponivel.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/server.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/backups_falhos.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/zabbix.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/antigo_monitora.js" type="text/javascript"></script>
-		<script src="' . base_url() . 'assets/custom/chamados_mantis.js" type="text/javascript"></script>';
+		<script src="' . base_url() . 'assets/custom/chamados_mantis.js" type="text/javascript"></script>
+		<script src="' . base_url() . 'assets/custom/temperatura_nobreak.js" type="text/javascript"></script>';
 
 		$username = $this->session->userdata('username');
 		$user = array("username" => $username);
