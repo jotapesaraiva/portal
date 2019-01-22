@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- BEGIN DASHBOARD STATS 1-->
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div id="nbk01" class="dashboard-stat">
+                <div id="nbk01" class="dashboard-stat green">
                     <div class="visual">
                         <i class="fa fa-battery-full"></i>
                     </div>
@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div id="nbk02" class="dashboard-stat">
+                <div id="nbk02" class="dashboard-stat green">
                     <div class="visual">
                         <i class="fa fa-battery-full"></i>
                     </div>
@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="dashboard-stat purple">
+                <div id="num_mantis" class="dashboard-stat green">
                     <div class="visual">
                         <i class="fa fa-ticket"></i>
                     </div>

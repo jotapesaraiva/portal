@@ -15,6 +15,7 @@ $(document).ready(function () {
     }
 
     function quantidade_mantis() {
+        var num_mantis = $("#num_mantis");
         var ident = $("#quantidade");
         $.ajax({
             url: "https://producaoh.sefa.pa.gov.br/portal/dash/chamados_mantis/",
@@ -22,8 +23,10 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 for (var i in data) {
+                    var nmantis = data[i].flag;
                     var output = data[i].QTD_MANTIS;
                 }
+                num_mantis.removeClass('red green').addClass(nmantis);
                 ident.html(output);
             }
         });

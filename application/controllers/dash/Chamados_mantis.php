@@ -10,8 +10,30 @@ class Chamados_mantis extends CI_Controller {
     }
 
     public function index() {
-        $quantidade = $this->mantis_model->widget_mantis('quantidade');
-        echo json_encode($quantidade);
+        $result = '';
+        $retorno = array();
+        $qtds = $this->mantis_model->widget_mantis('quantidade');
+        foreach ($qtds as $qtd) {
+          foreach ($qtd as $key => $value) {
+          if($key == 'QTD_MANTIS'){
+            if($value == '0'){
+              $result = array(
+                'QTD_MANTIS' => $value,
+                'flag' => 'green'
+              );
+            } else {
+              $result = array(
+                'QTD_MANTIS' => $value,
+                'flag' => 'red'
+              );
+            }
+          }
+          array_push($retorno,$result);
+
+          }
+        }
+        // echo $quantidade;
+        echo json_encode($retorno);
     }
 
     public function mantis_producao() {

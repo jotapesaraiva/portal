@@ -22,8 +22,8 @@ $(document).ready(function () {
                 }
                 displaynbk01.html(nobreak01);
                 displaynbk02.html(nobreak02);
-                flag01.addClass(fnbk01);
-                flag02.addClass(fnbk02);
+                flag01.removeClass('red green').addClass(fnbk01);
+                flag02.removeClass('red green').addClass(fnbk02);
             }
         });
         setTimeout('temperatura()', 30000);
