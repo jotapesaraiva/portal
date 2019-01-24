@@ -29,7 +29,6 @@ class Chamados_mantis extends CI_Controller {
             }
           }
           array_push($retorno,$result);
-
           }
         }
         // echo $quantidade;

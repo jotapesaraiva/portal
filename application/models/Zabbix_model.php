@@ -73,6 +73,7 @@ class Zabbix_model extends CI_Model {
     public function duplicate_zabbix_server($dados) {
         $portal_db = $this->load->database('default',true);
         $portal_db->on_duplicate('zbx_server_fora', $dados);
+        // echo $portal_db->last_query();
     }
 
     public function save_zabbix_server($dados) {
@@ -100,7 +101,7 @@ class Zabbix_model extends CI_Model {
 
     public function delete_zabbix_server($id) {
         $portal_db = $this->load->database('default',true);
-        $portal_db->where_not_in('id',$id);
+        $portal_db->where_not_in('id', $id);
         $portal_db->delete('zbx_server_fora');
         // echo $portal_db->last_query();
     }

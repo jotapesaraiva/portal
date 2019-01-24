@@ -54,15 +54,6 @@ class Antigo_monitora extends CI_Controller {
         }
         echo json_encode($retorno);
     }
-
-    public function teste() {
-      // $consulta = $this->mantis_model->alerta_repetido('Falha na Carga SPED para o DW.','SYBASE');
-      $consulta = $this->monitora_model->monitora();
-      // $consulta = $this->mantis_model->alerta_repetido('Parcelamento com pagamentos não processados/apropriados','PARCELAMENTO ou COTA UNICA');
-      vd($consulta);
-    // echo $consulta[0]['id'];
-    }
-
 }
 
 /* End of file Antigo_monitora.php */

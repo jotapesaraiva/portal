@@ -80,7 +80,6 @@ class Antigo_monitora extends CI_Controller {
                     }
                   }
 
-
                   $where = array(
                     'desc_alerta'    => $desc_alerta,
                     'data_fim' => date("Y-m-d H:i:s"),

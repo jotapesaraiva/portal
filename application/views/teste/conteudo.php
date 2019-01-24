@@ -92,7 +92,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- END DASHBOARD STATS 1-->
         <div class="row">
 
-            <div class="col-md-6 col-sm-6"> <!-- Tabela Monitora antigo -->
+            <div class="col-lg-7 col-md-6 col-sm-6"> <!-- Tabela Monitora antigo -->
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -113,7 +113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </div><!-- FIM da Tabela Monitora antigo -->
 
-            <div class="col-md-6 col-sm-6"> <!-- Tabela link indisponivel -->
+            <div class="col-lg-5 col-md-6 col-sm-6"> <!-- Tabela link indisponivel -->
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -137,7 +137,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         </div>
         <div class="row">
-            <div class="col-md-6 col-sm-6"> <!-- Tabela Servidores -->
+            <div class="col-lg-7 col-md-6 col-sm-6"> <!-- Tabela Servidores -->
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -158,7 +158,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
             </div><!-- FIM da Tabela Servidores -->
-            <div class="col-md-6 col-sm-6"> <!-- Tabela Backupsl -->
+            <div class="col-lg-5 col-md-6 col-sm-6"> <!-- Tabela Backupsl -->
                 <div class="portlet light tasks-widget bordered">
                     <div class="portlet-title">
                         <div class="caption">

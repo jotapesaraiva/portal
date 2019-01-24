@@ -4,7 +4,8 @@ $(document).ready(function () {
         "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
-        "ajax": "https://producaoh.sefa.pa.gov.br/portal/dash/chamados_mantis/mantis_producao/"
+        "ajax": "https://producaoh.sefa.pa.gov.br/portal/dash/chamados_mantis/mantis_producao/",
+        "order": [[4, 'desc']],
     });
     setInterval( function () {
         table.ajax.reload( null, false ); // user paging is not reset on reload

@@ -58,6 +58,7 @@ class Monitora_model extends CI_Model {
          $portal->where('data_fim > NOW() - INTERVAL "10" MINUTE');
          $portal->order_by('data_inicio', 'DESC');
          $query = $portal->get();
+         // echo $portal->last_query();
          return $query->result_array();
      }
 

@@ -175,7 +175,7 @@ class Mantis_model extends CI_Model {
         }
         $sql .= "AND extract(month from MBT.DATE_SUBMITTED) = extract(month from sysdate)";
         if ($flag == 'chamados'){
-            $sql .= " ORDER BY MBT.date_submitted ASC";
+            $sql .= " ORDER BY MBT.date_submitted DESC";
         }
         // vd($sql);
         $stmt = oci_parse($mantis->conn_id,$sql);
