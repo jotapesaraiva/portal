@@ -33,6 +33,7 @@ class Welcome extends CI_Controller {
 		<script src="' . base_url() . 'assets/custom/zabbix.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/antigo_monitora.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/chamados_mantis.js" type="text/javascript"></script>
+		<script src="' . base_url() . 'assets/custom/sobreaviso.js" type="text/javascript"></script>
 		<script src="' . base_url() . 'assets/custom/temperatura_nobreak.js" type="text/javascript"></script>';
 
 		$username = $this->session->userdata('username');
@@ -46,6 +47,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('teste/conteudo');
 		$this->load->view('template/footer',$script);
 		$this->load->view('modal/modal_mantis');
+		$this->load->view('modal/modal_sobreaviso');
 /*
 		set_tema('title','Titulo'); //$tema['title'] = 'titulo';
 		set_tema('navbar', load_modulo('menu_topo', 'painel', 'tpl'));// $tema['header'] = 'cabeçalho';

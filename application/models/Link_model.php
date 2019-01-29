@@ -179,6 +179,20 @@ class Link_model extends CI_Model{
         return $query->result_array();
     }
 
+    public function tempo($mes,$ano) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('centro, sum(TIMESTAMPDIFF(HOUR,abertura,atualizacao)) AS tempo');
+        $portal_db->from('ebt_grc');
+        $portal_db->where('Month(atualizacao)',$mes);
+        $portal_db->where('year(atualizacao)',$ano);
+        $portal_db->group_by('centro');
+        $portal_db->order_by('tempo', 'DESC');
+        $portal_db->limit('10');
+        $query = $portal_db->get();
+        // echo $portal_db->last_query();
+        return $query->result_array();
+    }
+
     public function localidade($mes,$ano) {
         $portal_moni = $this->load->database('portalmoni',true);
         $portal_moni->select('centro, count(ticket) as numero');

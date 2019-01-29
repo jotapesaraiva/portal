@@ -1,15 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mensal extends CI_Controller {
+class Zabbix extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         esta_logado();
+        //Do your magic here
     }
 
     public function index() {
-
         $curr_year = date('Y');
         $curr_mes = date('n');
         if($this->input->post('ano')) {
@@ -19,7 +19,6 @@ class Mensal extends CI_Controller {
             $nano = date('Y');
             $data['nano'] = date('Y');
         }
-
         if($this->input->post('mes')){
             $nmes = $this->input->post('mes');
             $data['nmes'] = $nmes;
@@ -114,7 +113,6 @@ class Mensal extends CI_Controller {
             <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $session['username'] = $this->session->userdata('username');
 
-
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Link</span>','/link');
         $this->breadcrumbs->push('<span>Gráficos</span>','link/graficos');
@@ -132,23 +130,7 @@ class Mensal extends CI_Controller {
 
     }
 
-
-    public function teste() {
-       $dados = $this->link_model->causa('1','2018');
-        $array_dados = array();
-        foreach ($dados as $key => $value) {
-            $array_dados['causa'][$key] =  $dados[$key]['causa'];
-            $array_dados['numero'][$key] = floatval($dados[$key]['numero']);
-        }
-       echo "todos:";
-       // vd($dados);
-       echo "Causa:";
-       // vd($array_dados['causa']);
-       echo "Numero:";
-       vd($array_dados['numero']);
-    }
-
 }
 
-/* End of file Mensal.php */
-/* Location: ./application/controllers/links/graficos/causa/Mensal.php */
+/* End of file Zabbix.php */
+/* Location: ./application/controllers/links/graficos_link/tempo/Zabbix.php */

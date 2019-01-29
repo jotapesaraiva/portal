@@ -30,6 +30,14 @@
             <ul class="nav navbar-nav pull-right">
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                <li class="dropdown dropdown-extended dropdown-inbox">
+                    <a href="javascript:void(0)" onclick="sobreaviso()" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <i class="icon-calendar"></i>
+                        <!-- <span class="badge badge-default"> 4 </span> -->
+                    </a>
+                </li>
+                <!-- END INBOX DROPDOWN -->
+                <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         Olá :

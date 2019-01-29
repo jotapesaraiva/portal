@@ -13,6 +13,27 @@ class Zabbix_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function select_ebt_grc($dado) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('*');
+        $portal_db->from('ebt_grc_teste');
+        $portal_db->where('ticket',$dado);
+        $query = $portal_db->get();
+        return $query;
+    }
+
+    public function update_ebt_grc($id,$dados) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->update('ebt_grc_teste', $dados, $id);
+        return $portal_db->affected_rows();
+    }
+
+    public function insert_ebt_grc($dados) {
+        $portal_db = $this->load->database('default', true);
+        $portal_db->insert('ebt_grc_teste', $dados);
+        return $portal_db->insert_id();
+    }
+
     public function list_grc_link($designacao) {
         $portal_db = $this->load->database('default',true);
         $portal_db->select('*');

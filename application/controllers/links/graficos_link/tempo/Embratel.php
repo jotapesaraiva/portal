@@ -1,17 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mensal extends CI_Controller {
+class Embratel extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         esta_logado();
+        //Do your magic here
     }
 
     public function index() {
-
-        $curr_year = date('Y');
-        $curr_mes = date('n');
+        // $curr_year = date('Y');
+        // $curr_mes = date('n');
         if($this->input->post('ano')) {
             $nano = $this->input->post('ano');
             $data['nano'] = $nano;
@@ -25,16 +25,15 @@ class Mensal extends CI_Controller {
             $data['nmes'] = $nmes;
             $data['mes'] = dataEmPortugues($nmes);
         } else {
-            $nmes = $curr_mes;
+            $nmes = date('n');
             $data['nmes'] = date('n');
             $data['mes'] = dataEmPortugues(date('n'));
         }
-
-        $dados = $this->link_model->causa($nmes,$nano);
+        $dados = $this->link_model->tempo($nmes,$nano);
          $array_dados = array();
          foreach ($dados as $key => $value) {
-             $array_dados['causa'][$key] =  $dados[$key]['causa'];
-             $array_dados['numero'][$key] = floatval($dados[$key]['numero']);
+             $array_dados['centro'][$key] =  $dados[$key]['centro'];
+             $array_dados['tempo'][$key] = floatval($dados[$key]['tempo']);
          }
 
         $script['footerinc'] = '
@@ -51,18 +50,18 @@ class Mensal extends CI_Controller {
                             zoomType: "xy"
                         },
                         title: {
-                            text: "TOP 10 - Maiores Causas de Indisponibilidade de Circuito no Mês '. dataEmPortugues($nmes) .' de '.  $nano .'"
+                            text: "TOP 10 - Unidades com maior tempo de indisponibilidade no mês '. dataEmPortugues($nmes) .' de '.  $nano .'"
                         },
                         xAxis: {
-                            categories: '. json_encode($array_dados['causa']).',
+                            categories: '. json_encode($array_dados['centro']).',
                             crosshair: true
                         },
                         yAxis: [{
                             title: {
-                                text: "Causa"
+                                text: "Tempo"
                             },
                             labels: {
-                                format: "{value} Tickets"
+                                format: "{value} Horas"
                             }
                         }, {
                             title: {
@@ -97,15 +96,16 @@ class Mensal extends CI_Controller {
                                 valueDecimals: 1,
                                 valueSuffix: " %"
                             },
-                            baseSeries: 1
+                            baseSeries: 1,
+                            dashStyle: "longdash"
                         }, {
-                            name: "Tickets",
+                            name: "Tempo",
                             type: "column",
                             zIndex: 2,
                             tooltip: {
-                               valueSuffix: " Tickets"
+                               valueSuffix: " Horas"
                             },
-                            data: '. json_encode($array_dados['numero']).'
+                            data: '. json_encode($array_dados['tempo']).'
                         }]
                     });
                 });
@@ -130,25 +130,10 @@ class Mensal extends CI_Controller {
 
         $this->load->view('template/footer',$script);
 
-    }
 
-
-    public function teste() {
-       $dados = $this->link_model->causa('1','2018');
-        $array_dados = array();
-        foreach ($dados as $key => $value) {
-            $array_dados['causa'][$key] =  $dados[$key]['causa'];
-            $array_dados['numero'][$key] = floatval($dados[$key]['numero']);
-        }
-       echo "todos:";
-       // vd($dados);
-       echo "Causa:";
-       // vd($array_dados['causa']);
-       echo "Numero:";
-       vd($array_dados['numero']);
     }
 
 }
 
-/* End of file Mensal.php */
-/* Location: ./application/controllers/links/graficos/causa/Mensal.php */
+/* End of file Embratel.php */
+/* Location: ./application/controllers/links/graficos_link/tempo/Embratel.php */

@@ -57,7 +57,6 @@ class Nobreak extends CI_Controller {
                     $flag ="green";
                  }
               }
-              if($hostname != 'DataCenter'){
                   $result = array(
                     'id' => $hostid,
                     'name' => $hostname,
@@ -67,7 +66,6 @@ class Nobreak extends CI_Controller {
                   );
                   //inserir todos os alertas no mesmo array
                   array_push($retorno,$result);
-              }
           }
           //passar para tabela server via json.
           echo json_encode($retorno);

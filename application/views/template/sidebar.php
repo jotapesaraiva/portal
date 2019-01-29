@@ -422,6 +422,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </li>
                                     </ul>
                                 </li>
+                                <!--############# ABA LINKS > Graficos > Tempo ############-->
+                                <li class="nav-item <?php echo active_segment(3,'tempo'); ?>">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="fa fa-clock-o"></i>
+                                        <span class="title">Tempo</span>
+                                        <?php echo span_segment(3,'tempo'); ?>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <!--############# ABA LINKS > Graficos > Ticket > mensal ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'embratel'); ?>">
+                                            <?php echo anchor('links/graficos_link/tempo/embratel', 'Embratel', 'class="nav-link"')?>
+                                            <?php echo span_segment(4,'embratel'); ?>
+                                        </li>
+                                        <!--############# ABA LINKS > Graficos > Ticket > anual ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'zabbix'); ?>">
+                                            <?php echo anchor('links/graficos_link/tempo/zabbix', 'Zabbix', 'class="nav-link"')?>
+                                            <?php echo span_segment(4,'zabbix'); ?>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <?php }?>
@@ -478,9 +499,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item ">
-                            <?php echo anchor_popup('http://x-oc-cacti.sefa.pa.gov.br:8080/nagios/', 'Nagios'); ?>
-                        </li>
-                        <li class="nav-item ">
                             <?php echo anchor_popup('http://x-oc-zabbix.sefa.pa.ipa/zabbix/', 'Zabbix'); ?>
                         </li>
                         <li class="nav-item ">
@@ -513,9 +531,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </li>
                         <li class="nav-item ">
                             <?php echo anchor_popup('https://rede.sefa.pa.gov.br/hextra/', 'Hora Extras'); ?>
-                        </li>
-                        <li class="nav-item ">
-                            <?php echo anchor_popup('http://observium.sefa.pa.gov.br/', 'Observium'); ?>
                         </li>
                         <li class="nav-item ">
                             <?php echo anchor_popup('http://producao.sefa.pa.gov.br/msg/login.php', 'Mensagem de rede'); ?>

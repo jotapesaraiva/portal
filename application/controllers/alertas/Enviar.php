@@ -48,13 +48,13 @@ class Enviar extends CI_Controller {
         }
         $dados['projetos'] = $this->select_option(
             $projetos = array(
-                        array('ID' => '1','NAME' => 'CGDA'),
-                        array('ID' => '2','NAME' => 'CGPS - Sustentação'),
-                        array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
-                        array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
-                        array('ID' => '5','NAME' => 'CGRE - Rede'),
-                        array('ID' => '6','NAME' => 'CGRE - Infra')
-            ));
+                            array('ID' => '1','NAME' => 'CGDA'),
+                            array('ID' => '2','NAME' => 'CGPS - Sustentação'),
+                            array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
+                            array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
+                            array('ID' => '5','NAME' => 'CGRE - Rede'),
+                            array('ID' => '6','NAME' => 'CGRE - Infra')
+                        ));
         $dados['form'] = "modelo_cprojeto";
 
         $this->index($dados);
@@ -71,13 +71,13 @@ class Enviar extends CI_Controller {
         \nInicio do Chamado:".date('d/m/Y H:i' ,strtotime($detalhes->data_alerta));
         $dados['projetos'] = $this->select_option(
             $projetos = array(
-                        array('ID' => '1','NAME' => 'CGDA'),
-                        array('ID' => '2','NAME' => 'CGPS - Sustentação'),
-                        array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
-                        array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
-                        array('ID' => '5','NAME' => 'CGRE - Rede'),
-                        array('ID' => '6','NAME' => 'CGRE - Infra')
-            ));
+                            array('ID' => '1','NAME' => 'CGDA'),
+                            array('ID' => '2','NAME' => 'CGPS - Sustentação'),
+                            array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
+                            array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
+                            array('ID' => '5','NAME' => 'CGRE - Rede'),
+                            array('ID' => '6','NAME' => 'CGRE - Infra')
+                        ));
         $dados['form'] = "modelo_cprojeto";
 
         $this->index($dados);
@@ -204,7 +204,6 @@ Ramal: 4994/4984
             'servico'   => $this->input->post('alerta'),//resumo do mantis
             'detalhe'   => $this->input->post('detalhe')//descriçao do mantis
         );
-        // echo $parametros;
         // vd($params);
         //load da procedore passando as variaveis e armazenando em uma variavel
         $this->mantis_model->abrir_mantis_teste($params,$procedore,$parametros);

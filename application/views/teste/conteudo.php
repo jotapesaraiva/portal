@@ -56,17 +56,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="dashboard-stat green">
+                <div id="dcenter" class="dashboard-stat green">
                     <div class="visual">
                         <i class="fa fa-building-o"></i>
                     </div>
                     <div class="details">
                         <div class="number">
-                            <span data-counter="counterup" data-value="549">18</span>°C
+                            <span id="datacenter" data-counter="counterup" data-value="0">0</span>°C
                         </div>
                         <div class="desc"> Data Center </div>
                     </div>
-                    <a class="more" href="javascript:;"> View more
+                    <a class="more" href="https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10595" target="_blank"> Mais Info
                         <i class="m-icon-swapright m-icon-white"></i>
                     </a>
                 </div>
