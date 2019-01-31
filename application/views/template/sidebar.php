@@ -186,10 +186,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo span_segment(2,'historico'); ?>
                         </li>
                         <!--############# ABA BACKUPS > Janela de bakcups ############-->
-                        <?php } if($this->auth_ad->level_access('janela_backup',group_session($this->session->userdata('username')))){?>
+                        <?php } if($this->auth_ad->level_access('janela_bkp',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'janela_backup'); ?>">
-                            <?php echo anchor('backup/janela_backup', 'Janela de Backup', 'class="nav-link"')?>
-                            <?php echo span_segment(2,'janela_backup'); ?>
+                            <?php echo anchor('backup/janela_bkp', 'Janela de Backup', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'janela_bkp'); ?>
                         </li>
                         <!--############# ABA BACKUPS > fitas ############-->
                         <?php } if($this->auth_ad->level_access('fitas',group_session($this->session->userdata('username')))){?>

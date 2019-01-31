@@ -56,6 +56,7 @@ class Enviar extends CI_Controller {
                             array('ID' => '6','NAME' => 'CGRE - Infra')
                         ));
         $dados['form'] = "modelo_cprojeto";
+        $dados['tabela'] = "mnt_alertas";
 
         $this->index($dados);
     }
@@ -79,6 +80,7 @@ class Enviar extends CI_Controller {
                             array('ID' => '6','NAME' => 'CGRE - Infra')
                         ));
         $dados['form'] = "modelo_cprojeto";
+        $dados['tabela'] = "zbx_server_fora";
 
         $this->index($dados);
     }
@@ -99,6 +101,7 @@ class Enviar extends CI_Controller {
         }
         $dados['projeto'] = "7";
         $dados['form'] = "link";
+        $dados['tabela'] = "zbx_link_fora";
 
         $this->index($dados);
     }
@@ -119,6 +122,7 @@ Ramal: 4994/4984
         }
         $dados['projeto'] = "8";
         $dados['form'] = "modelo_sprojeto";
+        $dados['tabela'] = "dp_backups";
 
         $this->index($dados);
     }
@@ -132,46 +136,46 @@ Ramal: 4994/4984
                 $categoria = 'Acionamento';
                 $procedore = 'STP_RELT_PROJETO_CATEG_CGDA';
                 $parametros = '';
-                $table ='mnt_alertas';
+                $table = $this->input->post('tabela');
                 break;
             case '2'://CGPS - Sustentação
                 $projeto   = 'Sustentação';
                 $categoria = 'Alertas de Produção';
                 $procedore = 'STP_RELT_CASO_DEMANDAS_CGPS';
-                $parametros = 'IN_CF_TIPO_DEMAND => "Manutenção Corretiva",
-                               IN_CF_SOLICITANTE => "Equipe de Produção",';
-                $table ='mnt_alertas';
+                $parametros = "IN_CF_TIPO_DEMAND => 'Manutenção Corretiva',
+                               IN_CF_SOLICITANTE => 'Equipe de Produção',";
+                $table =$this->input->post('tabela');
                 break;
-            case '3'://CGPS - Proj. Manu. Assistida
-                $projeto   = 'Projetos/Man.Assistida';
-                $categoria = 'Alertas de Produção';
-                $procedore = 'STP_RELT_CASO_DEMANDAS_CGPS';
-                $parametros = 'IN_CF_TIPO_DEMAND => "Manutenção Corretiva",
-                               IN_CF_SOLICITANTE => "Equipe de Produção",';
-                $table ='mnt_alertas';
-                break;
-            case '4'://CGPS - Gestão de Configuração
+            case '3'://CGPS - Gestão de Configuração
                 $projeto   = 'Infraestrutura';
                 $categoria = 'Análise';
                 $procedore = 'STP_RELT_CASO_DEMANDAS_CONFIG';
-                $parametros = 'IN_CF_ESCOPO => "Sustentação/Produção",
-                               IN_CF_NOAMBIENTE => "Produção",
-                               IN_CF_APLICACOES => "",';
-                $table ='mnt_alertas';
+                $parametros = "IN_CF_ESCOPO => 'Sustentação/Produção',
+                               IN_CF_NOAMBIENTE => 'Produção',
+                               IN_CF_APLICACOES => '',";
+                $table =$this->input->post('tabela');
+                break;
+            case '4'://CGPS - Proj. Manu. Assistida
+                $projeto   = 'Projetos/Man.Assistida';
+                $categoria = 'Alertas de Produção';
+                $procedore = 'STP_RELT_CASO_DEMANDAS_CGPS';
+                $parametros = "IN_CF_TIPO_DEMAND => 'Manutenção Corretiva',
+                               IN_CF_SOLICITANTE => 'Equipe de Produção',";
+                $table =$this->input->post('tabela');
                 break;
             case '5'://CGRE - Rede
                 $projeto   = 'Suporte a Servidores';
                 $categoria = 'Verificar servidor';
                 $procedore = 'STP_RELT_CASO_PROJETO_CATEG';
                 $parametros = '';
-                $table ='zbx_server_fora';
+                $table =$this->input->post('tabela');
                 break;
             case '6'://CGRE - Infra
                 $projeto   = 'Equipamentos de Rede';
                 $categoria = 'No-Break Servidores';
                 $procedore = '';
                 $parametros = '';
-                $table ='tbl_';
+                $table =$this->input->post('tabela');
                 break;
             case '7'://CGRE - Produção link
                 $projeto   = 'Chamado de Link';
@@ -179,21 +183,21 @@ Ramal: 4994/4984
                 $procedore = 'STP_RELT_CASO_DEMANDAS_LINK';
                 $parametros = "IN_CF_TICKET => '".$this->input->post('ticket')."',
                                IN_CF_INICIO_CHAMADO => '".strtotime(str_replace("/", "-",$this->input->post("inicio_chamado")))."',";
-                $table ='zbx_link_fora';
+                $table =$this->input->post('tabela');
                 break;
             case '8'://CGRE - Produção Backup
                 $projeto   = 'Ambiente de Backup';
                 $categoria = 'Relatório de Falha de Backup';
                 $procedore = 'STP_RELT_CASO_PROJETO_CATEG';
                 $parametros = '';
-                $table ='dp_backups';
+                $table =$this->input->post('tabela');
                 break;
             default://CGRE - Produção
                 $projeto   = 'Ambiente de Backup';//Chamado de Link
                 $categoria = 'Relatório de Falha de Backup';//DADOS
                 $procedore ='STP_RELT_CASO_PROJETO_CATEG';
                 $parametros = '';
-                $table ='tbl_';
+                $table =$this->input->post('tabela');
                 break;
         }
 

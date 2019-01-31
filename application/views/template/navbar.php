@@ -17,7 +17,7 @@
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="#">
+            <a href="<?php echo base_url(); ?>welcome">
                 <img src="<?php echo base_url(); ?>assets/layouts/layout/img/noc_logo.png" alt="logo" style="margin: 0 30px 0;" class="logo-default" /> </a>
             <div class="menu-toggler sidebar-toggler"> </div>
         </div>

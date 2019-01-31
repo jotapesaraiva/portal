@@ -12,7 +12,7 @@ $(document).ready(function () {
     });
     setInterval( function () {
         table.ajax.reload( null, false ); // user paging is not reset on reload
-    }, 300 );
+    }, 30000 );
 });
     function sobreaviso() {
         $('#sobreaviso').modal('show'); // show bootstrap modal when complete loaded

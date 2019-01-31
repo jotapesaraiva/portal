@@ -28,7 +28,7 @@ class Mantis_model extends CI_Model {
                     DBMS_OUTPUT.PUT_LINE(NUM_CASO);
                 END;";
         $stmt = oci_parse($mantis->conn_id,$sql);
-
+        // vd($sql);
         oci_execute($stmt);
 
         return $stmt;

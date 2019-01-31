@@ -38,6 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                  <div class="form-body">
                                                     <?php echo form_hidden('id', $id);?>
                                                     <?php echo form_hidden('alerta', $alerta);?>
+                                                    <?php echo form_hidden('tabela', $tabela);?>
 
                                                     <div class="form-group">
                                                         <label class="col-md-2 control-label">Detalhe do Alerta</label>
