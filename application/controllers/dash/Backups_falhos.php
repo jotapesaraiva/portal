@@ -8,6 +8,7 @@ class Backups_falhos extends CI_Controller {
         //Do your magic here
         $this->load->model('backups_model');
         $this->load->model('mantis_model');
+        $this->load->helper('color_mantis');
     }
 
     public function index() {
@@ -27,9 +28,7 @@ class Backups_falhos extends CI_Controller {
                 $flag = '';
                 $row = $this->mantis_model->mantis($falho['mantis']);
                 $status_mantis = $row->STATUS;
-                $array_color = array(50 => "primary", 10 => "danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
-                // $mantis = $falho['mantis'];
-                $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$falho['mantis'].'" class = "label label-'. $array_color[$status_mantis].'" target="_blank">'.$falho['mantis'].'</a>';
+                $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$falho['mantis'].'" class = "label label-'.color_mantis($status_mantis).'" target="_blank">'.$falho['mantis'].'</a>';
             }
 
             if($status_mantis != '80' AND $status_mantis != '90') {

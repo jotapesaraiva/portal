@@ -13,7 +13,9 @@ class Link_indisponivel extends CI_Controller {
         include APPPATH . 'third_party/zabbix/date_function.php';
         $this->load->model('zabbix_model');
         $this->load->model('mantis_model');
+        $this->load->model('link_model');
         $this->load->model('modulos_model');
+        $this->load->helper('macros_helper');
     }
 
     public function index() {
@@ -48,7 +50,7 @@ class Link_indisponivel extends CI_Controller {
                 'selectInterfaces' => array('ip'),
                 'selectInventory' => array('location_lat','location_lon','vendor'),
                 // 'selectInventory' => 'extend',
-                'groupids' => array(19,18)
+                'groupids' => array(16)//16- novo zabbix(link Acesso) //19,18 - antigo zabbix(link terrestre,link satelite)
             ));
                 foreach ($hosts as $host) {
                     $host_id[] = $host->hostid;
@@ -71,6 +73,10 @@ class Link_indisponivel extends CI_Controller {
                            'priority' => array('5'),
                            'value' => '1')
                    ));
+
+            if($triggers==NULL){
+                $alert ='0';
+            } else {
                 foreach($triggers as $trigger) {
                    foreach($trigger->hosts as $host) {
                        $hostTriggers[$host->hostid][] = $trigger;
@@ -94,13 +100,14 @@ class Link_indisponivel extends CI_Controller {
 
                     if($hoststatus == 0){
                         if (array_key_exists($hostid, $hostTriggers)) {
+                             // echo $hostTriggers[$hostid][0]->lastchange;
                             $tempo_fora = time2string(time()-strtotime(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange)));
                             $data_alerta = date('Y-m-d H:i:s' ,$hostTriggers[$hostid][0]->lastchange);
                             $count = "0";
 
                             foreach ($hostTriggers[$hostid] as $event) {
                                     $id = $event->triggerid;
-                                    $detalhe = $event->comments;
+                                    $detalhe = macros($event->comments);
                                 if ($count++ <= 2 ) {
                                     $priority = $event->priority;
                                     $description = $event->description;
@@ -133,15 +140,13 @@ class Link_indisponivel extends CI_Controller {
                             $this->zabbix_model->duplicate_zabbix_grc($save_db);
                             print_r($save_db);
                             array_push($alert,$id);
-                            //consulta na tabela zbx_links_fora
+                            //consulta na tabela ebt_grc
                             $grc = $this->zabbix_model->list_grc_link($hostdesignacao);
-
+                            // print_r($grc);
                             foreach ($grc as $linha_grc) {
-                                $ticket = $linha_grc['ticket'];
-                                $posicionamento = $linha_grc['posicionamento'];
                                 $designacao_update = array(
-                                    'ticket'         => $ticket,
-                                    'posicionamento' => $posicionamento
+                                    'ticket'         => $linha_grc['ticket'],
+                                    'posicionamento' => $linha_grc['posicionamento']
                                 );// atualiza a tabela zbx_link_fora com o numero do ticket e o ultimo posicionamento do GRC
                                 $this->zabbix_model->update_zabbix_grc($designacao_update,$hostdesignacao);
                             }
@@ -152,8 +157,32 @@ class Link_indisponivel extends CI_Controller {
                         }
                     }
                 }
+            }
+
+
                 // deleta todos que não estão alertando
                 $this->zabbix_model->delete_zabbix_grc($alert);
+
+                //consultar todos os alertas da tabela mnt_alertas no banco portal
+                $alertas = $this->link_model->select_link_fora();
+                // vd($alertas);
+                foreach($alertas as $alerta){
+                  //consultar todos os alertas da tabela bug_tb no banco mantis
+                  $projetos = $this->mantis_model->mantis_projetos_producao();
+                  // vd($projetos);
+                  foreach ($projetos as $projeto) {
+                    if("Problema de Link: ".$alerta['ticket']." - ".$alerta['servidor']."" == $projeto['RESUMO']){
+
+                    // if("servidor {$alerta['servidor']} - servico {$alerta['servico']}" == $projeto['RESUMO']) {
+                      echo "Problema de Link: ".$alerta['ticket']." - ".$alerta['servidor']." RESUMO:".$projeto['RESUMO']."<br>";
+                        //update tabela com numeo mantis
+                        $this->link_model->update_link_fora(array('id'=> $alerta['id']),array('mantis' => $projeto['NUMERO_CHAMADO']));
+                    }else{
+                      // echo "ERRADO: Problema de Link: ".$alerta['ticket']." - ".$alerta['servidor']." RESUMO:".$projeto['RESUMO']."<br>";
+                    }
+                  }
+                }
+
 
         } else{
             echo "SCRIPT DESABILITADO NO BANCO DE DADOS";

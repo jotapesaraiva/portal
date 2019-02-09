@@ -16,7 +16,9 @@ class Unidade extends CI_Controller {
             <script src="'.base_url().'assets/custom/localidade_unidades.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
-            <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>';
+            <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+            <script src="//cdn.datatables.net/plug-ins/1.10.19/filtering/type-based/accent-neutralise.js" type="text/javascript"></script>
+            ';
         $script['script'] = '
             <script src="'.base_url().'assets/custom/form-input-mask.js" type="text/javascript"></script>';
         $css['headerinc'] = '
@@ -135,16 +137,16 @@ class Unidade extends CI_Controller {
               $row[] = $Tecnico;
             }
            //****************************************************************************************
-           // $servidores = $this->unidade_model->listar_unidade_usuario($unidade->id_unidade,16);
-           // if($servidores == null){
-           //    $row[] = "";
-           // } else {
-           //   $Servidor = '';
-           //   foreach($servidores->result() as $servidor){
-           //    $Servidor .= $servidor->nome_usuario. '<br>';
-           //   }
-           //   $row[] = $Servidor;
-           // }
+           $servidores = $this->unidade_model->listar_unidade_usuario($unidade->id_unidade,16);
+           if($servidores == null){
+              $row[] = "";
+           } else {
+             $Servidor = '';
+             foreach($servidores->result() as $servidor){
+              $Servidor .= $servidor->nome_usuario. '<br>';
+             }
+             $row[] = $Servidor;
+           }
            //****************************************************************************************
            if ($unidade->status_unidade == '1'){
             $row[] = '<span class="label label-sm label-info"> Ativo. </span>';

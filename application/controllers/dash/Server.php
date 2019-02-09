@@ -11,6 +11,7 @@ class Server extends CI_Controller {
         include APPPATH . 'third_party/zabbix/date_function.php';
         $this->load->model('zabbix_model');
         $this->load->model('mantis_model');
+        $this->load->helper('color_mantis');
     }
 
     public function index() {
@@ -19,6 +20,20 @@ class Server extends CI_Controller {
         $retorno = array();
           //consultar novamente a tabela do banco zbx_server_fora
           $servers_fora = $this->zabbix_model->list_zabbix_server();
+          // vd($servers_fora);
+          if($servers_fora == null){
+            $result = array(
+              'hostid'   => '.',
+              'ip'       => '.',
+              'duration' => '.',
+              'servico'   => 'Nenhum alerta no momento',
+              'servidor' => ':)',
+              'flag'     => '.',
+              'mantis'   => '.'
+            );
+            array_push($retorno,$result);
+            // vd($retorno);
+          }else{
           // vd($servers_fora);
           //percorrer o array da consulta
           foreach ($servers_fora as $server) {
@@ -37,7 +52,7 @@ class Server extends CI_Controller {
                   $array_color = array(50 => "primary", 10 => "danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
                   //10-novo-vermelho  20-retorno-vermelho escuro  30-impedido-roxo  40-autorizado-amarelo  50-atribuido-azul  80-realizado-laranja
                   $flag = '';
-                  $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$server['mantis'].'" class = "label label-'. $array_color[$status->STATUS].'" target="_blank">'.$server['mantis'].'</a>';
+                  $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$server['mantis'].'" class = "label label-'.color_mantis($status->STATUS).'" target="_blank">'.$server['mantis'].'</a>';
               }
               //criar um novo array para exibir no dashboard
               $result = array(
@@ -53,6 +68,7 @@ class Server extends CI_Controller {
               array_push($retorno,$result);
             }
           //passar para tabela server via json.
+          }
           echo json_encode($retorno);
     }
 

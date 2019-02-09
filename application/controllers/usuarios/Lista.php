@@ -304,17 +304,17 @@ class Lista extends CI_Controller {
                 $data['status'] = FALSE;
             }
 
-            if($this->input->post('email') == '') {
-                $data['inputerror'][] = 'email';
-                $data['error_string'][] = 'O campo email é obrigatorio';
-                $data['status'] = FALSE;
-            }
+            // if($this->input->post('email') == '') {
+            //     $data['inputerror'][] = 'email';
+            //     $data['error_string'][] = 'O campo email é obrigatorio';
+            //     $data['status'] = FALSE;
+            // }
 
-            if($this->input->post('login') == '') {
-                $data['inputerror'][] = 'login';
-                $data['error_string'][] = 'O campo login é obrigatorio';
-                $data['status'] = FALSE;
-            }
+            // if($this->input->post('login') == '') {
+            //     $data['inputerror'][] = 'login';
+            //     $data['error_string'][] = 'O campo login é obrigatorio';
+            //     $data['status'] = FALSE;
+            // }
 
             if($this->input->post('permissao') == '') {
                 $data['inputerror'][] = 'permissao';

@@ -9,6 +9,11 @@ class Calculo_multa extends CI_Controller {
     }
 
     public function index() {
+        $css['headerinc'] = '
+            <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
+            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
+            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
 
         $script['footerinc'] = '
 
@@ -20,11 +25,6 @@ class Calculo_multa extends CI_Controller {
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '';
 
-        $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
-            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
-            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
 
           $session['username'] = $this->session->userdata('username');
 
@@ -33,7 +33,7 @@ class Calculo_multa extends CI_Controller {
           $this->breadcrumbs->push('<span>Calculo multa</span>','link/calculo_multa');
 
           if(!$this->input->post('data1')) {
-            $date = date("Y-m-09");
+            $date = date("Y-m-10");
             $date = strtotime(date("Y-m-d", strtotime($date)) . "-1 month");
             $data_inicio = date('Y-m-d', $date);
             $data['data_inicio'] = date('d/m/Y', $date);
@@ -42,8 +42,9 @@ class Calculo_multa extends CI_Controller {
             $data_inicio = date("Y-m-d", strtotime($datai));
             $data['data_inicio'] = $this->input->post('data1');
           }
+
           if(!$this->input->post('data2')) {
-            $data_final = date("Y-m-10");
+            $data_final = date("Y-m-09");
             $data['data_final'] = date("d/m/Y", strtotime($data_final));
             //$data['mostra_dataf'] = $data_final;
           } else {

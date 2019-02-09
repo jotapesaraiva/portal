@@ -56,6 +56,7 @@ class Monitora_model extends CI_Model {
          $portal->select('*');
          $portal->from('mnt_alertas');
          $portal->where('data_fim > NOW() - INTERVAL "10" MINUTE');
+         $portal->where_not_in('tipo_alerta',array('Informativo'));
          $portal->order_by('data_inicio', 'DESC');
          $query = $portal->get();
          // echo $portal->last_query();

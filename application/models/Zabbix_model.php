@@ -41,6 +41,7 @@ class Zabbix_model extends CI_Model {
         $portal_db->like('designacao',$designacao);
         $portal_db->where_not_in('status',array('Fechado','Cancelado'));
         $portal_db->order_by('ticket','DESC');
+        $portal_db->limit(1);
         $query = $portal_db->get();
         return $query->result_array();
     }

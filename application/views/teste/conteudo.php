@@ -101,6 +101,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="caption-helper">Alertas</span>
                         </div>
                         <div class="actions">
+                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;"><i class="icon-wrench"></i></a>
                             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>
@@ -122,7 +123,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="caption-helper">Indisponíveis</span>
                         </div>
                         <div class="actions">
-
+                            <a class="btn btn-circle btn-icon-only btn-default" href="https://producaoh.sefa.pa.gov.br/portal/links/gmaps" target="_blank" data-original-title="" title=""><i class="fa fa-link"></i></a>
+                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;"><i class="icon-wrench"></i></a>
                             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>
@@ -146,7 +148,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="caption-helper">SEFA/PRODEPA</span>
                         </div>
                         <div class="actions">
-
+                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;"><i class="icon-wrench"></i></a>
                             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>
@@ -167,7 +169,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <span class="caption-helper">Falhos</span>
                         </div>
                         <div class="actions">
-
+                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;" data-original-title="" title=""><i class="icon-wrench"></i></a>
                             <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                         </div>
                     </div>

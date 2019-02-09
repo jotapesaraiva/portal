@@ -8,6 +8,7 @@ class Antigo_monitora extends CI_Controller {
         //Do your magic here
         $this->load->model('mantis_model');
         $this->load->model('monitora_model');
+        $this->load->helper('color_mantis');
         include APPPATH . 'third_party/zabbix/date_function.php';
     }
 
@@ -32,11 +33,9 @@ class Antigo_monitora extends CI_Controller {
                             </a>';
             } else { //se não possui mantis
                 $status = $this->mantis_model->mantis($alerta['mantis']);
-                $array_color = array(50 => "primary", 10 => "danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "", 60 => "");
-                //10-novo-vermelho  20-retorno-vermelho escuro  30-impedido-roxo  40-autorizado-amarelo  50-atribuido-azul  80-realizado-laranja
                 $flag = '';
                 $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id=
-                '.$alerta['mantis'].'" class = "label label-'.$array_color[$status->STATUS].'" target="_blank">
+                '.$alerta['mantis'].'" class = "label label-'.color_mantis($status->STATUS).'" target="_blank">
                 '.$alerta['mantis'].'</a>';
             }
             //criar um novo array para exibir no dashboard
@@ -53,6 +52,12 @@ class Antigo_monitora extends CI_Controller {
             array_push($retorno,$dash);
         }
         echo json_encode($retorno);
+    }
+
+
+    public function teste() {
+        $this->load->helper('color_mantis');
+        echo color_mantis(50);
     }
 }
 

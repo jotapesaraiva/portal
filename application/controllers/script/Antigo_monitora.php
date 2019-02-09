@@ -94,9 +94,7 @@ class Antigo_monitora extends CI_Controller {
                 // inserir todos os alertas no mesmo array
                 // array_push($retorno,$result);
             }
-
             // echo json_encode($retorno);
-
         } else {
             echo "SCRIPT DESABILITADO NO BANCO DE DADOS";
         }

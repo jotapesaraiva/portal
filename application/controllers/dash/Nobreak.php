@@ -36,9 +36,9 @@ class Nobreak extends CI_Controller {
               // 'selectGroups'=> 'extend',
           'selectInterfaces' => array('ip'),
           // 'selectInventory' => array('location_lat','location_lon'),
-          'groupids' => array(34)
+          'groupids' => array(21)//21- novo zabbix(nobreak)//34 - antigo zabbix(Power UPS)
         ));
-
+        // vd($hosts);
           foreach ($hosts as $host) {
               // $host_id[] = $host->hostid;
              $hostid = $host->hostid;

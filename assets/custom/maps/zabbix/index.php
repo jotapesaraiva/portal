@@ -4,7 +4,8 @@
 	use ZabbixApi\ZabbixApi;
 	try {
 		// connect to Zabbix API
-		$api = new ZabbixApi('https://x-oc-zabbix.sefa.pa.ipa/zabbix/api_jsonrpc.php', 'zbx3', '!!Z@bb1xx');
+		 $api = new ZabbixApi('https://x-oc-zabbix.sefa.pa.ipa/zabbix/api_jsonrpc.php', 'zbx3', '!!Z@bb1xx');
+#                $api = new ZabbixApi('https://10.3.1.189/zabbix/api_jsonrpc.php', 'zbx3', '!!Z@bb1xx');
 
 		/* . . .  do your stuff here . . . */
 		// get all graphs named "CPU"

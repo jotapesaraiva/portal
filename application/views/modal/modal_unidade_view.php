@@ -10,7 +10,7 @@
               <div class="container-fluid">
                 <div class="tabbable-line boxless margin-bottom-20">
                     <ul class="nav nav-tabs">
-                        <li class="active">
+                        <li class="">
                             <a href="#tab_1" data-toggle="tab" aria-expanded="true"> Geral </a>
                         </li>
                         <li class="">
@@ -19,12 +19,12 @@
                         <li class="">
                             <a href="#tab_3" data-toggle="tab" aria-expanded="false"> Técnico </a>
                         </li>
-                        <li class="">
+                        <li class="active">
                             <a href="#tab_4" data-toggle="tab" aria-expanded="false"> Servidor </a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="tab_1">
+                        <div class="tab-pane" id="tab_1">
                             <form class="form-horizontal" id="form_1" role="form">
                                 <div class="form-body">
                                     <div class="form-group">
@@ -185,7 +185,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane" id="tab_4">
+                        <div class="tab-pane active" id="tab_4">
                             <form class="form-horizontal" id="form_4" role="form">
                                 <div class="form-body">
                                     <div class="form-group">

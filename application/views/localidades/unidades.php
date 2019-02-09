@@ -73,6 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <th> IP Link </th>
                                     <th> Designação </th>
                                     <th> Técnico </th>
+                                    <th> Servidor </th>
                                     <th> Status </th>
                                     <th> Ação </th>
                                 </tr>

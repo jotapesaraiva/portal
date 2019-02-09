@@ -12,6 +12,7 @@ class Link_indisponivel extends CI_Controller {
         include APPPATH . 'third_party/zabbix/date_function.php';
         $this->load->model('zabbix_model');
         $this->load->model('mantis_model');
+        $this->load->helper('color_mantis');
     }
 
     public function index() {
@@ -19,6 +20,23 @@ class Link_indisponivel extends CI_Controller {
             $alert = array();
             $retorno = array();
             $links_fora = $this->zabbix_model->select_zabbix_grc();
+
+            if($links_fora == null){
+                $result = array(
+                    'ticket'   => '.',
+                    'hostid'   => '.',
+                    'ip'       => '.',
+                    'duration' => '.',
+                    'vendor'   => ':)',
+                    'servidor' => 'Nenhum alerta no momento',
+                    'flag'     => '.',
+                    'mantis'   => '.'
+                );
+                array_push($retorno,$result);
+            } else {
+
+            }
+
             //percorrer o array da consulta
             foreach ($links_fora as $link) {
                 $ticket   = $link['ticket'];
@@ -35,10 +53,8 @@ class Link_indisponivel extends CI_Controller {
                             </a>';
                 } else { //se não possui mantis
                     $status = $this->mantis_model->mantis($link['mantis']);
-                    $array_color = array(50 => "primary", 10 => "danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
-                    //10-novo-vermelho  20-retorno-vermelho escuro  30-impedido-roxo  40-autorizado-amarelo  50-atribuido-azul  80-realizado-laranja
                     $flag = '';
-                    $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$link['mantis'].'" class = "label label-'. $array_color[$status->STATUS].'" target="_blank">'.$link['mantis'].'</a>';
+                    $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$link['mantis'].'" class = "label label-'.color_mantis($status->STATUS).'" target="_blank">'.$link['mantis'].'</a>';
                 }
                 //criar um novo array para exibir no dashboard
                 $result = array(

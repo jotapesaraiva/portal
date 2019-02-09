@@ -14,6 +14,8 @@ class Server extends CI_Controller {
         include APPPATH . 'third_party/zabbix/date_function.php';
         $this->load->model('zabbix_model');
         $this->load->model('mantis_model');
+        $this->load->model('server_model');
+        $this->load->helper('macros_helper');
     }
 
     public function index() {
@@ -47,13 +49,19 @@ class Server extends CI_Controller {
                   // 'selectGroups'=> 'extend',
               'selectInterfaces' => array('ip'),
               // 'selectInventory' => array('location_lat','location_lon'),
-              'groupids' => array(8,11,14,21,31)
+              'groupids' => array(20,18,2,15,17) //20,18,2,15,17 - novo zabbix (servidores windows,linux,descentralizados,email,weblogic)
+              //8,11,14,21,31 - antigo zabbix(servers windows, regionais, linux)
             ));
 
               foreach ($hosts as $host) {
                   $host_id[] = $host->hostid;
               }
-
+              // vd($host_id);
+              $alertas = $api->triggerGet(array(
+                'output' => 'extend',
+                // 'selectHosts' => 'extend'
+              ));
+              // vd($alertas);
               $triggers = $api->triggerGet(array(
                      'output' => array(
                          'priority',
@@ -72,12 +80,16 @@ class Server extends CI_Controller {
                          'value' => '1')
                  ));
               // vd($triggers);
+          if($triggers==NULL){
+                $alert = '0';
+            }else{
               foreach($triggers as $trigger) {
                  foreach($trigger->hosts as $host) {
                      $hostTriggers[$host->hostid][] = $trigger;
                  }
               }
-
+              // vd($hostTriggers);
+              // vd($hosts);
               foreach ($hosts as $host) {
                   $hostid = $host->hostid;
                   $hostname = $host->name;
@@ -85,10 +97,12 @@ class Server extends CI_Controller {
                   $hostip = $host->interfaces[0]->ip;
 
                   if($hoststatus == 0){
+                    // var_dump(array_key_exists($hostid, $hostTriggers));
                       if (array_key_exists($hostid, $hostTriggers)) {
+                        // vd($hostTriggers[$hostid][0]->lastchange);
                           $tempo_fora=time2string(time()-strtotime(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange)));
                           $data_alerta = date('Y-m-d H:i:s' ,$hostTriggers[$hostid][0]->lastchange);
-                          $detalhe = $hostTriggers[$hostid][0]->comments;
+                          $detalhe = macros($hostTriggers[$hostid][0]->comments);
                           $count = "0";
                           foreach ($hostTriggers[$hostid] as $event) {
                                   $id = $event->triggerid;
@@ -126,16 +140,42 @@ class Server extends CI_Controller {
                           $duration = "00:00:00";
                           $priority = "up";
                       }
-
                   }
+              }
+}
+              //consultar todos os alertas da tabela mnt_alertas no banco portal
+              $alertas = $this->server_model->select_server_fora();
+              // vd($alertas);
+              foreach($alertas as $alerta){
+                //consultar todos os alertas da tabela bug_tb no banco mantis
+                $projetos = $this->mantis_model->mantis_projetos();
+                // vd($projetos);
+                foreach ($projetos as $projeto) {
+                  if("servidor ".$alerta['servidor']." - servico ".$alerta['servico']."" == $projeto['RESUMO']){
+                  // if("servidor {$alerta['servidor']} - servico {$alerta['servico']}" == $projeto['RESUMO']) {
+                    echo "servidor ".$alerta['servidor']." - servico ".$alerta['servico']." RESUMO:".$projeto['RESUMO']."<br>";
+                      //update tabela com numeo mantis
+                      $this->server_model->update_server_fora(array('id'=> $alerta['id']),array('mantis' => $projeto['NUMERO_CHAMADO']));
+                  } else {
+                    // echo "ERRADO: servidor ".$alerta['servidor']." - servico ".$alerta['servico']." RESUMO:".$projeto['RESUMO']."<br>";
+                  }
+                }
               }
               // vd($alert);
               //deleta todos que não estão alertando
               $this->zabbix_model->delete_zabbix_server($alert);
-
           } else {
               echo "SCRIPT DESABILITADO NO BANCO DE DADOS";
           }
+      }
+
+
+      public function teste() {
+        $unixtime = '0';
+        // $unixtime = '1548355975';
+        echo time2string(time()-strtotime(date('Y-m-d H:i:s', $unixtime)));
+
+        // echo macros($string);
       }
 
 }

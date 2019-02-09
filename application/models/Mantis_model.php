@@ -123,6 +123,25 @@ class Mantis_model extends CI_Model {
         return $equip;
     }
 
+
+    public function mantis_projetos_producao() {
+        $mantis = $this->load->database('mantis', true);
+        $sql = "    SELECT id numero_chamado, summary as resumo, project_id
+                    FROM mantis_bug_tb
+                    WHERE status not in (60,80,90)
+                    AND PROJECT_ID in (SELECT A.ID FROM mantis_project_tb a
+                                        LEFT JOIN mantis_project_hierarchy_tb b ON a.id = b.child_id
+                                        WHERE A.ENABLED = 1
+                                        start with a.id = 4041
+                                        connect by b.parent_id = prior a.id)
+                    AND extract(month from DATE_SUBMITTED) = extract(month from sysdate)
+                    ORDER BY numero_chamado DESC";
+        $stmt = oci_parse($mantis->conn_id,$sql);
+        oci_execute($stmt, OCI_NO_AUTO_COMMIT);
+        oci_fetch_all($stmt,$equip,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+        return $equip;
+    }
+
     public function projetos_mantis($id) {
         $mantis = $this->load->database('monitora', true);
         $sql = "SELECT A.ID, A.NAME
