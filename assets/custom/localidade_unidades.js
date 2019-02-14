@@ -35,12 +35,12 @@ $(document).ready(function() {
           "targets": [ -1 ], //last column
           "orderable": false, //set not orderable
       },{ "width": "15%", "targets": 0 },//id
-      { "width": "8%", "targets": 1 },//telefone
+      { "width": "9%", "targets": 1 },//telefone
       { "width": "4%", "targets": 2 },//voip
       { "width": "7%", "targets": 3 },//ip
       { "width": "7%", "targets": 4 },//designacao
       { "width": "14%", "targets": 5 },//tecnico
-      // { "width": "14%", "targets": 6 },//servidor
+      { "width": "14%", "targets": 6 },//servidor
       { "width": "5%", "targets": 7 },//status
       { "width": "11%", "targets": 8 }],//acao
     });

@@ -49,8 +49,6 @@ class Server extends CI_Controller {
                               </a>';
               } else { //se não possui mantis
                   $status = $this->mantis_model->mantis($server['mantis']);
-                  $array_color = array(50 => "primary", 10 => "danger", 20 => "retorno", 40 => "autorizado", 30 => "impedido", 80 => "warning", 90 => "");
-                  //10-novo-vermelho  20-retorno-vermelho escuro  30-impedido-roxo  40-autorizado-amarelo  50-atribuido-azul  80-realizado-laranja
                   $flag = '';
                   $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$server['mantis'].'" class = "label label-'.color_mantis($status->STATUS).'" target="_blank">'.$server['mantis'].'</a>';
               }

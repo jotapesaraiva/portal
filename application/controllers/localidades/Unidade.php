@@ -153,7 +153,7 @@ class Unidade extends CI_Controller {
            } else {
             $row[] = '<span class="label label-sm label-danger"> Desativado. </span>';
            }
-           $unidade->status_unidade;
+           // $unidade->status_unidade;
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Editar" onclick="edit_person('."'".$unidade->id_unidade."'".')"><i class="glyphicon glyphicon-pencil"></i></a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Deletar" onclick="delete_person('."'".$unidade->id_unidade."'".')"><i class="glyphicon glyphicon-trash"></i></a>
                      <a class="btn blue btn-outline sbold" href="javascript:void(0)" title="Info" onclick="view_person('."'".$unidade->id_unidade."'".')"><i class="glyphicon glyphicon-info-sign"></i></a>';
@@ -256,6 +256,11 @@ class Unidade extends CI_Controller {
        echo json_encode($data);
     }
 
+
+
+
+
+
     public function unidade_view($id) {
         $unidade  = $this->unidade_model->listar_unidade($id);
         $link     = $this->unidade_model->listar_link($id);
@@ -272,35 +277,38 @@ class Unidade extends CI_Controller {
                 'voip_tecnico' => ''
             );
         } else {
-            $celulares = $this->usuario_model->edit_usuario_telefone($tec->id_usuario,2);
-            if($celulares == null) {
+            $celulares = $this->usuario_model->list_usuario_telefone($tec->id_usuario,2);
+            if($celulares[0]['telefone'] == NULL) {
                 $cel = "";
             } else {
-                  $cel = "";
+                  $cel = $celulares[0]['telefone'];
+                  // $cel = "";
                   // vd($celulares);
-                  foreach($celulares as $celular) {
-                   $cel .= $celular->numero_telefone. ', ';
-                  }
+                  // foreach($celulares as $celular) {
+                  //  $cel .= $celular->numero_telefone. ', ';
+                  // }
             }
-            $telefones = $this->usuario_model->edit_usuario_telefone($tec->id_usuario,1);
-            if($telefones == null) {
+            $telefones = $this->usuario_model->list_usuario_telefone($tec->id_usuario,1);
+            if($telefones[0]['telefone'] == NULL) {
                 $tel = "";
             } else {
-                  $tel = "";
-                  // vd($telefones);
-                  foreach($telefones as $telefone) {
-                   $tel .= $telefone->numero_telefone. ', ';
-                  }
+                  $tel = $telefones[0]['telefone'];
+                  // $tel = "";
+                  // // vd($telefones);
+                  // foreach($telefones as $telefone) {
+                  //  $tel .= $telefone->numero_telefone. ', ';
+                  // }
             }
-            $voips = $this->usuario_model->edit_usuario_telefone($tec->id_usuario,3);
-            if($voips == null) {
+            $voips = $this->usuario_model->list_usuario_telefone($tec->id_usuario,3);
+            if($voips[0]['telefone'] == NULL) {
                 $vp = "";
             } else {
-                  $vp = "";
-                  // vd($voips);
-                  foreach($voips as $voip) {
-                   $vp .= $voip->numero_telefone. ', ';
-                  }
+                  $vp = $voips[0]['telefone'];
+                  // $vp = "";
+                  vd($voips);
+                  // foreach($voips as $voip) {
+                  //  $vp .= $voip->numero_telefone. ', ';
+                  // }
             }
             $row = array(
                 'id_tecnico' => $tec->id_usuario,
@@ -325,35 +333,38 @@ class Unidade extends CI_Controller {
               'voip_servidor' => ''
           );
       } else {
-          $celulares = $this->usuario_model->edit_usuario_telefone($serv->id_usuario,2);
-          if($celulares == null) {
+          $celulares = $this->usuario_model->list_usuario_telefone($serv->id_usuario,2);
+          if($celulares[0]['telefone'] == NULL) {
               $cel = "";
           } else {
-                $cel = "";
-                // vd($celulares);
-                foreach($celulares as $celular) {
-                 $cel .= $celular->numero_telefone. ', ';
-                }
+                $cel = $celulares[0]['telefone'];
+                // $cel = "";
+                // // vd($celulares);
+                // foreach($celulares as $celular) {
+                //  $cel .= $celular->numero_telefone. ', ';
+                // }
           }
-          $telefones = $this->usuario_model->edit_usuario_telefone($serv->id_usuario,1);
-          if($telefones == null) {
+          $telefones = $this->usuario_model->list_usuario_telefone($serv->id_usuario,1);
+          if($telefones[0]['telefone'] == NULL) {
               $tel = "";
           } else {
-                $tel = "";
-                // vd($telefones);
-                foreach($telefones as $telefone) {
-                 $tel .= $telefone->numero_telefone. ', ';
-                }
+                $tel = $telefones[0]['telefone'];
+                // $tel = "";
+                // // vd($telefones);
+                // foreach($telefones as $telefone) {
+                //  $tel .= $telefone->numero_telefone. ', ';
+                // }
           }
-          $voips = $this->usuario_model->edit_usuario_telefone($serv->id_usuario,3);
-          if($voips == null) {
+          $voips = $this->usuario_model->list_usuario_telefone($serv->id_usuario,3);
+          if($voips[0]['telefone'] == NULL) {
               $vp = "";
           } else {
-                $vp = "";
-                // vd($voips);
-                foreach($voips as $voip) {
-                 $vp .= $voip->numero_telefone. ', ';
-                }
+                $vp = $voips[0]['telefone'];
+                // $vp = "";
+                // // vd($voips);
+                // foreach($voips as $voip) {
+                //  $vp .= $voip->numero_telefone. ', ';
+                // }
           }
           $row = array(
               'id_servidor' => $serv->id_usuario,
@@ -381,6 +392,9 @@ class Unidade extends CI_Controller {
       // vd($data);
       echo json_encode($data);
     }
+
+
+
 
     public function unidades_update() {
        $this->unidades_validate();
@@ -467,6 +481,9 @@ class Unidade extends CI_Controller {
        echo json_encode(array("status" => TRUE));
     }
 
+
+
+
     public function unidades_delete($id) {
        $this->unidade_model->delete_unidade_telefone($id);
        $this->unidade_model->delete_unidade($id);
@@ -482,6 +499,9 @@ class Unidade extends CI_Controller {
       $this->telefonia_model->delete_telefone($id_telefone);
       echo json_encode(array("status" => TRUE));
     }
+
+
+
 
     public function listar_voip() {
        $data = $this->voip_model->listar_ramal();
@@ -499,6 +519,8 @@ class Unidade extends CI_Controller {
         $data = $this->fornecedor_model->listar_fornecedor();
         echo json_encode($data->result());
     }
+
+
 
     private function unidades_validate(){
             $data = array();

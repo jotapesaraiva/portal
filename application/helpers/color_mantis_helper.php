@@ -7,9 +7,9 @@ if ( ! function_exists('color_mantis')){
             20 => "retorno",//retorno-vermelho escuro
             40 => "autorizado",//autorizado-amarelo
             30 => "impedido",//impedido-roxo
-            80 => "warning",//realizado-laranja
+            80 => "success",//realizado-laranja
             90 => "default",//indeferido cinza
-            60 => "success"//resolvido- verde green-meadow  green-haze
+            60 => "warning"//resolvido- verde green-meadow  green-haze
         );
         return $array_color[$color];
     }

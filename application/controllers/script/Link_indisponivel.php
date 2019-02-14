@@ -171,7 +171,7 @@ class Link_indisponivel extends CI_Controller {
                   $projetos = $this->mantis_model->mantis_projetos_producao();
                   // vd($projetos);
                   foreach ($projetos as $projeto) {
-                    if("Problema de Link: ".$alerta['ticket']." - ".$alerta['servidor']."" == $projeto['RESUMO']){
+                    if(trim("Problema de Link: ".$alerta['ticket']." - ".$alerta['servidor']."") == trim($projeto['RESUMO'])){
 
                     // if("servidor {$alerta['servidor']} - servico {$alerta['servico']}" == $projeto['RESUMO']) {
                       echo "Problema de Link: ".$alerta['ticket']." - ".$alerta['servidor']." RESUMO:".$projeto['RESUMO']."<br>";

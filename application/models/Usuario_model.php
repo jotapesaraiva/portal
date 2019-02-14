@@ -129,6 +129,18 @@ class Usuario_model extends CI_Model{
         return $query-> result();
     }
 
+    public function list_usuario_telefone($id_usuario,$categoria) {
+        $default = $this->load->database('default',true);
+        $default->select('GROUP_CONCAT(t.numero_telefone ORDER BY t.numero_telefone SEPARATOR ", " ) AS telefone');
+        $default->from('tbl_usuario u');
+        $default->join('tbl_usuario_telefone ut','ut.id_usuario=u.id_usuario');
+        $default->join('tbl_telefone t','t.id_telefone=ut.id_telefone');
+        $default->where('u.id_usuario',$id_usuario);
+        $default->where('t.id_tipo_categoria_telefone',$categoria);
+        $query = $default->get();
+        return $query-> result_array();
+    }
+
     public function delete_usuario($id){
         $portal_db = $this->load->database('default',true);
         $portal_db->where('id_usuario', $id);

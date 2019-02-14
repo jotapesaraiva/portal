@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    <div class="portlet-body">
                     <div class="table-toolbar">
                         <div class="row">
-                            <div class="col-md-offset-3 col-md-2"><label for="" class="control-label"><b>Pesquisar por Periodo:</b></label></div>
+                            <div class="col-md-offset-3 col-md-2"><label for="" class="control-label bold">Pesquisar por Periodo:</label></div>
                             <div class="col-md-2">
                                 <form method="post" name="myform" action="<?php $_SERVER['PHP_SELF']?>">
                                   <select name="myselect" class="selectpicker" onchange='this.form.submit()'>

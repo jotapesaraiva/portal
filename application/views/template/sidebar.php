@@ -444,10 +444,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </ul>
                                 </li>
                             </ul>
+
                         </li>
                         <?php }?>
                     </ul>
                 </li>
+
+                <!--############# ABA MANTIS ############-->
+                <li class="nav-item <?php echo active_segment(1,'mantis'); ?>">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="fa fa-link"></i>
+                        <span class="title">Mantis</span>
+                        <?php echo span_segment(1,'mantis'); ?>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <!--############# ABA MANTIS > Sustentacao ############-->
+                        <?php if($this->auth_ad->level_access('sustentacao',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'sustentacao'); ?>">
+                            <?php echo anchor('mantis/sustentacao', '<i class="fa fa-history"></i> Sustentação', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'sustentacao'); ?>
+                        </li>
+                        <!--############# ABA MANTIS > Evolutiva ############-->
+                        <?php } if($this->auth_ad->level_access('evolutiva',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'evolutiva'); ?>">
+                            <?php echo anchor('mantis/evolutiva', '<i class="fa fa-calculator"></i> Evolutiva', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'evolutiva  '); ?>
+                        </li>
+                        <!--############# ABA MANTIS > Projetos ############-->
+                        <?php } if($this->auth_ad->level_access('projetos',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'projetos'); ?>">
+                            <?php echo anchor('mantis/projetos', '<i class="fa fa-bar-chart"></i> Projeto/Manu. Assistida', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'projetos'); ?>
+                        </li>
+                        <?php }?>
+                    </ul>
 
                 <li class="heading">
                     <h3>LINKS / APPS</h3>

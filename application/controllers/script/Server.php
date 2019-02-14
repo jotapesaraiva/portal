@@ -49,7 +49,7 @@ class Server extends CI_Controller {
                   // 'selectGroups'=> 'extend',
               'selectInterfaces' => array('ip'),
               // 'selectInventory' => array('location_lat','location_lon'),
-              'groupids' => array(20,18,2,15,17) //20,18,2,15,17 - novo zabbix (servidores windows,linux,descentralizados,email,weblogic)
+              'groupids' => array(20,18,2,15,17,19) //20,18,2,15,17 - novo zabbix (servidores windows,linux,descentralizados,email,weblogic)
               //8,11,14,21,31 - antigo zabbix(servers windows, regionais, linux)
             ));
 
