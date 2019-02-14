@@ -37,7 +37,7 @@ class Server extends CI_Controller {
           // vd($servers_fora);
           //percorrer o array da consulta
           foreach ($servers_fora as $server) {
-              $hostid   = $server['host_id'];
+              $hostid   = $server['id'];
               $ip       = $server['ip'];
               $duration = $server['duration'];
               $servico   = $server['servico'];

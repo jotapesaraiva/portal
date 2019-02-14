@@ -151,7 +151,7 @@ class Server extends CI_Controller {
                 $projetos = $this->mantis_model->mantis_projetos();
                 // vd($projetos);
                 foreach ($projetos as $projeto) {
-                  if("servidor ".$alerta['servidor']." - servico ".$alerta['servico']."" == $projeto['RESUMO']){
+                  if("servidor ".$alerta['servidor']." - servico ".$alerta['servico']."" == $projeto['RESUMO'] || $alerta['']){
                   // if("servidor {$alerta['servidor']} - servico {$alerta['servico']}" == $projeto['RESUMO']) {
                     echo "servidor ".$alerta['servidor']." - servico ".$alerta['servico']." RESUMO:".$projeto['RESUMO']."<br>";
                       //update tabela com numeo mantis

@@ -40,6 +40,7 @@ $(document).ready(function() {
 
     $('select#selector').change(function() {
         value = $(this).val();
+        console.log(value);
         table.ajax.url( server+"/datatable_list/"+ value ).load();
     });
 });

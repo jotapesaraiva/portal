@@ -116,7 +116,7 @@ class Zabbix_model extends CI_Model {
         $portal_db = $this->load->database('default',true);
         $portal_db->select('*');
         $portal_db->from('zbx_server_fora');
-        $portal_db->where('host_id',$id);
+        $portal_db->where('id',$id);
         $query = $portal_db->get();
         return $query->row();
     }

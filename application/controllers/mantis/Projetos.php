@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Projetos extends CI_Controller {
 
 
-    public function __construct(){
+    public function __construct() {
         parent::__construct();
         //Do your magic here
         $this->load->model('analise_model');
@@ -49,33 +49,39 @@ class Projetos extends CI_Controller {
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
 
-        $evolutivas = $this->analise_model->evolutiva($value);
+        $projetos = $this->analise_model->projetos($value);
 
         $data = array();
         $cont = 1;
-        foreach ($evolutivas->result_array() as $evol) {
+        foreach ($projetos->result_array() as $proj) {
             $row = array();
             $row[] = $cont++;
-            $row[] = "<a href = 'http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$evol['ID']." 'target='_blank'> ".$evol['ID']." </a>";
-            // $row[] = $evol['DATE_SUBMITTED'];
-            $row[] = $evol['LAST_UPDATED'];
-            // $evol['STATUS']
-            $row[] = '<a class="label label-'.color_mantis($evol['STATUS']).'">'.$evol['STATUS_DESCRIPTION'].'</a>';
-            $row[] = '<a class="label label-'.priority_mantis($evol['PRIORITY']).'">'.priority_name($evol['PRIORITY']).'</a>';
-            $row[] = $evol['SUMMARY'];
-            $row[] = $evol['CATEGORY'];
-            $row[] = $evol['USERNAME'];
-            $row[] = $evol['SOLICITANTE'];
-            // $row[] = $evol['NAME'];
+            $row[] = "<a href = 'http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$proj['ID']." 'target='_blank'> ".$proj['ID']." </a>";
+            $row[] = $proj['DATE_SUBMITTED'];
+            // $proj['STATUS']
+            $row[] = '<a class="label label-'.color_mantis($proj['STATUS']).'">'.$proj['STATUS_DESCRIPTION'].'</a>';
+            $row[] = '<a class="label label-'.priority_mantis($proj['PRIORITY']).'">'.priority_mantis($proj['PRIORITY']).'</a>';
+            $row[] = $proj['SUMMARY'];
+            $row[] = $proj['CATEGORY'];
+            $row[] = $proj['USERNAME'];
+            $row[] = $proj['SOLICITANTE'];
+            $row[] = $proj['PLANEJADO'];
+            $row[] = $proj['PRIORIZADO'];
             $data[] = $row;
         }
             $output = array (
                 "draw"            => $draw,
-                "recordsTotal"    => $evolutivas->num_rows(),
-                "recordsFiltered" => $evolutivas->num_rows(),
+                "recordsTotal"    => $projetos->num_rows(),
+                "recordsFiltered" => $projetos->num_rows(),
                 "data"            => $data,
             );
             echo json_encode($output);
+    }
+
+    public function teste()
+    {
+        $status = $this->analise_model->status();
+        vd($status->result());
     }
 
 }

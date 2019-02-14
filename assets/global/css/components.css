@@ -7636,23 +7636,110 @@ Customized Bootstrap Labels
   .label-danger[href]:focus {
     background-color: #e73d4a; }
 
-.label-retorno {
-  background-color: #e43a45; }
-  .label-danger[href]:hover,
-  .label-danger[href]:focus {
-    background-color: #D91E18; }
+.label-normal{
+  background-color: #79c530;
+  color: #000000b3; }
+  .label-normal[href]:hover,
+  .label-normal[href]:focus {
+    background-color: #74c823; }
 
-.label-autorizado {
-  background-color: #F4D03F; }
-  .label-danger[href]:hover,
-  .label-danger[href]:focus {
-    background-color: #f3c200; }
+.label-alta{
+  background-color: #f9dc06;
+  color: #000000b3; }
+  .label-alta[href]:hover,
+  .label-alta[href]:focus {
+    background-color: #f9dc06; }
+
+.label-urgente{
+  background-color: #ffb950;
+  color: #000000b3; }
+  .label-urgente[href]:hover,
+  .label-urgente[href]:focus {
+    background-color: #f6C826; }
+
+.label-imediato{
+  background-color: #ed6b75;
+  color: #000000b3; }
+  .label-imediato[href]:hover,
+  .label-imediato[href]:focus {
+    background-color: #e73d4a; }
+
+.label-novo {
+  background-color: #fc7878;
+  color: #000000b3; }
+  .label-novo[href]:hover,
+  .label-novo[href]:focus {
+    background-color: #f35b5b; }
+
+.label-analise {
+  background-color: #ffcd85;
+  color: #000000b3; }
+  .label-analise[href]:hover,
+  .label-analise[href]:focus {
+    background-color: #ECA25E; }
+
+.label-retorno {
+  background-color: #e66262;
+  color: #000000b3; }
+  .label-retorno[href]:hover,
+  .label-retorno[href]:focus {
+    background-color: #E8332F; }
 
 .label-impedido {
-  background-color: #9B59B6; }
-  .label-danger[href]:hover,
-  .label-danger[href]:focus {
-    background-color: #8E44AD; }
+  background-color: #BF82CC;
+  color: #000000b3; }
+  .label-impedido[href]:hover,
+  .label-impedido[href]:focus {
+    background-color: #E7B0F3; }
+
+.label-autorizado {
+  background-color: #ffd850;
+  color: #000000b3; }
+  .label-autorizado[href]:hover,
+  .label-autorizado[href]:focus {
+    background-color: #F6C826; }
+
+.label-notificado {
+  background-color: #ffdab9;
+  color: #000000b3; }
+  .label-notificado[href]:hover,
+  .label-notificado[href]:focus {
+    background-color: #FEC456; }
+
+.label-atribuido {
+  background-color: #4fa1fc;
+  color: #000000b3; }
+  .label-atribuido[href]:hover,
+  .label-atribuido[href]:focus {
+    background-color: #3a8de9; }
+
+.label-realizado {
+  background-color: #ffb950;
+  color: #000000b3; }
+  .label-realizado[href]:hover,
+  .label-realizado[href]:focus {
+    background-color: #f8c271; }
+
+.label-inconcluso {
+  background-color: #DEB887;
+  color: #000000b3; }
+  .label-inconcluso[href]:hover,
+  .label-inconcluso[href]:focus {
+    background-color: #DBB04D; }
+
+.label-resolvido {
+  background-color: #79c530;
+  color: #000000b3; }
+  .label-resolvido[href]:hover,
+  .label-resolvido[href]:focus {
+    background-color: #74c823; }
+
+.label-indeferido {
+  background-color: #a19e9e;
+  color: #000000b3; }
+  .label-indeferido[href]:hover,
+  .label-indeferido[href]:focus {
+    background-color: #c5c2c2; }
 
 /***
 Iconic labels

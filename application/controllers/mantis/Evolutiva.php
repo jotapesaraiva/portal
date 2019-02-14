@@ -57,7 +57,7 @@ class Evolutiva extends CI_Controller {
             $row[] = $evol['LAST_UPDATED'];
             // $evol['STATUS']
             $row[] = '<a class="label label-'.color_mantis($evol['STATUS']).'">'.$evol['STATUS_DESCRIPTION'].'</a>';
-            $row[] = '<a class="label label-'.priority_mantis($evol['PRIORITY']).'">'.priority_name($evol['PRIORITY']).'</a>';
+            $row[] = '<a class="label label-'.priority_mantis($evol['PRIORITY']).'">'.priority_mantis($evol['PRIORITY']).'</a>';
             $row[] = $evol['SUMMARY'];
             $row[] = $evol['CATEGORY'];
             $row[] = $evol['USERNAME'];
