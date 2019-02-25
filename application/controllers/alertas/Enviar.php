@@ -157,7 +157,7 @@ Ramal: 4994/4984
                 $table =$this->input->post('tabela');
                 break;
             case '4'://CGPS - Proj. Manu. Assistida
-                $projeto   = 'Projetos/Man.Assistida';
+                $projeto   = 'Operação Assistida';
                 $categoria = 'Alertas de Produção';
                 $procedore = 'STP_RELT_CASO_DEMANDAS_CGPS';
                 $parametros = "IN_CF_TIPO_DEMAND => 'Manutenção Corretiva',
@@ -209,6 +209,10 @@ Ramal: 4994/4984
             'servico'   => $this->input->post('alerta'),//resumo do mantis
             'detalhe'   => $this->input->post('detalhe')//descriçao do mantis
         );
+        // echo $procedore;
+        // echo "<br>";
+        // echo $parametros;
+        // echo "<br>";
         // vd($params);
         //load da procedore passando as variaveis e armazenando em uma variavel
         $this->mantis_model->abrir_mantis_teste($params,$procedore,$parametros);
@@ -216,7 +220,7 @@ Ramal: 4994/4984
         //atualizo a tabela do backup ou zabbix com o numero do mantis
         $this->mantis_model->update_num_mantis($table,array('mantis' => $resultado), array('id' => $this->input->post('id')));
         //retorno para dashboard
-        redirect('welcome');
+        redirect('dashboard/producao');
     }
 
     public function select_option($dados) {

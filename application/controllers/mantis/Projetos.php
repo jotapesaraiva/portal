@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Projetos extends CI_Controller {
 
-
     public function __construct() {
         parent::__construct();
         //Do your magic here
@@ -23,7 +22,7 @@ class Projetos extends CI_Controller {
             <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/mantis/evolutiva.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/mantis/projetos.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/daterangepicker.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '';
@@ -32,13 +31,13 @@ class Projetos extends CI_Controller {
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Mantis</span>','/mantis');
-        $this->breadcrumbs->push('<span>Evolutiva</span>','mantis/evolutiva');
+        $this->breadcrumbs->push('<span>Evolutiva</span>','mantis/projetos');
 
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('mantis/evolutiva');
+        $this->load->view('mantis/projetos');
 
         $this->load->view('template/footer',$script);
     }
@@ -52,10 +51,10 @@ class Projetos extends CI_Controller {
         $projetos = $this->analise_model->projetos($value);
 
         $data = array();
-        $cont = 1;
+        // $cont = 1;
         foreach ($projetos->result_array() as $proj) {
             $row = array();
-            $row[] = $cont++;
+            // $row[] = $cont++;
             $row[] = "<a href = 'http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$proj['ID']." 'target='_blank'> ".$proj['ID']." </a>";
             $row[] = $proj['DATE_SUBMITTED'];
             // $proj['STATUS']

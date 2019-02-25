@@ -75,7 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                    <th> Unidade </th>
                                    <th> VoIP </th>
                                    <th> IP </th>
-                                   <th> Descrição </th>
+                                   <th> Setor </th>
                                    <th> Equipamento </th>
                                    <th> Categoria </th>
                                    <th> Contexto </th>

@@ -73,7 +73,7 @@ class Auth extends CI_Controller{
                 $status = $this->login_database->status_user($this->session->userdata('displayname'));
                 if(isset($status)){
                     $status = $status->status_usuario;
-                }else{
+                } else {
                     $status = '0';
                 }
                 $data = array(
@@ -97,7 +97,40 @@ class Auth extends CI_Controller{
                 // $this->session->userdata('dn') contains the distinguished name from the AD
                 // $this->session->userdata('logged_in') contains a boolean (true)
                 set_msg('loginOk','Logado com sucesso no sistema !!!','sucesso');
-                redirect('welcome');
+                switch ($group) {
+                    case 1://'CGRE-Produção':
+                        redirect('dashboard/producao');
+                        break;
+                    case 3://'CGRE-Rede':
+                         redirect('dashboard/rede');
+                        break;
+                    case 2://'CGRE-InfraEstrutura':
+                         // redirect('dashboard/infra');
+                         redirect('dashboard/producao');
+                        break;
+                    case 4://'CGDA-Banco':
+                        redirect('dashboard/banco');
+                        break;
+                    case 7://'CGAQ-SACS':
+                         redirect('dashboard/sacs');
+                        break;
+                    case 6://'CGAQ-Manutenção':
+                         redirect('dashboard/manutencao');
+                        break;
+                    case 5://'CGAQ-Tecnico':
+                         redirect('dashboard/manutencao');
+                        break;
+                    case 8://'CGPS':
+                         redirect('dashboard/cgps');
+                        break;
+                    case 9://'DTI-GERENTES':
+                         redirect('dashboard/dti');
+                        break;
+                    default:
+                        redirect('dashboar/default');
+                        break;
+                }
+                // redirect('welcome');
             } else {
                 // user could not be authenticated, whoops.
                 // $data = array('error_message' => 'Usuário ou senha inserido errado');
@@ -255,26 +288,35 @@ class Auth extends CI_Controller{
         public function pesquisar($username) {
             // $result = $this->auth_ad->search_ad($username, array('dn'),TRUE);
             $entries = $this->auth_ad->auto_search($username);
+
+            $data = array();
+            foreach ($entries as $key => $value) {
+              $row = array();
+              $row[]     = $entries[$key]["displayname"][0];
+              $row[]   = $entries[$key]["samaccountname"][0];
+              $data[] = $row;
+            }
+
             // vd($entries);
             // echo json_encode($entries);
-            $ad_users = "";
-            for ($x=0; $x<$entries['count']; $x++) {
-                if (!empty($entries[$x]['givenname'][0]) &&
-                     !empty($entries[$x]['mail'][0]) &&
-                     !empty($entries[$x]['samaccountname'][0]) &&
-                     !empty($entries[$x]['sn'][0]) &&
-                     'Shop' !== $entries[$x]['sn'][0] &&
-                     'Account' !== $entries[$x]['sn'][0]){
+            // $ad_users = "";
+            // for ($x=0; $x<$entries['count']; $x++) {
+            //     if (!empty($entries[$x]['givenname'][0]) &&
+            //          !empty($entries[$x]['mail'][0]) &&
+            //          !empty($entries[$x]['samaccountname'][0]) &&
+            //          !empty($entries[$x]['sn'][0]) &&
+            //          'Shop' !== $entries[$x]['sn'][0] &&
+            //          'Account' !== $entries[$x]['sn'][0]){
 
-                    // $ad_users[strtoupper(trim($entries[$x]['samaccountname'][0]))] = array('email' => strtolower(trim($entries[$x]['mail'][0])),'first_name' => trim($entries[$x]['givenname'][0]),'last_name' => trim($entries[$x]['sn'][0]));
-                    $ad_users .= '<ul>
-                                   <li>'.strtoupper(trim($entries[$x]['samaccountname'][0])).'</li>
-                                </ul>';
-                }
-            }
+            //         // $ad_users[strtoupper(trim($entries[$x]['samaccountname'][0]))] = array('email' => strtolower(trim($entries[$x]['mail'][0])),'first_name' => trim($entries[$x]['givenname'][0]),'last_name' => trim($entries[$x]['sn'][0]));
+            //         $ad_users .= '<ul>
+            //                        <li>'.strtoupper(trim($entries[$x]['samaccountname'][0])).'</li>
+            //                     </ul>';
+            //     }
+            // }
             // vd($ad_users);
-            echo $ad_users;
-            // echo json_encode($ad_users);
+            // echo $ad_users;
+            echo json_encode($data);
         }
 
 

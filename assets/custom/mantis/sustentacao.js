@@ -28,15 +28,13 @@ $(document).ready(function() {
               // "targets": [ -1 ], //last column
               // "orderable": false, //set not orderable
           },{ "width": "2%", "targets": 0 },//numero
-          { "width": "2%", "targets": 1 },//data abertura
+          { "width": "2%", "targets": 1 },//atualizacao
           { "width": "4%", "targets": 2 },//status
-          { "width": "2%", "targets": 3 },//criticidade
+          { "width": "2%", "targets": 3 },//prioridade
           { "width": "16%", "targets": 4 },//descricao
           { "width": "8%", "targets": 5 },//categoria
           { "width": "11%", "targets": 6 },//atribuido
-          { "width": "11%", "targets": 7 },//solicitante
-          { "width": "3%", "targets": 8 },//planejado
-          { "width": "11%", "targets": 9 }],//priozado
+          { "width": "11%", "targets": 7 }],//solicitante
     });
 
     $('select#selector').change(function() {

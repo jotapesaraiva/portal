@@ -138,7 +138,7 @@ class Link_indisponivel extends CI_Controller {
                                 'duration' => $tempo_fora
                             );//salva os link fora na tabela zbx_link_fora.
                             $this->zabbix_model->duplicate_zabbix_grc($save_db);
-                            print_r($save_db);
+                            // print_r($save_db);
                             array_push($alert,$id);
                             //consulta na tabela ebt_grc
                             $grc = $this->zabbix_model->list_grc_link($hostdesignacao);
@@ -176,7 +176,7 @@ class Link_indisponivel extends CI_Controller {
                     // if("servidor {$alerta['servidor']} - servico {$alerta['servico']}" == $projeto['RESUMO']) {
                       echo "Problema de Link: ".$alerta['ticket']." - ".$alerta['servidor']." RESUMO:".$projeto['RESUMO']."<br>";
                         //update tabela com numeo mantis
-                        $this->link_model->update_link_fora(array('id'=> $alerta['id']),array('mantis' => $projeto['NUMERO_CHAMADO']));
+                        $this->link_model->update_link_fora(array('id'=> $alerta['id']),array('ticket' => $projeto['TICKET'],'mantis' => $projeto['NUMERO_CHAMADO']));
                     }else{
                       // echo "ERRADO: Problema de Link: ".$alerta['ticket']." - ".$alerta['servidor']." RESUMO:".$projeto['RESUMO']."<br>";
                     }

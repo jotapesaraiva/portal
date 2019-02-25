@@ -25,7 +25,7 @@ Lista de tarefas pendentes para resolver
 
 //FIXME: OK Os campos do abrir mantis em servidores os campos não estão sendo zerados para inserir nos dados.
 
-//TODO: Criar formulario de abrir mantis do monitora.
+//TODO: OK Criar formulario de abrir mantis do monitora.
 
 //TODO: OK Criar menu para download dos graficos.
 
@@ -33,7 +33,7 @@ Lista de tarefas pendentes para resolver
 
 //TODO: OK Criar tabela dos alertas do monitora no banco do portal
 
-//TODO: Realizar backup automatico do banco de dados e do site.
+//TODO: OK Realizar backup automatico do banco de dados e do site.
 
 //TODO: Realizar alteração de arquivos de configuração do codeigniter
 
@@ -49,20 +49,19 @@ Lista de tarefas pendentes para resolver
 
 //TODO: OK Implementar opção nos graficos o menu de mes e ano.
 
-//TODO: Implementação Abertura de mantis para os alertas.
+//TODO: OK Implementação Abertura de mantis para os alertas.
 
-//NOTE: Verificar se há a necessidade de ter
 
 //NOTE: Ramais - DTI / SEFA
 
 //NOTE: Validação de backups
 
-//NOTE: Rotina de backups
+//NOTE: NÂO Rotina de backups
 
-//NOTE: Janela de backups
+//NOTE: OK Janela de backups
 
-//NOTE: Impressora c2a
+//NOTE: NÂO Impressora c2a
 
-//NOTE: Jobs
+//NOTE: NÂO Jobs
 
-//NOTE: Banco de dados alertas exports
+//NOTE: NÂO Banco de dados alertas exports

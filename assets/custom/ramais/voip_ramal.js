@@ -89,7 +89,7 @@
               $('[name="id_telefone"]').val(data.id_telefone);
               $('[name="voip"]').val(data.numero_telefone);
               $('[name="ip"]').val(data.ip_telefone_voip);
-              $('[name="descricao"]').val(data.descricao_telefone_voip);
+              $('[name="setor"]').val(data.setor_telefone_voip);
               $('[name="equipamento"]').val(data.id_tipo_equipamento_voip);
               $('[name="categoria"]').val(data.id_tipo_categoria_voip);
               $('[name="contexto"]').val(data.id_tipo_contexto_voip);

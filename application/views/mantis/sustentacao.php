@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -27,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> Mantis Projetos Man. Assistida Pendentes / Resolvidas </span>
+                        <span class="caption-subject bold uppercase"> Mantis Sustentação Pendentes / Resolvidas </span>
                     </div>
                    </div>
                    <div class="portlet-body">
@@ -92,5 +93,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 
-<!-- /* End of file projetos.php */ -->
-<!-- /* Location: ./application/views/mantis/projetos.php */ -->
+<!-- /* End of file sustentacao.php */ -->
+<!-- /* Location: ./application/views/mantis/sustentacao.php */ -->

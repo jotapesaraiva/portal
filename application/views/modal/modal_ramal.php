@@ -39,9 +39,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Descrição :</label>
+                            <label class="control-label col-md-3">Setor :</label>
                             <div class="col-md-9">
-                                <input name="descricao" placeholder="Descrição" class="form-control" type="text">
+                                <input name="setor" placeholder="Setor" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">

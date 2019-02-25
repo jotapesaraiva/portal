@@ -146,9 +146,11 @@ class Auth_AD
                 'debug',
                 'Auth_AD: Successful login for ' . $entries['cn'][0] . '(' . $username . ') from IP ' . $this -> ci -> input -> ip_address()
             );
+            // foreach ($this->_admin_group as => $admin_group) {
+                // Check if the user is a member of the Domain Admins group
+                $is_admin = $this->in_group($username, $this-> _admin_group);
 
-            // Check if the user is a member of the Domain Admins group
-            $is_admin = $this -> in_group($username, $this -> _admin_group);
+            // }
 
             // Put useful user data into session
             $user_info = array(
@@ -230,10 +232,8 @@ class Auth_AD
     public function in_group($username, $groupname) {
         // preset the result
         $result = false;
-
         // preset the continuation marker
         $continue = true;
-
         // bind to the AD
         if (!$this -> bind_ad()) {
             $continue = false;
@@ -1039,6 +1039,7 @@ class Auth_AD
         // set up the search parameters
         //(&(objectCategory=person)(objectClass=user)(!userAccountControl:1.2.840.113556.1.4.803:=2))
         $filter = '(sAMAccountName=' . $this -> ldap_escape($account, false) . ')';
+        // $filter = $filter = '(&(objectClass=user)(objectCategory=person)(!userAccountControl:1.2.840.113556.1.4.803:=2)(samaccountname='.$account.'))';
         if ($from_root) {
             $search_dn = $this -> _base_dn;
         } elseif (strlen($this -> _start_ou) > 0) {
@@ -1130,8 +1131,7 @@ class Auth_AD
      * @access private
      * @return bool
      */
-    private function bind_ad()
-    {
+    private function bind_ad() {
         // preset the continuation marker
         $continue = true;
 

@@ -1,15 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access aloowed');
-
-/**/
-
-/*if (isset($this->session->userdata['logged_in'])) {
-    $username = ($this->session->userdata['logged_in']['username']);
-    $email = ($this->session->userdata['logged_in']['email']);
-} else {
-    redirect('painel/login');
-   // header("location: painel/login");
-}*/
-?>
+<?php defined('BASEPATH') OR exit('No direct script access aloowed');?>
 
 <!-- BEGIN HEADER -->
 <div style="height: 53px;" class="page-header navbar navbar-fixed-top">
@@ -17,7 +6,7 @@
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="<?php echo base_url(); ?>welcome">
+            <a href="<?php echo base_url(); ?>dashboard/producao">
                 <img src="<?php echo base_url(); ?>assets/layouts/layout/img/noc_logo.png" alt="logo" style="margin: 0 30px 0;" class="logo-default" /> </a>
             <div class="menu-toggler sidebar-toggler"> </div>
         </div>
@@ -25,16 +14,40 @@
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
         <!-- END RESPONSIVE MENU TOGGLER -->
+
         <!-- BEGIN TOP NAVIGATION MENU -->
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
+                <!-- BEGIN TODO DROPDOWN -->
+                <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                <li class="dropdown dropdown-extended">
+                    <a href="#" class="dropdown-toggle tooltips" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-placement="bottom" data-original-title="Ramais">
+                        <i class="fa fa-phone"></i>
+                    </a>
+                    <ul class="dropdown-menu" style="width:0px !important;">
+                        <li>
+                            <a href="javascript:;" onclick="ramais_dti()">Ramais DTI</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" onclick="ramais_sefa()">Ramais SEFA</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- END TODO DROPDOWN -->
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                <li class="dropdown dropdown-extended dropdown-inbox">
-                    <a href="javascript:void(0)" onclick="sobreaviso()" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                <li class="dropdown dropdown-extended">
+                    <a href="#" class="dropdown-toggle tooltips" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-placement="bottom" data-original-title="Sobreaviso">
                         <i class="icon-calendar"></i>
-                        <!-- <span class="badge badge-default"> 4 </span> -->
                     </a>
+                    <ul class="dropdown-menu" style="width:0px !important;">
+                        <li>
+                            <a href="javascript:;" onclick="sobreaviso()" >Sobreaviso do dia</a>
+                        </li>
+                        <li>
+                            <a href="https://producaoh.sefa.pa.gov.br/sobreaviso" target="_blank" >Sistema Sobreaviso</a>
+                        </li>
+                    </ul>
                 </li>
                 <!-- END INBOX DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -46,13 +59,11 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="page_user_profile_1.html">
-                                <i class="icon-user"></i> Meu Perfil </a>
+                            <a href="page_user_profile_1.html"><i class="icon-user"></i> Meu Perfil </a>
                         </li>
                         <li>
                             <a href="app_todo.html">
-                                <i class="icon-rocket"></i> Minhas Tarefas
-                                <span class="badge badge-success"> 7 </span>
+                                <i class="icon-rocket"></i> Minhas Tarefas <span class="badge badge-success"> 7 </span>
                             </a>
                         </li>
                         <li class="divider"> </li>

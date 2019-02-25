@@ -11,9 +11,7 @@ class Voip extends CI_Controller {
     public function index() {
         $this->output->enable_profiler(FALSE);
         $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/voip_ramal.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/ramais/voip_ramal.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
 
@@ -21,9 +19,7 @@ class Voip extends CI_Controller {
             <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>';
 
         $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
-            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
+            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
 
         $session['username'] = $this->session->userdata('username');
         $unidades = $this->unidade_model->listar_unidade();
@@ -53,7 +49,7 @@ class Voip extends CI_Controller {
        $draw = intval($this->input->get("draw"));
        $start = intval($this->input->get("start"));
        $length = intval($this->input->get("length"));
-
+       //Consulta no model voip_model da tabela tbl_telefone_voip
        $ramais = $this->voip_model->listar_ramal();
 
        $data = array();
@@ -64,7 +60,7 @@ class Voip extends CI_Controller {
            $row[] = $ramal->nome_unidade;
            $row[] = $ramal->numero_telefone;
            $row[] = $ramal->ip_telefone_voip;
-           $row[] = $ramal->descricao_telefone_voip;
+           $row[] = $ramal->setor_telefone_voip;
            $row[] = $ramal->nome_tipo_equipamento_voip;
            $row[] = $ramal->nome_tipo_categoria_voip;
            $row[] = $ramal->nome_tipo_contexto_voip;
@@ -88,12 +84,12 @@ class Voip extends CI_Controller {
             'numero_telefone' => $this->input->post('voip'),
             'id_tipo_categoria_telefone' => 4,
        );
-       //inseri os dados no tabela tbl_telefone e retorna o id.
+       //inserir os dados no tabela tbl_telefone e retorna o id.
        $id_telefone = $this->telefonia_model->save_telefone($telefone);
 
        $data = array(
             'ip_telefone_voip' => $this->input->post('ip'),
-            'descricao_telefone_voip' => $this->input->post('descricao'),
+            'setor_telefone_voip' => $this->input->post('setor'),
             'id_telefone' => $id_telefone,
             'id_tipo_categoria_voip' => $this->input->post('categoria'),
             'id_tipo_equipamento_voip' => $this->input->post('equipamento'),
@@ -135,7 +131,7 @@ class Voip extends CI_Controller {
       else{echo json_encode(array("status" => FALSE));}*/
        $voip = array(
             'ip_telefone_voip' => $this->input->post('ip'),
-            'descricao_telefone_voip' => $this->input->post('descricao'),
+            'setor_telefone_voip' => $this->input->post('setor'),
             'id_telefone' => $this->input->post('id_telefone'),
             'id_tipo_categoria_voip' => $this->input->post('categoria'),
             'id_tipo_equipamento_voip' => $this->input->post('equipamento'),

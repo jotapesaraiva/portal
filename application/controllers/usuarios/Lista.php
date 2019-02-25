@@ -12,8 +12,6 @@ class Lista extends CI_Controller {
         $this->output->enable_profiler(FALSE);
         $script['footerinc'] = '
             <script src="'. base_url() .'assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-            <script src="'. base_url() .'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-            <script src="'. base_url() .'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
             <script src="'. base_url() .'assets/custom/usuarios_lista.js" type="text/javascript"></script>
             <script src="'. base_url() .'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
             <script src="'. base_url() .'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
@@ -23,8 +21,6 @@ class Lista extends CI_Controller {
 
         $css['headerinc'] = '
             <link href="'. base_url() .'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
-            <link href="'. base_url() .'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="'. base_url() .'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
             <link href="'. base_url() .'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
             <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">';
 
@@ -339,5 +335,233 @@ class Lista extends CI_Controller {
                 exit();
             }
         }
+
+        public function pesquisa_ad(){
+          $this->load->view('teste/ad');
+        }
+
+
+        public function teste_ad($query = NULL) {
+            $ldap_server = "10.3.1.30";
+            $auth_user = "dokuwiki@sefa.pa.gov.br";
+            $auth_pass = "wikidoku";
+            $usuario = $query;
+
+            // Set the base dn to search the entire directory.
+            $base_dn = "OU=SEFA-PA,DC=sefa,DC=pa,DC=gov,DC=br";
+
+            // Show People
+            $filter = "(&(objectClass=user)(objectCategory=person)(cn=*)(displayname=$usuario*))";
+
+            //Usuarios sem grupo (apenas domain users):
+            //$filter = '(&(objectCategory=user)(objectClass=user)(!memberOf=*))'
+
+            //Usuarios sem e-mail
+            //$filter = '(objectcategory=person)(!mail=*)'
+
+            //Usuarios com e-mail
+            //$filter = '(objectcategory=person)(mail=*)'
+
+            //Usuarios que nunca fizeram logon no dominio
+            //$filter = '(&(&(objectCategory=person)(objectClass=user))(|(lastLogon=0)(!(lastLogon=*))))'
+
+            //Usuários Criados depois de 09/10/2011
+            //$filter = '(objectCategory=user)(whenCreated>=20111009000000.0Z)'; //Obs: troque o data por uma data da sua necessidade
+
+            //Usuários que precisam mudar a senha no próximo logon
+            //$filter = '(objectCategory=user)(pwdLastSet=0)';
+
+            //Usuários cuja senha nunca expira
+            //$filter = '(objectcategory=user)(userAccountControl:1.2.840.113556.1.4.803:=65536)';
+
+            //Usuarios Ativos
+            // $filter = "(&(objectClass=user)(objectCategory=person)(!userAccountControl:1.2.840.113556.1.4.803:=2))";
+
+            //Usuarios Desabilitados
+            //$filter = '(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=2))';
+
+            $req_attrs = array(
+                            // 'cn',
+                            // 'dn',
+                            'displayname',
+                            // 'dn',
+                            'mail',
+                            // 'department',
+                            // 'sn',
+                            // 'givenname',
+                            'samaccountname'
+                            // 'description',
+                            // 'lastlogontimestamp',
+                            // 'physicaldeliveryofficename'
+                        );
+
+            // connect to server
+            if (!($connect=@ldap_connect($ldap_server))) {
+              die("1: Could not connect to ldap server");
+            }
+
+            // bind to server
+            if (!($bind=@ldap_bind($connect, $auth_user, $auth_pass))) {
+              die("2: Unable to bind to server");
+            }
+
+            // search active directory
+            if (!($search=@ldap_search($connect, $base_dn, $filter, $req_attrs))) {
+              die("3: Unable to search ldap server");
+            }
+
+            $number_returned = ldap_count_entries($connect,$search);
+            $info = ldap_get_entries($connect, $search);
+
+            // echo "The number of entries returned is ". $number_returned."<p>";
+            // vd($info);
+
+            // for ($i=0; $i<$info["count"]; $i++) {
+            // echo "Name is: ". $info[$i]["name"][0]."<br>";
+            // echo "Name: ". $info[$i]["displayname"][0]."<br>";
+            // echo "Email: ". $info[$i]["mail"][0]."<br>";
+            // echo "Fone: ". $info[$i]["telephonenumber"][0]."<br>";
+            // echo "CONTA AD.: ". $info[$i]["samaccountname"][0]."<br>";
+            // echo "GRUPO.: ". $info[$i][""][0]."<p>";//aqui "OU AD" do usuário que tem o mesmo nome do grupo
+              // $row[$i] = $info[$i]["displayname"][0];
+              // $info[$i]["mail"][0];
+              // $row[$i] =  $info[$i]["samaccountname"][0];
+            // }
+            $data = array();
+            foreach ($info as $key => $value) {
+              $row = array();
+              $row[]     = $info[$key]["displayname"][0];
+              $row[]   = $info[$key]["samaccountname"][0];
+              $data[] = $row;
+            }
+            vd($data);
+            // echo json_encode($data);
+            ldap_close($connect);
+
+          // $this->load->view('teste/ad');
+        }
+
+
+        public function teste_newAD()
+        {
+          // Servidor Active Directory
+          $phpAD["ldap_server"] = "10.3.1.25";
+
+          // Usuario e senha necessário dominio
+          $phpAD["auth_user"] = "dokuwiki@sefa.pa.gov.br";
+          $phpAD["auth_pass"] = "wikidoku";
+
+           // Unidade organizacional
+           //$phpAD["ldap_dn"] = "OU=Matriz Tecnica,DC=empresa,DC=org, DC=br";//GEO
+           $phpAD["ldap_dn"] = "OU=SEFA-PA,DC=sefa,DC=pa,DC=gov,DC=br";
+
+           // OU padrão
+           $phpAD["ldap_default_ou"] = "SEFA-PA";
+
+           // Dominio Active directory
+           $phpAD["ad_domain_name"] = "sefa.pa.gov.br";
+
+           set_time_limit(0);
+
+           // Base do dominio para procura.
+           $base_dn = $phpAD["ldap_dn"];
+
+           // Conectando ao servidor
+           if (!($connect=@ldap_connect($phpAD["ldap_server"])))
+           die("Could not connect to ldap server");
+
+           // Autenticando
+           if (!($bind=@ldap_bind($connect, $phpAD["auth_user"], $phpAD["auth_pass"])))
+           die("Unable to bind to server");
+
+           $filtro = "(&(objectClass=user)(objectCategory=person)(displayname=*))";
+
+           // $mostrar = array("displayname","samaccountname","useraccountcontrol","userprincipalname","distinguishedname");
+           $mostrar = array("displayname","samaccountname","useraccountcontrol","distinguishedname");
+
+           // Busca no active directory $busca = ldap_search($ds, $ldap_dn, $filtro/*, $attributes*/);
+           if (!($busca=@ldap_search($connect, $base_dn, $filtro, $mostrar)))
+           die("Não foi possível realizar busca no Active Directory");
+
+          $info = ldap_get_entries($connect, $busca);
+          // vd($info);
+          //Salva todos os usuarios em um vetor
+           foreach ($info as $Key => $Value )
+           {
+            $Name     = $info[$Key]["displayname"][0];
+            $Account  = $info[$Key]["samaccountname"][0];
+            $State   = $info[$Key]["useraccountcontrol"][0];
+            // $Mail   = $info[$Key]["userprincipalname"][0];
+
+            $org    = $info[$Key]["distinguishedname"][0];
+
+            $State   = dechex($State);
+            $State     = substr($State,-1,1);//verifica contas desabilitadas
+
+            // $Value = $Name."^".$Account."^".$State."^".$Mail."^".$org;
+            $Value = $Name."^".$Account."^".$State."^".$org;
+
+            if ( $Name != "" && $State != 2)
+            $USERs[]=$Value;
+           }
+           if ( count($USERs) > 0 )
+           sort($USERs);
+
+           if ( count($USERs) == 0 )
+           {
+              echo "Não foi econtrado nenhum usuário";
+           }
+
+           //Verifica todos departamentos na OU como financeiro, RH, TI...
+           for ($i=0;$i<=count($USERs)-1;$i++)
+           {
+            $Value  = $USERs[$i];
+            $Splitted = explode("^",$Value);
+
+            $Name     = $Splitted[0];
+            $Account   = $Splitted[1];
+            $State    = $Splitted[2];
+            // $Mail     = $Splitted[3];
+            $org         = $Splitted[3];
+
+            $org_array = explode(",",$org);
+            $org = substr($org_array[2],3,(strlen($org_array[2])));
+            $temp[$i] = $org;
+
+            $org2 = array_unique($temp);
+
+          //Lista os usuarios por departamento
+              foreach( $org2 as $mostra ){
+                  echo"<br>".$mostra;
+                   for ($i=0;$i<=count($USERs)-1;$i++)
+                   {
+                    $Value  = $USERs[$i];
+                    $Splitted = explode("^",$Value);
+
+                    $Name     = $Splitted[0];
+                    $Account   = $Splitted[1];
+                    $State    = $Splitted[2];
+                    // $Mail     = $Splitted[3];
+                      $org      = $Splitted[3];
+                                  $org_array = explode(",",$org);
+                     $org = substr($org_array[2],3,(strlen($org_array[2])));
+                     $temp[$i] = $org;
+                     if ($org == $mostra)
+                       echo "<br>--".$Name;
+                   }
+               }
+           }
+        }
+
+        public function ajaxPro() {
+          $query = $this->input->get('query');
+          $this->load->library('auth_ad');
+          $data = $this->auth_ad->search_ad($query);
+          // $this->db->like('name', $query);
+          // $data = $this->db->get("tags")->result();
+          echo json_encode( $data);
+        }
+
+
 
 }
