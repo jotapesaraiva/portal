@@ -166,7 +166,7 @@ class Mantis_model extends CI_Model {
         return $catego;
     }
 
-    public function widget_mantis($flag) {
+    public function widget_mantis($flag,$equipe) {
         $sql = "";
         $mantis = $this->load->database('mantis', true);
         if($flag == 'quantidade'){
@@ -185,10 +185,22 @@ class Mantis_model extends CI_Model {
          $sql .= "
          where MBT.PROJECT_ID in (SELECT A.ID FROM mantis_project_tb a
             LEFT JOIN mantis_project_hierarchy_tb b ON a.id = b.child_id
-            WHERE A.ENABLED = 1
-            start with a.id = 4041
-            connect by b.parent_id = prior a.id) ";
-        if ($flag == 'quantidade'){
+            WHERE A.ENABLED = 1";
+        switch ($equipe) {
+            case 'CGRE-Produção':
+                $sql .= "start with a.id = 4041 connect by b.parent_id = prior a.id) ";
+                break;
+            case 'CGRE-InfraEstrutura':
+                $sql .= "start with a.id = 3861 connect by b.parent_id = prior a.id)";
+                break;
+            case 'CGPS':
+                $sql .= "start with a.id in(341,4161) connect by b.parent_id = prior a.id)";
+                break;
+            default:
+                # code...
+                break;
+        }
+        if ($flag == 'quantidade') {
             $sql .= "AND MBT.status = 10 ";
         } else {
             $sql .=  "AND MBT.status not in (60, 90, 80) ";
@@ -213,6 +225,44 @@ class Mantis_model extends CI_Model {
         //         }
         //     }
     }
+
+
+    public function graf_resolvido_d(){
+        $mantis = $this->load->database('monitora', true);
+        $sql = "
+        SELECT p.username AS usuario, TO_DATE(b.last_updated, 'dd/mm/yy') AS data, count(*) AS qtd
+        FROM mantis.mantis_bug_tb b
+        JOIN mantis.mantis_user_tb p ON b.handler_id = p.id
+        WHERE b.project_id IN (
+                SELECT A.ID
+                  FROM mantis_project_tb a
+                  LEFT JOIN mantis_project_hierarchy_tb b
+                    ON a.id = b.child_id
+                 WHERE A.ENABLED = 1
+                 start WITH a.id = 341
+                connect by b.parent_id = prior a.id
+        )
+        AND b.status IN (80, 60, 90, 45, 70)
+        AND b.last_updated BETWEEN SYSDATE-7 AND SYSDATE
+        GROUP BY p.username, TO_DATE(b.last_updated, 'dd/mm/yy')  ORDER BY TO_DATE(b.last_updated, 'dd/mm/yy') ASC
+
+                    ";
+        $stmt = oci_parse($mantis->conn_id,$sql);
+        oci_execute($stmt, OCI_NO_AUTO_COMMIT);
+        // oci_fetch_all($stmt,$equip,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+        // oci_fetch_all($stmt,$equip);
+        oci_fetch_all($stmt,$equip,null,null,OCI_FETCHSTATEMENT_BY_ROW + OCI_NUM);
+        return $equip;
+    }
+
+
+
+
+
+
+
+
+
 
 
 //######################################################Procedure para adicionar anotação no mantis###########################################################

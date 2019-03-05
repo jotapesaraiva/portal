@@ -322,6 +322,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor('links/consumo_banda', '<i class="fa fa-bar-chart"></i> Consumo de Banda', 'class="nav-link"')?>
                             <?php echo span_segment(2,'consumo_banda'); ?>
                         </li>
+                        <!--############# ABA LINKS > Chamados de Links ############-->
+                        <?php } if($this->auth_ad->level_access('chamado_links',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'chamado_links'); ?>">
+                            <?php echo anchor('links/chamado_links', '<i class="fa fa-table"></i> Chamados Links', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'chamado_links'); ?>
+                        </li>
                         <!--############# ABA LINKS > Graficos ############-->
                         <?php } if($this->auth_ad->level_access('graficos_link',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'graficos_link'); ?>">
@@ -489,14 +495,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor_popup('http://10.3.1.37/ddem/login/', 'Data Domain DD6300'); ?>
                         </li>
                         <li class="nav-item ">
-                            <?php echo anchor_popup('http://10.3.1.39/ddem/', 'Data Domain DD2500'); ?>
+                            <?php echo anchor_popup('http://10.2.13.14/ddem/', 'Data Domain DD2500'); ?>
                         </li>
                         <li class="nav-item ">
                             <?php echo anchor_popup('http://libraryhp.sefa.pa.gov.br/login.ssi', 'Library HP'); ?>
                         </li>
-                        <li class="nav-item">
-                            <?php echo anchor_popup('http://librarydell.sefa.pa.gov.br', 'Library Dell'); ?>
-                        </li>
+                        <!--<li class="nav-item">
+                            <?php //echo anchor_popup('http://librarydell.sefa.pa.gov.br', 'Library Dell'); ?>
+                        </li> -->
                     </ul>
                 </li>
 
@@ -590,19 +596,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <?php echo anchor_popup('http://10.3.1.102:7001/console/login/LoginForm.jsp', 'Extranet 11G'); ?>
                                 </li>
                                 <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.13:7001/console/login/LoginForm.jsp', 'Extranet 12G'); ?>
+                                    <?php echo anchor_popup('http://10.3.1.13:7001/console/login/LoginForm.jsp', 'Extranet 12C'); ?>
                                 </li>
                                 <li class="nav-item ">
                                     <?php echo anchor_popup('http://10.3.1.104:7001/console/login/LoginForm.jsp', 'Intranet 11G'); ?>
                                 </li>
                                 <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.213:7001/console/login/LoginForm.jsp', 'Intranet 12G'); ?>
+                                    <?php echo anchor_popup('http://10.3.1.213:7001/console/login/LoginForm.jsp', 'Intranet 12C'); ?>
                                 </li>
                                 <li class="nav-item ">
                                     <?php echo anchor_popup('http://10.3.1.106:7001/console/login/LoginForm.jsp', 'Processamento 11G'); ?>
                                 </li>
                                 <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.17:7001/console/login/LoginForm.jsp', 'Processamento 12G'); ?>
+                                    <?php echo anchor_popup('http://10.3.1.17:7001/console/login/LoginForm.jsp', 'Processamento 12C'); ?>
                                 </li>
                                 <li class="nav-item ">
                                     <?php echo anchor_popup('http://10.3.1.190:7001/console/login/LoginForm.jsp', 'SiatWeb'); ?>

@@ -100,7 +100,7 @@ class Server extends CI_Controller {
                     // var_dump(array_key_exists($hostid, $hostTriggers));
                       if (array_key_exists($hostid, $hostTriggers)) {
                         // vd($hostTriggers[$hostid][0]->lastchange);
-                          $tempo_fora=time2string(time()-strtotime(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange)));
+                          $tempo_fora=time_elapsed_string(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange),true);
                           $data_alerta = date('Y-m-d H:i:s' ,$hostTriggers[$hostid][0]->lastchange);
                           $detalhe = macros($hostTriggers[$hostid][0]->comments);
                           $count = "0";

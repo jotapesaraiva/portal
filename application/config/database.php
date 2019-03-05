@@ -199,7 +199,7 @@ $db['sobreaviso'] = array(
 
 
 $active_group = 'teste';
-$query_builder = TRUE;
+// $query_builder = TRUE;
 
 $db['teste'] = array(
 	'dsn'	=> '',
@@ -207,6 +207,32 @@ $db['teste'] = array(
 	'username' => 'root',
 	'password' => '!!GR&m10',
 	'database' => 'dhtmlx_samples',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+
+$active_group = 'msg';
+// $query_builder = TRUE;
+
+$db['msg'] = array(
+	'dsn'	=> '',
+	'hostname' => '10.3.1.42',
+	'username' => 'root',
+	'password' => 'p@$$w0rd',
+	'database' => 'msg',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

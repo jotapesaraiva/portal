@@ -51,16 +51,34 @@ class Monitora_model extends CI_Model {
          return $portal->affected_rows();
      }
 
-     public function select_mnt_alerta() {
+     // public function select_mnt_alerta($session) {
+     public function select_mnt_alerta($session) {
          $portal = $this->load->database('default',true);
          $portal->select('*');
          $portal->from('mnt_alertas');
          $portal->where('data_fim > NOW() - INTERVAL "10" MINUTE');
-         $portal->where_not_in('tipo_alerta',array('Informativo'));
-         $portal->order_by('data_inicio', 'DESC');
-         $query = $portal->get();
-         // echo $portal->last_query();
-         return $query->result_array();
+         switch ($session) {
+             case 'CGRE-Produção':
+                    $portal->where_not_in('tipo_alerta',array('Informativo'));
+                    $portal->order_by('data_inicio', 'DESC');
+                    $query = $portal->get();
+                    // echo $portal->last_query();
+                    return $query->result_array();
+                 break;
+             case 'CGPS':
+                    $portal->like('responsavel','CGPS');
+                    $portal->order_by('data_inicio', 'DESC');
+                    $query = $portal->get();
+                    // echo $portal->last_query();
+                    return $query->result_array();
+                 break;
+             default:
+                    $portal->order_by('data_inicio', 'DESC');
+                    $query = $portal->get();
+                    // echo $portal->last_query();
+                    return $query->result_array();
+                 break;
+         }
      }
 
      public function select_mnt($id) {

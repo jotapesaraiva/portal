@@ -19,6 +19,22 @@
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
                 <!-- BEGIN TODO DROPDOWN -->
+                <?php if($this->auth_ad->level_access('producao', group_session($this->session->userdata('username')))){?>
+                <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <i class="icon-envelope-open"></i>
+                        <span id="mensagem_rede" class="badge badge-info"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="external">
+                            <h3>Você tem <span id="count_msg" class="bold">-1</span> Messagens</h3>
+                            <a href="https://rede.sefa.pa.gov.br/msg/">ver tudo</a>
+                        </li>
+                        <li id='content_msg'>
+                        </li>
+                    </ul>
+                </li>
+                <?php }?>
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-extended">
                     <a href="#" class="dropdown-toggle tooltips" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-placement="bottom" data-original-title="Ramais">

@@ -13,7 +13,8 @@ class Chamados_mantis extends CI_Controller {
     public function index() {
         $result = '';
         $retorno = array();
-        $qtds = $this->mantis_model->widget_mantis('quantidade');
+        $equipe = $this->session->userdata('physicaldeliveryofficename');
+        $qtds = $this->mantis_model->widget_mantis('quantidade',$equipe);
         foreach ($qtds as $qtd) {
           foreach ($qtd as $key => $value) {
           if($key == 'QTD_MANTIS'){
@@ -38,7 +39,8 @@ class Chamados_mantis extends CI_Controller {
 
     public function mantis_producao() {
         $retorno = array();
-        $chamados = $this->mantis_model->widget_mantis('chamados');
+        $equipe = $this->session->userdata('physicaldeliveryofficename');
+        $chamados = $this->mantis_model->widget_mantis('chamados',$equipe);
         // vd($chamados);
         foreach($chamados as $producao){
             $ID =  '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$producao['ID'].'" class="label label-'.color_mantis($producao['STATUS']).'" target="_blank">'.$producao['ID'].'</a>';

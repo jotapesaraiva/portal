@@ -24,7 +24,8 @@ class Cgps extends CI_Controller {
         <script src="' . base_url() . 'assets/custom/server.js" type="text/javascript"></script>
         <script src="' . base_url() . 'assets/custom/zabbix.js" type="text/javascript"></script>
         <script src="' . base_url() . 'assets/custom/antigo_monitora.js" type="text/javascript"></script>
-
+        <script src="' . base_url() . 'assets/custom/replicador.js" type="text/javascript"></script>
+        <script src="' . base_url() . 'assets/custom/chamados_mantis.js" type="text/javascript"></script>
         ';
 
         $username = $this->session->userdata('username');
@@ -36,27 +37,9 @@ class Cgps extends CI_Controller {
         $this->load->view('dashboard/cgps');
         $this->load->view('template/footer',$script);
         $this->load->view('modal/modal_mantis');
+        $this->load->view('modal/modal_replicador');
+        $this->load->view('modal/modal_renvia');
     }
-
-    public function teste() {
-        // $this->load->helper('date');
-        // echo unix_to_human($result);
-        // date_default_timezone_set("America/New York");
-        // $this->set_timezone();
-        $replic = $this->replicador_model->itinga();
-        // echo $replic->row('DATA');
-        // echo '<br>';
-        echo $result = intval($replic->row('DATA'));//timestamp
-        echo '<br>';
-        echo date('d/m/Y H:i:s', intval($replic->row('DATA')));//datetime
-        echo '<br>';
-        echo $data = date("d/m/Y H:i:s");
-        echo '<br>';
-        echo date_diff($result,$data);
-        echo '<br>';
-
-    }
-
 }
 
 /* End of file Cgps.php */

@@ -101,7 +101,7 @@ class Link_indisponivel extends CI_Controller {
                     if($hoststatus == 0){
                         if (array_key_exists($hostid, $hostTriggers)) {
                              // echo $hostTriggers[$hostid][0]->lastchange;
-                            $tempo_fora = time2string(time()-strtotime(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange)));
+                            $tempo_fora = time_elapsed_string(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange), true);
                             $data_alerta = date('Y-m-d H:i:s' ,$hostTriggers[$hostid][0]->lastchange);
                             $count = "0";
 

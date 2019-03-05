@@ -64,8 +64,8 @@ class Antigo_monitora extends CI_Controller {
                   echo "  ";
                 //   pr($result);
                 } else {
-                  //consultar todos os alertas da tabela mnt_alertas no banco portal
-                  $alertas = $this->monitora_model->select_mnt_alerta();
+                  //consultar todos os alertas da tabela mnt_alertas no banco portal //default para trazer tudo
+                  $alertas = $this->monitora_model->select_mnt_alerta('default');
                   // vd($alertas);
                   foreach($alertas as $alerta){
                     //consultar todos os alertas da tabela bug_tb no banco mantis

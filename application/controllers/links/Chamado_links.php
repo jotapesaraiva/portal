@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Chamado_links extends CI_Controller {
 
-  public function __construct()
-  {
+  public function __construct() {
     parent::__construct();
     //Do your magic here
     // esta_logado();

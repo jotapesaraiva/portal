@@ -32,11 +32,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class="details">
                         <div class="number">
-                            <span id="nobreak01" data-counter="counterup" data-value="0"></span>
+                            <span id="replicador" data-counter="counterup" data-value="0"></span>
                         </div>
                         <div class="desc"> Replicado </div>
                     </div>
-                    <a class="more" href="https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10567" target="_blank"> Mais info
+                    <a class="more" href="javascript:void(0)" onclick="replicador_full()"> Mais info
                         <i class="m-icon-swapright m-icon-white"></i>
                     </a>
                 </div>
@@ -48,11 +48,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class="details">
                         <div class="number">
-                            <span id="nobreak02" data-counter="counterup" data-value="0">0</span>
+                            <span id="renvia" data-counter="counterup" data-value="0"></span>
                         </div>
                         <div class="desc"> R_Envia </div>
                     </div>
-                    <a class="more" href="https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10595" target="_blank"> Mais info
+                    <a class="more" href="javascript:void(0)" onclick="renvia_full()"> Mais info
                         <i class="m-icon-swapright m-icon-white"></i>
                     </a>
                 </div>
