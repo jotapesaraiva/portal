@@ -193,11 +193,20 @@ class Mantis_model extends CI_Model {
             case 'CGRE-InfraEstrutura':
                 $sql .= "start with a.id = 3861 connect by b.parent_id = prior a.id)";
                 break;
+            case 'CGRE-Rede':
+                $sql .= "start with a.id = 1992 connect by b.parent_id = prior a.id)";
+                break;
             case 'CGPS':
                 $sql .= "start with a.id in(341,4161) connect by b.parent_id = prior a.id)";
                 break;
+            case 'CGDA-Banco':
+                $sql .= "start with a.id = 4001 connect by b.parent_id = prior a.id)";
+                break;
+            case 'DTI-GERENTES':
+                $sql .= "start with a.id in(2342,3441) connect by b.parent_id = prior a.id)";
+                break;
             default:
-                # code...
+                $sql .= "start with a.id in(1921,3841) connect by b.parent_id = prior a.id)";
                 break;
         }
         if ($flag == 'quantidade') {

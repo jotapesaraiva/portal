@@ -5,8 +5,13 @@ var ComponentsDateTimePickers = function () {
         if (jQuery().datepicker) {
             $('.date-picker').datepicker({
                 rtl: App.isRTL(),
-                orientation: "left",
-                autoclose: true
+                orientation: "right",
+                autoclose: true,
+                language: 'pt-BR',
+                format: "dd/mm/yyyy",
+                todayHighlight: true
+                // minDate: '01/01/2018',
+                // maxDate: '31/12/2030'
             });
             //$('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
         }

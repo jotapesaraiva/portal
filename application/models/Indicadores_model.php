@@ -14,9 +14,9 @@ class Indicadores_model extends CI_Model {
     }
 
     public function nome_status() {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         $portal_moni->select('status as variavel');
-        $portal_moni->from('tbl_dp_backups');
+        $portal_moni->from('dp_backups');
         $portal_moni->group_by('status');
         $portal_moni->order_by('status');
         $query = $portal_moni->get();
@@ -24,9 +24,9 @@ class Indicadores_model extends CI_Model {
     }
 
     public function backup_job($backup,$mes,$ano) {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         $portal_moni->select('Month(day_time) AS Mes, Day(day_time) AS Dia, ROUND (Sum(gb_written),2) AS tamanho, ROUND (Sum((time_to_sec(duration)/60)/60),1) AS duracao');
-        $portal_moni->from('tbl_dp_backups');
+        $portal_moni->from('dp_backups');
         $portal_moni->where('Month(day_time)', $mes);
         $portal_moni->where('Year(day_time)', $ano);
         if($backup == 'Todos'){
@@ -36,17 +36,18 @@ class Indicadores_model extends CI_Model {
             $portal_moni->having('specification', $backup);
         }
         $query = $portal_moni->get();
+        // echo $portal_moni->last_query();
         return $query->result_array();
     }
 
     public function backup_status($backup,$status,$ano) {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         if($backup!= 'Todos' and $status != 'Todos'){
             $portal_moni->select('specification, Month(day_time) AS Mes, ROUND (Sum(gb_written)/count(*),2) AS MediaGB, ROUND(Sum((TIME_TO_SEC(duration)/60)/60)/count(*),2) AS MediaDuracao, Year(day_time) AS Ano');
         } else {
             $portal_moni->select('specification, Month(day_time) AS Mes, ROUND (Sum(gb_written),2) AS MediaGB, ROUND(Sum((TIME_TO_SEC(duration)/60)/60),2) AS MediaDuracao, Year(day_time) AS Ano');
         }
-        $portal_moni->from('tbl_dp_backups');
+        $portal_moni->from('dp_backups');
         if($backup!= 'Todos' and $status != 'Todos'){
             $portal_moni->where('status =', $status);
             $portal_moni->where('Year(day_time)=', $ano);
@@ -69,13 +70,13 @@ class Indicadores_model extends CI_Model {
     }
 
     public function quantidade_status($status, $ano) {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         if($status == 'abortados'){
             $portal_moni->select('Count(status) AS abortados, Month(day_time) AS Mes');
         } elseif($status == 'completos'){
             $portal_moni->select('Count(status) AS completos, Month(day_time) AS Mes');
         }
-        $portal_moni->from('tbl_dp_backups');
+        $portal_moni->from('dp_backups');
         if($status == 'abortados'){
             $portal_moni->where('status', 'Failed');
             $portal_moni->where('Year(day_time)', $ano);
@@ -96,13 +97,13 @@ class Indicadores_model extends CI_Model {
     }
 
     public function tempo_volume($variavel, $mes, $ano) {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         if($variavel == 'volume') {
             $portal_moni->select('specification, ROUND(Sum(gb_written)) as numero');
         } else {
             $portal_moni->select('specification, ROUND(Sum((time_to_sec(duration)/60)/60)) as numero');
         }
-        $portal_moni->from('tbl_dp_backups');
+        $portal_moni->from('dp_backups');
         if($mes != 'null'){
             $portal_moni->where('Month(day_time)', $mes);
         }

@@ -31,8 +31,12 @@ function content_msg() {
         url : "https://producaoh.sefa.pa.gov.br/portal/dash/mensagem_rede",
         type: "GET",
         dataType: "JSON",
+        beforeSend: function() {
+             // setting a timeout
+            var html = ' ';
+            $("#content_msg").html(html);
+         },
         success: function(data) {
-            console.log(data);
             var html = '';
             if(data.length != 0) {
                 html += '<ul class="dropdown-menu-list scroller"  data-handle-color="#637283">';
@@ -50,15 +54,15 @@ function content_msg() {
                         html +=     '</li>';
                     });
                 html += '</ul>';
-                $("#content_msg").append(html);
+                $("#content_msg").html(html);
             } else {
-                var html = 'Sem mensagens :)'
-                $("#content_msg").append(html);
+                var html = 'Sem mensagens :)';
+                $("#content_msg").html(html);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('Erro ao pegar os dados do ajax');
         }
     });
-    // setTimeout('content_msg()', 30000);
+    setTimeout('content_msg()', 30000);
 }

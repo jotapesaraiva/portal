@@ -453,7 +453,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!--############# ABA MANTIS ############-->
                 <li class="nav-item <?php echo active_segment(1,'mantis'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="fa fa-link"></i>
+                        <i class="fa fa-bug"></i>
                         <span class="title">Mantis</span>
                         <?php echo span_segment(1,'mantis'); ?>
                         <span class="arrow"></span>

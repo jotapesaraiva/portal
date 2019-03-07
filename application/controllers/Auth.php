@@ -102,32 +102,38 @@ class Auth extends CI_Controller{
                         redirect('dashboard/producao');
                         break;
                     case 3://'CGRE-Rede':
-                         redirect('dashboard/rede');
+                         // redirect('dashboard/rede');
+                        redirect('dashboard/producao');
                         break;
                     case 2://'CGRE-InfraEstrutura':
                          // redirect('dashboard/infra');
                          redirect('dashboard/producao');
                         break;
                     case 4://'CGDA-Banco':
-                        redirect('dashboard/banco');
+                        // redirect('dashboard/banco');
+                        redirect('dashboard/cgps');
                         break;
                     case 7://'CGAQ-SACS':
                          redirect('dashboard/sacs');
                         break;
                     case 6://'CGAQ-Manutenção':
-                         redirect('dashboard/manutencao');
+                         // redirect('dashboard/manutencao');
+                         redirect('dashboard/producao');
                         break;
                     case 5://'CGAQ-Tecnico':
-                         redirect('dashboard/manutencao');
+                         // redirect('dashboard/manutencao');
+                         redirect('dashboard/producao');
                         break;
                     case 8://'CGPS':
                          redirect('dashboard/cgps');
                         break;
                     case 9://'DTI-GERENTES':
-                         redirect('dashboard/dti');
+                         // redirect('dashboard/dti');
+                         redirect('dashboard/producao');
                         break;
                     default:
-                        redirect('dashboar/default');
+                        // redirect('dashboar/default');
+                        redirect('dashboard/producao');
                         break;
                 }
                 // redirect('welcome');

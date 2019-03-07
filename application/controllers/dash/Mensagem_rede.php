@@ -13,16 +13,6 @@ class Mensagem_rede extends CI_Controller {
         $this->load->model('mensagem_rede_model');
         $resultado = $this->mensagem_rede_model->select();
         // vd($resultado->result());
-        // foreach ($resultado->result_array() as $msg) {
-        //    $output = array(
-        //         'id' => $msg['id'], //id
-        //         'name' => $msg['post_user'], //usario que postou
-        //         'msg' => $msg['msg'], //mensagem
-        //         'type' => $msg['ps'], //tipo da mensagem
-        //         'start' => $msg['start_date'], //inicio da mensagem
-        //         'stop' => $msg['stop_date'] //fim da mensagem
-        //     );
-        // }
         echo json_encode($resultado->result());
     }
 

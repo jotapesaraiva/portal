@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Data</label>
                             <div class="col-md-9">
-                                <div class="input-group date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                                <div class="input-group date date-picker">
                                     <input type="text" name="data" class="form-control" readonly>
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button">

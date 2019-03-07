@@ -10,8 +10,6 @@ class Dia extends CI_Controller {
     }
 
     public function index() {
-        $curr_year = date('Y');
-        $curr_mes = date('n');
         if($this->input->post('ano')) {
             $nano = $this->input->post('ano');
             $data['nano'] = $nano;
@@ -19,15 +17,17 @@ class Dia extends CI_Controller {
             $nano = date('Y');
             $data['nano'] = date('Y');
         }
+
         if($this->input->post('mes')){
             $nmes = $this->input->post('mes');
             $data['nmes'] = $nmes;
             $data['mes'] = dataEmPortugues($nmes);
         } else {
-            $nmes = $curr_mes;
-            $data['nmes'] = date('n');
-            $data['mes'] = dataEmPortugues(date('n'));
+            $nmes = date('m');
+            $data['nmes'] = $nmes;
+            $data['mes'] = dataEmPortugues($nmes);
         }
+
         if($this->input->post('backup')){
             $nbackup = $this->input->post('backup');
             $data['nbackup'] = $nbackup;
@@ -36,8 +36,10 @@ class Dia extends CI_Controller {
             $data['nbackup'] = "Todos";
         }
 
+
         $linhas = $this->indicadores_model->backup_job($nbackup,$nmes,$nano);
-        // $linhas = $this->indicadores_model->backup_job('EMAIL',03,2015);
+        // $linhas = $this->indicadores_model->backup_job('Todos',03,2015);
+        // vd($linhas);
         $array_dados = array();
         foreach ($linhas as $key => $value) {
                 $array_dados['dia'][$key] = $linhas[$key]['Dia'];

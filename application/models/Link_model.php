@@ -155,9 +155,9 @@ class Link_model extends CI_Model{
     //
 
     public function historico() {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         $portal_moni->select('ticket, posicionamento, rec, centro, status, responsabilidade, causa, date_format(abertura, "%d/%m/%Y %H:%i:%s") as abertura, date_format(atualizacao, "%d/%m/%Y %H:%i:%s") as atualizacao');
-        $portal_moni->from('tbl_ebt_grc');
+        $portal_moni->from('ebt_grc');
         $portal_moni->order_by('id', 'DESC');
         $portal_moni->limit('1000');
         $query = $portal_moni->get();
@@ -165,9 +165,9 @@ class Link_model extends CI_Model{
     }
 
     public function calculo($inicio,$fim) {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         $portal_moni->select('g.centro, g.ticket, date_format(g.abertura, "%d/%m/%Y %H:%i:%s") AS abertura, date_format(g.atualizacao, "%d/%m/%Y %H:%i:%s") AS atualizacao, g.tempo_embratel_hora as tmp_portal , g.responsabilidade');
-        $portal_moni->from('tbl_ebt_grc g');
+        $portal_moni->from('ebt_grc g');
         $portal_moni->join('tbl_ebt_fatura f','g.ticket = f.ticket','left');
         $where = "atualizacao BETWEEN '". $inicio ."' AND '". $fim ."'";
         $portal_moni->where($where);
@@ -178,9 +178,9 @@ class Link_model extends CI_Model{
     }
 
     public function ticket($mes) {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         $portal_moni->select('Month(atualizacao) as mes, count(ticket) as numero');
-        $portal_moni->from('tbl_ebt_grc');
+        $portal_moni->from('ebt_grc');
         $portal_moni->where('year(atualizacao)',$mes);
         $portal_moni->group_by('Month(atualizacao)');
         $portal_moni->order_by('mes', 'ASC');
@@ -190,9 +190,9 @@ class Link_model extends CI_Model{
     }
 
     public function ticket_anual() {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         $portal_moni->select('year(atualizacao) as ano, count(ticket) as numero');
-        $portal_moni->from('tbl_ebt_grc');
+        $portal_moni->from('ebt_grc');
         $portal_moni->where('year(atualizacao) >=','2010');
         $portal_moni->group_by('year(atualizacao)');
         $portal_moni->order_by('ano', 'ASC');
@@ -202,9 +202,9 @@ class Link_model extends CI_Model{
     }
 
     public function causa($mes,$ano) {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         $portal_moni->select('causa, count(causa) as numero');
-        $portal_moni->from('tbl_ebt_grc');
+        $portal_moni->from('ebt_grc');
         if($mes != 'null'){
             $portal_moni->where('Month(atualizacao)',$mes);
         }
@@ -231,9 +231,9 @@ class Link_model extends CI_Model{
     }
 
     public function localidade($mes,$ano) {
-        $portal_moni = $this->load->database('portalmoni',true);
+        $portal_moni = $this->load->database('default',true);
         $portal_moni->select('centro, count(ticket) as numero');
-        $portal_moni->from('tbl_ebt_grc');
+        $portal_moni->from('ebt_grc');
         if($mes != 'null'){
             $portal_moni->where('Month(atualizacao)',$mes);
         }

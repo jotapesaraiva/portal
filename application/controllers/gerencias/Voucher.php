@@ -13,20 +13,17 @@ class Voucher extends CI_Controller {
     public function index() {
 
         $this->output->enable_profiler(FALSE);
+        $css['headerinc'] = '
+            <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+            ';
         $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/voucher.js" type="text/javascript"></script>
             ';
         $script['script'] = '
-            <script src="' . base_url() . 'assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>
         ';
-        $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-            ';
         $session['username'] = $this->session->userdata('username');
         $modal['usuario'] = $this->session->userdata('username');
 
