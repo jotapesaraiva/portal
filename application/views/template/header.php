@@ -1,18 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access aloowed');
-/*if (isset($this->session->userdata['logged_in'])) {
-    $username = ($this->session->userdata['logged_in']['username']);
-    $email = ($this->session->userdata['logged_in']['email']);
-} else {
-    redirect('painel/login');
-    //header("location: painel/login");
-}*/
-/*if($this->auth_ad->is_authenticated()){
-    $username = $this->session->userdata('username');
-} else {
-    redirect('auth/login');
-}*/
-
-?><!DOCTYPE html>
+<?php defined('BASEPATH') OR exit('No direct script access aloowed');?>
+<!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js" data-ng-app="MetronicApp"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js" data-ng-app="MetronicApp"> <![endif]-->
 <!--[if !IE]><!-->

@@ -1,12 +1,7 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-</div>
-<!-- END CONTAINER -->
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
        <!-- BEGIN FOOTER -->
         <div class="page-footer">
-            <div class="page-footer-inner"> 2017 &copy; DTI-CGRE Produção.
-            </div>
+            <div class="page-footer-inner"> 2017 &copy; DTI-CGRE Produção.</div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>
             </div>

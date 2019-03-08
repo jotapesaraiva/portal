@@ -75,7 +75,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="page_user_profile_1.html"><i class="icon-user"></i> Meu Perfil </a>
+                            <a href="<?php echo base_url();?>dash/meu_perfil"><i class="icon-user"></i> Meu Perfil </a>
                         </li>
                         <li>
                             <a href="app_todo.html">

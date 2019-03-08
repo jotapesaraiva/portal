@@ -72,10 +72,9 @@ class Usuario_model extends CI_Model{
     //=============================================================================================================================================================
     //
 
-    public function listar_usuarios(){
+    public function listar_usuarios($id=NULL){
         $portal_db = $this->load->database('default',true);
-        return $portal_db->query('
-            SELECT
+        $sql = 'SELECT
                u.*,
                c.nome_cargo,
                p.nome_permissao,
@@ -83,7 +82,11 @@ class Usuario_model extends CI_Model{
             FROM tbl_usuario AS u
             JOIN tbl_cargo AS c ON c.id_cargo = u.id_cargo
             JOIN tbl_grupos AS g ON g.id_grupo = u.id_grupo
-            JOIN tbl_permissao AS p ON p.id_permissao = u.id_permissao');
+            JOIN tbl_permissao AS p ON p.id_permissao = u.id_permissao';
+        if($id !=null){
+            $sql .= ' WHERE u.id_usuario='.$id.'';
+        }
+        return $portal_db->query($sql);
         //return $portal_db->get('tbl_usuario');
     }
 
@@ -164,6 +167,42 @@ class Usuario_model extends CI_Model{
         $portal_db->insert('tbl_usuario_telefone', $dados);
         return $portal_db->insert_id();
     }
+
+    public function listar_modulos($id) {
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('m.nome_modulo');
+        $portal_db->from('tbl_usuario u');
+        $portal_db->join('tbl_perfil p', 'p.id_grupo=u.id_grupo');
+        $portal_db->join('tbl_modulos m','m.id_modulo=p.id_modulo');
+        $portal_db->where('u.id_usuario',$id);
+        $query = $portal_db->get();
+        // echo $portal_db->last_query();
+        return $query->result_array();
+    }
+
+    public function id_user($username){
+        $portal_db = $this->load->database('default',true);
+        $portal_db->select('id_usuario');
+        $portal_db->from('tbl_usuario');
+        $portal_db->where('login_usuario',$username);
+        $query = $portal_db->get();
+        return $query->row();
+    }
+
+
+    public function user_telefone($id_usuario, $categoria) {
+        $default = $this->load->database('default',true);
+        $default->select('GROUP_CONCAT(t.numero_telefone ORDER BY t.numero_telefone SEPARATOR ", " ) AS numero');
+        $default->from('tbl_usuario u');
+        $default->join('tbl_usuario_telefone ut','ut.id_usuario=u.id_usuario');
+        $default->join('tbl_telefone t','t.id_telefone=ut.id_telefone');
+        $default->where('u.id_usuario',$id_usuario);
+        $default->where('t.id_tipo_categoria_telefone',$categoria);
+        $query = $default->get();
+        return $query-> row();
+    }
+
+
     //
     //=============================================================================================================================================================
     //
