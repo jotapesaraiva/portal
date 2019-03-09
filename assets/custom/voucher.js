@@ -117,6 +117,7 @@ function save(){
         data: $('#form').serialize(),
         dataType: "JSON",
         success: function(data) {
+            console.log(data);
             if(data.status){ //if success close modal and reload ajax table
                 $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Voucher adicionado com sucesso !!!</div>');
                 $("#myAlert").fadeOut(4000);

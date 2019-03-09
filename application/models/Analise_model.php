@@ -40,7 +40,7 @@ class Analise_model extends CI_Model {
             JOIN mantis_custom_field_string_tb f2 ON b.id = f2.bug_id AND f2.field_id = 1181
             JOIN MANTIS.MANTIS_BUG_STATUS_TB s ON b.status = s.status
             LEFT JOIN mantis_custom_field_string_tb f ON b.id = f.bug_id
-            WHERE p.name in ('Projetos/Man.Assistida')
+            WHERE p.name in ('Operação Assistida')
             ) b
         LEFT JOIN (
             SELECT BUG_ID, VALUE AS priorizado

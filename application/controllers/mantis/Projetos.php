@@ -77,12 +77,6 @@ class Projetos extends CI_Controller {
             echo json_encode($output);
     }
 
-    public function teste()
-    {
-        $status = $this->analise_model->status();
-        vd($status->result());
-    }
-
 }
 
 /* End of file Projetos.php */

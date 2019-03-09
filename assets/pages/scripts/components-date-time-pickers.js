@@ -8,7 +8,7 @@ var ComponentsDateTimePickers = function () {
                 orientation: "right",
                 autoclose: true,
                 language: 'pt-BR',
-                format: "dd/mm/yyyy",
+                format: "dd-mm-yyyy",
                 todayHighlight: true
                 // minDate: '01/01/2018',
                 // maxDate: '31/12/2030'

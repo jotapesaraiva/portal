@@ -77,21 +77,24 @@ class Voucher extends CI_Controller {
 
     public function voucher_add() {
         $this->historico_validate();
+        // $format =  str_replace('/', '-', $this->input->post('data'));
         $data = array(
             'usuario' => $this->input->post('usuario'),
             'motorista' => $this->input->post('motorista'),
             'prefixo' => $this->input->post('prefixo'),
             'voucher' => $this->input->post('voucher'),
-            'data' => date('Y-m-d', strtotime($this->input->post('data'))),
+            'data' => date('Y-m-d', strtotime($this->input->post('data'))),//se o strtotime estiver separado por  '/' assumi o formato m/d/y se for por - assumi o formanto d-m-y
             'valor' => $this->input->post('valor'),
             'observacao' => $this->input->post('observacao')
         );
+        // vd($data);
         $this->voucher_model->save_voucher($data);
         echo json_encode(array("status" => TRUE));
     }
 
     public function voucher_update() {
         $this->historico_validate();
+        // $format =  str_replace('/', '-', $this->input->post('data'));
         $data = array(
             'usuario' => $this->input->post('usuario'),
             'motorista' => $this->input->post('motorista'),
