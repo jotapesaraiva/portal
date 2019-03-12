@@ -14,7 +14,7 @@ class Sobreaviso_model extends CI_Model {
         WHERE s.inicio BETWEEN CONCAT( CURDATE(),' ', '00:00:00') AND CONCAT( CURDATE(),' ', '23:59:59')
         GROUP BY s.usuario_idusuario");
         // echo $sobreaviso->last_query();
-        return $query->result_array();
+        return $query;
     }
 
 

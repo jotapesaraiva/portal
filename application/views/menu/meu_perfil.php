@@ -37,15 +37,15 @@
                         <div class="profile-usermenu">
                             <ul class="nav">
                                 <li class="active">
-                                    <a href="<?php echo base_url();?>dash/meu_perfil">
+                                    <a href="<?php echo base_url();?>menu/meu_perfil">
                                         <i class="icon-home"></i> Overview </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url();?>dash/meu_perfil/configuracao">
+                                    <a href="<?php echo base_url();?>menu/meu_perfil/configuracao">
                                         <i class="icon-settings"></i> Configuração da Conta </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url();?>dash/meu_perfil/ajuda">
+                                    <a href="<?php echo base_url();?>menu/meu_perfil/ajuda">
                                         <i class="icon-info"></i> Ajuda </a>
                                 </li>
                             </ul>

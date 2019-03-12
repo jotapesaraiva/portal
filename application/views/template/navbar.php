@@ -11,6 +11,10 @@
             <div class="menu-toggler sidebar-toggler"> </div>
         </div>
         <!-- END LOGO -->
+
+
+
+
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
         <!-- END RESPONSIVE MENU TOGGLER -->
@@ -75,7 +79,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="<?php echo base_url();?>dash/meu_perfil"><i class="icon-user"></i> Meu Perfil </a>
+                            <a href="<?php echo base_url();?>menu/meu_perfil"><i class="icon-user"></i> Meu Perfil </a>
                         </li>
                         <li>
                             <a href="app_todo.html">

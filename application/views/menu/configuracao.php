@@ -37,15 +37,15 @@
                         <div class="profile-usermenu">
                             <ul class="nav">
                                 <li >
-                                    <a href="<?php echo base_url();?>dash/meu_perfil">
+                                    <a href="<?php echo base_url();?>menu/meu_perfil">
                                         <i class="icon-home"></i> Overview </a>
                                 </li>
                                 <li class="active">
-                                    <a href="<?php echo base_url();?>dash/meu_perfil/configuracao">
+                                    <a href="<?php echo base_url();?>menu/meu_perfil/configuracao">
                                         <i class="icon-settings"></i> Configuração da Conta </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url();?>dash/meu_perfil/ajuda">
+                                    <a href="<?php echo base_url();?>menu/meu_perfil/ajuda">
                                         <i class="icon-info"></i> Ajuda </a>
                                 </li>
                             </ul>
@@ -213,7 +213,7 @@
                                             <form action="#">
                                                 <table class="table table-light table-hover">
                                                     <tr>
-                                                        <td> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus.. </td>
+                                                        <td> Nivel de acesso : </td>
                                                         <td>
                                                             <label class="uniform-inline">
                                                                 <input type="radio" name="optionsRadios1" value="option1" /> Yes </label>
@@ -222,7 +222,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td> Enim eiusmod high life accusamus terry richardson ad squid wolf moon </td>
+                                                        <td> Acesso as paginas : </td>
                                                         <td>
                                                             <label class="uniform-inline">
                                                                 <input type="checkbox" value="" /> Yes </label>

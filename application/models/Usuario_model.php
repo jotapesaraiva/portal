@@ -364,4 +364,12 @@ class Usuario_model extends CI_Model{
         $portal_db->delete('tbl_perfil');
     }
 
+    public function resp_tecnico()
+    {
+        $default = $this->load->database('default',true);
+        $default->where_in_not('id_grupo',array('11','10'));
+        $query = $default->get('tbl_usuario');
+        return $query;
+    }
+
 }

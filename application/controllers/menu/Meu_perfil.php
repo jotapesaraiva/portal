@@ -29,7 +29,7 @@ class Meu_perfil extends CI_Controller {
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$user);
         $this->load->view('template/sidebar');
-        $this->load->view('dashboard/meu_perfil');
+        $this->load->view('menu/meu_perfil');
         $this->load->view('template/footer',$script);
     }
 
@@ -61,7 +61,7 @@ class Meu_perfil extends CI_Controller {
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$user);
         $this->load->view('template/sidebar');
-        $this->load->view('dashboard/configuracao', $data);
+        $this->load->view('menu/configuracao', $data);
         $this->load->view('template/footer',$script);
     }
 
@@ -85,7 +85,7 @@ class Meu_perfil extends CI_Controller {
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$user);
         $this->load->view('template/sidebar');
-        $this->load->view('dashboard/ajuda');
+        $this->load->view('menu/ajuda');
         $this->load->view('template/footer',$script);
     }
 

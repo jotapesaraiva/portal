@@ -53,7 +53,8 @@ class Enviar extends CI_Controller {
                             array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
                             array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
                             array('ID' => '5','NAME' => 'CGRE - Rede'),
-                            array('ID' => '6','NAME' => 'CGRE - Infra')
+                            array('ID' => '6','NAME' => 'CGRE - Infra'),
+                            array('ID' => '99','NAME' => 'CGRE - Produção')
                         ));
         $dados['form'] = "modelo_cprojeto";
         $dados['tabela'] = "mnt_alertas";
@@ -78,7 +79,8 @@ class Enviar extends CI_Controller {
                             array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
                             array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
                             array('ID' => '5','NAME' => 'CGRE - Rede'),
-                            array('ID' => '6','NAME' => 'CGRE - Infra')
+                            array('ID' => '6','NAME' => 'CGRE - Infra'),
+                            array('ID' => '99','NAME' => 'CGRE - Produção')
                         ));
         $dados['form'] = "modelo_cprojeto";
         $dados['tabela'] = "zbx_server_fora";
@@ -193,9 +195,9 @@ Ramal: 4994/4984
                 $parametros = '';
                 $table =$this->input->post('tabela');
                 break;
-            default://CGRE - Produção
-                $projeto   = 'Ambiente de Backup';//Chamado de Link
-                $categoria = 'Relatório de Falha de Backup';//DADOS
+            default://CGRE - Produção Administração de ambiente
+                $projeto   = 'Administração de Ambiente';//Projeto Administração de Ambiente
+                $categoria = 'Suporte a Servidor';//Suporte a Servidor
                 $procedore ='STP_RELT_CASO_PROJETO_CATEG';
                 $parametros = '';
                 $table =$this->input->post('tabela');

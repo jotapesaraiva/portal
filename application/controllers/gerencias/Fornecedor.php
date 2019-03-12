@@ -127,7 +127,6 @@ class Fornecedor extends CI_Controller {
                'status_fornecedor' => $status,
                //'contatos' => $this->input->post('contato'),
            );
-       //var_dump($data);
        $insert = $this->fornecedor_model->save_fornecedor($data);
        // foreach para percorre o array do input e criar o values do insert correto
        //var_dump($this->input->post('telefone'));
