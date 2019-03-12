@@ -61,11 +61,11 @@
       $('#form')[0].reset(); // reset form on modals
       $('.form-group').removeClass('has-error'); // clear error class
       $('.help-block').empty(); // clear error string
-      $('#modal_form').modal('show'); // show bootstrap modal
+      $('#modal_ativo').modal('show'); // show bootstrap modal
       $('.modal-title').text('Adicionar Tipo de Categoria VOIP'); // Set Title to Bootstrap modal title
   }
 
-  function edit_person(id) {
+  function edit_ativo(id) {
       save_method = 'update';
       $('#form')[0].reset(); // reset form on modals
       $('.form-group').removeClass('has-error'); // clear error class
@@ -77,11 +77,21 @@
           type: "GET",
           dataType: "JSON",
           success: function(data) {
-              $('[name="id"]').val(data.id_ativos);
-              $('[name="nome"]').val(data.nome_ativos);
-              // $('[name="comentario"]').val(data.comentario_tipo_ativos);
-              $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-              $('.modal-title').text('Editar Categoria'); // Set title to Bootstrap modal title
+              $('[name="id_ativo"]').val(data[0].id_ativo);
+              $('[name="nome"]').val(data[0].nome_ativo);
+              $('[name="localizacao"]').val(data[0].localizacao_ativo);
+              $('[name="numero_serie"]').val(data[0].numero_serie_ativo);
+              $('[name="modelo"]').val(data[0].modelo_ativo);
+              $('[name="fabricante"]').val(data[0].fabricante_ativo);
+              $('[name="tipo"]').selectpicker('val', data[0].id_tipo_ativo);
+              $('[name="patrimonio"]').val(data[0].patrimonio_ativo);
+              $('[name="grupo"]').selectpicker('val', data[0].id_grupo);
+              $('[name="tecnico"]').selectpicker('val', data[0].id_usuario);
+              $('[name="contrato"]').selectpicker('val', data[0].id_contrato);
+              $('[name="fornecedor"]').selectpicker('val', data[0].id_fornecedor);
+
+              $('#modal_ativo').modal('show'); // show bootstrap modal when complete loaded
+              $('.modal-title').text('Editar Ativo'); // Set title to Bootstrap modal title
           },
           error: function (jqXHR, textStatus, errorThrown) {
               alert('Erro ao pegar os dados do ajax');
@@ -114,7 +124,7 @@
               if(data.status){ //if success close modal and reload ajax table
                   $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Categoria adicionado com sucesso !!!</div>');
                   $("#myAlert").fadeOut(4000);
-                  $('#modal_form').modal('hide');
+                  $('#modal_ativo').modal('hide');
                   reload_table();
               } else {
                   for (var i = 0; i < data.inputerror.length; i++) {
@@ -133,7 +143,7 @@
       });
   }
 
-  function delete_person(id){
+  function delete_ativo(id){
       if(confirm('Você tem certeza que quer deletar o item?')) {
           // ajax delete data to database
           $.ajax({
@@ -145,7 +155,7 @@
                   //if success reload ajax table
                   $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Categoria deletado com sucesso !!!</div>');
                   $("#myAlert").fadeOut(4000);
-                  $('#modal_form').modal('hide');
+                  $('#modal_ativo').modal('hide');
                   reload_table();
               },
               error: function (jqXHR, textStatus, errorThrown)

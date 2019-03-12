@@ -9,7 +9,7 @@
             <div class="modal-body">
               <div class="container-fluid">
                 <form action="#" id="form" class="form-horizontal">
-                    <input type="hidden" value="" id="id_ativo" name="id_ativo"/>
+                    <input type="hidden" value="" id="fornecedor" name="id"/>
                     <div class="form-body">
                         <div class="form-group">
                             <label class="control-label col-md-3">Nome :</label>
@@ -19,58 +19,47 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Localização :</label>
+                            <label class="control-label col-md-3">Tipo :</label>
                             <div class="col-md-9">
                                 <input name="localizacao" placeholder="" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Numero de serie :</label>
+                            <label class="control-label col-md-3">Numero do Contrato :</label>
                             <div class="col-md-9">
                                 <input name="numero_serie" placeholder="" class="form-control" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Modelo :</label>
+                            <label class="control-label col-md-3">Data Inicio :</label>
                             <div class="col-md-9">
-                                <input name="modelo" placeholder="" class="form-control" type="text">
+                                <div class="input-group date date-picker">
+                                    <input type="text" name="data" class="form-control" readonly>
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Fabricante :</label>
+                            <label class="control-label col-md-3">Duração :</label>
                             <div class="col-md-9">
                                 <input name="fabricante" placeholder="" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Tipo :</label>
+                            <label class="control-label col-md-3">Renovação :</label>
                             <div class="col-md-9">
-                                <select class="selectpicker form-control" name="tipo">
-                                    <option value="">------Selecione o Serviço-----</option>
-                                    <?php foreach($tipos->result() as $tipo) : ?>
-                                    <option value="<?=$tipo->id_tipo_ativo?>"><?=$tipo->nome_tipo_ativo?></option>
-                                    <?php endforeach ?>
-                                </select>
-                                <span class="help-block"></span>
+                                <input name="tipo" placeholder="" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Patrimonio :</label>
+                            <label class="control-label col-md-3">Aviso :</label>
                             <div class="col-md-9">
                                 <input name="patrimonio" placeholder="" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Contrato :</label>
-                            <div class="col-md-9">
-                                <select class="selectpicker form-control" name="contrato">
-                                    <option value="">------Selecione o Serviço-----</option>
-                                    <?php foreach($contratos->result() as $contrato) : ?>
-                                    <option value="<?=$contrato->id_contrato?>"><?=$contrato->nome_contrato?></option>
-                                    <?php endforeach ?>
-                                </select>
-                                <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -80,30 +69,6 @@
                                     <option value="">------Selecione o Serviço-----</option>
                                     <?php foreach($fornecedores->result() as $fornecedor) : ?>
                                     <option value="<?=$fornecedor->id_fornecedor?>"><?=$fornecedor->nome_fornecedor?></option>
-                                    <?php endforeach ?>
-                                </select>
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Grupo Responsavel :</label>
-                            <div class="col-md-9">
-                                <select class="selectpicker form-control" name="grupo">
-                                    <option value="">------Selecione o Serviço-----</option>
-                                    <?php foreach($grupos->result() as $grupo) : ?>
-                                    <option value="<?=$grupo->id_grupo?>"><?=$grupo->nome_grupo?></option>
-                                    <?php endforeach ?>
-                                </select>
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Tecnico Responsavel :</label>
-                            <div class="col-md-9">
-                                <select class="selectpicker form-control" name="tecnico">
-                                    <option value="">------Selecione o Serviço-----</option>
-                                    <?php foreach($tecnicos->result() as $tecnico) : ?>
-                                    <option value="<?=$tecnico->id_usuario?>"><?=$tecnico->nome_usuario?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <span class="help-block"></span>
@@ -123,3 +88,5 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal
+
+

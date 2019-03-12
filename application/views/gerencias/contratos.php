@@ -21,7 +21,7 @@
                     <div class="portlet-title">
                      <div class="caption font-dark">
                          <i class="icon-settings font-dark"></i>
-                         <span class="caption-subject bold uppercase"> Lista de contrato </span>
+                         <span class="caption-subject bold uppercase"> Lista de contratos </span>
                      </div>
                     </div>
                     <div class="portlet-body">
@@ -68,7 +68,6 @@
                                     <th> Aviso </th>
                                     <th> Renovação </th>
                                     <th> Fornecedor </th>
-                                    <th> Ativos </th>
                                     <th> Ação </th>
                                 </tr>
                             </thead>

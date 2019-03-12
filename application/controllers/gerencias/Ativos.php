@@ -8,22 +8,33 @@ class Ativos extends CI_Controller {
         //Do your magic here
         $this->load->model('ativos_model');
         $this->load->model('usuario_model');
+        $this->load->model('fornecedor_model');
+        $this->load->model('contratos_model');
     }
 
     public function index() {
 
 
         $this->output->enable_profiler(FALSE);
-        $css['headerinc'] = '';
-        $script['footerinc'] = '<script src="' . base_url() . 'assets/custom/ativos.js" type="text/javascript"></script>';
+        $css['headerinc'] = '<link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
+        $script['footerinc'] = '
+            <script src="' . base_url() . 'assets/custom/ativos.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '';
 
         $session['username'] = $this->session->userdata('username');
         $grupos = $this->usuario_model->listar_grupo();
         $tecnicos = $this->usuario_model->resp_tecnico();
+        $fornecedores = $this->fornecedor_model->listar_fornecedor();
+        $contratos = $this->contratos_model->listar_contratos();
+        $tipos = $this->ativos_model->listar_tipo();
+
         $modal = array(
             'grupos' => $grupos,
-            'tecnicos' => $tecnicos
+            'tecnicos' => $tecnicos,
+            'fornecedores' => $fornecedores,
+            'contratos' => $contratos,
+            'tipos' => $tipos
         );
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
@@ -51,17 +62,19 @@ class Ativos extends CI_Controller {
         $data = array();
         foreach ($ativos->result_array() as $ativo) {
             $row = array();
-            $row[] = $ativos['nome_ativo'];
-            $row[] = $ativos['localizacao_ativo'];
-            $row[] = $ativos['numero_serie_ativo'];
-            $row[] = $ativos['modelo_ativo'];
-            $row[] = $ativos['fabricante_ativo'];
-            $row[] = $ativos['tipo_ativo'];
-            $row[] = $ativos['id_grupo'];
-            $row[] = $ativos['id_tecnico'];
-            $row[] = $ativos['patrimonio_ativo'];
-            $row[] = $ativos['id_contrato'];
-            $row[] = $ativos['id_fornecedor'];
+            $row[] = $ativo['nome_ativo'];
+            $row[] = $ativo['localizacao_ativo'];
+            $row[] = $ativo['numero_serie_ativo'];
+            $row[] = $ativo['modelo_ativo'];
+            $row[] = $ativo['fabricante_ativo'];
+            $row[] = $ativo['nome_tipo_ativo'];
+            $row[] = $ativo['nome_grupo'];
+            $row[] = $ativo['login_usuario'];
+            $row[] = $ativo['patrimonio_ativo'];
+            $row[] = $ativo['numero_contrato'];
+            $row[] = $ativo['nome_fornecedor'];
+            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_ativo('."'".$ativo['id_ativo']."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
+                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_ativo('."'".$ativo['id_ativo']."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
             $data[] = $row;
         }
         $output = array(
@@ -74,26 +87,27 @@ class Ativos extends CI_Controller {
     }
 
     public function ativos_add() {
-        $this->fornecedor_validate();
+        // $this->ativos_validate();
         $data = array(
             'nome_ativo' => $this->input->post('nome'),
             'localizacao_ativo' => $this->input->post('localizacao'),
             'numero_serie_ativo' => $this->input->post('numero_serie'),
             'modelo_ativo' => $this->input->post('modelo'),
             'fabricante_ativo' => $this->input->post('fabricante'),
+            'id_tipo_ativo' => $this->input->post('tipo'),
             'id_grupo' => $this->input->post('grupo'),
-            'id_tecnico' => $this->input->post('tecnico'),
+            'id_usuario' => $this->input->post('tecnico'),
             'patrimonio_ativo' => $this->input->post('patrimonio'),
             'id_contrato' => $this->input->post('contrato'),
             'id_fornecedor' => $this->input->post('fornecedor')
          );
-        $this->ativos_model->save_ativos($data);
+        $this->ativos_model->save_ativo($data);
         echo json_encode(array("status" => TRUE));
     }
 
     public function ativos_edit($id) {
-        $ativo = $this->ativos_model->edit_ativo($id);
-        echo json_encode($ativos);
+        $ativo = $this->ativos_model->listar_ativos($id);
+        echo json_encode($ativo->result_array());
     }
 
     public function ativos_view($id)
@@ -101,27 +115,26 @@ class Ativos extends CI_Controller {
         # code...
     }
 
-    public function ativos_update()
-    {
-        $this->fornecedor_validate();
+    public function ativos_update() {
+        // $this->fornecedor_validate();
         $data = array(
             'nome_ativo' => $this->input->post('nome'),
             'localizacao_ativo' => $this->input->post('localizacao'),
             'numero_serie_ativo' => $this->input->post('numero_serie'),
             'modelo_ativo' => $this->input->post('modelo'),
             'fabricante_ativo' => $this->input->post('fabricante'),
+            'id_tipo_ativo' => $this->input->post('tipo'),
             'id_grupo' => $this->input->post('grupo'),
-            'id_tecnico' => $this->input->post('tecnico'),
+            'id_usuario' => $this->input->post('tecnico'),
             'patrimonio_ativo' => $this->input->post('patrimonio'),
             'id_contrato' => $this->input->post('contrato'),
             'id_fornecedor' => $this->input->post('fornecedor')
          );
-        $this->ativos_model->update_ativo($data);
+        $this->ativos_model->update_ativo(array('id_ativo' => $this->input->post('id_ativo')),$data);
         echo json_encode(array("status" => TRUE));
     }
 
-    public function ativos_delete($id)
-    {
+    public function ativos_delete($id) {
         $this->ativos_model->delete_ativo($id);
         echo json_encode(array("status" => TRUE));
     }
