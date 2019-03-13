@@ -22,6 +22,7 @@
                             <label class="control-label col-md-3">Localização :</label>
                             <div class="col-md-9">
                                 <input name="localizacao" placeholder="" class="form-control" type="text">
+                                <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -35,12 +36,14 @@
                             <label class="control-label col-md-3">Modelo :</label>
                             <div class="col-md-9">
                                 <input name="modelo" placeholder="" class="form-control" type="text">
+                                <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Fabricante :</label>
                             <div class="col-md-9">
                                 <input name="fabricante" placeholder="" class="form-control" type="text">
+                                <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -59,8 +62,10 @@
                             <label class="control-label col-md-3">Patrimonio :</label>
                             <div class="col-md-9">
                                 <input name="patrimonio" placeholder="" class="form-control" type="text">
+                                <span class="help-block"></span>
                             </div>
                         </div>
+                        <hr>
                         <div class="form-group">
                             <label class="control-label col-md-3">Contrato :</label>
                             <div class="col-md-9">

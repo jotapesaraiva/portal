@@ -19,14 +19,6 @@ class Ativos_model extends CI_Model {
         return $query;
     }
 
-    public function listar_tipo($id = NULL) {
-        $default = $this->load->database('default', TRUE);
-        if($id != null){
-            $default->where('id_tipo_ativo',$id);
-        }
-        $query = $default->get('tbl_tipo_ativo');
-        return $query;
-    }
 
     public function save_ativo($dados) {
         $portal_db = $this->load->database('default',true);
@@ -46,6 +38,14 @@ class Ativos_model extends CI_Model {
         $portal_db->delete('tbl_ativos');
     }
 
+    public function listar_tipo($id = NULL) {
+        $default = $this->load->database('default', TRUE);
+        if($id != null){
+            $default->where('id_tipo_ativo',$id);
+        }
+        $query = $default->get('tbl_tipo_ativo');
+        return $query;
+    }
 }
 
 /* End of file Ativos_model.php */

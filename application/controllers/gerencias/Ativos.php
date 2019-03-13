@@ -14,7 +14,6 @@ class Ativos extends CI_Controller {
 
     public function index() {
 
-
         $this->output->enable_profiler(FALSE);
         $css['headerinc'] = '<link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['footerinc'] = '
@@ -87,7 +86,7 @@ class Ativos extends CI_Controller {
     }
 
     public function ativos_add() {
-        // $this->ativos_validate();
+        $this->ativos_validate();
         $data = array(
             'nome_ativo' => $this->input->post('nome'),
             'localizacao_ativo' => $this->input->post('localizacao'),
@@ -110,13 +109,12 @@ class Ativos extends CI_Controller {
         echo json_encode($ativo->result_array());
     }
 
-    public function ativos_view($id)
-    {
+    public function ativos_view($id) {
         # code...
     }
 
     public function ativos_update() {
-        // $this->fornecedor_validate();
+        $this->ativos_validate();
         $data = array(
             'nome_ativo' => $this->input->post('nome'),
             'localizacao_ativo' => $this->input->post('localizacao'),
@@ -145,9 +143,21 @@ class Ativos extends CI_Controller {
         $data['inputerror'] = array();
         $data['status'] = TRUE;
 
-        if($this->input->post('servico') == '') {
-            $data['inputerror'][] = 'servico';
-            $data['error_string'][] = 'O campo tipo de servico é obrigatorio';
+        if($this->input->post('nome') == '') {
+            $data['inputerror'][] = 'nome';
+            $data['error_string'][] = 'O campo nome é obrigatorio';
+            $data['status'] = FALSE;
+        }
+
+        if($this->input->post('numero_serie') == '') {
+            $data['inputerror'][] = 'numero_serie';
+            $data['error_string'][] = 'O campo numero de serie é obrigatorio';
+            $data['status'] = FALSE;
+        }
+
+        if($this->input->post('patrimonio') == '') {
+            $data['inputerror'][] = 'patrimonio';
+            $data['error_string'][] = 'O campo patrimonio é obrigatorio';
             $data['status'] = FALSE;
         }
 
