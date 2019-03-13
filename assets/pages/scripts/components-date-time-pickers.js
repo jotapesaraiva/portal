@@ -151,7 +151,9 @@ var ComponentsDateTimePickers = function () {
         $(".form_datetime").datetimepicker({
             autoclose: true,
             isRTL: App.isRTL(),
+            language: "pt-BR",
             format: "dd MM yyyy - hh:ii",
+            todayHighlight: true,
             pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left")
         });
 

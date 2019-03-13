@@ -31,7 +31,7 @@ class Contratos_model extends CI_Model {
 
     public function delete_contrato($id) {
         $portal_db = $this->load->database('default',true);
-        $portal_db->where('id_contratos', $id);
+        $portal_db->where('id_contrato', $id);
         $portal_db->delete('tbl_contratos');
     }
 

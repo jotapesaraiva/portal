@@ -12,23 +12,27 @@ class Contratos extends CI_Controller {
     }
 
     public function index() {
-
         $this->output->enable_profiler(FALSE);
         $css['headerinc'] = '
             <link href="'.base_url().'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-            <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />';
+            <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+            <link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['footerinc'] = '
             <script src="'.base_url().'assets/custom/contratos.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
-            <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>';
+            <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '
             <script src="'.base_url().'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>';
 
         $session['username'] = $this->session->userdata('username');
         $fornecedores = $this->fornecedor_model->listar_fornecedor();
+        $tipos = $this->contratos_model->listar_tipo();
 
-        $modal = array( 'fornecedores' => $fornecedores );
+        $modal = array(
+            'fornecedores' => $fornecedores,
+            'tipos' => $tipos );
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
@@ -81,14 +85,19 @@ class Contratos extends CI_Controller {
     }
 
     public function contratos_add() {
-        // $this->contratos_validate();
+        $this->contratos_validate();
+        if($this->input->post('renovacao') == 'on') {
+          $status = '1';
+        } else {
+          $status = '0';
+        }
         $data = array(
             'nome_contrato' => $this->input->post('nome'),
             'tipo_contrato' => $this->input->post('tipo'),
             'numero_contrato' => $this->input->post('numero'),
-            'data_inicio_contrato' => $this->input->post('data_inicio'),
+            'data_inicio_contrato' => date('Y-m-d', strtotime($this->input->post('data'))),
             'duracao_contrato' => $this->input->post('duracao'),
-            'renovacao_contrato' => $this->input->post('renovacao'),
+            'renovacao_contrato' => $status,
             'aviso_contrato' => $this->input->post('aviso'),
             'id_fornecedor' => $this->input->post('fornecedor')
          );
@@ -97,19 +106,24 @@ class Contratos extends CI_Controller {
     }
 
     public function contratos_edit($id) {
-        $contrato = $this->contratos_model->edit_contrato($id);
-        echo json_encode($contrato);
+        $contrato = $this->contratos_model->listar_contratos($id);
+        echo json_encode($contrato->result_array());
     }
 
     public function contratos_update() {
-        // $this->contratos_validate();
+        $this->contratos_validate();
+        if($this->input->post('renovacao') == 'on') {
+          $status = '1';
+        } else {
+          $status = '0';
+        }
         $data = array(
             'nome_contrato' => $this->input->post('nome'),
             'tipo_contrato' => $this->input->post('tipo'),
             'numero_contrato' => $this->input->post('numero'),
-            'data_inicio_contrato' => $this->input->post('data_inicio'),
+            'data_inicio_contrato' => date('Y-m-d', strtotime($this->input->post('data'))),
             'duracao_contrato' => $this->input->post('duracao'),
-            'renovacao_contrato' => $this->input->post('renovacao'),
+            'renovacao_contrato' => $status,
             'aviso_contrato' => $this->input->post('aviso'),
             'id_fornecedor' => $this->input->post('fornecedor')
          );
@@ -134,15 +148,39 @@ class Contratos extends CI_Controller {
             $data['status'] = FALSE;
         }
 
-        if($this->input->post('numero_serie') == '') {
-            $data['inputerror'][] = 'numero_serie';
-            $data['error_string'][] = 'O campo numero de serie é obrigatorio';
+        if($this->input->post('tipo') == '') {
+            $data['inputerror'][] = 'tipo';
+            $data['error_string'][] = 'O campo tipo é obrigatorio';
             $data['status'] = FALSE;
         }
 
-        if($this->input->post('patrimonio') == '') {
-            $data['inputerror'][] = 'patrimonio';
-            $data['error_string'][] = 'O campo patrimonio é obrigatorio';
+        if($this->input->post('numero') == '') {
+            $data['inputerror'][] = 'numero';
+            $data['error_string'][] = 'O campo numero é obrigatorio';
+            $data['status'] = FALSE;
+        }
+
+        if($this->input->post('data') == '') {
+            $data['inputerror'][] = 'data';
+            $data['error_string'][] = 'O campo data é obrigatorio';
+            $data['status'] = FALSE;
+        }
+
+        if($this->input->post('duracao') == '') {
+            $data['inputerror'][] = 'duracao';
+            $data['error_string'][] = 'O campo duração é obrigatorio';
+            $data['status'] = FALSE;
+        }
+
+        if($this->input->post('aviso') == '') {
+            $data['inputerror'][] = 'aviso';
+            $data['error_string'][] = 'O campo aviso é obrigatorio';
+            $data['status'] = FALSE;
+        }
+
+        if($this->input->post('fornecedor') == '') {
+            $data['inputerror'][] = 'fornecedor';
+            $data['error_string'][] = 'O campo fornecedor é obrigatorio';
             $data['status'] = FALSE;
         }
 

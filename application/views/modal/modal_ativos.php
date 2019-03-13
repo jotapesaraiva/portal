@@ -50,7 +50,7 @@
                             <label class="control-label col-md-3">Tipo :</label>
                             <div class="col-md-9">
                                 <select class="selectpicker form-control" name="tipo">
-                                    <option value="">------Selecione o Serviço-----</option>
+                                    <option value="">------Selecione o tipo-----</option>
                                     <?php foreach($tipos->result() as $tipo) : ?>
                                     <option value="<?=$tipo->id_tipo_ativo?>"><?=$tipo->nome_tipo_ativo?></option>
                                     <?php endforeach ?>
@@ -70,7 +70,7 @@
                             <label class="control-label col-md-3">Contrato :</label>
                             <div class="col-md-9">
                                 <select class="selectpicker form-control" name="contrato">
-                                    <option value="">------Selecione o Serviço-----</option>
+                                    <option value="">------Selecione o contrato-----</option>
                                     <?php foreach($contratos->result() as $contrato) : ?>
                                     <option value="<?=$contrato->id_contrato?>"><?=$contrato->nome_contrato?></option>
                                     <?php endforeach ?>
@@ -82,7 +82,7 @@
                             <label class="control-label col-md-3">Fornecedor :</label>
                             <div class="col-md-9">
                                 <select class="selectpicker form-control" name="fornecedor">
-                                    <option value="">------Selecione o Serviço-----</option>
+                                    <option value="">------Selecione o Fornecedor-----</option>
                                     <?php foreach($fornecedores->result() as $fornecedor) : ?>
                                     <option value="<?=$fornecedor->id_fornecedor?>"><?=$fornecedor->nome_fornecedor?></option>
                                     <?php endforeach ?>
@@ -94,7 +94,7 @@
                             <label class="control-label col-md-3">Grupo Responsavel :</label>
                             <div class="col-md-9">
                                 <select class="selectpicker form-control" name="grupo">
-                                    <option value="">------Selecione o Serviço-----</option>
+                                    <option value="">------Selecione o Grupo-----</option>
                                     <?php foreach($grupos->result() as $grupo) : ?>
                                     <option value="<?=$grupo->id_grupo?>"><?=$grupo->nome_grupo?></option>
                                     <?php endforeach ?>
@@ -106,7 +106,7 @@
                             <label class="control-label col-md-3">Tecnico Responsavel :</label>
                             <div class="col-md-9">
                                 <select class="selectpicker form-control" name="tecnico">
-                                    <option value="">------Selecione o Serviço-----</option>
+                                    <option value="">------Selecione o Tecnico-----</option>
                                     <?php foreach($tecnicos->result() as $tecnico) : ?>
                                     <option value="<?=$tecnico->id_usuario?>"><?=$tecnico->nome_usuario?></option>
                                     <?php endforeach ?>

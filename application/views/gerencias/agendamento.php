@@ -21,7 +21,7 @@
                     <div class="portlet-title">
                      <div class="caption font-dark">
                          <i class="icon-settings font-dark"></i>
-                         <span class="caption-subject bold uppercase"> Lista de contratos </span>
+                         <span class="caption-subject bold uppercase"> Lista de agendamento de tarefas </span>
                      </div>
                     </div>
                     <div class="portlet-body">
@@ -29,7 +29,7 @@
                          <div class="row">
                              <div class="col-md-6">
                                  <div class="btn-group">
-                                    <button class="btn sbold green" onclick="add_contrato()"> Adicionar Novo
+                                    <button class="btn sbold green" onclick="add_agendamento()"> Adicionar Novo
                                         <i class="fa fa-plus"></i>
                                     </button>
                                  </div>
@@ -61,13 +61,12 @@
                             <thead>
                                 <tr>
                                     <th> Nome </th>
-                                    <th> Numero </th>
-                                    <th> Tipo </th>
+                                    <th> Mensagem </th>
                                     <th> Data inicio </th>
-                                    <th> Duração </th>
-                                    <th> Aviso </th>
-                                    <th> Renovação </th>
-                                    <th> Fornecedor </th>
+                                    <th> Data fim </th>
+                                    <th> Responsavel </th>
+                                    <th> Mantis solicitado </th>
+                                    <th> Mantis Notificação </th>
                                     <th> Ação </th>
                                 </tr>
                             </thead>
@@ -82,5 +81,5 @@
     </div>
 </div>
 
-<!-- /* End of file contrato.php */ -->
-<!-- /* Location: ./application/views/gerencias/contrato.php */ -->
+<!-- /* End of file agendamento.php */ -->
+<!-- /* Location: ./application/views/gerencias/agendamento.php */ -->

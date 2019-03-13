@@ -9,7 +9,7 @@ $(document).ready(function() {
               "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
       },
       "ajax": {
-          url : server+"/contratos_list",//json datasource
+          url : server+"/agendamento_list",//json datasource
           type : 'GET', //type of method  , by default would be get
           error: function(){ // error handling code
             $("#employee_grid_processing").css("display","none");
@@ -54,18 +54,19 @@ $(document).ready(function() {
         $(this).parent().parent().removeClass('has-error');
         $(this).next().empty();
     });
+
 });
 
-function add_contrato() {
+function add_agendamento() {
     save_method = 'add';
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
-    $('#modal_contratos').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Adicionar Contrato'); // Set Title to Bootstrap modal title
+    $('#modal_agendamento').modal('show'); // show bootstrap modal
+    $('.modal-title').text('Adicionar agendamento'); // Set Title to Bootstrap modal title
 }
 
-function edit_contrato(id) {
+function edit_agendamento(id) {
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
@@ -73,28 +74,21 @@ function edit_contrato(id) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/contratos_edit/" + id,
+        url : server+"/agendamento_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
-            $('[name="id"]').val(data[0].id_contratos);
-            $('[name="nome"]').val(data[0].nome_contrato);
-            $('[name="tipo"]').selectpicker('val', data[0].id_tipo_contrato);
-            $('[name="numero"]').val(data[0].numero_contrato);
-            $('[name="data"]').val(data[0].data_inicio_contrato);
-            $('[name="duracao"]').val(data[0].duracao_contrato);
-            if(data[0].renovacao_contrato == '1') {
-                $('[name="renovacao"]').bootstrapSwitch('state', true);
-            } else {
-                $('[name="renovacao"]').bootstrapSwitch('state', false);
-            }
-            $('[name="aviso"]').val(data[0].aviso_contrato);
-            $('[name="fornecedor"]').selectpicker('val', data[0].id_fornecedor);
-
-
+            $('[name="id_agendamento"]').val(data[0].id_agendamento);
+            $('[name="nome"]').val(data[0].nome_agendamento);
+            $('[name="mensagem"]').val(data[0].mensagem_agendamento);
+            $('[name="data_inicio"]').val(data[0].data_inicio_agendamento);
+            $('[name="data_fim"]').val(data[0].data_fim_agendamento);
+            $('[name="grupo"]').selectpicker('val', data[0].id_grupo);
+            $('[name="mantis_solicitado"]').val(data[0].mantis_solicitado);
+            $('[name="mantis_notificado"]').val(data[0].mantis_notificado);
             //
-            $('#modal_contratos').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Editar Contrato'); // Set title to Bootstrap modal title
+            $('#modal_agendamento').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Editar agendamento'); // Set title to Bootstrap modal title
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('Erro ao pegar os dados do ajax');
@@ -112,9 +106,9 @@ function save(){
     var url;
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
-        url = server+"/contratos_add";
+        url = server+"/agendamento_add";
     } else {
-        url = server+"/contratos_update";
+        url = server+"/agendamento_update";
     }
 
     // ajax adding data to database
@@ -127,7 +121,7 @@ function save(){
             if(data.status){ //if success close modal and reload ajax table
                 $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Categoria adicionado com sucesso !!!</div>');
                 $("#myAlert").fadeOut(4000);
-                $('#modal_contratos').modal('hide');
+                $('#modal_agendamento').modal('hide');
                 reload_table();
             } else {
                 for (var i = 0; i < data.inputerror.length; i++) {
@@ -146,11 +140,11 @@ function save(){
     });
 }
 
-function delete_contrato(id){
-    if(confirm('Você tem certeza que quer deletar o Contrato ?')) {
+function delete_agendamento(id){
+    if(confirm('Você tem certeza que quer deletar o agendamento ?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/contrato_delete/"+id,
+            url : server+"/agendamento_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
@@ -158,7 +152,7 @@ function delete_contrato(id){
                 //if success reload ajax table
                 $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Categoria deletado com sucesso !!!</div>');
                 $("#myAlert").fadeOut(4000);
-                $('#modal_contratos').modal('hide');
+                $('#modal_agendamento').modal('hide');
                 reload_table();
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -169,3 +163,4 @@ function delete_contrato(id){
 
     }
 }
+

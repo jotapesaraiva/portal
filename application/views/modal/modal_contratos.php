@@ -1,5 +1,5 @@
 <!--Bootstrap modal -->
-<div class="modal fade bs-modal-lg" id="modal_ativo" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-modal-lg" id="modal_contratos" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +9,7 @@
             <div class="modal-body">
               <div class="container-fluid">
                 <form action="#" id="form" class="form-horizontal">
-                    <input type="hidden" value="" id="fornecedor" name="id"/>
+                    <input type="hidden" value="" id="id_contrato" name="id_contrato"/>
                     <div class="form-body">
                         <div class="form-group">
                             <label class="control-label col-md-3">Nome :</label>
@@ -21,13 +21,19 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Tipo :</label>
                             <div class="col-md-9">
-                                <input name="localizacao" placeholder="" class="form-control" type="text">
+                                <select class="selectpicker form-control" name="tipo">
+                                    <option value="">------Selecione o Tipo-----</option>
+                                    <?php foreach($tipos->result() as $tipo) : ?>
+                                    <option value="<?=$tipo->id_tipo_contrato?>"><?=$tipo->nome_tipo_contrato?></option>
+                                    <?php endforeach ?>
+                                </select>
+                                <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Numero do Contrato :</label>
                             <div class="col-md-9">
-                                <input name="numero_serie" placeholder="" class="form-control" type="text">
+                                <input name="numero" placeholder="" class="form-control" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -41,32 +47,35 @@
                                             <i class="fa fa-calendar"></i>
                                         </button>
                                     </span>
+                                    <span class="help-block"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Duração :</label>
                             <div class="col-md-9">
-                                <input name="fabricante" placeholder="" class="form-control" type="text">
+                                <input name="duracao" placeholder="" class="form-control" type="text">
+                                <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Renovação :</label>
                             <div class="col-md-9">
-                                <input name="tipo" placeholder="" class="form-control" type="text">
+                                <input name="renovacao" type="checkbox" class="make-switch" checked data-on-text="&nbsp;Sim&nbsp;&nbsp;" data-off-text="&nbsp;Não&nbsp;">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Aviso :</label>
                             <div class="col-md-9">
-                                <input name="patrimonio" placeholder="" class="form-control" type="text">
+                                <input name="aviso" placeholder="" class="form-control" type="text">
+                                <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Fornecedor :</label>
                             <div class="col-md-9">
                                 <select class="selectpicker form-control" name="fornecedor">
-                                    <option value="">------Selecione o Serviço-----</option>
+                                    <option value="">------Selecione o Fornecedor-----</option>
                                     <?php foreach($fornecedores->result() as $fornecedor) : ?>
                                     <option value="<?=$fornecedor->id_fornecedor?>"><?=$fornecedor->nome_fornecedor?></option>
                                     <?php endforeach ?>
