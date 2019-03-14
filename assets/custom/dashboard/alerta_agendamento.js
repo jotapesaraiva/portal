@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    alerta_agendamento();
-    content_agendamento();
+    // alerta_agendamento();
+    // content_agendamento();
 });
 function alerta_agendamento() {
     $.ajax({
@@ -21,7 +21,7 @@ function alerta_agendamento() {
             alert('Erro ao pegar os dados do ajax agendamento');
         }
     });
-    setTimeout('alerta_agendamento()', 30000);
+    // setTimeout('alerta_agendamento()', 30000);
 }
 
 
@@ -63,5 +63,5 @@ function content_agendamento() {
             alert('Erro ao pegar os dados do ajax agendamento 2');
         }
     });
-    setTimeout('content_agendamento()', 30000);
+    // setTimeout('content_agendamento()', 30000);
 }

@@ -14,15 +14,15 @@ class Agendamento extends CI_Controller {
     public function index() {
         $this->output->enable_profiler(FALSE);
         $css['headerinc'] = '
-            <link href="'.base_url().'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+
             <link href="'.base_url().'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
             <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
             <link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['footerinc'] = '
             <script src="'.base_url().'assets/custom/agendamento.js" type="text/javascript"></script>
-            <script src="'.base_url().'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+
             <script src="'.base_url().'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-            <script src="'.base_url().'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '
@@ -85,8 +85,8 @@ class Agendamento extends CI_Controller {
         $data = array(
             'nome_agendamento' => $this->input->post('nome'),
             'mensagem_agendamento' => $this->input->post('mensagem'),
-            'data_inicio_agendamento' => date('Y-m-d h:i:s', strtotime($this->input->post('data_inicio'))),
-            'data_fim_agendamento' => date('Y-m-d h:i:s', strtotime($this->input->post('data_fim'))),
+            'data_inicio_agendamento' => date('Y-m-d H:i:s', strtotime($this->input->post('data_inicio'))),
+            'data_fim_agendamento' => date('Y-m-d H:i:s', strtotime($this->input->post('data_fim'))),
             'id_grupo' => $this->input->post('grupo'),
             'mantis_solicitado' => $this->input->post('mantis_solicitado'),
             'mantis_notificado' => $this->input->post('mantis_notificado')
@@ -97,7 +97,18 @@ class Agendamento extends CI_Controller {
 
     public function agendamento_edit($id) {
         $agendamento = $this->agendamento_model->listar_agendamento($id);
-        echo json_encode($agendamento->result_array());
+        $resultado = $agendamento->row();
+        $retorno = array(
+            'id_agendamento' => $resultado->id_agendamento,
+            'nome_agendamento' => $resultado->nome_agendamento,
+            'mensagem_agendamento' => $resultado->mensagem_agendamento,
+            'data_inicio_agendamento' => date('d-m-Y H:i', strtotime($resultado->data_inicio_agendamento)),
+            'data_fim_agendamento' => date('d-m-Y H:i', strtotime($resultado->data_fim_agendamento)),
+            'id_grupo' => $resultado->id_grupo,
+            'mantis_solicitado' => $resultado->mantis_solicitado,
+            'mantis_notificado' => $resultado->mantis_notificado
+        );
+        echo json_encode($retorno);
     }
 
     public function agendamento_update() {
@@ -105,8 +116,8 @@ class Agendamento extends CI_Controller {
         $data = array(
             'nome_agendamento' => $this->input->post('nome'),
             'mensagem_agendamento' => $this->input->post('mensagem'),
-            'data_inicio_agendamento' => date('Y-m-d h:i:s', strtotime($this->input->post('data_inicio'))),
-            'data_fim_agendamento' => date('Y-m-d h:i:s', strtotime($this->input->post('data_fim'))),
+            'data_inicio_agendamento' => date('Y-m-d H:i:s', strtotime($this->input->post('data_inicio'))),
+            'data_fim_agendamento' => date('Y-m-d H:i:s', strtotime($this->input->post('data_fim'))),
             'id_grupo' => $this->input->post('grupo'),
             'mantis_solicitado' => $this->input->post('mantis_solicitado'),
             'mantis_notificado' => $this->input->post('mantis_notificado')

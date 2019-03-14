@@ -29,7 +29,7 @@
                             <label class="control-label col-md-3">Data Inicio :</label>
                             <div class="col-md-9">
                                 <div class="input-group date form_datetime">
-                                    <input type="text" name="data_inicio" class="form-control">
+                                    <input type="text" name="data_inicio" class="form-control" readonly>
                                     <span class="input-group-btn">
                                         <button class="btn default date-set" type="button">
                                             <i class="fa fa-calendar"></i>
@@ -43,7 +43,7 @@
                             <label class="control-label col-md-3">Data Fim :</label>
                             <div class="col-md-9">
                                 <div class="input-group date form_datetime">
-                                    <input type="text" name="data_fim" class="form-control">
+                                    <input type="text" name="data_fim" class="form-control" readonly>
                                     <span class="input-group-btn">
                                         <button class="btn default date-set" type="button">
                                             <i class="fa fa-calendar"></i>

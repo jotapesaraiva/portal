@@ -11,7 +11,7 @@ $(document).ready(function() {
                     text: 'Export',
                     buttons: [ 'pdf', 'csv', 'copy', 'excel' ]
         }],
-        // "order": [[2, 'desc']],
+        // "order": [[0, 'asc']],
         //Set column definition initialisation properties.
         "columnDefs": [{
               "targets": [ -1 ], //last column

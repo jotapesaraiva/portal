@@ -95,9 +95,10 @@ class Historico_bkp extends CI_Controller {
                 $velocidade = number_format($velocidadenaoformatada,2);
 
                 $html .= "<tr>\n";
-                // $html .= "  <td>".$contador++."</td>\n";
+                $html .= "  <td>".$contador++."</td>\n";
 
-                $html .= "<td>".utf8_encode($historico['day_time'])."</td>\n";
+                $html .= "<td>".$historico['daytime']."</td>\n";
+
             if($historico['status']=="Completed") {
                 $html .= "<td><img border='0' src='".base_url('/assets/custom/img/completed.gif')."'><span class='label label-sm label-success'</span> Completo </td>\n";
             } else if($historico['status']=="Completed/Errors") {

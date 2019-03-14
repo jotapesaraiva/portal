@@ -152,7 +152,7 @@ var ComponentsDateTimePickers = function () {
             autoclose: true,
             isRTL: App.isRTL(),
             language: "pt-BR",
-            format: "dd MM yyyy - hh:ii",
+            format: "dd-mm-yyyy hh:ii",
             todayHighlight: true,
             pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left")
         });

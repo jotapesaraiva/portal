@@ -110,7 +110,17 @@ class Voucher extends CI_Controller {
 
     public function voucher_edit($id) {
         $data = $this->voucher_model->edit_voucher($id);
-        echo json_encode($data);
+            $date = array(
+              'id_historico' => $data->id_historico,
+              'usuario' => $data->usuario,
+              'motorista' => $data->motorista,
+              'prefixo' => $data->prefixo,
+              'voucher' => $data->voucher,
+              'data' => date('d-m-Y', strtotime($data->data)),
+              'valor' => $data->valor,
+              'observacao' => $data->observacao
+            );
+        echo json_encode($date);
     }
 
     public function voucher_delete($id) {

@@ -54,7 +54,6 @@ $(document).ready(function() {
         $(this).parent().parent().removeClass('has-error');
         $(this).next().empty();
     });
-
 });
 
 function add_agendamento() {
@@ -62,6 +61,7 @@ function add_agendamento() {
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
+    $(".form_datetime").datetimepicker('update');
     $('#modal_agendamento').modal('show'); // show bootstrap modal
     $('.modal-title').text('Adicionar agendamento'); // Set Title to Bootstrap modal title
 }
@@ -71,21 +71,21 @@ function edit_agendamento(id) {
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
-
+    $(".form_datetime").datetimepicker('update');
     //Ajax Load data from ajax
     $.ajax({
         url : server+"/agendamento_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
-            $('[name="id_agendamento"]').val(data[0].id_agendamento);
-            $('[name="nome"]').val(data[0].nome_agendamento);
-            $('[name="mensagem"]').val(data[0].mensagem_agendamento);
-            $('[name="data_inicio"]').val(data[0].data_inicio_agendamento);
-            $('[name="data_fim"]').val(data[0].data_fim_agendamento);
-            $('[name="grupo"]').selectpicker('val', data[0].id_grupo);
-            $('[name="mantis_solicitado"]').val(data[0].mantis_solicitado);
-            $('[name="mantis_notificado"]').val(data[0].mantis_notificado);
+            $('[name="id_agendamento"]').val(data.id_agendamento);
+            $('[name="nome"]').val(data.nome_agendamento);
+            $('[name="mensagem"]').val(data.mensagem_agendamento);
+            $('[name="data_inicio"]').val(data.data_inicio_agendamento);
+            $('[name="data_fim"]').val(data.data_fim_agendamento);
+            $('[name="grupo"]').selectpicker('val', data.id_grupo);
+            $('[name="mantis_solicitado"]').val(data.mantis_solicitado);
+            $('[name="mantis_notificado"]').val(data.mantis_notificado);
             //
             $('#modal_agendamento').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Editar agendamento'); // Set title to Bootstrap modal title

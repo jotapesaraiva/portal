@@ -78,6 +78,7 @@ function edit_voucher(id) {
         type: "GET",
         dataType: "JSON",
         success: function(data) {
+
             $('[name="id_historico"]').val(data.id_historico);
             $('[name="usuario"]').val(data.usuario);
             $('[name="motorista"]').val(data.motorista);
