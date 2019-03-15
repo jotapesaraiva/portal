@@ -6,17 +6,10 @@
                 <h4 class="modal-title">Sobreaviso do dia</h4>
             </div>
             <div class="modal-body">
-                <table id="tbl_sobreaviso" class="display">
-                        <thead>
-                            <tr>
-                                <th>Equipe</th>
-                                <th>Sobreaviso</th>
-                                <th>Contato</th>
-                                <th>Inicio</th>
-                                <th>Fim</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div id="sobreaviso_table_loading">
+                        <img src="../assets/global/img/loading.gif" alt="loading" />
+                    </div>
+                    <div id="sobreaviso_table_content" class="table-scrollable table-scrollable-borderless"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">Voltar</button>

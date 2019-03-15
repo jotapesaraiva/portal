@@ -78,14 +78,14 @@ function edit_agendamento(id) {
         type: "GET",
         dataType: "JSON",
         success: function(data) {
-            $('[name="id_agendamento"]').val(data.id_agendamento);
+            $('[name="id"]').val(data.id);
             $('[name="nome"]').val(data.nome_agendamento);
             $('[name="mensagem"]').val(data.mensagem_agendamento);
             $('[name="data_inicio"]').val(data.data_inicio_agendamento);
             $('[name="data_fim"]').val(data.data_fim_agendamento);
             $('[name="grupo"]').selectpicker('val', data.id_grupo);
             $('[name="mantis_solicitado"]').val(data.mantis_solicitado);
-            $('[name="mantis_notificado"]').val(data.mantis_notificado);
+            $('[name="mantis"]').val(data.mantis);
             //
             $('#modal_agendamento').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Editar agendamento'); // Set title to Bootstrap modal title

@@ -16,5 +16,6 @@ class Agendamento extends CI_Controller {
 
 }
 
+
 /* End of file Agendamento.php */
 /* Location: ./application/controllers/script/Agendamento.php */

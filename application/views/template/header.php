@@ -15,7 +15,7 @@
             <meta content="" name="description" />
             <meta content="" name="author" />
             <!-- BEGIN GLOBAL MANDATORY STYLES -->
-            <link href="<?php echo base_url(); ?>assets/googlefonts.css" rel="stylesheet" type="text/css" />
+
             <link href="<?php echo base_url(); ?>assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
             <link href="<?php echo base_url(); ?>assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
             <link href="<?php echo base_url(); ?>assets/global/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />

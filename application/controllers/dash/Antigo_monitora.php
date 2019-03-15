@@ -56,11 +56,6 @@ class Antigo_monitora extends CI_Controller {
         echo json_encode($retorno);
     }
 
-
-    public function teste() {
-        $this->load->helper('color_mantis');
-        echo color_mantis(50);
-    }
 }
 
 /* End of file Antigo_monitora.php */

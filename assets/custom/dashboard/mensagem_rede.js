@@ -22,7 +22,7 @@ function alerta_msg() {
             alert('Erro ao pegar os dados do ajax');
         }
     });
-    setTimeout('alerta_msg()', 30000);
+    setTimeout('alerta_msg()', 300000); // 5 minutos
 }
 
 
@@ -64,5 +64,5 @@ function content_msg() {
             alert('Erro ao pegar os dados do ajax');
         }
     });
-    setTimeout('content_msg()', 30000);
+    setTimeout('content_msg()', 300000); // 5 minutos
 }

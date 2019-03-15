@@ -10,6 +10,7 @@ class Enviar extends CI_Controller {
         $this->load->model('backups_model');
         $this->load->model('mantis_model');
         $this->load->model('monitora_model');
+        $this->load->model('agendamento_model');
     }
 
     public function index($dados) {
@@ -129,6 +130,32 @@ Ramal: 4994/4984
 
         $this->index($dados);
     }
+
+    public function agendamento($id) {
+        $alertas = $this->agendamento_model->select_alerta($id);
+        foreach ($alertas->result_array() as $alerta) {
+            $dados['id'] = $alerta['id'];
+            $dados['alerta'] = $alerta['nome_agendamento'];
+
+            $dados['detalhe'] = $alerta['mensagem_agendamento'];
+        }
+        $dados['projetos'] = $this->select_option(
+            $projetos = array(
+                            array('ID' => '1','NAME' => 'CGDA'),
+                            array('ID' => '2','NAME' => 'CGPS - Sustentação'),
+                            array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
+                            array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
+                            array('ID' => '5','NAME' => 'CGRE - Rede'),
+                            array('ID' => '6','NAME' => 'CGRE - Infra'),
+                            array('ID' => '99','NAME' => 'CGRE - Produção')
+                        ));
+        $dados['form'] = "modelo_cprojeto";
+        $dados['tabela'] = "tbl_agendamento";
+
+        $this->index($dados);
+    }
+
+
 
     public function abrir_mantis() {
         $this->load->model('mantis_model');

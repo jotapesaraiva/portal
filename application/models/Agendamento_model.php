@@ -9,7 +9,7 @@ class Agendamento_model extends CI_Model {
         $default->from('tbl_agendamento a');
         $default->join('tbl_grupos g','g.id_grupo=a.id_grupo');
         if($id != null){
-            $default->where('a.id_agendamento',$id);
+            $default->where('a.id',$id);
         }
         $query = $default->get();
         return $query;
@@ -33,6 +33,15 @@ class Agendamento_model extends CI_Model {
         $portal_db->delete('tbl_agendamento');
     }
 
+    public function select_alerta() {
+        $default = $this->load->database('default',true);
+        $default->select('a.*, g.nome_grupo');
+        $default->from('tbl_agendamento a');
+        $default->join('tbl_grupos g ', 'g.id_grupo= a.id_grupo');
+        $default->where('Month(a.data_inicio_agendamento) <= Month(now() + interval 1 month)');
+        $query = $default->get();
+        return $query;
+    }
 }
 
 /* End of file Agendamento_model.php */

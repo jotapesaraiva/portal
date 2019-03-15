@@ -1,19 +1,38 @@
 $(document).ready(function () {
-    var table = $('#tbl_sobreaviso').DataTable( {
-        "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
-        },
-        "ajax": "https://producaoh.sefa.pa.gov.br/portal/dash/sobreaviso/",
-        "paging":   false,
-        "searching": false,
-        "ordering": false,
-        "info":     false
-        // "order": [[2, 'desc']],
-    });
-    setInterval( function () {
-        table.ajax.reload( null, false ); // user paging is not reset on reload
-    }, 30000 );
+    sobreaviso_new()
 });
     function sobreaviso() {
         $('#sobreaviso').modal('show'); // show bootstrap modal when complete loaded
+    }
+
+    function sobreaviso_new() {
+        $('#sobreaviso_table_loading').hide();
+        $('#sobreaviso_table_content').show();
+        var displayResources = $("#sobreaviso_table_content");
+        // displayResources.text("Loading data from JSON source...");
+        $.ajax({
+           url: "https://producaoh.sefa.pa.gov.br/portal/dash/sobreaviso",
+           dataType: 'json',
+           success: function (data) {
+            // console.log(data);
+            var output ='<table class="table table-hover"><thead><tr class="uppercase"><th>Equipe</th><th>Sobreaviso</th><th>Contato</th><th>Inicio</th><th>Fim</th></thead><tbody>';
+                    for (var i in data) {
+                      output +=
+                        "<tr><td>" +
+                        data[i].celula +
+                        "</td><td>" +
+                        data[i].nome +
+                        "</td><td>" +
+                        data[i].telefone +
+                        "</td><td>" +
+                        data[i].inicio +
+                        "</td><td>" +
+                        data[i].fim +
+                        "</td><tr>";
+                    }
+                    output += "</tbody></table>";
+            displayResources.html(output);
+           }
+        });
+            setTimeout('sobreaviso_new()', 1800000 );//300000 - 5 minutos  30000 - 30 segundos 1800000 - 30 minutos
     }

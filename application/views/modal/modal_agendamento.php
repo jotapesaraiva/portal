@@ -9,7 +9,7 @@
             <div class="modal-body">
               <div class="container-fluid">
                 <form action="#" id="form" class="form-horizontal">
-                    <input type="hidden" value="" id="id_agendamento" name="id_agendamento"/>
+                    <input type="hidden" value="" id="id" name="id"/>
                     <div class="form-body">
                         <div class="form-group">
                             <label class="control-label col-md-3">Nome :</label>
@@ -75,7 +75,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Mantis Notificado :</label>
                             <div class="col-md-9">
-                                <input name="mantis_notificado" placeholder="" class="form-control" type="text">
+                                <input name="mantis" placeholder="" class="form-control" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>

@@ -31,7 +31,7 @@
                     <ul class="dropdown-menu">
                         <li class="external">
                             <h3>Alerta de <span id="count_agendamento" class="bold">-1</span> agendamento</h3>
-                            <a href="##">ver tudo</a>
+                            <a href="<?php echo base_url(); ?>gerencias/agendamento/table_agendamento_alerta">ver tudo</a>
                         </li>
                         <li id='content_agendamento'>
                         </li>
