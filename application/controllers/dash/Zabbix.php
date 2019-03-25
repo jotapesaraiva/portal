@@ -30,6 +30,12 @@ class Zabbix extends CI_Controller {
         $api = new ZabbixApi($api_url, $api_user, base64_decode($api_pass));
         // Set Defaults
 
+      //   $macros = $api->usermacroGet(array(
+      //       'output' => 'extend',
+      //       'globalmacro' => true
+      //   ));
+      // vd($macros);
+
         $hosts = $api->hostGet(array(
               'output'=> array('hostid','name','status'),
           // 'output'=> 'extend',
@@ -37,7 +43,7 @@ class Zabbix extends CI_Controller {
               // 'selectGroups'=> 'extend',
           'selectInterfaces' => array('ip'),
           // 'selectInventory' => array('location_lat','location_lon'),
-          'groupids' => array(35)
+          'groupids' => array(16)
         ));
         // echo vd($hosts);
           foreach ($hosts as $host) {
@@ -51,7 +57,9 @@ class Zabbix extends CI_Controller {
                      'comments'),
                  'selectHosts' => array('hostid'),
                      'hostids' => $host_id,
-                     'expandDescription' => 1,
+                     'expandComment'               => 1,
+                     'expandDescription'           => 1,
+                     'expandExpression'            => 1,
                      'only_true' => 1,
                      'monitored' => 1,
                      'withLastEventUnacknowledged' => 1,
@@ -61,7 +69,8 @@ class Zabbix extends CI_Controller {
                      'priority' => array('4','5'),
                      'value' => '1')
              ));
-           // vd($triggers);
+           vd($triggers);
+
           foreach($triggers as $trigger) {
              foreach($trigger->hosts as $host) {
                  $hostTriggers[$host->hostid][] = $trigger;

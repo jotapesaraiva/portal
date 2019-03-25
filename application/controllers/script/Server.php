@@ -15,7 +15,6 @@ class Server extends CI_Controller {
         $this->load->model('zabbix_model');
         $this->load->model('mantis_model');
         $this->load->model('server_model');
-        $this->load->helper('macros_helper');
     }
 
     public function index() {
@@ -63,26 +62,27 @@ class Server extends CI_Controller {
               ));
               // vd($alertas);
               $triggers = $api->triggerGet(array(
-                     'output' => array(
-                         'priority',
-                         'description',
-                         'comments'),
-                     'selectHosts' => array('hostid'),
-                         'hostids' => $host_id,
-                         'expandDescription' => 1,
-                         'only_true' => 1,
-                         'monitored' => 1,
+                         'output'                      => array('priority', 'description','comments'),
+                         'selectHosts'                 => array('hostid'),
+                         'hostids'                     => $host_id,
+                         'expandComment'               => 1, //expande as macros no comentario
+                         'expandDescription'           => 1, //expande as macros no descrição
+                         'expandExpression'            => 1, //expande as macros no expressão
+                         'only_true'                   => 1, // exibi somente trigger que tiverem com status de problema.
+                         'monitored'                   => 1, //exibi somente trigger ativados que pertencem a hosts monitorados e contêm apenas itens ativados.
+                         'skipDependent'               => 1, // não exibir se o alerta tiver regra de dependencia.
+                         'active'                      => 1, // exibi somente trigger ativados que pertencem aos hosts monitorados.
                          'withLastEventUnacknowledged' => 1,
-                      'sortfield' => array('lastchange', 'priority'),
-                         'sortorder' => 'DESC',
-                      'filter' => array(
-                         'priority' => array('4','5'),
-                         'value' => '1')
+                         'sortfield'                   => array('lastchange', 'priority'),
+                         'sortorder'                   => 'DESC',
+                         'filter'                      => array(
+                                            'priority' => array('4','5'),
+                                            'value'    => '1')
                  ));
               // vd($triggers);
-          if($triggers==NULL){
+            if($triggers==NULL){
                 $alert = '0';
-            }else{
+            } else {
               foreach($triggers as $trigger) {
                  foreach($trigger->hosts as $host) {
                      $hostTriggers[$host->hostid][] = $trigger;
@@ -102,7 +102,7 @@ class Server extends CI_Controller {
                         // vd($hostTriggers[$hostid][0]->lastchange);
                           $tempo_fora=time_elapsed_string(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange),true);
                           $data_alerta = date('Y-m-d H:i:s' ,$hostTriggers[$hostid][0]->lastchange);
-                          $detalhe = macros($hostTriggers[$hostid][0]->comments);
+                          $detalhe = $hostTriggers[$hostid][0]->comments;
                           $count = "0";
                           foreach ($hostTriggers[$hostid] as $event) {
                                   $id = $event->triggerid;
@@ -142,7 +142,7 @@ class Server extends CI_Controller {
                       }
                   }
               }
-}
+            }
               //consultar todos os alertas da tabela mnt_alertas no banco portal
               $alertas = $this->server_model->select_server_fora();
               // vd($alertas);
@@ -151,7 +151,7 @@ class Server extends CI_Controller {
                 $projetos = $this->mantis_model->mantis_projetos();
                 // vd($projetos);
                 foreach ($projetos as $projeto) {
-                  if("servidor ".$alerta['servidor']." - servico ".$alerta['servico']."" == $projeto['RESUMO'] || $alerta['']){
+                  if("servidor ".$alerta['servidor']." - servico ".$alerta['servico']."" == $projeto['RESUMO']){
                   // if("servidor {$alerta['servidor']} - servico {$alerta['servico']}" == $projeto['RESUMO']) {
                     echo "servidor ".$alerta['servidor']." - servico ".$alerta['servico']." RESUMO:".$projeto['RESUMO']."<br>";
                       //update tabela com numeo mantis
@@ -164,10 +164,10 @@ class Server extends CI_Controller {
               // vd($alert);
               //deleta todos que não estão alertando
               $this->zabbix_model->delete_zabbix_server($alert);
-          } else {
-              echo "SCRIPT DESABILITADO NO BANCO DE DADOS";
-          }
-      }
+    } else {
+        echo "SCRIPT DESABILITADO NO BANCO DE DADOS";
+    }
+}
 
 
       public function teste() {

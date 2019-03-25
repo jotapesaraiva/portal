@@ -22,14 +22,15 @@ class Agendamento extends CI_Controller {
             <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
             <link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['footerinc'] = '
-            <script src="'.base_url().'assets/custom/agendamento.js" type="text/javascript"></script>
-
+            <script src="'.base_url().'assets/custom/gerencias/agendamento.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '
-            <script src="'.base_url().'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>';
+            <script src="'.base_url().'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/custom/form-input-mask.js" type="text/javascript"></script>';
 
         $session['username'] = $this->session->userdata('username');
         $grupos = $this->usuario_model->listar_grupo();
@@ -61,13 +62,14 @@ class Agendamento extends CI_Controller {
         $data = array();
         foreach ($agendamentos->result_array() as $agendamento) {
             $row = array();
+            $row[] = $agendamento['id'];
             $row[] = $agendamento['nome_agendamento'];
             $row[] = $agendamento['mensagem_agendamento'];
-            $row[] = date( 'd/M/Y h:i:s', strtotime($agendamento['data_inicio_agendamento']));
-            $row[] = date( 'd/M/Y h:i:s', strtotime($agendamento['data_fim_agendamento']));
+            $row[] = date( 'd/m/Y h:i', strtotime($agendamento['data_inicio_agendamento']));
+            $row[] = date( 'd/m/Y h:i', strtotime($agendamento['data_fim_agendamento']));
             $row[] = $agendamento['nome_grupo']; //responsavel
-            $row[] = $agendamento['mantis_solicitado'];
-            $row[] = $agendamento['mantis'];
+            $row[] = anchor_popup('http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$agendamento['mantis_solicitado'].'', $agendamento['mantis_solicitado']);
+            $row[] = anchor_popup('http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$agendamento['mantis'].'', $agendamento['mantis']);
 
             $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_agendamento('."'".$agendamento['id']."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                       <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_agendamento('."'".$agendamento['id']."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
@@ -206,9 +208,12 @@ class Agendamento extends CI_Controller {
             $result = array(
                 'flag'     => $flag,
                 'id' => $alerta['id'],
+                'title' => $alerta['nome_agendamento'],
                 'post_user' => $alerta['nome_grupo'],
                 'start_date' => $alerta['data_inicio_agendamento'],
                 'stop_date' => $alerta['data_fim_agendamento'],
+                'start_dc' => date('d/m/y H:i', strtotime($alerta['data_inicio_agendamento'])),
+                'stop_dc' => date('d/m/y H:i', strtotime($alerta['data_fim_agendamento'])),
                 'msg' => $alerta['mensagem_agendamento'],
                 'mantis'   => $mantis
             );
@@ -237,7 +242,6 @@ class Agendamento extends CI_Controller {
 
         $this->load->view('template/footer', $script);
     }
-
 }
 
 /* End of file Agendamento.php */

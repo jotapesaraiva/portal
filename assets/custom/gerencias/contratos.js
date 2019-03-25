@@ -43,22 +43,23 @@ $(document).ready(function() {
     });
     //set input/textarea/select event when change value, remove class error and remove text help block
     $("input").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
+        $(this).parents('div.form-group').removeClass('has-error');
+        $(this).parents('div.form-group').find('.help-block').empty();
     });
     $("textarea").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
+        $(this).parents('div.form-group').removeClass('has-error');
+        $(this).parents('div.form-group').empty();
     });
     $("select").change(function(){
-        $(this).parent().parent().removeClass('has-error');
-        $(this).next().empty();
+        $(this).parents('div.form-group').removeClass('has-error');
+        $(this).parents('div.form-group').find('.help-block').empty();
     });
 });
 
 function add_contrato() {
     save_method = 'add';
     $('#form')[0].reset(); // reset form on modals
+    $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_contratos').modal('show'); // show bootstrap modal
@@ -68,6 +69,7 @@ function add_contrato() {
 function edit_contrato(id) {
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
+    $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
 
@@ -131,8 +133,8 @@ function save(){
                 reload_table();
             } else {
                 for (var i = 0; i < data.inputerror.length; i++) {
-                    $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-                    $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                    $('[name="'+data.inputerror[i]+'"]').parents('div.form-group').addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+                    $('[name="'+data.inputerror[i]+'"]').parents('div.form-group').find('.help-block').text(data.error_string[i]); //select span help-block class set text error string
                 }
             }
             $('#btnSave').text('Salvo'); //change button text

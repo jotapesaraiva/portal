@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  $('.mantis').mask('0000000');
+  $('.duration').mask('00 mes');
   $('#date').mask('00/00/0000');
   $('#time').mask('00:00:00');
   $('#date_time').mask('00/00/0000 00:00:00');

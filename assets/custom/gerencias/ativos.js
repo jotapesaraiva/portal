@@ -43,16 +43,16 @@
       });
       //set input/textarea/select event when change value, remove class error and remove text help block
       $("input").change(function(){
-          $(this).parent().parent().removeClass('has-error');
-          $(this).next().empty();
+          $(this).parents('div.form-group').removeClass('has-error');
+          $(this).parents('div.form-group').find('.help-block').empty();
       });
       $("textarea").change(function(){
-          $(this).parent().parent().removeClass('has-error');
-          $(this).next().empty();
+          $(this).parents('div.form-group').removeClass('has-error');
+          $(this).parents('div.form-group').empty();
       });
       $("select").change(function(){
-          $(this).parent().parent().removeClass('has-error');
-          $(this).next().empty();
+          $(this).parents('div.form-group').removeClass('has-error');
+          $(this).parents('div.form-group').find('.help-block').empty();
       });
   });
 
@@ -128,8 +128,8 @@
                   reload_table();
               } else {
                   for (var i = 0; i < data.inputerror.length; i++) {
-                      $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-                      $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                      $('[name="'+data.inputerror[i]+'"]').parents('div.form-group').addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+                      $('[name="'+data.inputerror[i]+'"]').parents('div.form-group').find('.help-block').text(data.error_string[i]); //select span help-block class set text error string
                   }
               }
               $('#btnSave').text('Salvo'); //change button text

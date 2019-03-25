@@ -103,6 +103,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor('gerencias/voucher', '<i class="fa fa-cab"></i> Voucher', 'class="nav-link"')?>
                             <?php echo span_segment(2,'voucher'); ?>
                         </li>
+                        <!--############# ABA GERENCIA > Agendamento ############-->
+                        <?php } if($this->auth_ad->level_access('agendamento',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'agendamento'); ?>">
+                            <?php echo anchor('gerencias/agendamento', '<i class="fa fa-calendar-check-o"></i> Agendamento', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'agendamento'); ?>
+                        </li>
+                        <!--############# ABA GERENCIA > Ativos ############-->
+                        <?php } if($this->auth_ad->level_access('ativos',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'ativos'); ?>">
+                            <?php echo anchor('gerencias/ativos', '<i class="fa fa-sitemap"></i> Ativos', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'ativos'); ?>
+                        </li>
+                        <!--############# ABA GERENCIA > Contratos ############-->
+                        <?php } if($this->auth_ad->level_access('contratos',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'contratos'); ?>">
+                            <?php echo anchor('gerencias/contratos', '<i class="fa fa-book"></i> contratos', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'contratos'); ?>
+                        </li>
                         <?php }?>
                     </ul>
                 </li>
@@ -513,9 +531,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li class="nav-item ">
-                            <?php echo anchor_popup('http://10.3.1.37/ddem/login/', 'Vsphere Web Client'); ?>
-                        </li>
+                        <!-- <li class="nav-item ">
+                            <?php //echo anchor_popup('http://10.3.1.37/ddem/login/', 'Vsphere Web Client'); ?>
+                        </li> -->
                         <li class="nav-item ">
                             <?php echo anchor_popup('https://10.3.1.196:9443/vsphere-client/?csp', 'Vsphere Web Client 6.5.0'); ?>
                         </li>

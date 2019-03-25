@@ -71,7 +71,8 @@ $(document).ready(function() {
     $("select").change(function(){
         $(this).parents('div.form-group').removeClass('has-error');
         $(this).parents('div.form-group').find('.help-block').empty();
-    });});
+    });
+});
 /*********************************************************************
 *********************************************************************/
 var telefones = 0;

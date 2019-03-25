@@ -18,7 +18,7 @@
                                 <span class="help-block"></span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div id="help-block" class="form-group">
                             <label class="control-label col-md-3">Tipo :</label>
                             <div class="col-md-9">
                                 <select class="selectpicker form-control" name="tipo">
@@ -47,14 +47,14 @@
                                             <i class="fa fa-calendar"></i>
                                         </button>
                                     </span>
-                                    <span class="help-block"></span>
                                 </div>
+                                <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Duração :</label>
                             <div class="col-md-9">
-                                <input name="duracao" placeholder="" class="form-control" type="text">
+                                <input name="duracao" placeholder="" class="form-control duration" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -67,11 +67,11 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Aviso :</label>
                             <div class="col-md-9">
-                                <input name="aviso" placeholder="" class="form-control" type="text">
+                                <input name="aviso" placeholder="" class="form-control duration" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div id="help-block" class="form-group">
                             <label class="control-label col-md-3">Fornecedor :</label>
                             <div class="col-md-9">
                                 <select class="selectpicker form-control" name="fornecedor">

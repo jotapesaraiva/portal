@@ -15,7 +15,6 @@ class Link_indisponivel extends CI_Controller {
         $this->load->model('mantis_model');
         $this->load->model('link_model');
         $this->load->model('modulos_model');
-        $this->load->helper('macros_helper');
     }
 
     public function index() {
@@ -43,35 +42,37 @@ class Link_indisponivel extends CI_Controller {
             // Set Defaults
 
             $hosts = $api->hostGet(array(
-                'output'=> array('hostid','name','status', 'description'),
-                // 'output'=> 'extend',
-                'sortfield' => 'name',
-                    // 'selectGroups'=> 'extend',
-                'selectInterfaces' => array('ip'),
-                'selectInventory' => array('location_lat','location_lon','vendor'),
-                // 'selectInventory' => 'extend',
-                'groupids' => array(16)//16- novo zabbix(link Acesso) //19,18 - antigo zabbix(link terrestre,link satelite)
+                    'output'             => array('hostid','name','status', 'description'),
+                    // 'output'          => 'extend',
+                    'sortfield'          => 'name',
+                    // 'selectGroups'    => 'extend',
+                    'selectInterfaces'   => array('ip'),
+                    'selectInventory'    => array('location_lat','location_lon','vendor'),
+                    // 'selectInventory' => 'extend',
+                    'groupids'           => array(16)//16- novo zabbix(link Acesso) //19,18 - antigo zabbix(link terrestre,link satelite)
             ));
                 foreach ($hosts as $host) {
                     $host_id[] = $host->hostid;
                 }
 
                 $triggers = $api->triggerGet(array(
-                       'output' => 'extend',
-                       // array(
-                       //     'priority',
-                       //     'description'),
-                       'selectHosts' => array('hostid'),
-                           'hostids' => $host_id,
-                           'expandDescription' => 1,
-                           'only_true' => 1,
-                           'monitored' => 1,
+                           'output'                      => 'extend',
+                           // array(
+                           //     'priority',
+                           //     'description'),
+                           'selectHosts'                 => array('hostid'),
+                           'hostids'                     => $host_id,
+                           'expandComment'               => 1,
+                           'expandDescription'           => 1,
+                           'expandExpression'            => 1,
+                           'only_true'                   => 1,
+                           'monitored'                   => 1,
                            'withLastEventUnacknowledged' => 1,
-                        'sortfield' => array('lastchange', 'priority'),
-                           'sortorder' => 'DESC',
-                        'filter' => array(
-                           'priority' => array('5'),
-                           'value' => '1')
+                           'sortfield'                   => array('lastchange', 'priority'),
+                           'sortorder'                   => 'DESC',
+                           'filter'                      => array(
+                                              'priority' => array('5'),
+                                              'value'    => '1')
                    ));
 
             if($triggers==NULL){
@@ -107,7 +108,7 @@ class Link_indisponivel extends CI_Controller {
 
                             foreach ($hostTriggers[$hostid] as $event) {
                                     $id = $event->triggerid;
-                                    $detalhe = macros($event->comments);
+                                    $detalhe = $event->comments;
                                 if ($count++ <= 2 ) {
                                     $priority = $event->priority;
                                     $description = $event->description;

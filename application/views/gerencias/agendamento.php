@@ -60,6 +60,7 @@
                         <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table">
                             <thead>
                                 <tr>
+                                    <th> ID </th>
                                     <th> Nome </th>
                                     <th> Mensagem </th>
                                     <th> Data inicio </th>

@@ -35,8 +35,8 @@
                                             <i class="fa fa-calendar"></i>
                                         </button>
                                     </span>
-                                    <span class="help-block"></span>
                                 </div>
+                                <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,8 +49,8 @@
                                             <i class="fa fa-calendar"></i>
                                         </button>
                                     </span>
-                                    <span class="help-block"></span>
                                 </div>
+                                <span class="help-block"></span>
                             </div>
                         </div>
                          <div class="form-group">
@@ -68,14 +68,14 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Mantis Solicitado :</label>
                             <div class="col-md-9">
-                                <input name="mantis_solicitado" placeholder="" class="form-control" type="text">
+                                <input name="mantis_solicitado" placeholder="" class="form-control mantis" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Mantis Notificado :</label>
                             <div class="col-md-9">
-                                <input name="mantis" placeholder="" class="form-control" type="text">
+                                <input name="mantis" placeholder="" class="form-control mantis" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>

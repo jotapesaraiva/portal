@@ -17,7 +17,7 @@ class Ativos extends CI_Controller {
         $this->output->enable_profiler(FALSE);
         $css['headerinc'] = '<link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/custom/ativos.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/gerencias/ativos.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '';
 

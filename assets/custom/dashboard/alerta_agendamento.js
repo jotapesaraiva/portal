@@ -43,12 +43,12 @@ function content_agendamento() {
                 html += '<ul class="dropdown-menu-list scroller"  data-handle-color="#637283">';
                     $.each(data, function(indice,valor) {
                         html +=     '<li>';
-                        html +=         '<a href="'+valor.id+'" target="_blank">';
-                        html +=             '<span class="photo">';
-                        html +=                 '<img src="assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>';
+                        html +=         '<a href="https://producaoh.sefa.pa.gov.br/portal/gerencias/agendamento/" target="_blank">';
+                        // html +=             '<span class="photo">';
+                        // html +=                 '<img src="assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>';
                         html +=             '<span class="subject">';
                         html +=                 '<span class="from">'+valor.post_user+'</span>';
-                        html +=                 '<span class="time">'+valor.start_date+' '+valor.stop_date+'</span>';
+                        html +=                 '<span class="time">'+valor.stop_dc+'</span>';
                         html +=            '</span>';
                         html +=             '<span class="message">'+valor.msg+'</span>';
                         html +=         '</a>';
@@ -57,7 +57,7 @@ function content_agendamento() {
                 html += '</ul>';
                 $("#content_agendamento").html(html);
             } else {
-                var html = 'Sem mensagens :)';
+                var html = 'Sem agendamento de tarefa :)';
                 $("#content_agendamento").html(html);
             }
         },
@@ -78,19 +78,21 @@ function table_agendamento() {
        dataType: 'json',
        success: function (data) {
         // console.log(data);
-        var output ='<table class="table table-hover"><thead><tr class="uppercase"><th>id</th><th>mensagem</th><th>responsavel</th><th>Inicio</th><th>Fim</th><th>mantis</th></thead><tbody>';
+        var output ='<table class="table table-hover"><thead><tr class="uppercase"><th>id</th><th>Nome</th><th>mensagem</th><th>responsavel</th><th>Inicio</th><th>Fim</th><th>mantis</th></thead><tbody>';
                 for (var i in data) {
                   output +=
                     "<tr "+data[i].flag+"><td>" +
                     data[i].id +
                     "</td><td>" +
+                    data[i].title +
+                    "</td><td>" +
                     data[i].msg +
                     "</td><td>" +
                     data[i].post_user +
                     "</td><td>" +
-                    data[i].start_date +
+                    data[i].start_dc +
                     "</td><td>" +
-                    data[i].stop_date +
+                    data[i].stop_dc +
                     "</td><td>" +
                     data[i].mantis +
                     "</td><tr>";
