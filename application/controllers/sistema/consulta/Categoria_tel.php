@@ -10,17 +10,16 @@ class Categoria_tel extends CI_Controller {
 
     public function index(){
        $this->output->enable_profiler(FALSE);
-       $script['footerinc'] = '
-           <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-           <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-           <script src="' . base_url() . 'assets/custom/categoria_telefonia.js" type="text/javascript"></script>
-       ';
-       $script['script'] = '';
-
        $css['headerinc'] = '
            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
+       $script['script'] = '';
 
+       $script['footerinc'] = '
+           <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+           <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+           <script src="' . base_url() . 'assets/custom/sistema/categoria_telefonia.js" type="text/javascript"></script>
+       ';
        $session['username'] = $this->session->userdata('username');
 
        $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');

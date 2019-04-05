@@ -22,7 +22,6 @@ class Unidade extends CI_Controller {
             <script src="'.base_url().'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-            <script src="//cdn.datatables.net/plug-ins/1.10.19/filtering/type-based/accent-neutralise.js" type="text/javascript"></script>
             ';
         $script['script'] = '
             <script src="'.base_url().'assets/custom/form-input-mask.js" type="text/javascript"></script>';

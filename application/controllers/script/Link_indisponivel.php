@@ -139,7 +139,7 @@ class Link_indisponivel extends CI_Controller {
                                 'duration' => $tempo_fora
                             );//salva os link fora na tabela zbx_link_fora.
                             $this->zabbix_model->duplicate_zabbix_grc($save_db);
-                            // print_r($save_db);
+                            print_r($save_db);
                             array_push($alert,$id);
                             //consulta na tabela ebt_grc
                             $grc = $this->zabbix_model->list_grc_link($hostdesignacao);

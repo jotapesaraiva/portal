@@ -13,7 +13,7 @@ class Contexto_voip extends CI_Controller {
        $script['footerinc'] = '
            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-           <script src="' . base_url() . 'assets/custom/voip_contexto.js" type="text/javascript"></script>
+           <script src="' . base_url() . 'assets/custom/sistema/voip_contexto.js" type="text/javascript"></script>
        ';
        $script['script'] = '';
 

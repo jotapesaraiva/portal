@@ -13,6 +13,17 @@ var ComponentsDateTimePickers = function () {
                 // minDate: '01/01/2018',
                 // maxDate: '31/12/2030'
             });
+
+            $('.year-picker').datepicker({
+                rtl: App.isRTL(),
+                orientation: "right",
+                autoclose: true,
+                language: 'pt-BR',
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years",
+                todayHighlight: true
+            });
             //$('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
         }
 

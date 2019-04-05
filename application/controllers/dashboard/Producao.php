@@ -21,13 +21,13 @@ class Producao extends CI_Controller {
             $css['headerinc'] = '';
             $script['script'] = '';
             $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/custom/link_indisponivel.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/server.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/backups_falhos.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/zabbix.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/antigo_monitora.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/chamados_mantis.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/temperatura_nobreak.js" type="text/javascript"></script>';
+            <script src="' . base_url() . 'assets/custom/dashboard/link_indisponivel.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/dashboard/server.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/dashboard/backups_falhos.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/dashboard/zabbix.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/dashboard/antigo_monitora.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/dashboard/chamados_mantis.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/dashboard/temperatura_nobreak.js" type="text/javascript"></script>';
 
             $username = $this->session->userdata('username');
             $user = array("username" => $username);

@@ -14,7 +14,7 @@ class Acessos extends CI_Controller {
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/senhas.js" type="text/javascript"></script>';
+            <script src="' . base_url() . 'assets/custom/gerencias/senhas.js" type="text/javascript"></script>';
         $script['script'] = '';
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />

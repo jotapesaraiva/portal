@@ -22,7 +22,7 @@ $(document).ready(function() {
                       text: 'Export',
                       buttons: [ 'pdf', 'csv', 'print', 'excel' ]
           }],
-          "order": [[1, 'asc']],
+          "order": [[0, 'asc']],
           //Set column definition initialisation properties.
           "columnDefs": [{
               // "targets": [ -1 ], //last column

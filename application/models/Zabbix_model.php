@@ -108,6 +108,10 @@ class Zabbix_model extends CI_Model {
         $portal_db = $this->load->database('default',true);
         $portal_db->select('*');
         $portal_db->from('zbx_server_fora');
+        if(date('H') >= '08' && date('H') <= '18'){
+        }else{
+            $portal_db->where('priority','5');
+        }
         $portal_db->order_by('data_alerta', 'DESC');
         $query = $portal_db->get();
         return $query->result_array();

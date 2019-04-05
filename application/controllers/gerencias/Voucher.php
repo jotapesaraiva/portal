@@ -19,7 +19,7 @@ class Voucher extends CI_Controller {
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/voucher.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/gerencias/voucher.js" type="text/javascript"></script>
             ';
         $script['script'] = '
             <script src="' . base_url() . 'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>

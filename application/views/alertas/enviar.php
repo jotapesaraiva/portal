@@ -83,14 +83,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                 <?php echo form_hidden('id', $id);?>
                                                 <?php echo form_hidden('alerta', $alerta);?>
                                                 <?php echo form_hidden('tabela', $tabela);?>
-
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label">Detalhe do Alerta</label>
                                                     <div class="col-md-8">
                                                             <textarea class="form-control" name="detalhe" rows="15"><?php echo $detalhe; ?></textarea>
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label">Ticket</label>
                                                     <div class="col-md-8">

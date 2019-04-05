@@ -12,7 +12,7 @@ class Lista extends CI_Controller {
         $this->output->enable_profiler(FALSE);
         $script['footerinc'] = '
             <script src="'. base_url() .'assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-            <script src="'. base_url() .'assets/custom/usuarios_lista.js" type="text/javascript"></script>
+            <script src="'. base_url() .'assets/custom/usuarios/usuarios_lista.js" type="text/javascript"></script>
             <script src="'. base_url() .'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
             <script src="'. base_url() .'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
             <script src="'. base_url() .'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>';

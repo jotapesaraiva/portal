@@ -21,7 +21,7 @@ class Perfil extends CI_Controller {
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/perfil.js" type="text/javascript"></script>';
+            <script src="' . base_url() . 'assets/custom/usuarios/perfil.js" type="text/javascript"></script>';
         $script['script'] = '';
 
         $this->output->enable_profiler(false);

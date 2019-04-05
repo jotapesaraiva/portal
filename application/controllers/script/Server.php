@@ -76,7 +76,7 @@ class Server extends CI_Controller {
                          'sortfield'                   => array('lastchange', 'priority'),
                          'sortorder'                   => 'DESC',
                          'filter'                      => array(
-                                            'priority' => array('4','5'),
+                                            'priority' => array('4','5'),//desastre -5, alta -4
                                             'value'    => '1')
                  ));
               // vd($triggers);
@@ -115,7 +115,7 @@ class Server extends CI_Controller {
                                   // View
                                   // echo "<div class=\"description nok" . $priority ."\" title=\"" . $description . "\">" . $description . "</div>";
                                   $duration = $data_alerta;
-                                  $priority ="down";
+                                  // $priority ="down";
                               } else {
                                   break;
                               }
@@ -128,7 +128,8 @@ class Server extends CI_Controller {
                                   'data_alerta' => $duration,
                                   'data_ultima_verificacao' => date('Y-m-d H'),
                                   'ip' => $hostip,
-                                  'duration' => $tempo_fora
+                                  'duration' => $tempo_fora,
+                                  'priority' => $priority
                                 );
                                 print_r($save_db);
                                 array_push($alert,$id);

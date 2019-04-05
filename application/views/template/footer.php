@@ -32,7 +32,7 @@
         <script src="<?php echo base_url(); ?>assets/custom/dashboard/alerta_agendamento.js" type="text/javascript"></script>
         <!-- <script src="<?php echo base_url(); ?>assets/global/plugins/morris/morris.min.js" type="text/javascript"></script> -->
         <!-- <script src="<?php echo base_url(); ?>assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script> -->
-        <script src="//cdn.datatables.net/plug-ins/1.10.19/filtering/type-based/accent-neutralise.js" type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/global/plugins/datatables/accent-neutralise.js" type="text/javascript"></script>
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="<?php echo base_url(); ?>assets/global/scripts/app.min.js" type="text/javascript"></script>

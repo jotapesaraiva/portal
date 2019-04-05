@@ -116,13 +116,13 @@ class Enviar extends CI_Controller {
             $dados['id'] = $detalhe['id'];
             $dados['alerta'] = "Backup ".$detalhe['status'] ." - ".$detalhe['specification'];
             $dados['detalhe'] = "Backup: ".$detalhe['specification']."
-Sessão: ".$detalhe['session_id']."
-Modo: ".$detalhe['mode']."
-\nEquipe Responsável: CGRE - Produção.
-Plano de Ação: Analisar os log da session ".$detalhe['session_id'].".
-Email: operadores@sefa.pa.gov.br
-Ramal: 4994/4984
-\nLogo de Erro: ".$detalhe['erro_backup'];
+                                \nSessão: ".$detalhe['session_id']."
+                                \nModo: ".$detalhe['mode']."
+                                \nEquipe Responsável: CGRE - Produção.
+                                \nPlano de Ação: Analisar os log da session ".$detalhe['session_id'].".
+                                \nEmail: operadores@sefa.pa.gov.br
+                                \nRamal: 4994/4984
+                                \nLogo de Erro: ".$detalhe['erro_backup'];
         }
         $dados['projeto'] = "8";
         $dados['form'] = "modelo_sprojeto";
