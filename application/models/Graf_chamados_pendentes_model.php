@@ -45,7 +45,7 @@ class Graf_chamados_pendentes_model extends CI_Model {
                                    AND B.PROJECT_ID IN (1502)
                                    AND F.VALUE LIKE '%Evolutiva%')
                         PIVOT(SUM(VALOR_1)
-                           FOR(NAME_1) IN('Projetos/Man.Assistida' AS PROJETOS,
+                           FOR(NAME_1) IN('Operação Assistida' AS PROJETOS,
                                          'Sustentação' AS SUSTENTACAO,
                                          'evolutiva' AS EVOLUTIVA))) A
                                          order by MES asc

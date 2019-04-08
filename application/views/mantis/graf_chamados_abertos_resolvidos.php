@@ -1,6 +1,5 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
+
 
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
@@ -28,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> Mantis evolutiva por mês / nome </span>
+                        <span class="caption-subject bold uppercase"> Chamados abertos resolvidos por dia</span>
                     </div>
                    </div>
                    <div class="portlet-body">
@@ -37,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="col-md-3 col-md-offset-3">
                             <label class="control-label col-md-4 bold">Data Inicio </label>
                               <div class="input-group input-medium date date-picker" >
-                                  <input class="form-control" name="data_inicio" readonly value="<?php echo $data_inicio;?>" type="text" onchange='this.form.submit()'>
+                                  <input class="form-control" name="data_inicio"  readonly value="<?php echo $data_inicio;?>" type="text" onchange='this.form.submit()'>
                                   <span class="input-group-btn">
                                       <button class="btn default" type="button">
                                           <i class="fa fa-calendar"></i>
@@ -47,8 +46,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <div class="col-md-3">
                             <label class="control-label col-md-4 bold">Data Final </label>
-                            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy">
-                                <input class="form-control"  name="data_fim" readonly value="<?php echo $data_fim;?>" type="text" onchange='this.form.submit()'>
+                            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="-1M">
+                                <input class="form-control"  name="data_fim"  readonly value="<?php echo $data_fim;?>" type="text" onchange='this.form.submit()'>
                                 <span class="input-group-btn">
                                     <button class="btn default" type="button">
                                         <i class="fa fa-calendar"></i>
@@ -69,5 +68,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 
-<!-- /* End of file graf_evolutiva.php */ -->
-<!-- /* Location: ./application/views/mantis/graf_evolutiva.php */ -->
+
+<!-- /* End of file graf_chamados_abertos_resolvidos.php */ -->
+<!-- /* Location: ./application/views/mantis/graf_chamados_abertos_resolvidos.php */ -->

@@ -14,6 +14,17 @@ var ComponentsDateTimePickers = function () {
                 // maxDate: '31/12/2030'
             });
 
+            $('.month-picker').datepicker({
+                rtl: App.isRTL(),
+                orientation: "right",
+                autoclose: true,
+                language: 'pt-BR',
+                format: "mm-yyyy",
+                viewMode: "months",
+                minViewMode: "months",
+                todayHighlight: true
+            });
+
             $('.year-picker').datepicker({
                 rtl: App.isRTL(),
                 orientation: "right",
@@ -24,6 +35,7 @@ var ComponentsDateTimePickers = function () {
                 minViewMode: "years",
                 todayHighlight: true
             });
+
             //$('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
         }
 

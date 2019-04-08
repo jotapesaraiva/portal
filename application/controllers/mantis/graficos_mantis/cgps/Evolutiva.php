@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Graf_evolutiva extends CI_Controller {
+class Evolutiva extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -12,18 +12,18 @@ class Graf_evolutiva extends CI_Controller {
 
     public function index() {
         if($this->input->post('data_inicio')) {
-            $data_inicio = $this->input->post('data_inicio');
-            $data['data_inicio'] = $data_inicio;
+            $data_inicio = '01-'.$this->input->post('data_inicio');
+            $data['data_inicio'] = $this->input->post('data_inicio');
         } else {
             $data_inicio = date('01/01/Y');
-            $data['data_inicio'] = date('01-01-Y');
+            $data['data_inicio'] = date('01-Y');
         }
         if($this->input->post('data_fim')) {
-            $data_fim = $this->input->post('data_fim');
-            $data['data_fim'] = $data_fim;
+            $data_fim = date('d').'-'.$this->input->post('data_fim');
+            $data['data_fim'] = $this->input->post('data_fim');
         } else {
             $data_fim = date('d/m/Y');
-            $data['data_fim'] = date('d-m-Y');
+            $data['data_fim'] = date('m-Y');
         }
 
         $this->output->enable_profiler(FALSE);
@@ -97,7 +97,7 @@ class Graf_evolutiva extends CI_Controller {
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('mantis/graf_evolutiva',$data);
+        $this->load->view('mantis/graficos_mantis/cgps/evolutiva',$data);
 
         $this->load->view('template/footer',$script);
     }

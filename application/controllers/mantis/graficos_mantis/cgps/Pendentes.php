@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Graf_chamados_pendentes extends CI_Controller {
+class Pendentes extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         //Do your magic here
-        $this->load->model('graf_chamados_pendentes_model', 'chamados_model');
+        $this->load->model('graf_chamados_pendentes_model', 'pendentes_model');
+        $this->load->helper('date_helper');
     }
 
     public function index(){
@@ -100,7 +101,7 @@ class Graf_chamados_pendentes extends CI_Controller {
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Mantis</span>', '/mantis;');
-        $this->breadcrumbs->push('<span>Chamados Pendentes</span>', '/mantis/chamados_pendentes');
+        $this->breadcrumbs->push('<span>Chamados Pendentes</span>', '/mantis/graf_chamados_pendentes');
 
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$session);
@@ -113,12 +114,12 @@ class Graf_chamados_pendentes extends CI_Controller {
 
     public function chart_data($ano) {
     // public function chart_data() {
-        $chamados = $this->chamados_model->chamados_pendentes($ano);
-        // $chamados = $this->chamados_model->chamados_pendentes('2019');
+        $chamados = $this->pendentes_model->chamados_pendentes($ano);
+        // $chamados = $this->pendentes_model->chamados_pendentes('2019');
         $result = array();
         foreach ($chamados as $value) {
             $retorno = array(
-                'DATA' => $value['MES'],
+                'DATA' => dataEmPortugues($value['MES']),
                 'PROJETOS' => intval($value['PROJETOS']),
                 'EVOLUTIVA' => intval($value['EVOLUTIVA']),
                 'SUSTENTACAO' => intval($value['SUSTENTACAO'])
