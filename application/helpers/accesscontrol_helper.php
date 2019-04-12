@@ -20,5 +20,16 @@ if ( ! function_exists('esta_logado')){
 }
 
 
+if ( ! function_exists('minhas_tarefas')){
+    function minhas_tarefas() {
+        $CI =& get_instance();
+        $CI->load->library('session');
+        $CI->load->model('menu_model');
+        $tarefas = $CI->menu_model->minhas_tarefas($CI->session->userdata('username'));
+        return $tarefas->TAREFAS;
+    }
+}
+
+
 /* End of file accessControl_helper.php */
 /* Location: ./application/helpers/accessControl_helper.php */

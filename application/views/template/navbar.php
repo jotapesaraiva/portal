@@ -96,9 +96,7 @@
                             <a href="<?php echo base_url();?>menu/meu_perfil"><i class="icon-user"></i> Meu Perfil </a>
                         </li>
                         <li>
-                            <a href="app_todo.html">
-                                <i class="icon-rocket"></i> Minhas Tarefas <span class="badge badge-success"> 7 </span>
-                            </a>
+                            <?php echo anchor_popup('https://mantis.sefa.pa.gov.br/my_view_page.php', '<i class="icon-rocket"></i> Minhas Tarefas <span class="badge badge-success"> '.minhas_tarefas().' </span>' ); ?>
                         </li>
                         <li class="divider"> </li>
                         <li>

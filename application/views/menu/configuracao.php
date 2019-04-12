@@ -19,6 +19,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div id="msgs"></div>
+                <?php get_msg('loginOk'); get_msg('loginErro'); get_msg('retorno')?>
                 <!-- BEGIN PROFILE SIDEBAR -->
                 <div class="profile-sidebar">
                     <!-- PORTLET MAIN -->
@@ -59,16 +60,16 @@
                         <h3 class="page-title">Mantis</h3>
                         <div class="row list-separated profile-stat">
                             <div class="col-md-4 col-sm-4 col-xs-6">
-                                <div class="uppercase profile-stat-title"> 37 </div>
+                                <div class="uppercase profile-stat-title"> <?php echo $abertos; ?> </div>
                                 <div class="uppercase profile-stat-text"> Abertos </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-6">
-                                <div class="uppercase profile-stat-title"> 51 </div>
-                                <div class="uppercase profile-stat-text"> Finalizados </div>
+                                <div class="uppercase profile-stat-title"> <?php echo $impedidos; ?> </div>
+                                <div class="uppercase profile-stat-text"> Impedidos </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-6">
-                                <div class="uppercase profile-stat-title"> 61 </div>
-                                <div class="uppercase profile-stat-text"> Impedidos </div>
+                                <div class="uppercase profile-stat-title"> <?php echo $realizados; ?> </div>
+                                <div class="uppercase profile-stat-text"> Realizados </div>
                             </div>
                         </div>
                         <!-- END STAT -->
@@ -113,7 +114,7 @@
                                             <a href="#tab_1_3" data-toggle="tab">Mudar a Senha</a>
                                         </li> -->
                                         <li>
-                                            <a href="#tab_1_4" data-toggle="tab">Configuração Privilegio</a>
+                                            <a href="#tab_1_4" data-toggle="tab">Configuração de Privilegio</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -132,10 +133,14 @@
                                                     <label class="control-label">Email</label>
                                                     <input type="text" value="<?php echo $usuario->email_usuario;?>"class="form-control" /> </div>
                                                 <div class="form-group">
-                                                    <label class="control-label">Sobreaviso</label>
-                                                    <input name="sobreaviso" type="checkbox" class="make-switch" checked data-on-text="&nbsp;Sim&nbsp;&nbsp;" data-off-text="&nbsp;Não&nbsp;">
-                                                    <label class="control-label">Status</label>
-                                                    <input name="status" type="checkbox" class="make-switch" checked data-on-text="&nbsp;Ativo&nbsp;&nbsp;" data-off-text="&nbsp;Desativado&nbsp;"> </div>
+                                                    <div class="col-md-4 col-md-offset-2">
+                                                        <label class="control-label">Sobreaviso</label>
+                                                        <input name="sobreaviso" type="checkbox" class="make-switch" checked data-on-text="&nbsp;Sim&nbsp;&nbsp;" data-off-text="&nbsp;Não&nbsp;">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Status</label>
+                                                        <input name="status" type="checkbox" class="make-switch" checked data-on-text="&nbsp;Ativo&nbsp;&nbsp;" data-off-text="&nbsp;Desativado&nbsp;"> </div>
+                                                    </div>
                                                 <div class="form-group">
                                                     <label class="control-label">Cargo</label>
                                                     <input type="text" value="<?php echo $usuario->nome_cargo;?>" class="form-control" /> </div>
@@ -163,7 +168,7 @@
                                         <div class="tab-pane" id="tab_1_2">
                                             <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
                                                 eiusmod. </p>
-                                            <form action="#" role="form">
+                                            <?php echo form_open_multipart('menu/meu_perfil/enviar');?>
                                                 <div class="form-group">
                                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                                         <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
@@ -173,7 +178,8 @@
                                                             <span class="btn default btn-file">
                                                                 <span class="fileinput-new"> Selecionar imagem </span>
                                                                 <span class="fileinput-exists"> Mudar </span>
-                                                                <input type="file" name="..."> </span>
+                                                                <input type="file" name="perfil" size="20">
+                                                            </span>
                                                             <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remover </a>
                                                         </div>
                                                     </div>
@@ -183,7 +189,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="margin-top-10">
-                                                    <a href="javascript:;" class="btn green"> Enviar </a>
+                                                    <input type="submit"  class="btn green" value="upload" />
+                                                    <!-- <a href="javascript:;" class="btn green"> Enviar </a> -->
                                                     <a href="javascript:;" class="btn default"> Cancel </a>
                                                 </div>
                                             </form>
