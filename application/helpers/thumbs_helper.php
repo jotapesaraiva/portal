@@ -1,8 +1,7 @@
 <?php
-
-
+if ( ! function_exists('create_thumb')) {
     //gera uma miniatura de uma imagem caso ela nao exista.
-    function thumb($imagem=NULL, $largura=100, $altura=75, $geratag=TRUE){
+    function create_thumb($imagem=NULL, $largura=150, $altura=150){
         $CI =& get_instance();
         $CI->load->helper('file');
         $thumb = $largura.'x'.$altura.'_'.$imagem;
@@ -10,22 +9,26 @@
         if ($thumbinfo != FALSE):
             $retorno = base_url('uploads/thumbs/'.$thumb);
         else:
-            $CI->load->library('image_lib');
-            $config['image_library'] = 'gd2';
-            $config['source_image'] = './uploads/'.$imagem;
-            $config['new_image'] = './uploads/thumbs/'.$thumb;
-            $config['maintain_ratio'] = TRUE;
-            $config['width'] = $largura;
-            $config['height'] = $altura;
-            $CI->image_lib->initialize($config);
+            $config = array(
+                'image_library' => 'gd2',
+                'source_image' => './uploads/'.$imagem,
+                'new_image' => './uploads/thumbs/'.$thumb,
+                'maintain_ratio' => TRUE,
+                'create_thumb' => TRUE,
+                'thumb_marker' => '_thumb',
+                'width' => $largura,
+                'height' => $altura
+            );
+            // $CI->image_lib->initialize($config);
+            $CI->load->library('image_lib',$config);
             if ($CI->image_lib->resize()):
                 $CI->image_lib->clear();
-                $retorno = base_url('uploads/thumbs/'.$thumb);
+                return TRUE;
             else:
-                $retorno = FALSE;
+                return $CI->image_lib->display_errors();
             endif;
         endif;
-        if ($geratag && $retorno != FALSE) $retorno = '<img src=" '.$retorno.' " alt="" />';
-        return $retorno;
     }
- ?>
+}
+
+?>

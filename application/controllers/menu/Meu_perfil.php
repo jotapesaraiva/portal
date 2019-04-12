@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Meu_perfil extends CI_Controller {
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         //Do your magic here
         $this->load->model('usuario_model');
@@ -12,8 +11,8 @@ class Meu_perfil extends CI_Controller {
         $this->load->helper('month_helper');
         $this->load->helper('equipe_helper');
         $this->load->helper('color_mantis_helper');
-        // $this->load->model('midia_model', 'midia');
-
+        $this->load->helper('midia_helper');
+        $this->load->helper('thumbs_helper');
     }
 
     public function index() {
@@ -193,20 +192,15 @@ class Meu_perfil extends CI_Controller {
 
 
     public function enviar() {
-        $config = array(
-        'upload_path'   => "./uploads/",
-        'allowed_types' => "gif|jpg|png|jpeg",
-        'overwrite'     => TRUE,
-        'max_size'      => "250000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-        'max_height'    => "768",
-        'max_width'     => "1024"
-        );
-        $this->load->library('upload', $config);
-        if ($this->upload->do_upload('perfil')):
+        $username = $this->session->userdata('username');
+        $upload = do_upload('perfil',$username);
+        $thumbnail = create_thumb($upload['file_name']);
+        // if (is_array($upload) && $upload['file_name'] != ' '):
+        if(is_array($thumbnail)):
             set_msg('retorno','Imagem salva com sucesso.','sucesso');
             $this->configuracao();
         else:
-            set_msg('retorno', $this->upload->display_errors(), 'erro');
+            set_msg('retorno', $thumbnail, 'erro');
             $this->configuracao();
         endif;
     }
