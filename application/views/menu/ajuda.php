@@ -27,7 +27,7 @@
                     <div class="portlet light profile-sidebar-portlet ">
                         <!-- SIDEBAR USERPIC -->
                         <div class="profile-userpic">
-                            <img src="<?php echo base_url(); ?>assets/pages/media/profile/profile_user.jpg" class="img-responsive" alt=""> </div>
+                            <img src="<?php echo $perfil_user; ?>" class="img-responsive" alt=""> </div>
                         <!-- END SIDEBAR USERPIC -->
                         <!-- SIDEBAR USER TITLE -->
                         <div class="profile-usertitle">

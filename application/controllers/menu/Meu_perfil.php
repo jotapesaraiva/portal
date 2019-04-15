@@ -19,7 +19,10 @@ class Meu_perfil extends CI_Controller {
         $this->output->enable_profiler(FALSE);
         $equipe = $this->session->userdata('physicaldeliveryofficename');
         $username = $this->session->userdata('username');
-        $user = array("username" => $username);
+        $perfil_user = image_upload($username);
+        $user = array(
+            'username' => $username,
+            'perfil_user' => $perfil_user);
         $score_mantis = $this->menu_model->score_mantis($username);
         $servicos = $this->menu_model->top_servicos(date_start(),date_end(),numero_equipe($equipe));
         $categoria = $this->menu_model->top_categoria(date_start(),date_end(),numero_equipe($equipe));
@@ -83,6 +86,11 @@ class Meu_perfil extends CI_Controller {
             createSeries("NORMAL", "Normal","#26C281");//verde
             //habilitar export em pdf img csv print ...
             chart.exporting.menu = new am4core.ExportMenu();
+
+            // Add cursor
+            chart.cursor = new am4charts.XYCursor();
+            chart.cursor.lineX.opacity = 0;
+            chart.cursor.lineY.opacity = 0;
             </script>
 
         ';
@@ -106,13 +114,15 @@ class Meu_perfil extends CI_Controller {
         $css['headerinc'] = '
             <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
             <link href="'.base_url().'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
-            <link href="'.base_url().'assets/pages/css/profile.css" rel="stylesheet" type="text/css" />';
+            <link href="'.base_url().'assets/pages/css/profile.css" rel="stylesheet" type="text/css" />
+            <link href="'. base_url() .'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['script'] = '';
         $script['footerinc'] = '
             <script src="'.base_url().'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+            <script src="'. base_url() .'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
             ';
 
         $username = $this->session->userdata('username');
@@ -124,9 +134,19 @@ class Meu_perfil extends CI_Controller {
         $modulo = $this->usuario_model->listar_modulos($id_user->id_usuario);
         $score_mantis = $this->menu_model->score_mantis($username);
 
-        $data = array('abertos' => $score_mantis->ABERTOS, 'impedidos' => $score_mantis->IMPEDIDOS, 'realizados' => $score_mantis->REALIZADOS, 'usuario' => $usuario->row(), 'telefone' => $telefone, 'celular' => $celular, 'voip' => $voip, 'modulo' => $modulo);
-
-        $user = array("username" => $username);
+        $data = array(
+            'abertos' => $score_mantis->ABERTOS,
+            'impedidos' => $score_mantis->IMPEDIDOS,
+            'realizados' => $score_mantis->REALIZADOS,
+            'usuario' => $usuario->row(),
+            'telefone' => $telefone,
+            'celular' => $celular,
+            'voip' => $voip
+        );
+        $perfil_user = image_upload($username);
+        $user = array(
+            'username' => $username,
+            'perfil_user' => $perfil_user);
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Meu perfil</span>', 'dash/meu_perfil');
@@ -149,13 +169,15 @@ class Meu_perfil extends CI_Controller {
             <script src="'.base_url().'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>';
 
         $username = $this->session->userdata('username');
-        $user = array("username" => $username);
+        $perfil_user = image_upload($username);
+        $user = array(
+            'username' => $username,
+            'perfil_user' => $perfil_user);
         $score_mantis = $this->menu_model->score_mantis($username);
         $dados = array(
             'abertos'    => $score_mantis->ABERTOS,
             'impedidos'  => $score_mantis->IMPEDIDOS,
-            'realizados' => $score_mantis->REALIZADOS
-        );
+            'realizados' => $score_mantis->REALIZADOS);
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Meu perfil</span>', 'dash/meu_perfil');
@@ -190,23 +212,34 @@ class Meu_perfil extends CI_Controller {
         // echo json_encode($result);
     }
 
-
     public function enviar() {
         $username = $this->session->userdata('username');
         $upload = do_upload('perfil',$username);
-        $thumbnail = create_thumb($upload['file_name']);
-        // if (is_array($upload) && $upload['file_name'] != ' '):
-        if(is_array($thumbnail)):
+        // if (is_array($thumb29)):
+        if (is_array($upload) && $upload['file_name'] != ' '):
+            create_thumb2($upload['file_name']);
+            create_thumb2($upload['file_name'],29,29);
             set_msg('retorno','Imagem salva com sucesso.','sucesso');
             $this->configuracao();
         else:
-            set_msg('retorno', $thumbnail, 'erro');
+            set_msg('retorno', $upload, 'erro');
             $this->configuracao();
         endif;
     }
 
-    public function cadastrar() {
-        # code...
+    public function listar_usuarios() {
+        $this->load->model('usuario_model');
+        $username = $this->session->userdata('username');
+        $id = $this->usuario_model->id_user($username);
+
+        $usuario = $this->usuario_model->edit_usuario($id);
+
+        $telefone = $this->usuario_model->edit_usuario_telefone($id,1);
+
+        $celular = $this->usuario_model->edit_usuario_telefone($id,2);
+
+        $data = array('usuario' => $usuario, 'telefone' => $telefone, 'celular' => $celular);
+        echo json_encode($data);
     }
 
     public function month() {
