@@ -6,6 +6,7 @@ class Evolutiva extends CI_Controller {
     public function __construct(){
         parent::__construct();
         //Do your magic here
+        esta_logado();
         $this->load->model('analise_model');
         $this->load->helper('color_mantis');
         $this->load->helper('priority_mantis');

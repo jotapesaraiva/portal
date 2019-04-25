@@ -276,14 +276,12 @@ class Lista extends CI_Controller {
     }
     // FIXME: Falta finalizar o delete VOIP!
     public function usuarios_delete($id) {
-
       $telefones = $this->usuario_model->listar_usuario_telefone($id);
       $this->usuario_model->delete_usuario_telefone($id);
       $this->usuario_model->delete_usuario($id);
       foreach($telefones->result() as $telefone) {
         $this->telefonia_model->delete_telefone($telefone->id_telefone);
       }
-
        // $this->usuario_model->delete_usuario($id);
        echo json_encode(array("status" => TRUE));
     }

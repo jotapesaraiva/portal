@@ -20,7 +20,7 @@
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
                 <!-- BEGIN TODO DROPDOWN -->
-                <?php if($this->auth_ad->level_access('producao', group_session($this->session->userdata('username')))){?>
+                <?php if(control_session($this->session->userdata('physicaldeliveryofficename'))){?>
                 <!-- BEGIN NOTIFICATION DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
@@ -46,7 +46,7 @@
                     <ul class="dropdown-menu">
                         <li class="external">
                             <h3>Você tem <span id="count_msg" class="bold">-1</span> Messagens</h3>
-                            <a href="https://rede.sefa.pa.gov.br/msg/">ver tudo</a>
+                            <?php echo anchor_popup('https://rede.sefa.pa.gov.br/msg/','ver tudo'); ?>
                         </li>
                         <li id='content_msg'>
                         </li>
@@ -87,7 +87,7 @@
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                        <!-- <img alt="" class="img-circle" src="<?php //echo $perfil_user; ?>" /> -->
+                        <img alt="" class="img-circle" src="<?php echo thumbnail_upload($this->session->userdata('username')); ?>" />
                         <span class="username username-hide-on-mobile"> <?php echo $username; ?> </span>
                         <i class="fa fa-angle-down"></i>
                     </a>

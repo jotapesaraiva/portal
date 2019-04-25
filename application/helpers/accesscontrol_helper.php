@@ -9,7 +9,7 @@ if ( ! function_exists('esta_logado')){
                 $username = $CI->session->userdata('username');
             } else {
                 set_msg('loginErro','Você não tem acesso a esse modulo.','erro');
-                redirect('welcome');
+                redirect('auth/login');
             }
         } else {
           // $data = array('error_message' => 'Efetue o login para acessar o sistema');
@@ -30,6 +30,35 @@ if ( ! function_exists('minhas_tarefas')){
     }
 }
 
+if ( ! function_exists('image_upload')) {
+    function image_upload($name) {
+        $CI =& get_instance();
+        $CI->load->helper('file');
+        $name = str_replace(".", "_", $name);
+        $thumbinfo = get_file_info('./uploads/'.$name.'.jpg');
+        if ($thumbinfo != FALSE):
+            $retorno = base_url('uploads/'.$name.'.jpg');
+        else:
+            $retorno = base_url('uploads/no-image.jpg');
+        endif;
+        return $retorno;
+    }
+}
 
+if ( ! function_exists('thumbnail_upload')) {
+    function thumbnail_upload($name) {
+        $CI =& get_instance();
+        $CI->load->helper('file');
+        $name = str_replace(".", "_", $name);
+        $thumbinfo = get_file_info('./uploads/thumbs/29x29_'.$name.'_thumb.jpg');
+        if ($thumbinfo != FALSE):
+            $retorno = base_url('uploads/thumbs/29x29_'.$name.'_thumb.jpg');
+        else:
+            $retorno = base_url('uploads/thumbs/no-image.jpg');
+        endif;
+        return $retorno;
+    }
+
+}
 /* End of file accessControl_helper.php */
 /* Location: ./application/helpers/accessControl_helper.php */

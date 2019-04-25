@@ -6,6 +6,7 @@ class Abertos_resolvidos extends CI_Controller {
  public function __construct() {
         parent::__construct();
         //Do your magic here
+        esta_logado();
         $this->load->model('graf_chamados_abertos_resolvidos_model', 'abertos_model');
         $this->load->helper('date_helper');
     }

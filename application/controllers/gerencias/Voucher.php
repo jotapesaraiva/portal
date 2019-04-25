@@ -6,8 +6,9 @@ class Voucher extends CI_Controller {
     public function __construct() {
         parent::__construct();
         //Do your magic here
-        // esta_logado();
+        esta_logado();
         $this->load->model('voucher_model');
+        $this->load->helper('date_helper');
     }
 
     public function index() {
@@ -162,6 +163,12 @@ class Voucher extends CI_Controller {
             echo json_encode($data);
             exit();
         }
+    }
+
+    public function teste()
+    {
+      $teste = strtotime("now");
+      datePtBr($teste);
     }
 
 }

@@ -37,7 +37,6 @@ function content_agendamento() {
             $("#content_agendamento").html(html);
          },
         success: function(data) {
-            // console.table(data);
             var html = '';
             if(data.length != 0) {
                 html += '<ul class="dropdown-menu-list scroller"  data-handle-color="#637283">';
@@ -61,9 +60,10 @@ function content_agendamento() {
                 $("#content_agendamento").html(html);
             }
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('Erro ao pegar os dados do ajax agendamento 2');
-        }
+        // error: function (jqXHR, textStatus, errorThrown) {
+        //     // alert('Erro ao pegar os dados do ajax agendamento 2'+textStatus +' '+ errorThrown);
+        //     alert('<p>status code: '+jqXHR.status+'</p><p>errorThrown: ' + errorThrown + '</p><p>jqXHR.responseText:</p><div>'+jqXHR.responseText + '</div>');
+        // }
     });
     setTimeout('content_agendamento()', 300000); // 5 minutos
 }

@@ -6,6 +6,7 @@ class Enviar extends CI_Controller {
     public function __construct() {
         parent::__construct();
         //Do your magic here
+        esta_logado();
         $this->load->model('zabbix_model');
         $this->load->model('backups_model');
         $this->load->model('mantis_model');

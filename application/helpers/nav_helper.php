@@ -57,8 +57,18 @@ if ( ! function_exists('group_session')) {
     }
 }
 
+if ( ! function_exists('control_session')) {
+    function control_session($session_group){
+        if($session_group == 'CGRE-Produção'){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+        // return $grupo->nome_grupo;
+    }
+}
 
-
+//##############################################################################
 
 if ( ! function_exists('span_segment')) {
     function span_segment($segmento,$name){

@@ -6,6 +6,7 @@ class Sustentacao extends CI_Controller {
     public function __construct() {
         parent::__construct();
         //Do your magic here
+        esta_logado();
         $this->load->model('analise_model');
         $this->load->helper('color_mantis');
         $this->load->helper('priority_mantis');
@@ -51,10 +52,10 @@ class Sustentacao extends CI_Controller {
         $sustentacao = $this->analise_model->sustentacao($value);
 
         $data = array();
-        // $cont = 1;
+        $cont = 1;
         foreach ($sustentacao->result_array() as $sus) {
             $row = array();
-            // $row[] = $cont++;
+            $row[] = $cont++;
             $row[] = "<a href = 'http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$sus['ID']." 'target='_blank'> ".$sus['ID']." </a>";
             $row[] = $sus['DATE_SUBMITTED'];
             // $sus['STATUS']

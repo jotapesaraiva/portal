@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- BEGIN DASHBOARD STATS 1-->
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div id="msgs"></div>
                <!-- BEGIN EXAMPLE TABLE PORTLET-->
                <div class="portlet light bordered">
@@ -80,7 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                </div>
             </div>
 
-           <div class="col-md-6">
+           <div class="col-md-4">
                 <div id="msgs"></div>
                  <!-- BEGIN EXAMPLE TABLE PORTLET-->
                  <div class="portlet light bordered">

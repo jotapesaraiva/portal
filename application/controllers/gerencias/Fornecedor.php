@@ -325,12 +325,12 @@ class Fornecedor extends CI_Controller {
     }
 
     public function fornecedor_delete($id) {
-       $this->fornecedor_model->delete_fornecedor_telefone($id);
-       $this->fornecedor_model->delete_fornecedor($id);
        $telefones = $this->fornecedor_model->listar_fornecedor_telefone($id);
+       $this->fornecedor_model->delete_fornecedor_telefone($id);
        foreach($telefones->result() as $telefone){
          $this->telefonia_model->delete_telefone($telefone->id_telefone);
        }
+       $this->fornecedor_model->delete_fornecedor($id);
        echo json_encode(array("status" => TRUE));
     }
 

@@ -7,6 +7,7 @@ class Agendamento extends CI_Controller {
     {
         parent::__construct();
         //Do your magic here
+        esta_logado();
         $this->load->model('usuario_model');
         $this->load->model('agendamento_model');
         $this->load->model('mantis_model');
@@ -198,7 +199,7 @@ class Agendamento extends CI_Controller {
                 $mantis = ' <a class="btn blue btn-outline sbold" href="'.base_url().'alertas/enviar/agendamento/'.$alerta['id'].'" title="Criar Mantis">
                                 <i class="fa fa-plus"></i>
                             </a>';
-            } else{
+            } else {
                 $status = $this->mantis_model->mantis($alerta['mantis']);
                 $flag = '';
                 $mantis = '<a href="http://intranet2.sefa.pa.gov.br/mantis/view.php?id=

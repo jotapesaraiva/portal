@@ -6,7 +6,7 @@ class Chamado_links extends CI_Controller {
   public function __construct() {
     parent::__construct();
     //Do your magic here
-    // esta_logado();
+    esta_logado();
     $this->load->model('link_model');
   }
 

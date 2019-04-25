@@ -2,7 +2,7 @@ var save_method; //for save method string
 var table;
 var server = window.location.href;
 $(document).ready(function() {
-    var table = $('#table').DataTable({
+    table = $('#table').DataTable({
       // "dom": 'T<"clear">lfrtip', //initialize tableTools
       "dom": "flrtip",
       // "dom": "Rlfrtip",
@@ -322,20 +322,20 @@ $(document).ready(function() {
         }
     }
 
-    function delete_telefone(id_telefone,id_contato) {
-        if(confirm('Você tem certeza que quer deletar o item?')) {
-            // ajax delete data to database
-            $.ajax({
-                url : server+"/contato_telefone_delete/"+id_telefone+"/"+id_contato,
-                type: "POST",
-                dataType: "JSON",
-                success: function(data) {
-                    alert("excluido com sucesso!!!!");
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Erro ao deletar dados');
-                }
-            });
-        }
-    }
+    // function delete_telefone(id_telefone,id_contato) {
+    //     if(confirm('Você tem certeza que quer deletar o item?')) {
+    //         // ajax delete data to database
+    //         $.ajax({
+    //             url : server+"/contato_telefone_delete/"+id_telefone+"/"+id_contato,
+    //             type: "POST",
+    //             dataType: "JSON",
+    //             success: function(data) {
+    //                 alert("excluido com sucesso!!!!");
+    //             },
+    //             error: function (jqXHR, textStatus, errorThrown) {
+    //                 alert('Erro ao deletar dados');
+    //             }
+    //         });
+    //     }
+    // }
 

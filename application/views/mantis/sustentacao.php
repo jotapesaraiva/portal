@@ -71,6 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table">
                            <thead>
                                <tr>
+                                    <th>#</th>
                                     <th>Número</th>
                                     <th>Data Abertura</th>
                                     <th>Status</th>

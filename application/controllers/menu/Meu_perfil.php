@@ -6,6 +6,7 @@ class Meu_perfil extends CI_Controller {
     public function __construct() {
         parent::__construct();
         //Do your magic here
+        esta_logado();
         $this->load->model('usuario_model');
         $this->load->model('menu_model');
         $this->load->helper('month_helper');
@@ -16,7 +17,7 @@ class Meu_perfil extends CI_Controller {
     }
 
     public function index() {
-        $this->output->enable_profiler(FALSE);
+        $this->output->enable_profiler(TRUE);
         $equipe = $this->session->userdata('physicaldeliveryofficename');
         $username = $this->session->userdata('username');
         $perfil_user = image_upload($username);

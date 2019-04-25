@@ -9,20 +9,15 @@ class Contato extends CI_Controller {
   }
 
     public function index() {
+      $css['headerinc'] = '
+          <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
+      $script['script'] = '
+            <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>';
       $script['footerinc'] = '
-          <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-          <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
           <script src="' . base_url() . 'assets/custom/gerencias/contato.js" type="text/javascript"></script>
           <script src="' . base_url() . 'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
           <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
       ';
-      $script['script'] = '
-      <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>';
-
-      $css['headerinc'] = '
-          <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
-          <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-          <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
 
         $telefone = $this->telefonia_model->listar_telefone();//"telefone" => $telefone,
         $celular = $this->telefonia_model->listar_celular();//"celular" => $celular
@@ -238,20 +233,20 @@ class Contato extends CI_Controller {
     }
 
     public function contato_delete($id) {
-      $this->contato_model->delete_contato_telefone($id);
-      $this->contato_model->delete_contato($id);
       $telefones = $this->contato_model->listar_contato_telefone($id);
+      $this->contato_model->delete_contato_telefone($id);
       foreach($telefones->result() as $telefone){
         $this->telefonia_model->delete_telefone($telefone->id_telefone);
       }
+      $this->contato_model->delete_contato($id);
       echo json_encode(array("status" => TRUE));
     }
 
-    public function contato_telefone_delete($id_telefone,$id_contato) {
-      $this->contato_model->delete_contato_telefone($id_contato);
-      $this->telefonia_model->delete_telefone($id_telefone);
-      echo json_encode(array("status" => TRUE));
-    }
+    // public function contato_telefone_delete($id_telefone,$id_contato) {
+    //   $this->contato_model->delete_contato_telefone($id_contato);
+    //   $this->telefonia_model->delete_telefone($id_telefone);
+    //   echo json_encode(array("status" => TRUE));
+    // }
 
     private function contato_validate() {
         $data = array();

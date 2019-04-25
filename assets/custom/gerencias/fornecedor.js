@@ -499,7 +499,7 @@ function delete_person(id){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/fornecedor_delete"+id,
+            url : server+"/fornecedor_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
@@ -517,22 +517,22 @@ function delete_person(id){
     }
 }
 
-function delete_telefone(id_telefone,id_fornecedor) {
-    if(confirm('Você tem certeza que quer deletar o item?')) {
-        // ajax delete data to database
-        $.ajax({
-            url : server+"/fornecedor_telefone_delete/"+id_telefone+"/"+id_fornecedor,
-            type: "POST",
-            dataType: "JSON",
-            success: function(data) {
-                //if success reload ajax table
-                //$('#modal_fornecedor').modal('hide');
-                //reload_table();
-                alert("excluido com sucesso!!!!");
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Erro ao deletar dados');
-            }
-        });
-    }
-}
+// function delete_telefone(id_telefone,id_fornecedor) {
+//     if(confirm('Você tem certeza que quer deletar o item?')) {
+//         // ajax delete data to database
+//         $.ajax({
+//             url : server+"/fornecedor_telefone_delete/"+id_telefone+"/"+id_fornecedor,
+//             type: "POST",
+//             dataType: "JSON",
+//             success: function(data) {
+//                 //if success reload ajax table
+//                 //$('#modal_fornecedor').modal('hide');
+//                 //reload_table();
+//                 alert("excluido com sucesso!!!!");
+//             },
+//             error: function (jqXHR, textStatus, errorThrown) {
+//                 alert('Erro ao deletar dados');
+//             }
+//         });
+//     }
+// }

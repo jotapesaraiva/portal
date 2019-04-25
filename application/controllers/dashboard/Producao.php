@@ -6,14 +6,7 @@ class Producao extends CI_Controller {
         public function __construct() {
             parent::__construct();
             // Load form validation library
-            $this->load->library('Auth_AD');
-
-            if($this->auth_ad->is_authenticated()){
-                $username = $this->session->userdata('username');
-            } else {
-                set_msg('loginErro','Efetue o login para acessar o sistema','erro');
-                redirect('auth/login');
-            }
+            esta_logado();
         }
         public function index() {
 

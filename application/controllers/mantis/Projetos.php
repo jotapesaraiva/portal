@@ -6,6 +6,7 @@ class Projetos extends CI_Controller {
     public function __construct() {
         parent::__construct();
         //Do your magic here
+        esta_logado();
         $this->load->model('analise_model');
         $this->load->helper('color_mantis');
         $this->load->helper('priority_mantis');
@@ -51,10 +52,10 @@ class Projetos extends CI_Controller {
         $projetos = $this->analise_model->projetos($value);
 
         $data = array();
-        // $cont = 1;
+        $cont = 1;
         foreach ($projetos->result_array() as $proj) {
             $row = array();
-            // $row[] = $cont++;
+            $row[] = $cont++;
             $row[] = "<a href = 'http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$proj['ID']." 'target='_blank'> ".$proj['ID']." </a>";
             $row[] = $proj['DATE_SUBMITTED'];
             // $proj['STATUS']

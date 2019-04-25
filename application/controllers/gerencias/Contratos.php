@@ -6,6 +6,7 @@ class Contratos extends CI_Controller {
     public function __construct() {
         parent::__construct();
         //Do your magic here
+        esta_logado();
         $this->load->model('ativos_model');
         $this->load->model('fornecedor_model');
         $this->load->model('contratos_model');
