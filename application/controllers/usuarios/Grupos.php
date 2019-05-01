@@ -52,8 +52,12 @@ class Grupos extends CI_Controller {
            $row[] = $grupo->id_grupo;
            $row[] = $grupo->nome_grupo;
            $row[] = $grupo->descricao_grupo;
+           if(acesso_super_admin()):
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$grupo->id_grupo."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$grupo->id_grupo."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+           else:
+           $row[] = 'Sem permissão';
+           endif;
            $data[] = $row;
        }
 

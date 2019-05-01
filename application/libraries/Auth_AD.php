@@ -191,13 +191,13 @@ class Auth_AD
     public function level_access($segment,$group) {
         $this->ci->load->model('usuario_model');
         if(isset($group)){
-            $membros = $this->ci->usuario_model->modulos_grupo_nome($group);
+            $modulos = $this->ci->usuario_model->modulos_grupo_nome($group);
         } else {
-            $membros = "Sem Grupo";
+            $modulos = "Sem Grupo";
         }
-        // vd($membros->result());
+        // vd($modulos->result());
         $mod = array();
-        foreach ($membros->result() as $mem) {
+        foreach ($modulos->result() as $mem) {
             // echo $mem->nome_modulo . "<br>";
             $mod[] = $mem->nome_modulo;
         }
@@ -215,7 +215,6 @@ class Auth_AD
      */
     public function logout() {
         log_message('info', 'Auth_AD: User ' . $this -> ci -> session -> userdata('username') . ' logged out.');
-
         // set the session marker to false (superfluous but safe) and then
         // destroy the session
         $this -> ci -> session -> set_userdata(array('logged_in' => false));

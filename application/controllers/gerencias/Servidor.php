@@ -65,8 +65,12 @@ class Servidor extends CI_Controller {
          }
          $row[] = $Unidade;
        }
+       if(acesso_admin()):
        $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$servidor->id_usuario."','".$servidor->id_unidade."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                  <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$servidor->id_usuario."','".$servidor->id_unidade."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+        else:
+            $row[] = 'Sem permissão';
+        endif;
        $data[] = $row;
     }
 

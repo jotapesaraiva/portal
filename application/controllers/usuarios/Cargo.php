@@ -51,8 +51,12 @@ class Cargo extends CI_Controller {
            $row[] = $cargo->id_cargo;
            $row[] = $cargo->nome_cargo;
            $row[] = $cargo->comentario_cargo;
+           if(acesso_super_admin()):
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$cargo->id_cargo."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$cargo->id_cargo."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+           else:
+           $row[] = 'Sem permissão';
+           endif;
            $data[] = $row;
        }
 

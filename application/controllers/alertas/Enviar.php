@@ -48,16 +48,7 @@ class Enviar extends CI_Controller {
                                 \nDescrição de Serviço: ".$alerta['desc_servico']."
                                 \nInformação Adicional:".$alerta['info_adicional'];
         }
-        $dados['projetos'] = $this->select_option(
-            $projetos = array(
-                            array('ID' => '1','NAME' => 'CGDA'),
-                            array('ID' => '2','NAME' => 'CGPS - Sustentação'),
-                            array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
-                            array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
-                            array('ID' => '5','NAME' => 'CGRE - Rede'),
-                            array('ID' => '6','NAME' => 'CGRE - Infra'),
-                            array('ID' => '99','NAME' => 'CGRE - Produção')
-                        ));
+        $dados['projetos'] = $this->select_option();
         $dados['form'] = "modelo_cprojeto";
         $dados['tabela'] = "mnt_alertas";
 
@@ -74,16 +65,7 @@ class Enviar extends CI_Controller {
         \nIP:".$detalhes->ip."
         \n".$detalhes->detalhe."
         \nInicio do Chamado:".date('d/m/Y H:i' ,strtotime($detalhes->data_alerta));
-        $dados['projetos'] = $this->select_option(
-            $projetos = array(
-                            array('ID' => '1','NAME' => 'CGDA'),
-                            array('ID' => '2','NAME' => 'CGPS - Sustentação'),
-                            array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
-                            array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
-                            array('ID' => '5','NAME' => 'CGRE - Rede'),
-                            array('ID' => '6','NAME' => 'CGRE - Infra'),
-                            array('ID' => '99','NAME' => 'CGRE - Produção')
-                        ));
+        $dados['projetos'] = $this->select_option();
         $dados['form'] = "modelo_cprojeto";
         $dados['tabela'] = "zbx_server_fora";
 
@@ -140,22 +122,12 @@ class Enviar extends CI_Controller {
 
             $dados['detalhe'] = $alerta['mensagem_agendamento'];
         }
-        $dados['projetos'] = $this->select_option(
-            $projetos = array(
-                            array('ID' => '1','NAME' => 'CGDA'),
-                            array('ID' => '2','NAME' => 'CGPS - Sustentação'),
-                            array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
-                            array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
-                            array('ID' => '5','NAME' => 'CGRE - Rede'),
-                            array('ID' => '6','NAME' => 'CGRE - Infra'),
-                            array('ID' => '99','NAME' => 'CGRE - Produção')
-                        ));
+        $dados['projetos'] = $this->select_option();
         $dados['form'] = "modelo_cprojeto";
         $dados['tabela'] = "tbl_agendamento";
 
         $this->index($dados);
     }
-
 
 
     public function abrir_mantis() {
@@ -253,8 +225,17 @@ class Enviar extends CI_Controller {
         redirect('dashboard/producao');
     }
 
-    public function select_option($dados) {
+    public function select_option() {
         $html = "";
+        $dados = array(
+                        array('ID' => '1','NAME' => 'CGDA'),
+                        array('ID' => '2','NAME' => 'CGPS - Sustentação'),
+                        array('ID' => '3','NAME' => 'CGPS - Gestão de Configuração'),
+                        array('ID' => '4','NAME' => 'CGPS - Projeto/Manu. Assistida'),
+                        array('ID' => '5','NAME' => 'CGRE - Rede'),
+                        array('ID' => '6','NAME' => 'CGRE - Infra'),
+                        array('ID' => '99','NAME' => 'CGRE - Produção')
+                    );
         foreach ($dados as $key => $dado) {
             $html .= "<option value='".$dado['ID']."' >".$dado['NAME']."</option>";
         }

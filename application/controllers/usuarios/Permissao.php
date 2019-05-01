@@ -52,8 +52,12 @@ class Permissao extends CI_Controller {
            $row[] = $permissao->id_permissao;
            $row[] = $permissao->nome_permissao;
            $row[] = $permissao->comentario_permissao;
+           if(acesso_super_admin()):
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$permissao->id_permissao."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$permissao->id_permissao."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+           else:
+           $row[] = 'Sem permissão';
+           endif;
            $data[] = $row;
        }
 

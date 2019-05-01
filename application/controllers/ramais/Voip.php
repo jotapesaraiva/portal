@@ -64,8 +64,12 @@ class Voip extends CI_Controller {
            $row[] = $ramal->nome_tipo_equipamento_voip;
            $row[] = $ramal->nome_tipo_categoria_voip;
            $row[] = $ramal->nome_tipo_contexto_voip;
+           if(acesso_admin()):
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$ramal->id_telefone_voip."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$ramal->id_telefone_voip."','".$ramal->id_telefone."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+           else:
+           $row[] = 'Sem permissão';
+           endif;
            $data[] = $row;
        }
 

@@ -73,8 +73,12 @@ class Ativos extends CI_Controller {
             $row[] = $ativo['patrimonio_ativo'];
             $row[] = $ativo['numero_contrato'];
             $row[] = $ativo['nome_fornecedor'];
+            if(acesso_admin()):
             $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_ativo('."'".$ativo['id_ativo']."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                       <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_ativo('."'".$ativo['id_ativo']."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+            else:
+            $row[] = 'Sem permissão';
+            endif;
             $data[] = $row;
         }
         $output = array(

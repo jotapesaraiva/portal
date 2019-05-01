@@ -168,7 +168,7 @@ class Link_model extends CI_Model{
         $portal_moni = $this->load->database('default',true);
         $portal_moni->select('g.centro, g.ticket, date_format(g.abertura, "%d/%m/%Y %H:%i:%s") AS abertura, date_format(g.atualizacao, "%d/%m/%Y %H:%i:%s") AS atualizacao, g.tempo_embratel_hora as tmp_portal , g.responsabilidade');
         $portal_moni->from('ebt_grc g');
-        $portal_moni->join('tbl_ebt_fatura f','g.ticket = f.ticket','left');
+        // $portal_moni->join('tbl_ebt_fatura f','g.ticket = f.ticket','left');
         $where = "atualizacao BETWEEN '". $inicio ."' AND '". $fim ."'";
         $portal_moni->where($where);
         $portal_moni->order_by('g.centro', 'DESC');

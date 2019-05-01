@@ -55,8 +55,12 @@ class Acesso extends CI_Controller {
             $row[] = $acesso->id_tipo_acesso;
             $row[] = $acesso->nome_tipo_acesso;
             $row[] = $acesso->comentario_tipo_acesso;
+            if(acesso_super_admin()):
             $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$acesso->id_tipo_acesso."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                       <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$acesso->id_tipo_acesso."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+            else:
+                $row[] = 'Sem permissão';
+            endif;
             $data[] = $row;
         }
 

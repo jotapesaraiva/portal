@@ -33,7 +33,7 @@ class Janela_bkp extends CI_Controller {
 
     public function data() {
         // Mysql
-        $teste = $this->load->database('portalmoni',TRUE);
+        $teste = $this->load->database('default',TRUE);
 
         $list = new OptionsConnector($teste, "PHPCI");
             /* //Teste para saber esta conectando.
@@ -47,7 +47,7 @@ class Janela_bkp extends CI_Controller {
         //$list->render_table("types","typeid","typeid(value),name(label)");
         $list->render_table("SELECT DISTINCT specification value,
                               specification label
-                  FROM tbl_dp_backups
+                  FROM dp_backups
                   WHERE specification NOT LIKE '%TESTE%'
                   AND specification <> 'Interactive'
                   AND specification NOT LIKE '%OLD%'
@@ -83,7 +83,7 @@ class Janela_bkp extends CI_Controller {
                                                              files,
                                                              session_id,
                                                    'true' AS readonly
-                 FROM tbl_dp_backups
+                 FROM dp_backups
                 WHERE specification NOT LIKE '%TESTE%'
                   AND specification NOT LIKE '%OLD%'
                   AND specification NOT LIKE '%EXTRA%'

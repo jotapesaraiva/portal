@@ -54,8 +54,12 @@ class Velocidade extends CI_Controller {
             $row[] = $velocidade->id_tipo_velocidade;
             $row[] = $velocidade->nome_tipo_velocidade;
             $row[] = $velocidade->comentario_tipo_velocidade;
+            if(acesso_super_admin()):
             $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$velocidade->id_tipo_velocidade."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                       <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$velocidade->id_tipo_velocidade."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+            else:
+            $row[] = 'Sem permissão';
+            endif;
             $data[] = $row;
         }
 

@@ -34,11 +34,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <div class="table-toolbar">
                           <div class="row">
                               <div class="col-md-6">
+                                <?php if(acesso_super_admin()): ?>
                                   <div class="btn-group">
                                     <button class="btn sbold green" onclick="add_person()"> Adicionar Novo
                                         <i class="fa fa-plus"></i>
                                     </button>
                                   </div>
+                                <?php endif; ?>
                               </div>
                               <div class="col-md-6">
                                   <div class="btn-group pull-right">

@@ -229,7 +229,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = array(1,2);
+$config['log_threshold'] = 1;
 
 /*
 |--------------------------------------------------------------------------
@@ -384,13 +384,13 @@ $config['encryption_key'] = 'saldfjaoiruncvnbtryo';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
-$config['sess_save_path'] = '/var/log/sessions/';
-$config['sess_match_ip'] = TRUE;
+$config['sess_expiration'] = 60 * 60 * 24 * 7;// a week
+$config['sess_save_path'] = 'ci_sessions';
+$config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
-$config['sess_regenerate_destroy'] = TRUE;
+$config['sess_regenerate_destroy'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

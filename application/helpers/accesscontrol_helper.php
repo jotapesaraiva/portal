@@ -7,6 +7,7 @@ if ( ! function_exists('esta_logado')){
         if($CI->auth_ad->is_authenticated()) {
             if($CI->auth_ad->level_access($CI->uri->segment(2),$CI->session->userdata('physicaldeliveryofficename'))){
                 $username = $CI->session->userdata('username');
+                return TRUE;
             } else {
                 set_msg('loginErro','Você não tem acesso a esse modulo.','erro');
                 redirect('auth/login');
@@ -18,7 +19,6 @@ if ( ! function_exists('esta_logado')){
         }
     }
 }
-
 
 if ( ! function_exists('minhas_tarefas')){
     function minhas_tarefas() {

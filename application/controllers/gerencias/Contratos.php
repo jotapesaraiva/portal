@@ -74,8 +74,12 @@ class Contratos extends CI_Controller {
              $row[] = '<span class="label label-sm label-danger"> Não. </span>';
             }
             $row[] = $contrato['nome_fornecedor'];
+            if(acesso_admin()):
             $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_contrato('."'".$contrato['id_contrato']."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                       <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_contrato('."'".$contrato['id_contrato']."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+            else:
+            $row[] = 'Sem permissão';
+            endif;
             $data[] = $row;
         }
         $output = array(

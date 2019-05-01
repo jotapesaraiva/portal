@@ -7,7 +7,7 @@ class Agendamento extends CI_Controller {
     {
         parent::__construct();
         //Do your magic here
-        esta_logado();
+
         $this->load->model('usuario_model');
         $this->load->model('agendamento_model');
         $this->load->model('mantis_model');
@@ -16,6 +16,7 @@ class Agendamento extends CI_Controller {
     }
 
     public function index() {
+        esta_logado();
         $this->output->enable_profiler(FALSE);
         $css['headerinc'] = '
 
@@ -71,9 +72,12 @@ class Agendamento extends CI_Controller {
             $row[] = $agendamento['nome_grupo']; //responsavel
             $row[] = anchor_popup('http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$agendamento['mantis_solicitado'].'', $agendamento['mantis_solicitado']);
             $row[] = anchor_popup('http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$agendamento['mantis'].'', $agendamento['mantis']);
-
+            if(acesso_admin()):
             $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_agendamento('."'".$agendamento['id']."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                       <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_agendamento('."'".$agendamento['id']."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+            else:
+                 $row[] = 'Sem permissão';
+            endif;
             $data[] = $row;
         }
         $output = array(

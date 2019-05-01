@@ -94,9 +94,13 @@ class Fornecedor extends CI_Controller {
            } else {
             $row[] = '<span class="label label-sm label-danger"> Desativado. </span>';
            }
+           if(acesso_admin()):
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Editar" onclick="edit_person('."'".$fornecedor->id_fornecedor."'".')"><i class="glyphicon glyphicon-pencil"></i></a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Deletar" onclick="delete_person('."'".$fornecedor->id_fornecedor."'".')"><i class="glyphicon glyphicon-trash"></i></a>
                      <a class="btn blue btn-outline sbold" href="javascript:void(0)" title="Info" onclick="view_person('."'".$fornecedor->id_fornecedor."'".')"><i class="glyphicon glyphicon-info-sign"></i></a>';
+           else:
+              $row[] = '<a class="btn blue btn-outline sbold" href="javascript:void(0)" title="Info" onclick="view_person('."'".$fornecedor->id_fornecedor."'".')"><i class="glyphicon glyphicon-info-sign"></i></a>';
+           endif;
            $data[] = $row;
        }
 

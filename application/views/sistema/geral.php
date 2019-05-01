@@ -124,7 +124,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Error Logging Threshold: </label>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" value="" placeholder="Enter text">
+                                                    <input type="text" class="form-control" value="<?php echo $log_threshold; ?>" placeholder="Enter text">
                                                 </div>
                                                 <label class="col-md-2 control-label">Error Logging Directory Path: </label>
                                                 <div class="col-md-3">

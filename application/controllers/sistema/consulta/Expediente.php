@@ -54,8 +54,12 @@ class Expediente extends CI_Controller {
                $row[] = $expediente->id_expediente;
                $row[] = $expediente->nome_expediente;
                $row[] = $expediente->comentario_expediente;
+               if(acesso_super_admin()):
                $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$expediente->id_expediente."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                          <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$expediente->id_expediente."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+               else:
+               $row[] = 'Sem permissão';
+               endif;
                $data[] = $row;
            }
 

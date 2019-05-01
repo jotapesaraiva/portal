@@ -64,9 +64,11 @@ class Perfil extends CI_Controller {
            $row[] = $perfil->nome_grupo;
            $row[] = '<a href="javascript:void(0)" title="Modulo" onclick="membro_group('."'".$perfil->id_grupo."'".')"> Membros </a>';
            $row[] = '<a href="javascript:void(0)" title="Modulo" onclick="modulo_group('."'".$perfil->id_grupo."'".')"> Modulos </a>';
-
-           $row[] = '
-                     <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_perfil('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+           if(acesso_super_admin()):
+           $row[] = '<a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_perfil('."'".$perfil->id_grupo."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+           else:
+           $row[] = 'Sem permissão';
+           endif;
            $data[] = $row;
        }
 

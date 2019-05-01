@@ -71,6 +71,7 @@ class Auth extends CI_Controller{
                     $group = '11';
                 }
                 $status = $this->login_database->status_user($this->session->userdata('displayname'));
+                //verifica se o usuario está ativo no sistema. - permissão para acessar o sistema.
                 if(isset($status)){
                     $status = $status->status_usuario;
                 } else {
@@ -89,6 +90,7 @@ class Auth extends CI_Controller{
                 );
                     // 'celula_equipe'  => $this->session->userdata('physicaldeliveryofficename')
                 $alterado = $this->login_database->registration_update($data);
+                auditoria('Login no sistema','Login efetuado com sucesso.');
                 // echo 'OK';
                 // the login was succesful, do your thing here
                 // upon a succesful login the session will automagically contain some handy user data:
@@ -97,6 +99,7 @@ class Auth extends CI_Controller{
                 // $this->session->userdata('dn') contains the distinguished name from the AD
                 // $this->session->userdata('logged_in') contains a boolean (true)
                 set_msg('loginOk','Logado com sucesso no sistema !!!','sucesso');
+
                 switch ($group) {
                     case 1://'CGRE-Produção':
                         redirect('dashboard/producao');
@@ -111,10 +114,10 @@ class Auth extends CI_Controller{
                         break;
                     case 4://'CGDA-Banco':
                         // redirect('dashboard/banco');
-                        redirect('dashboard/cgps');
+                        redirect('dashboard/producao');
                         break;
                     case 7://'CGAQ-SACS':
-                         redirect('dashboard/sacs');
+                         redirect('dashboard/producao');
                         break;
                     case 6://'CGAQ-Manutenção':
                          // redirect('dashboard/manutencao');
@@ -155,16 +158,16 @@ class Auth extends CI_Controller{
 	public function logout() {
 		// perform the logout
 		if($this->session->userdata('logged_in')) {
-			$data['name'] = $this->session->userdata('cn');
-			$data['username'] = $this->session->userdata('username');
-			$data['logged_in'] = true;
+			// $data['name'] = $this->session->userdata('cn');
+			// $data['username'] = $this->session->userdata('username');
+			// $data['logged_in'] = true;
+            auditoria('Logout no sistema','Logout efetuado com sucesso.');
 			$this->auth_ad->logout();
 
-            // $data['error_message'] = 'Logout efetuado com sucesso !!!';
             set_msg('loginErro','Logout efetuado com sucesso !!!','erro');
             $this->load->view('login');
 		} else {
-			$data['logged_in'] = false;
+			// $data['logged_in'] = false;
             $this->load->view('login');
 		}
 

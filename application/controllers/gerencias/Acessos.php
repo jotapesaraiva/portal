@@ -57,6 +57,7 @@ class Acessos extends CI_Controller {
             $html .= "  <td>
                             <input id=password-field-".$servidor->id." class='form-control' type='password' value='".base64_decode($servidor->senha)."'>
                         </td>\n";
+            if(acesso_admin()):
             $html .= "  <td>
                             <a class='btn blue btn-outline sbold toggle-password' title='Exibir' toggle='#password-field-".$servidor->id."'>
                                 <i class='fa fa-fw fa-eye field-icon '></i> Exibir
@@ -68,6 +69,9 @@ class Acessos extends CI_Controller {
                                 <i class='glyphicon glyphicon-trash'></i> Deletar
                             </a>
                         </td>\n";
+            else:
+                $html .= "<td>Sem permissão</td>\n";
+            endif;
             $html .= "</tr>\n";
         }
         return $html;
@@ -86,6 +90,7 @@ class Acessos extends CI_Controller {
             $html .= "  <td>
                             <input id=password-field-".$servidor->id." class='form-control' type='password' value='".base64_decode($servidor->senha)."'>
                         </td>\n";
+            if(acesso_admin()):
             $html .= "  <td>
                             <a class='btn blue btn-outline sbold toggle-password' title='Exibir' toggle='#password-field-".$servidor->id."'>
                                 <i class='fa fa-fw fa-eye field-icon '></i> Exibir
@@ -97,6 +102,9 @@ class Acessos extends CI_Controller {
                                 <i class='glyphicon glyphicon-trash'></i> Deletar
                             </a>
                         </td>\n";
+            else:
+                $html .= "<td>Sem permissão</td>\n";
+            endif;
             $html .= "</tr>\n";
         }
         return $html;

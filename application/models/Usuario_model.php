@@ -71,6 +71,28 @@ class Usuario_model extends CI_Model{
     //
     //=============================================================================================================================================================
     //
+    // public function get_byid($id=NULL) {
+    //     if($id != NULL):
+    //         $portal_db = $this->load->database('default',true);
+    //         $portal_db->where('id_usuario',$id);
+    //         $portal_db->limit(1);
+    //         $query = $portal_db->get('tbl_usuario');
+    //         return $query;
+    //     else:
+    //         return FALSE;
+    //     endif;
+    // }
+
+    public function permissao($user_login) {
+            if($user_login != NULL):
+                $this->db->where('login_usuario',$user_login);
+                $this->db->limit(1);
+                $query = $this->db->get('tbl_usuario');
+                return $query;
+            else:
+                return FALSE;
+            endif;
+    }
 
     public function listar_usuarios($id=NULL){
         $portal_db = $this->load->database('default',true);

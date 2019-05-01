@@ -80,8 +80,12 @@ class Contato extends CI_Controller {
            }
            $row[] = $contato->nome_fornecedor;
            $row[] = $contato->comentario_contato;
+           if(acesso_admin()):
            $row[] = '<a class="btn yellow-mint btn-outline sbold" id="update" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$contato->id_contato."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$contato->id_contato."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+            else:
+              $row[] = 'Sem permissão';
+            endif;
            $data[] = $row;
        }
 

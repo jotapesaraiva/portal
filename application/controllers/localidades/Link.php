@@ -74,8 +74,12 @@ class Link extends CI_Controller {
                 } else {
                  $row[] = '<span class="label label-sm label-danger"> Desativado. </span>';
                 }
+                if(acesso_admin()):
                 $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Editar" onclick="edit_person('."'".$link->id_link."'".')"><i class="glyphicon glyphicon-pencil"></i></a>
                           <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Deletar" onclick="delete_person('."'".$link->id_link."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+                else:
+                   $row[] = 'Sem permissão';
+                endif;
                 $data[] = $row;
             }
 

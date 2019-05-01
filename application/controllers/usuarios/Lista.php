@@ -82,8 +82,12 @@ class Lista extends CI_Controller {
            } else {
             $row[] = '<span class="label label-sm label-danger"> Desativado. </span>';
            }
+           if(acesso_super_admin()):
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$usuario->id_usuario."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$usuario->id_usuario."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+           else:
+           $row[] = 'Sem permissão';
+           endif;
            $data[] = $row;
        }
 

@@ -52,8 +52,12 @@ class Categoria_tel extends CI_Controller {
            $row[] = $categoria->id_tipo_categoria_telefone;
            $row[] = $categoria->nome_tipo_categoria_telefone;
            $row[] = $categoria->comentario_tipo_categoria_telefone;
+           if(acesso_super_admin()):
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$categoria->id_tipo_categoria_telefone."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$categoria->id_tipo_categoria_telefone."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+           else:
+           $row[] = 'Sem permissão';
+           endif;
            $data[] = $row;
        }
 

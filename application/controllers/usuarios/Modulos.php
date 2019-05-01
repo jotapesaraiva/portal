@@ -53,8 +53,12 @@ class Modulos extends CI_Controller {
            $row[] = $modulo->id_modulo;
            $row[] = $modulo->nome_modulo;
            $row[] = $modulo->descricao_modulo;
+           if(acesso_super_admin()):
            $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$modulo->id_modulo."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                      <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$modulo->id_modulo."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+           else:
+           $row[] = 'Sem permissão';
+           endif;
            $data[] = $row;
        }
 

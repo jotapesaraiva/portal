@@ -95,7 +95,7 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
-$active_group = 'monitora';
+// $active_group = 'monitora';
 /*$query_builder = TRUE;*/
 
 $db['monitora'] = array(
@@ -120,7 +120,7 @@ $db['monitora'] = array(
 	'save_queries' => TRUE
 );
 
-$active_group = 'portalmoni';
+// $active_group = 'portalmoni';
 /*$query_builder = TRUE;*/
 
 $db['portalmoni'] = array(
@@ -145,7 +145,7 @@ $db['portalmoni'] = array(
 	'save_queries' => TRUE
 );
 
-$active_group = 'mantis';
+// $active_group = 'mantis';
 // $query_builder = TRUE;
 
 $db['mantis'] = array(
@@ -172,7 +172,7 @@ $db['mantis'] = array(
 );
 
 
-$active_group = 'sobreaviso';
+// $active_group = 'sobreaviso';
 /*$query_builder = TRUE;*/
 
 $db['sobreaviso'] = array(
@@ -198,7 +198,7 @@ $db['sobreaviso'] = array(
 );
 
 
-$active_group = 'teste';
+// $active_group = 'teste';
 // $query_builder = TRUE;
 
 $db['teste'] = array(
@@ -224,7 +224,7 @@ $db['teste'] = array(
 );
 
 
-$active_group = 'msg';
+// $active_group = 'msg';
 // $query_builder = TRUE;
 
 $db['msg'] = array(

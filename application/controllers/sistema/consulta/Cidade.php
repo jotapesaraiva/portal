@@ -54,8 +54,12 @@ class Cidade extends CI_Controller {
                $row[] = $cidade->id_cidade;
                $row[] = $cidade->nome_cidade;
                $row[] = $cidade->comentario_cidade;
+               if(acesso_super_admin()):
                $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$cidade->id_cidade."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
                          <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$cidade->id_cidade."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+               else:
+               $row[] = 'Sem permissão';
+               endif;
                $data[] = $row;
            }
 
