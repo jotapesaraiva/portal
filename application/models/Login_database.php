@@ -2,11 +2,6 @@
 
 Class Login_Database extends CI_Model {
 
-//model construct function
-public function __construct() {
-    parent::__construct();
-
-}
 // Insert registration data in database
 /*public function registration_insert($data) {
     $this->db = $this->load->database('default',true); //connected with mysql
@@ -81,7 +76,7 @@ public function registration_update($data) {
 
 // Read data from database to show data in admin page
 public function read_user_information($username) {
-    $this->db = $this->load->database('default',true); //connected with mysql
+    // $this->db = $this->load->database('default',true); //connected with mysql
 
     $condition = "login_usuario =" . "'" . $username . "'";
     $this->db->select('*');
@@ -99,7 +94,7 @@ public function read_user_information($username) {
 }
 
     public function numero_grupo($nome_group) {
-        $this->db = $this->load->database('default',true);
+        // $this->db = $this->load->database('default',true);
         $this->db->select('id_grupo');
         $this->db->from('tbl_grupos');
         $this->db->where('nome_grupo',$nome_group);
@@ -108,7 +103,7 @@ public function read_user_information($username) {
     }
 
     public function status_user($usuario) {
-        $this->db = $this->load->database('default',true);
+        // $this->db = $this->load->database('default',true);
         $this->db->select('status_usuario');
         $this->db->from('tbl_usuario');
         $this->db->where('nome_usuario',$usuario);

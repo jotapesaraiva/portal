@@ -28,7 +28,7 @@
  */
 
 class Auth extends CI_Controller{
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 		// this loads the Auth_AD library. You can also choose to autoload it (see config/autoload.php)
         $this->load->helper('funcoes_helper');
@@ -37,6 +37,7 @@ class Auth extends CI_Controller{
         // Load database
         $this->load->model('login_database');
 	}
+
 
 	public function index(){
         $this->load->view('login');

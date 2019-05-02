@@ -15,8 +15,8 @@ class Monitora_model extends CI_Model {
 
 
     public function alerta_repetido($alerta,$origem) {
-         $portal = $this->load->database('default',true);
-         $query = $portal->query('
+         // $portal = $this->load->database('default',true);
+         $query = $this->db->query('
              SELECT COUNT(ID) AS quantidade,id FROM (
              SELECT id, tipo_alerta, desc_alerta, origem
              FROM mnt_alertas
@@ -33,60 +33,60 @@ class Monitora_model extends CI_Model {
      //  FROM mnt_alertas WHERE desc_alerta="Falha na execução do Job J_STOP_ESTATISTICAS_TAXPAF." AND origem="CORP" AND data_fim > NOW() - INTERVAL "15" MINUTE ) AS TEMPO
 
      public function duplicate_mnt_alerta($dados) {
-         $portal = $this->load->database('default',true);
-         $portal->on_duplicate('mnt_alertas', $dados);
+         // $portal = $this->load->database('default',true);
+         $this->db->on_duplicate('mnt_alertas', $dados);
      }
 
      public function insert_mnt_alerta($dados) {
-         $portal = $this->load->database('default',true);
-         $portal->insert('mnt_alertas', $dados);
-         // echo $portal->last_query();
-         return $portal->insert_id();
+         // $this->db = $this->load->database('default',true);
+         $this->db->insert('mnt_alertas', $dados);
+         // echo $this->db->last_query();
+         return $this->db->insert_id();
      }
 
      public function update_mnt_alerta($id, $dados) {
-         $portal = $this->load->database('default',true);
-         $portal->update('mnt_alertas', $dados, $id);
-         // echo $portal->last_query();
-         return $portal->affected_rows();
+         // $this->db = $this->load->database('default',true);
+         $this->db->update('mnt_alertas', $dados, $id);
+         // echo $this->db->last_query();
+         return $this->db->affected_rows();
      }
 
      // public function select_mnt_alerta($session) {
      public function select_mnt_alerta($session) {
-         $portal = $this->load->database('default',true);
-         $portal->select('*');
-         $portal->from('mnt_alertas');
-         $portal->where('data_fim > NOW() - INTERVAL "10" MINUTE');
+         // $this->db = $this->load->database('default',true);
+         $this->db->select('*');
+         $this->db->from('mnt_alertas');
+         $this->db->where('data_fim > NOW() - INTERVAL "10" MINUTE');
          switch ($session) {
              case 'CGRE-Produção':
-                    $portal->where_not_in('tipo_alerta',array('Informativo'));
-                    $portal->order_by('data_inicio', 'DESC');
-                    $query = $portal->get();
-                    // echo $portal->last_query();
+                    $this->db->where_not_in('tipo_alerta',array('Informativo'));
+                    $this->db->order_by('data_inicio', 'DESC');
+                    $query = $this->db->get();
+                    // echo $this->db->last_query();
                     return $query->result_array();
                  break;
              case 'CGPS':
-                    $portal->like('responsavel','CGPS');
-                    $portal->order_by('data_inicio', 'DESC');
-                    $query = $portal->get();
-                    // echo $portal->last_query();
+                    $this->db->like('responsavel','CGPS');
+                    $this->db->order_by('data_inicio', 'DESC');
+                    $query = $this->db->get();
+                    // echo $this->db->last_query();
                     return $query->result_array();
                  break;
              default:
-                    $portal->order_by('data_inicio', 'DESC');
-                    $query = $portal->get();
-                    // echo $portal->last_query();
+                    $this->db->order_by('data_inicio', 'DESC');
+                    $query = $this->db->get();
+                    // echo $this->db->last_query();
                     return $query->result_array();
                  break;
          }
      }
 
      public function select_mnt($id) {
-         $portal = $this->load->database('default',true);
-         $portal->select('*');
-         $portal->from('mnt_alertas');
-         $portal->where('id',$id);
-         $query = $portal->get();
+         // $this->db = $this->load->database('default',true);
+         $this->db->select('*');
+         $this->db->from('mnt_alertas');
+         $this->db->where('id',$id);
+         $query = $this->db->get();
          return $query->result_array();
      }
 

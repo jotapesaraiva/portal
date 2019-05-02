@@ -264,7 +264,36 @@ class Mantis_model extends CI_Model {
         return $equip;
     }
 
-
+public function chamado_manutencao($data_inicio,$data_fim) {
+        $mantis = $this->load->database('mantis', true);
+ $query = $mantis->query("
+SELECT mb.id as mantis,
+       mb.summary as resumo,
+       mb.category as categoria,
+       mu.realname as tecnico,
+       to_char(mb.date_submitted, 'dd/mm/yyyy hh24:mi:ss') as inicio_chamado,
+       to_char(mb.last_updated, 'dd/mm/yyyy hh24:mi:ss') as fim_chamado,
+       extract(day from(CAST(mb.last_updated as timestamp) -
+                    CAST(mb.date_submitted as timestamp))) || ' dias ' ||
+       extract(hour from(CAST(mb.last_updated as timestamp) -
+                    CAST(mb.date_submitted as timestamp))) || ' h ' ||
+       extract(minute from(CAST(mb.last_updated as timestamp) -
+                    CAST(mb.date_submitted as timestamp))) || ' min' as tempo_atendimento,
+       mcf.value as localidade
+  from mantis_bug_tb mb
+ inner join mantis_project_tb mp
+    on mp.id = mb.project_id
+ inner join mantis_user_tb mu
+    on mb.handler_id = mu.id
+ inner join mantis_custom_field_string_tb mcf
+    on mcf.bug_id = mb.id
+   and mcf.field_id = 2741
+ where mb.project_id in (3803, 3901, 3822, 3821, 3802, 3801)
+   and mb.status in (60, 80)
+   and trunc(mb.last_updated) between '".$data_inicio."' and '".$data_fim."'
+");
+return $query;
+}
 
 
 

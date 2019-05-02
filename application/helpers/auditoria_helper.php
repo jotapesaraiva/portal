@@ -5,7 +5,7 @@ function auditoria($operacao, $obs, $query=TRUE){
     $CI =& get_instance();
     $CI->load->library('session');
     $CI->load->model('auditoria_model');
-    $CI->load->database('default',true);
+    // $CI->load->database('default',true);
     // $CI->load->model('usuario_model');
     // if (esta_logado(FALSE)):
     $user_login = $CI->session->userdata('username');

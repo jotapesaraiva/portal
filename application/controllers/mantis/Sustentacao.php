@@ -15,14 +15,10 @@ class Sustentacao extends CI_Controller {
     public function index() {
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
-            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
-            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
+            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
 
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/mantis/sustentacao.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/daterangepicker.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
@@ -32,7 +28,7 @@ class Sustentacao extends CI_Controller {
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Mantis</span>','/mantis');
-        $this->breadcrumbs->push('<span>Evolutiva</span>','mantis/evolutiva');
+        $this->breadcrumbs->push('<span>Sustentação</span>','mantis/sustentacao');
 
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$session);

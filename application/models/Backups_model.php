@@ -4,16 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Backups_model extends CI_Model {
 
     public function falhos() {
-        $portal = $this->load->database('default',true);
-        $portal->select('*');
-        $portal->from('dp_backups');
-        $portal->where_not_in('status',array('InProgress','InProgress/Errors','Mount-Request','InProgress/Failures','Mount/Failures','Mount/Errors','Completed'));
-        $portal->not_like('specification', 'TESTE');
-        $portal->where('day_time > DATE_SUB(curdate(), INTERVAL 1 MONTH)');
-        $portal->group_by(array('mantis','specification'));
-        $portal->order_by('day_time','DESC');
-        $query = $portal->get();
-        // echo $portal->last_query();
+        // $this->db = $this->load->database('default',true);
+        $this->db->select('*');
+        $this->db->from('dp_backups');
+        $this->db->where_not_in('status',array('InProgress','InProgress/Errors','Mount-Request','InProgress/Failures','Mount/Failures','Mount/Errors','Completed'));
+        $this->db->not_like('specification', 'TESTE');
+        $this->db->where('day_time > DATE_SUB(curdate(), INTERVAL 1 MONTH)');
+        $this->db->group_by(array('mantis','specification'));
+        $this->db->order_by('day_time','DESC');
+        $query = $this->db->get();
+        // echo $this->db->last_query();
         return $query->result_array();
     }
     // SELECT *
@@ -24,12 +24,12 @@ class Backups_model extends CI_Model {
     // GROUP BY mantis, specification
     // ORDER BY id DESC
     public function select_backup($id){
-        $portal = $this->load->database('default',true);
-        $portal->select('*');
-        $portal->from('dp_backups');
-        $portal->where('id',$id);
-        $query = $portal->get();
-        // echo $portal->last_query();
+        // $this->db = $this->load->database('default',true);
+        $this->db->select('*');
+        $this->db->from('dp_backups');
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        // echo $this->db->last_query();
         return $query->result_array();
     }
 

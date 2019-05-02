@@ -3,11 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Servico_model extends CI_Model {
 
-    public function __construct() {
-        parent::__construct();
-        $this->db = $this->load->database('default',true);
-    }
-
     public function listar_servico(){
         return $this->db->get('tbl_servico');
 

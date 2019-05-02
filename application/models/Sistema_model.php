@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Sistema_model extends CI_Model {
 
     public function modulos($group) {
-        $portal_db = $this->load->database('default',true);
-        $portal_db->select('*');
-        $portal_db->from('tbl_modulos');
-        $portal_db->where('grupos',$group);
-        $query = $portal_db->get();
+        // $portal_db = $this->load->database('default',true);
+        $this->db->select('*');
+        $this->db->from('tbl_modulos');
+        $this->db->where('grupos',$group);
+        $query = $this->db->get();
         return $query;
     }
 
