@@ -10,38 +10,18 @@ class Manutencao extends CI_Controller {
     }
 
     public function index(){
-         // $data['data_inicio'] = date_start_traco();
-         // $data['data_fim'] = date('d-m-Y');
-
-        if(!$this->input->post('data_inicio')):
-            $data_inicio = date_start();
-            $data['data_inicio'] = date_start();
-        else:
-            $datai = str_replace('/', '-', $this->input->post('data_inicio'));
-            $data_inicio = date("d/m/Y", strtotime($datai));
-            $data['data_inicio'] = $this->input->post('data_inicio');
-        endif;
-        if(!$this->input->post('data_fim')):
-            $data_fim = date('d/m/Y');
-            $data['data_fim'] = date('d/m/Y');
-        else:
-            $dataf = str_replace('/', '-', $this->input->post('data_fim'));
-            $data_fim = date("d/m/Y", strtotime($dataf));
-            $data['data_fim'] = $this->input->post('data_fim');
-        endif;
-
-        $data['calculo'] = $this->create_table($data_inicio,$data_fim);
+        $data['data_inicio'] = date_start_traco();
+        $data['data_fim'] = date('d-m-Y');
 
         $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
-            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
-
+            <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />';
         $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/backup/historico.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/daterangepicker.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/mantis/manutencao.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
-        $script['script'] = '';
+        $script['script'] = '
+            <script src="' . base_url() . 'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>';
 
         $session['username'] = $this->session->userdata('username');
 
@@ -58,31 +38,7 @@ class Manutencao extends CI_Controller {
         $this->load->view('template/footer',$script);
     }
 
-    public function create_table($datai,$dataf){
-
-        $manutencao = $this->mantis_model->chamado_manutencao($datai,$dataf);
-
-        $html = "";
-        foreach ($manutencao->result_array() as $key => $manu) {
-            $html .= "<tr>\n";
-            $html .= "<td>". ($key + 1) ."</td>\n";
-            $html .= "<td> <a href = 'http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$manu['MANTIS']." 'target='_blank'> ".$manu['MANTIS']." </a> </td>\n";
-            $html .= "<td>" .$manu['RESUMO']. "</td>\n";
-            $html .= "<td>" .$manu['CATEGORIA']. "</td>\n";
-            $html .= "<td>" .$manu['TECNICO']. "</td>\n";
-            $html .= "<td>" .$manu['INICIO_CHAMADO']. "</td>\n";
-            $html .= "<td>" .$manu['FIM_CHAMADO']. "</td>\n";
-            $html .= "<td>" .$manu['TEMPO_ATENDIMENTO']. "</td>\n";
-            $html .= "<td>" .$manu['LOCALIDADE']. "</td>\n";
-            $html .= "</tr>\n";
-        }
-        return $html;
-    }
-
-
-    public function datatable_list_old($datai,$dataf){
-        // $datai = $this->input->post('data_inicio');
-        // $dataf = $this->input->post('data_fim');
+    public function datatable_list($datai,$dataf){
         // Datatables Variables
         $draw = intval($this->input->get("draw"));
         $start = intval($this->input->get("start"));
@@ -91,10 +47,9 @@ class Manutencao extends CI_Controller {
         $manutencao = $this->mantis_model->chamado_manutencao($datai,$dataf);
 
         $data = array();
-        $cont = 1;
-        foreach ($manutencao->result_array() as $manu) {
+        foreach ($manutencao->result_array() as $key => $manu) {
             $row = array();
-            $row[] = $cont++;
+            $row[] = $key + 1;
             $row[] = "<a href = 'http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$manu['MANTIS']." 'target='_blank'> ".$manu['MANTIS']." </a>";
             $row[] = $manu['RESUMO'];
             $row[] = $manu['CATEGORIA'];

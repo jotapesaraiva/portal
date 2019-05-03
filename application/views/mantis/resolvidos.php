@@ -47,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <div class="col-md-3">
                             <label class="control-label col-md-4 bold">Data Final </label>
-                            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="-1M">
+                            <div class="input-group input-medium date date-picker">
                                 <input class="form-control"  name="data_fim"  readonly value="<?php echo $data_fim;?>" type="text" onchange='this.form.submit()'>
                                 <span class="input-group-btn">
                                     <button class="btn default" type="button">

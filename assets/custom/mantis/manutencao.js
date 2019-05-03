@@ -28,14 +28,15 @@ $(document).ready(function() {
           "columnDefs": [{
               // "targets": [ -1 ], //last column
               // "orderable": false, //set not orderable
-          },{ "width": "2%", "targets": 0 },//numero
-          { "width": "2%", "targets": 1 },//atualizacao
-          { "width": "4%", "targets": 2 },//status
-          { "width": "2%", "targets": 3 },//prioridade
-          { "width": "16%", "targets": 4 },//descricao
-          { "width": "8%", "targets": 5 },//categoria
-          { "width": "11%", "targets": 6 },//atribuido
-          { "width": "11%", "targets": 7 }],//solicitante
+          },{ "width": "2%", "targets": 0 },//#
+          { "width": "2%", "targets": 1 },//numero
+          { "width": "12%", "targets": 2 },//Resumo
+          { "width": "8%", "targets": 3 },//categoria
+          { "width": "11%", "targets": 4 },//tecnico
+          { "width": "8%", "targets": 5 },//inicio
+          { "width": "8%", "targets": 6 },//fim
+          { "width": "5%", "targets": 7 },//duracao
+          { "width": "11%", "targets": 8 }],//localidade
     });
 
     // $('td.day').on('click',function() {
@@ -45,12 +46,39 @@ $(document).ready(function() {
     //     console.log(dataf);
     //     table.ajax.url( server+"/datatable_list/"+ datai+"/"+dataf ).load();
     // });
-    $('#data_inicio')
-    .datetimepicker()
-    .on('changeDate', function(ev){
-      console.log(ev.date.valueOf());
+    // $('#data_inicio')
+    // .datetimepicker()
+    // .on('changeDate', function(ev){
+    //   console.log(ev.date.valueOf());
         // if (ev.date.valueOf() < date-start-display.valueOf()){
         //     ....
         // }
+    // });
+    $('#data_inicio').datepicker({
+        rtl: App.isRTL(),
+        orientation: "right",
+        autoclose: true,
+        language: 'pt-BR',
+        format: "dd-mm-yyyy",
+        todayHighlight: true
+    }).on('changeDate', function(e) {
+        datai = e.format();
+        dataf = $('[name="data_fim"]').val();
+        table.ajax.url( server+"/datatable_list/"+ datai+"/"+dataf ).load();
+        console.log(datai);
+        console.log(dataf);
     });
+    $('#data_fim').datepicker({
+        rtl: App.isRTL(),
+        orientation: "right",
+        autoclose: true,
+        language: 'pt-BR',
+        format: "dd-mm-yyyy",
+        todayHighlight: true
+    }).on('changeDate', function(e) {
+        datai = $('[name="data_inicio"]').val();
+        dataf = e.format();
+        table.ajax.url( server+"/datatable_list/"+ datai+"/"+dataf ).load();
+    });
+
 });

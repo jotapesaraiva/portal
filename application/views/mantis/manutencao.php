@@ -34,11 +34,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    <div class="portlet-body">
                     <div class="table-toolbar">
                       <div class="row">
-                        <form method="post" ction="<?php $_SERVER['PHP_SELF']?>">
+                        <form method="post" >
                           <div class="col-md-3 col-md-offset-3">
                              <label class="control-label col-md-4">Data Inicio </label>
                                <div class="input-group input-medium date date-picker" id='data_inicio'>
-                                   <input class="form-control" readonly="" name="data_inicio" value="<?php echo $data_inicio;?>" type="text" onchange='this.form.submit()'>
+                                   <input class="form-control" readonly name="data_inicio" value="<?php echo $data_inicio;?>" type="text" >
                                    <span class="input-group-btn">
                                        <button class="btn default" type="button">
                                            <i class="fa fa-calendar"></i>
@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <div class="col-md-3">
                             <label class="control-label col-md-4">Data Final </label>
                             <div class="input-group input-medium date date-picker" id='data_fim'>
-                                <input class="form-control" readonly="" name="data_fim" value="<?php echo $data_fim;?>" type="text" onchange='this.form.submit()'>
+                                <input class="form-control" readonly name="data_fim" value="<?php echo $data_fim;?>" type="text" >
                                 <span class="input-group-btn">
                                     <button class="btn default" type="button">
                                         <i class="fa fa-calendar"></i>
@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </span>
                             </div>
                           </div>
-                          <noscript><input type="submit" value="Submit"></noscript>
+                          <!-- <noscript><input type="submit" value="Submit"></noscript> -->
                         </form>
                           <div class="col-md-3">
                               <div class="btn-group pull-right">
@@ -97,7 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                </tr>
                            </thead>
                            <tbody>
-                            <?php echo $calculo ?>
+                            <?php //echo $calculo ?>
                            </tbody>
                        </table>
                    </div>

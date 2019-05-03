@@ -477,64 +477,97 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <!--############# ABA MANTIS > Sustentacao ############-->
-                        <?php if($this->auth_ad->level_access('sustentacao',group_session($this->session->userdata('username')))){?>
-                        <li class="nav-item <?php echo active_segment(2,'sustentacao'); ?>">
-                            <?php echo anchor('mantis/sustentacao', '<i class="fa fa-history"></i> Sustentação', 'class="nav-link"')?>
-                            <?php echo span_segment(2,'sustentacao'); ?>
-                        </li>
-                        <!--############# ABA MANTIS > Evolutiva ############-->
-                        <?php } if($this->auth_ad->level_access('evolutiva',group_session($this->session->userdata('username')))){?>
-                        <li class="nav-item <?php echo active_segment(2,'evolutiva'); ?>">
-                            <?php echo anchor('mantis/evolutiva', '<i class="fa fa-calculator"></i> Evolutiva', 'class="nav-link"')?>
-                            <?php echo span_segment(2,'evolutiva  '); ?>
-                        </li>
-                        <!--############# ABA MANTIS > Projetos ############-->
-                        <?php } if($this->auth_ad->level_access('projetos',group_session($this->session->userdata('username')))){?>
-                        <li class="nav-item <?php echo active_segment(2,'projetos'); ?>">
-                            <?php echo anchor('mantis/projetos', '<i class="fa fa-bar-chart"></i> Projeto/Manu. Assistida', 'class="nav-link"')?>
-                            <?php echo span_segment(2,'projetos'); ?>
-                        </li>
 
-                        <!--############# ABA MANTIS > Graficos > CGPS ############-->
-                        <?php } if($this->auth_ad->level_access('graficos_mantis',group_session($this->session->userdata('username')))){?>
-                        <li class="nav-item <?php echo active_segment(2,'graficos_mantis'); ?>">
+                        <!--############# ABA MANTIS > CGAQ ############-->
+                        <?php if($this->auth_ad->level_access('cgaq',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'cgaq'); ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="icon-bar-chart"></i>
-                                <span class="title">Gráficos</span>
-                                <?php echo span_segment(2,'graficos_mantis'); ?>
+                                <span class="title">CGAQ</span>
+                                <?php echo span_segment(2,'cgaq'); ?>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <!--############# ABA MANTIS > Graficos > CGPS > resolvidos ############-->
-                                <li class="nav-item <?php echo active_segment(4,'resolvidos'); ?>">
-                                    <?php echo anchor('mantis/graficos_mantis/cgps/resolvidos', 'Resolvidos', 'class="nav-link"')?>
-                                    <?php echo span_segment(4,'resolvidos'); ?>
+                                <!--############# ABA MANTIS > CGAQ > Manutenção ############-->
+                                <li class="nav-item <?php echo active_segment(3,'manutencao'); ?>">
+                                    <?php echo anchor('mantis/cgaq/manutencao', '<i class="fa fa-table"></i> Manutenção', 'class="nav-link"')?>
+                                    <?php echo span_segment(3,'manutencao'); ?>
                                 </li>
-                                <!--############# ABA MANTIS > Graficos > CGPS > evolutiva ############-->
-                                <li class="nav-item <?php echo active_segment(4,'evolutiva'); ?>">
-                                    <?php echo anchor('mantis/graficos_mantis/cgps/evolutiva', 'Evolutiva', 'class="nav-link"')?>
-                                    <?php echo span_segment(4,'evolutiva'); ?>
+                            </ul>
+                        </li>
+
+                        <!--############# ABA MANTIS > CGPS ############-->
+                        <?php } if($this->auth_ad->level_access('cgps',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'cgps'); ?>">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <span class="title">CGPS</span>
+                                <?php echo span_segment(2,'cgps'); ?>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <!--############# ABA MANTIS > Sustentacao ############-->
+                                <?php if($this->auth_ad->level_access('sustentacao',group_session($this->session->userdata('username')))){?>
+                                <li class="nav-item <?php echo active_segment(3,'sustentacao'); ?>">
+                                    <?php echo anchor('mantis/cgps/sustentacao', '<i class="fa fa-history"></i> Sustentação', 'class="nav-link"')?>
+                                    <?php echo span_segment(3,'sustentacao'); ?>
                                 </li>
-                                <!--############# ABA MANTIS > Graficos > CGPS > chamados_pendentes ############-->
-                                <li class="nav-item <?php echo active_segment(4,'pendentes'); ?>">
-                                    <?php echo anchor('mantis/graficos_mantis/cgps/pendentes', 'Pendentes', 'class="nav-link"')?>
-                                    <?php echo span_segment(4,'pendentes'); ?>
+                                <!--############# ABA MANTIS > Evolutiva ############-->
+                                <?php } if($this->auth_ad->level_access('evolutiva',group_session($this->session->userdata('username')))){?>
+                                <li class="nav-item <?php echo active_segment(3,'evolutiva'); ?>">
+                                    <?php echo anchor('mantis/cgps/evolutiva', '<i class="fa fa-calculator"></i> Evolutiva', 'class="nav-link"')?>
+                                    <?php echo span_segment(3,'evolutiva  '); ?>
                                 </li>
-                                <!--############# ABA MANTIS > Graficos > CGPS > chamados_abertos_resolvidos ############-->
-                                <li class="nav-item <?php echo active_segment(4,'abertos_resolvidos'); ?>">
-                                    <?php echo anchor('mantis/graficos_mantis/cgps/abertos_resolvidos', 'Abertos_resolvidos', 'class="nav-link"')?>
-                                    <?php echo span_segment(4,'abertos_resolvidos'); ?>
+                                <!--############# ABA MANTIS > Projetos ############-->
+                                <?php } if($this->auth_ad->level_access('projetos',group_session($this->session->userdata('username')))){?>
+                                <li class="nav-item <?php echo active_segment(3,'projetos'); ?>">
+                                    <?php echo anchor('mantis/cgps/projetos', '<i class="fa fa-bar-chart"></i> Operação Assistida', 'class="nav-link"')?>
+                                    <?php echo span_segment(3,'projetos'); ?>
                                 </li>
+
+                                <!--############# ABA MANTIS > Graficos > CGPS ############-->
+                                <?php } if($this->auth_ad->level_access('graficos_mantis',group_session($this->session->userdata('username')))){?>
+                                <li class="nav-item <?php echo active_segment(3,'graficos_mantis'); ?>">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="icon-bar-chart"></i>
+                                        <span class="title">Gráficos</span>
+                                        <?php echo span_segment(3,'graficos_mantis'); ?>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <!--############# ABA MANTIS > Graficos > CGPS > resolvidos ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'resolvidos'); ?>">
+                                            <?php echo anchor('mantis/cgps/graficos_mantis/resolvidos', 'Resolvidos', 'class="nav-link"')?>
+                                            <?php echo span_segment(4,'resolvidos'); ?>
+                                        </li>
+                                        <!--############# ABA MANTIS > Graficos > CGPS > evolutiva ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'evolutiva'); ?>">
+                                            <?php echo anchor('mantis/cgps/graficos_mantis/evolutiva', 'Evolutiva', 'class="nav-link"')?>
+                                            <?php echo span_segment(4,'evolutiva'); ?>
+                                        </li>
+                                        <!--############# ABA MANTIS > Graficos > CGPS > chamados_pendentes ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'pendentes'); ?>">
+                                            <?php echo anchor('mantis/cgps/graficos_mantis/pendentes', 'Pendentes', 'class="nav-link"')?>
+                                            <?php echo span_segment(4,'pendentes'); ?>
+                                        </li>
+                                        <!--############# ABA MANTIS > Graficos > CGPS > chamados_abertos_resolvidos ############-->
+                                        <li class="nav-item <?php echo active_segment(4,'abertos_resolvidos'); ?>">
+                                            <?php echo anchor('mantis/cgps/graficos_mantis/abertos_resolvidos', 'Abertos_resolvidos', 'class="nav-link"')?>
+                                            <?php echo span_segment(4,'abertos_resolvidos'); ?>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <?php }?>
                             </ul>
                         </li>
                         <?php }?>
 
-                    </ul>
 
-                <li class="heading">
-                    <h3>LINKS / APPS</h3>
+
+
+                    </ul>
                 </li>
+            <li class="heading">
+                <h3>LINKS / APPS</h3>
+            </li>
 
                 <li class="nav-item  ">
                     <a href="javascript:;" class="nav-link nav-toggle">
