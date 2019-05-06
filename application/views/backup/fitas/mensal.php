@@ -73,7 +73,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                </tr>
                            </thead>
                            <tbody>
-                              <?php echo $library_cofre; ?>
                            </tbody>
                        </table>
                    </div>
@@ -128,7 +127,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                  </tr>
                              </thead>
                              <tbody>
-                              <?php echo $cofre_library; ?>
                              </tbody>
                          </table>
                      </div>

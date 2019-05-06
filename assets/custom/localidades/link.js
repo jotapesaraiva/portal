@@ -3,7 +3,7 @@ var table;
 var server = window.location.href;
 $(document).ready(function() {
     table = $('#table').DataTable({
-        "dom": "flrtip",
+      "dom": "flrtip",
       "responsive": true,   // enable responsive
       "language": {
               "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"

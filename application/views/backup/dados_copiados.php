@@ -1,6 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -28,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> Histórico de backups  </span>
+                        <span class="caption-subject bold"> Dados Copiados  da session: <?php echo $session_id ?> do backup: <?php echo $specification ?></span>
                     </div>
                    </div>
                    <div class="portlet-body">
@@ -61,25 +59,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table1">
                            <thead>
                                <tr>
-                                      <th>ID</th>
-                                      <th>Data</th>
+                                      <th>Type</th>
+                                      <th>Client</th>
+                                      <th>Mountpoint</th>
+                                      <th>Description</th>
+                                      <th>Object Name</th>
                                       <th>Status</th>
-                                      <th>Backup</th>
-                                      <th>Session</th>
-                                      <th>Modo</th>
-                                      <th>Tipo</th>
-                                      <th>Início</th>
-                                      <th>Duração</th>
-                                      <th>Arquivos</th>
-                                      <th>Velocidade</th>
-                                      <th>Tamanho</th>
-                                      <!-- <th>Ação</th> -->
-                                      <th>Mantis</th>
-                                      <!-- <th>Estado</th> -->
+                                      <th>Mode</th>
+                                      <th>Date</th>
+                                      <th>Time</th>
+                                      <th>Duration</th>
+                                      <th>Size</th>
+                                      <th>Files</th>
+                                      <th>Performance</th>
+                                      <th>Protection</th>
+                                      <th>Errors</th>
+                                      <th>Warnings</th>
+                                      <th>Device</th>
                                </tr>
                            </thead>
                            <tbody>
-                                <?php //echo $historico; ?>
+                                <?php echo $dataCopy; ?>
                            </tbody>
                        </table>
                    </div>
@@ -89,3 +89,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </div>
 </div>
+<!-- /* End of file dados_copiados.php */ -->
+<!-- /* Location: ./application/views/backup/dados_copiados.php */ -->

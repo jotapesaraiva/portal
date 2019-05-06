@@ -11,14 +11,14 @@ class Historico_bkp extends CI_Controller {
 
     public function index() {
         $this->output->enable_profiler(FALSE);
-        $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/backup/historico.js" type="text/javascript"></script>';
-        $script['script'] = '';
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
             <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
+        $script['footerinc'] = '
+            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/backup/historico_new.js" type="text/javascript"></script>';
+        $script['script'] = '';
         $session['username'] = $this->session->userdata('username');
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
@@ -29,9 +29,7 @@ class Historico_bkp extends CI_Controller {
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-        $data['historico'] = $this->table_history();
-
-        $this->load->view('backup/historico', $data);
+        $this->load->view('backup/historico');
 
         $this->load->view('template/footer',$script);
 
@@ -42,8 +40,13 @@ class Historico_bkp extends CI_Controller {
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/historico.js" type="text/javascript"></script>';
-        $script['script'] = '';
+            <script src="' . base_url() . 'assets/custom/backup/historico.js" type="text/javascript"></script>';
+        $script['script'] = "
+
+        <script>
+        $('thead tr th',tbody tr td).css({'fonte-size' : '11px !important'});
+        </script>
+        ";
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
             <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
@@ -61,96 +64,9 @@ class Historico_bkp extends CI_Controller {
         $data['specification'] = $specification;
         $data['dataCopy'] = $this->table_data($session_id);
 
-        $this->load->view('backup/filesystem.php', $data);
+        $this->load->view('backup/dados_copiados.php', $data);
 
         $this->load->view('template/footer',$script);
-    }
-
-    public function teste() {
-        $historico = $this->historico_model->history();
-        vd($historico);
-    }
-
-    public function table_history() {
-
-        $historicos = $this->historico_model->history();
-        $contador = 1;
-        $html = "";
-        foreach ($historicos as $historico) {
-                // $id_session = $historico['session_id'];
-                $id_session = str_replace('/','_',$historico['session_id']);
-                $mantis = $historico['mantis'];
-
-                $tamanhoemmega = $historico['gb_written'] * 1024;
-                $duracaoemsegundos = ((substr($historico['duration'],0,2) * 3600) + (substr($historico['duration'],3,2) * 60));
-                if($tamanhoemmega == '0') {
-                    $velocidadenaoformatada = '0';
-                } else if($duracaoemsegundos == '0'){
-                    $velocidadenaoformatada = '0';
-                } else if($tamanhoemmega =='0'AND $duracaoemsegundos == '0'){
-                    $velocidadenaoformatada = '0';
-                } else{
-                    $velocidadenaoformatada = $tamanhoemmega / $duracaoemsegundos;
-                }
-                $velocidade = number_format($velocidadenaoformatada,2);
-
-                $html .= "<tr>\n";
-                $html .= "  <td>".$contador++."</td>\n";
-
-                $html .= "<td>".$historico['daytime']."</td>\n";
-
-            if($historico['status']=="Completed") {
-                $html .= "<td><img border='0' src='".base_url('/assets/custom/img/completed.gif')."'><span class='label label-sm label-success'</span> Completo </td>\n";
-            } else if($historico['status']=="Completed/Errors") {
-                $html .= "<td><img border = '0'0 src='".base_url('/assets/custom/img/completed_errors.gif')."'><span class='label label-sm label-warning'</span> Com Erros </td>\n";
-            } else if($historico['status']=="Completed/Failures") {
-                $html .= "<td><img border='0' src='".base_url('/assets/custom/img/completed_failures.gif')."'><span class='label label-sm label-warning'</span> Com Falhas </td>\n";
-            } else if($historico['status']=="Failed") {
-                $html .= "<td><img border='0' src='".base_url('/assets/custom/img/failed.gif')."'><span class='label label-sm label-danger'</span> Falhou </td>\n";
-            } else if($historico['status']=="Aborted") {
-                $html .= "<td><img border='0' src='".base_url('/assets/custom/img/aborted.gif')."'><span class='label label-sm label-danger'</span> Abortou </td>\n";
-            }
-                // $html .= "<td><a href='/?m=analise&f=backup&a=dados_copiados_bkp&aux=".$historico['session_id']."&aux2=".$historico['specification']."'target='_self''</a>".utf8_encode($historico['specification'])."</td>\n";
-                $html .= "<td>".anchor_popup(base_url("backup/historico/dados_copiados/". $id_session ."/".$historico['specification'].""),"".utf8_encode($historico['specification'])."")."</td>\n";
-                $html .= "<td>".utf8_encode($historico['session_id'])."</td>\n";
-                $html .= "<td>".utf8_encode($historico['mode'])."</td>\n";
-                $html .= "<td>".utf8_encode($historico['session_type'])."</td>\n";
-                $html .= "<td>".utf8_encode($historico['start_time'])."</td>\n";
-                $html .= "<td>".utf8_encode($historico['duration'])."</td>\n";
-                $html .= "<td>".utf8_encode($historico['files'])."</td>\n";
-                $html .= "<td>".str_replace(".",",",$velocidade)." MB/s</td>\n";
-                $html .= "<td>".(str_replace(".",",",$historico['gb_written']))." GB</td>\n";
-                //$html .= "<td>".utf8_encode(implode('<br>',explode("[",$historico['erro_backup'])))."</td>\n";
-                $html .= "<td>".$historico['providencia_backup']."</td>\n";
-            if($historico['mantis'] == 0) {
-                $html .= ("<td>".$historico['mantis']."</td>");
-            } else {
-                $html .= "<td><a href='http://intranet2.sefa.pa.gov.br/mantis/view.php?id=".$historico['mantis']."' target='_blank''>".$historico['mantis']."</a></td>";
-            }
-            if($mantis=="0") {
-                $html .= ("<td>-</td>");
-            } else {
-                $html .= ("<td>+</td>");
- /*               $conexao_oracle=AbrirConexaoOracle();
-                $s = oci_parse($conexao_oracle, "SELECT s.status_description
-                                                  FROM mantis.mantis_bug_tb b
-                                                  JOIN mantis.mantis_bug_status_tb s
-                                                    ON b.status = s.status
-                                                 WHERE b.id = ".$mantis."
-                ");
-                oci_execute($s, OCI_NO_AUTO_COMMIT);
-                while ($historic2 = oci_fetch_array($s, OCI_ASSOC)) {
-                    $status_mantis =  $historic2['STATUS_DESCRIPTION'];
-                    if($status_mantis=="resolvido") {
-                        $html .= ("<td><i class='icon icon-color icon-check'></i></td>");
-                    } else {
-                        $html .= ("<td><i class='icon icon-color icon-cancel'></i></td></tr>");
-                    }
-                }*/
-            }
-            $html .= "</tr>\n";
-        }
-        return $html;
     }
 
     public function table_data($session_id) {
@@ -158,7 +74,7 @@ class Historico_bkp extends CI_Controller {
         $descbkp = shell_exec("/opt/omni/bin/./omnirpt -tab -report session_objects -session ".$id_session." 2>&1 &");
         $html = "";
         $linhasdescbkp = explode("\n", $descbkp);
-        $tamanho = sizeof($linhasdescbkp);
+        $tamanho = sizeof($linhasdescbkp);//conta a quantidade de linhas
         for ($i = 7;  $i < $tamanho - 1; $i++) {
             $camposdescbkp = explode("\t", $linhasdescbkp[$i]);
             $tamanhointerno = sizeof($camposdescbkp);
@@ -173,6 +89,85 @@ class Historico_bkp extends CI_Controller {
         }
         return $html;
     }
+
+    public function datatable_list() {
+        // Datatables Variables
+        $draw = intval($this->input->get("draw"));
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+
+        $history = $this->historico_model->history();
+        $data = array();
+        foreach ($history->result_array() as $key => $value) {
+            $row = array();
+
+            $row[] = $key+1;
+            $row[] = $value['daytime'];
+            $row[] = $this->statusBackup($value['status']);
+            $row[] = anchor_popup(base_url("backup/historico_bkp/dados_copiados/".str_replace('/','_',$value['session_id'])."/".$value['specification'].""), utf8_encode($value['specification']));
+            $row[] = utf8_encode($value['session_id']);
+            $row[] = utf8_encode($value['mode']);
+            $row[] = utf8_encode($value['session_type']);
+            $row[] = utf8_encode($value['start_time']);
+            $row[] = utf8_encode($value['duration']);
+            $row[] = utf8_encode($value['files']);
+            $row[] = str_replace(".",",",$this->velocidade($value['gb_written'],$value['duration']))." MB/s";
+            $row[] = str_replace(".",",",$value['gb_written'])." GB";
+            $row[] = $this->mantisBackup($value['mantis']);
+            $data[] = $row;
+        }
+        $output = array (
+            "draw"            => $draw,
+            "recordsTotal"    => $history->num_rows(),
+            "recordsFiltered" => $history->num_rows(),
+            "data"            => $data,
+        );
+        echo json_encode($output);
+    }
+
+    public function statusBackup($value) {
+        switch ($value) {
+            case 'Completed':
+                return "<td> <img border='0' src='".base_url('/assets/custom/img/completed.gif')."'> <span class='label label-sm label-success'</span> Completo </td>\n";
+                break;
+            case 'Completed/Errors':
+                return "<td> <img border='0' src='".base_url('/assets/custom/img/completed_errors.gif')."'> <span class='label label-sm label-warning'</span> Com Erros </td>\n";
+                break;
+            case 'Completed/Failures':
+                return "<td><img border='0' src='".base_url('/assets/custom/img/completed_failures.gif')."'><span class='label label-sm label-warning'</span> Com Falhas </td>\n";
+                break;
+            case 'Failed':
+                return "<td><img border='0' src='".base_url('/assets/custom/img/failed.gif')."'><span class='label label-sm label-danger'</span> Falhou </td>\n";
+                break;
+            default://Aborted
+               return "<td><img border='0' src='".base_url('/assets/custom/img/aborted.gif')."'><span class='label label-sm label-danger'</span> Abortou </td>\n";
+                break;
+        }
+    }
+
+    public function mantisBackup($value) {
+        if($value == '0'){
+            return 0;
+        } else{
+            return  anchor_popup('http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$value.'', $value);
+        }
+    }
+
+    public function velocidade($tamanho,$duracao) {
+        $duracao = (substr($duracao,0,2) * 3600) + (substr($duracao,3,2) * 60);
+        if($tamanho == '0' || $duracao == '0' || ($tamanho =='0' AND $duracao == '0')):
+            return 0;
+        else:
+            return number_format(($tamanho*1024/$duracao),2);
+        endif;
+    }
+
+    public function teste(){
+        $duracao = '02:00:00';
+        $tamanho = '1362.39';
+        echo $this->velocidade($tamanho,$duracao);
+    }
+
 }
 
 /* End of file Historico.php */

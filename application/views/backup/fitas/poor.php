@@ -68,11 +68,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <th>Pool</th>
                                     <th>Drive</th>
                                     <th>Session</th>
-                                    <th>Ações</th>
                                </tr>
                            </thead>
                            <tbody>
-                              <?php echo $fitas_poor; ?>
                            </tbody>
                        </table>
                    </div>

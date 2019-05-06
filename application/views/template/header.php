@@ -25,7 +25,6 @@
             <!-- END GLOBAL MANDATORY STYLES -->
             <!-- BEGIN PAGE LEVEL PLUGINS -->
             <?php echo $headerinc; ?>
-
             <!-- END PAGE LEVEL PLUGINS -->
             <!-- BEGIN THEME GLOBAL STYLES -->
             <link href="<?php echo base_url(); ?>assets/global/css/components.css" rel="stylesheet" id="style_components" type="text/css" />

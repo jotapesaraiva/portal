@@ -22,7 +22,7 @@ class Historico_model extends CI_Model {
         $this->db->limit('1000');
         $query = $this->db->get();
         // echo $this->db->last_query();
-        return $query->result_array();
+        return $query;
     }
 
     // public function data_copy() {

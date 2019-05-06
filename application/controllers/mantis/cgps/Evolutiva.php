@@ -14,13 +14,8 @@ class Evolutiva extends CI_Controller {
 
     public function index() {
         $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
-            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
-
+            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/mantis/evolutiva.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '';
@@ -49,14 +44,12 @@ class Evolutiva extends CI_Controller {
         $evolutivas = $this->analise_model->evolutiva($value);
 
         $data = array();
-        $cont = 1;
-        foreach ($evolutivas->result_array() as $evol) {
+        foreach ($evolutivas->result_array() as $key => $evol) {
             $row = array();
-            $row[] = $cont++;
+            $row[] = $key++;
             $row[] = "<a href = 'http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$evol['ID']." 'target='_blank'> ".$evol['ID']." </a>";
             // $row[] = $evol['DATE_SUBMITTED'];
             $row[] = $evol['LAST_UPDATED'];
-            // $evol['STATUS']
             $row[] = '<a class="label label-'.color_mantis($evol['STATUS']).'">'.$evol['STATUS_DESCRIPTION'].'</a>';
             $row[] = '<a class="label label-'.priority_mantis($evol['PRIORITY']).'">'.priority_mantis($evol['PRIORITY']).'</a>';
             $row[] = $evol['SUMMARY'];

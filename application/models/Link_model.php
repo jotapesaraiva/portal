@@ -156,63 +156,63 @@ class Link_model extends CI_Model{
 
     public function historico() {
         // $portal_moni = $this->load->database('default',true);
-        $portal_moni->select('ticket, posicionamento, rec, centro, status, responsabilidade, causa, date_format(abertura, "%d/%m/%Y %H:%i:%s") as abertura, date_format(atualizacao, "%d/%m/%Y %H:%i:%s") as atualizacao');
-        $portal_moni->from('ebt_grc');
-        $portal_moni->order_by('id', 'DESC');
-        $portal_moni->limit('1000');
-        $query = $portal_moni->get();
+        $this->db->select('ticket, posicionamento, rec, centro, status, responsabilidade, causa, date_format(abertura, "%d/%m/%Y %H:%i:%s") as abertura, date_format(atualizacao, "%d/%m/%Y %H:%i:%s") as atualizacao');
+        $this->db->from('ebt_grc');
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit('1000');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
     public function calculo($inicio,$fim) {
         // $portal_moni = $this->load->database('default',true);
-        $portal_moni->select('g.centro, g.ticket, date_format(g.abertura, "%d/%m/%Y %H:%i:%s") AS abertura, date_format(g.atualizacao, "%d/%m/%Y %H:%i:%s") AS atualizacao, g.tempo_embratel_hora as tmp_portal , g.responsabilidade');
-        $portal_moni->from('ebt_grc g');
-        // $portal_moni->join('tbl_ebt_fatura f','g.ticket = f.ticket','left');
+        $this->db->select('g.centro, g.ticket, date_format(g.abertura, "%d/%m/%Y %H:%i:%s") AS abertura, date_format(g.atualizacao, "%d/%m/%Y %H:%i:%s") AS atualizacao, g.tempo_embratel_hora as tmp_portal , g.responsabilidade');
+        $this->db->from('ebt_grc g');
+        // $this->db->join('tbl_ebt_fatura f','g.ticket = f.ticket','left');
         $where = "atualizacao BETWEEN '". $inicio ."' AND '". $fim ."'";
-        $portal_moni->where($where);
-        $portal_moni->order_by('g.centro', 'DESC');
-        $portal_moni->limit('100');
-        $query = $portal_moni->get();
+        $this->db->where($where);
+        $this->db->order_by('g.centro', 'DESC');
+        $this->db->limit('100');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
     public function ticket($mes) {
         // $portal_moni = $this->load->database('default',true);
-        $portal_moni->select('Month(atualizacao) as mes, count(ticket) as numero');
-        $portal_moni->from('ebt_grc');
-        $portal_moni->where('year(atualizacao)',$mes);
-        $portal_moni->group_by('Month(atualizacao)');
-        $portal_moni->order_by('mes', 'ASC');
-        $portal_moni->limit('12');
-        $query = $portal_moni->get();
+        $this->db->select('Month(atualizacao) as mes, count(ticket) as numero');
+        $this->db->from('ebt_grc');
+        $this->db->where('year(atualizacao)',$mes);
+        $this->db->group_by('Month(atualizacao)');
+        $this->db->order_by('mes', 'ASC');
+        $this->db->limit('12');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
     public function ticket_anual() {
         // $portal_moni = $this->load->database('default',true);
-        $portal_moni->select('year(atualizacao) as ano, count(ticket) as numero');
-        $portal_moni->from('ebt_grc');
-        $portal_moni->where('year(atualizacao) >=','2010');
-        $portal_moni->group_by('year(atualizacao)');
-        $portal_moni->order_by('ano', 'ASC');
-        $portal_moni->limit('12');
-        $query = $portal_moni->get();
+        $this->db->select('year(atualizacao) as ano, count(ticket) as numero');
+        $this->db->from('ebt_grc');
+        $this->db->where('year(atualizacao) >=','2010');
+        $this->db->group_by('year(atualizacao)');
+        $this->db->order_by('ano', 'ASC');
+        $this->db->limit('12');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
     public function causa($mes,$ano) {
         // $portal_moni = $this->load->database('default',true);
-        $portal_moni->select('causa, count(causa) as numero');
-        $portal_moni->from('ebt_grc');
+        $this->db->select('causa, count(causa) as numero');
+        $this->db->from('ebt_grc');
         if($mes != 'null'){
-            $portal_moni->where('Month(atualizacao)',$mes);
+            $this->db->where('Month(atualizacao)',$mes);
         }
-        $portal_moni->where('year(atualizacao)',$ano);
-        $portal_moni->group_by('causa');
-        $portal_moni->order_by('numero', 'DESC');
-        $portal_moni->limit('10');
-        $query = $portal_moni->get();
+        $this->db->where('year(atualizacao)',$ano);
+        $this->db->group_by('causa');
+        $this->db->order_by('numero', 'DESC');
+        $this->db->limit('10');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
@@ -232,36 +232,35 @@ class Link_model extends CI_Model{
 
     public function localidade($mes,$ano) {
         // $portal_moni = $this->load->database('default',true);
-        $portal_moni->select('centro, count(ticket) as numero');
-        $portal_moni->from('ebt_grc');
+        $this->db->select('centro, count(ticket) as numero');
+        $this->db->from('ebt_grc');
         if($mes != 'null'){
-            $portal_moni->where('Month(atualizacao)',$mes);
+            $this->db->where('Month(atualizacao)',$mes);
         }
-        $portal_moni->where('year(atualizacao)',$ano);
-        $portal_moni->group_by('centro');
-        $portal_moni->order_by('numero', 'DESC');
-        $portal_moni->limit('10');
-        $query = $portal_moni->get();
+        $this->db->where('year(atualizacao)',$ano);
+        $this->db->group_by('centro');
+        $this->db->order_by('numero', 'DESC');
+        $this->db->limit('10');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
 
     public function select_link_fora() {
-
             // $portal = $this->load->database('default',true);
-            $portal->select('*');
-            $portal->from('zbx_link_fora');
-            $portal->order_by('data_alerta', 'DESC');
-            $query = $portal->get();
-            // echo $portal->last_query();
+            $this->db->select('*');
+            $this->db->from('zbx_link_fora');
+            $this->db->order_by('data_alerta', 'DESC');
+            $query = $this->db->get();
+            // echo $this->db->last_query();
             return $query->result_array();
     }
 
     public function update_link_fora($id, $dados) {
-        // $portal = $this->load->database('default',true);
-        $portal->update('zbx_link_fora', $dados, $id);
-        // echo $portal->last_query();
-        return $portal->affected_rows();
+        // $this->db = $this->load->database('default',true);
+        $this->db->update('zbx_link_fora', $dados, $id);
+        // echo $this->db->last_query();
+        return $this->db->affected_rows();
     }
 
 

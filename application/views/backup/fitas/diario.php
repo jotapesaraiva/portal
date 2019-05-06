@@ -29,6 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
                         <span class="caption-subject bold uppercase"> Fitas Library - Cofre </span>
+                        <div class="hide" id="pagina" value="<?php echo $pagina ?>"></div>
                     </div>
                    </div>
                    <div class="portlet-body">
@@ -73,7 +74,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                </tr>
                            </thead>
                            <tbody>
-                              <?php echo $library_cofre; ?>
                            </tbody>
                        </table>
                    </div>
@@ -128,7 +128,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                  </tr>
                              </thead>
                              <tbody>
-                              <?php echo $cofre_library; ?>
                              </tbody>
                          </table>
                      </div>

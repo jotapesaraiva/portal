@@ -10,6 +10,7 @@ class Fitas extends CI_Controller {
     }
 
     public function index() {
+        echo "TESTE";
         $diarios = $this->fitas_model->fitas_mensal_cofre_library_dataprotector();
         vd($diarios);
     }
@@ -18,7 +19,7 @@ class Fitas extends CI_Controller {
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/backup/fitas.js" type="text/javascript"></script>';
+            <script src="' . base_url() . 'assets/custom/backup/diario.js" type="text/javascript"></script>';
         $script['script'] = '';
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
@@ -34,11 +35,7 @@ class Fitas extends CI_Controller {
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-        $diario_lc = $this->fitas_model->diario_library_cofre();
-        $diario_cl = $this->fitas_model->diario_cofre_library();
-
-        $data['library_cofre'] =  $this->table_Library_cofre($diario_lc);
-        $data['cofre_library'] = $this->table_cofre_library($diario_cl);
+        $data['pagina'] = 'diario';
 
         $this->load->view('backup/fitas/diario', $data);
 
@@ -50,7 +47,7 @@ class Fitas extends CI_Controller {
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/fitas.js" type="text/javascript"></script>';
+            <script src="' . base_url() . 'assets/custom/backup/mensal.js" type="text/javascript"></script>';
         $script['script'] = '';
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
@@ -66,11 +63,7 @@ class Fitas extends CI_Controller {
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-        $mensal_lc = $this->fitas_model->mensal_library_cofre();
-        $mensal_cl = $this->fitas_model->mensal_cofre_library();
-
-        $data['library_cofre'] = $this->table_Library_cofre($mensal_lc);;
-        $data['cofre_library'] = $this->table_cofre_library($mensal_cl);
+        $data['pagina'] = 'mensal';
 
         $this->load->view('backup/fitas/mensal', $data);
 
@@ -81,7 +74,7 @@ class Fitas extends CI_Controller {
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/fitas.js" type="text/javascript"></script>';
+            <script src="' . base_url() . 'assets/custom/backup/poor.js" type="text/javascript"></script>';
         $script['script'] = '';
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
@@ -97,134 +90,157 @@ class Fitas extends CI_Controller {
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-
-        $data['fitas_poor'] = $this->table_poor();
-
-        $this->load->view('backup/fitas/poor', $data);
+        $this->load->view('backup/fitas/poor');
 
         $this->load->view('template/footer',$script);
     }
 
-    public function table_Library_cofre($variaveis) {
-        $html = "";
-        $contador = 1;
-        foreach($variaveis as $variavel){
-                    $Robo = $variavel['Location'];
-                    $Slot = substr($Robo, -3, 2);
-                    $Robo = strstr($Robo, "IBM");
-                    if ($Robo != ""):
-                        $Robo = "IBM";
-                    else:
-                        $Robo = "HP";
-                    endif;
+    public function table_lc($value) {
+        // Datatables Variables
+        $draw = intval($this->input->get("draw"));
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
 
-                    if ($Slot <= 9):
-                        $Local = "EI";
-                    elseif (($Slot > 9) AND ($Slot <=21)):
-                        $Local = "ES";
-                    elseif (($Slot > 21) AND ($Slot <=33)):
-                        $Local = "DI";
-                    else:
-                        $Local = "DS";
-                    endif;
-                $Porcentagem = $variavel['Porcentagem'];
-                $html .= "<tr>\n";
-                $html .= "  <td>".$contador++."</td>\n";
-                $html .= "  <td>".$variavel['Label']."</td>\n";
-                if ($Porcentagem == '100' OR $Porcentagem >= '80'){
-                    $html .= "  <td>
-                                    <div class='progress progress-striped active'>
-                                        <div class='progress-bar progress-bar-danger' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%'>
-                                            <span style='font-weight: bold;'>".$variavel['Porcentagem']."%</span>
-                                        </div>
-                                    </div>
-                                </td>\n";
-                } else if ($Porcentagem >='70') {
-                    $html .= "  <td>
-                                    <div class='progress progress-striped active'>
-                                        <div class='progress-bar progress-bar-warning' role='progressbar' aria-valuenow='80' aria-valuemin='0' aria-valuemax='100' style='width: 80%'>
-                                            <span style='font-weight: bold;'>".$variavel['Porcentagem']."%</span>
-                                        </div>
-                                    </div>
-                                </td>\n";
-                } else if ($Porcentagem >='30') {
-                    $html .= "  <td>
-                                    <div class='progress progress-striped active'>
-                                        <div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='30' aria-valuemin='0' aria-valuemax='100' style='width: 30%'>
-                                            <span style='font-weight: bold;'>".$variavel['Porcentagem']."%</span>
-                                        </div>
-                                    </div>
-                                </td>\n";
-                } else {
-                    $html .= "  <td>
-                                    <div class='progress progress-striped active'>
-                                        <div class='progress-bar progress-bar-info' role='progressbar' aria-valuenow='10' aria-valuemin='0' aria-valuemax='100' style='width: 10%'>
-                                            <span style='font-weight: bold;'>".$variavel['Porcentagem']."%</span>
-                                        </div>
-                                    </div>
-                                </td>\n";
-                }
-                $html .= "  <td>".$variavel['ProtectionDate']."</td>\n";
-                $html .= "  <td>".$Robo."</td>\n";
-                $html .= "  <td>".$Slot."</td>\n";
-                $html .= "  <td>".$Local."</td>\n";
-                if ($Porcentagem == '100'){
-                    $html .= "<td><span class='label label-danger'</span> Retirar da Library </td>\n";
-                } else {
-                    $html .= "<td><span class='label label-success'</span> Manter na Library </td>\n";
-                }
-                $html .= "</tr>\n";
+        if($value == 'diario') {
+            $resultado = $this->fitas_model->diario_library_cofre();
+        } else{
+            $resultado = $this->fitas_model->mensal_library_cofre();
         }
-        return $html;
+
+        $data = array();
+        foreach ($resultado->result_array() as $key => $value) {
+            $row = array();
+
+            $row[] = $key+1;//id
+            $row[] = $value['Label'];//label
+            $row[] = $this->porcentagem($value['Porcentagem']);//porcentagem
+            $row[] = $value['ProtectionDate']; //protecao
+            $row[] = $this->robo($value['Location']);//robo
+            $row[] = substr($value['Location'], -3, 2);//slot
+            $row[] = $this->local($value['Location']);//local
+            $row[] = utf8_encode($value['Porcentagem']);//retirar
+            $data[] = $row;
+        }
+        $output = array (
+            "draw"            => $draw,
+            "recordsTotal"    => $resultado->num_rows(),
+            "recordsFiltered" => $resultado->num_rows(),
+            "data"            => $data,
+        );
+        echo json_encode($output);
     }
 
-    public function table_cofre_library($variaveis) {
-               $html = "";
-            $contador = 1;
-            foreach($variaveis as $variavel){
-                $data_fita = $variavel['ProtectionDate'];
-                $data_corrente = date('Y-m-d');
-                $html .= "<tr>\n";
-                $html .= "  <td>".$contador++."</td>\n";
-                $html .= "  <td>".$variavel['Label']."</td>\n";
-                $html .= "  <td>".$variavel['ProtectionDate2']."</td>\n";
-                if ($data_fita <= $data_corrente){
-                    $html .= "<td><span class='label label-danger'</span> Retirar do Vault </td>\n";
-                } else {
-                    $html .= "<td><span class='label label-success'</span> Manter no Vault </td>\n";
-                }
-                $html .= "</tr>\n";
-            }
-            return $html;
+    public function local($value) {
+        $Slot = substr($value, -3, 2);
+        if ($Slot <= 9):
+            return "EI";
+        elseif (($Slot > 9) AND ($Slot <=21)):
+            return "ES";
+        elseif (($Slot > 21) AND ($Slot <=33)):
+            return "DI";
+        else:
+            return "DS";
+        endif;
+    }
+
+    public function robo($value) {
+        $Robo = strstr($value, "IBM");
+        if ($Robo != ""):
+            return "IBM";
+        else:
+            return "HP";
+        endif;
+    }
+    public function porcentagem($value) {
+        if ($value == '100' OR $value >= '80'){
+            $progressBar = 'danger';
+            $ariaValueNow = '100';
+            $width = '100';
+        } else if ($value >='70') {
+            $progressBar = 'warning';
+            $ariaValueNow = '80';
+            $width = '80';
+        } else if ($value >='30') {
+            $progressBar = 'success';
+            $ariaValueNow = '30';
+            $width = '30';
+        } else {
+            $progressBar = 'info';
+            $ariaValueNow = '10';
+            $width = '10';
+        }
+            return "   <div class='progress progress-striped active'>
+                            <div class='progress-bar progress-bar-".$progressBar."' role='progressbar' aria-valuenow='".$ariaValueNow."' aria-valuemin='0' aria-valuemax='100' style='width: ".$width."%'>
+                                <span style='font-weight: bold;'>".$value."%</span>
+                            </div>
+                        </div>";
+    }
+
+    public function table_cl($value) {
+        // Datatables Variables
+        $draw = intval($this->input->get("draw"));
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+        if($value == 'diario'){
+            $resultado = $this->fitas_model->diario_cofre_library();
+        } else {
+            $resultado = $this->fitas_model->mensal_cofre_library();
+        }
+
+        $data = array();
+        foreach ($resultado->result_array() as $key => $value) {
+            $row = array();
+
+            $row[] = $key+1;//id
+            $row[] = $value['Label'];//label
+            $row[] = $value['ProtectionDate2']; //protecao
+            if ($value['ProtectionDate'] <= date('Y-m-d')):
+                    $row[] = "<span class='label label-danger'</span> Retirar do Vault";
+            else:
+                    $row[] = "<span class='label label-success'</span> Manter no Vault";
+            endif;
+
+            $data[] = $row;
+        }
+        $output = array (
+            "draw"            => $draw,
+            "recordsTotal"    => $resultado->num_rows(),
+            "recordsFiltered" => $resultado->num_rows(),
+            "data"            => $data,
+        );
+        echo json_encode($output);
     }
 
     public function table_poor() {
-            $poors = $this->fitas_model->fitas_poor();
-            $html = "";
-            $contador = 1;
+        // Datatables Variables
+        $draw = intval($this->input->get("draw"));
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
 
-            foreach ($poors as $poor) {
-            // while ($poor = mysqli_fetch_assoc($rs)) {
-                $html .= "<tr>\n";
-                $html .= "  <td>".$contador++."</td>\n";
-                $html .= "  <td>".utf8_encode($poor['ocorrencia'])."</td>\n";
-                $html .= "  <td>".utf8_encode($poor['label'])."</td>\n";
-                $html .= "  <td>".utf8_encode($poor['pool'])."</td>\n";
-                $html .= "  <td>".utf8_encode($poor['drive'])."</td>\n";
-                $html .= "  <td>".utf8_encode($poor['data_session'].$poor['session'])."</td>\n";
-                $html .= "  <td>
-                                <div class='btn-group'>
-                                    <a class='btn btn-link dropdown-toggle' data-toggle='dropdown' href='#'><span class='caret'></span></a>
-                                    <ul class='dropdown-menu'>
-                                    <a href='?m=analise&f=backup&a=fitas_poor_alterar&id=".$poor['id']."'><i class='icon-pencil'></i> Editar</a>
-                                    <a href='?m=analise&f=backup&a=fitas_poor_deletar&id=".$poor['id']."'><i class='icon-trash'></i> Deletar</a>
-                                    </ul>
-                                </div>
-                            </td>";
-                $html.= "</tr>";
-            }
-        return $html;
+        $poors = $this->fitas_model->fitas_poor();
+
+        $data = array();
+        foreach ($poors->result_array() as $key => $value) {
+            $row = array();
+
+            $row[] = $key+1;//id
+            $row[] = utf8_encode($value['ocorrencia']);//label
+            $row[] = utf8_encode($value['label']);//porcentagem
+            $row[] = utf8_encode($value['pool']); //protecao
+            $row[] = utf8_encode($value['drive']); //protecao
+            $row[] = utf8_encode($value['data_session'].$value['session']); //protecao
+
+            $data[] = $row;
+        }
+        $output = array (
+            "draw"            => $draw,
+            "recordsTotal"    => $poors->num_rows(),
+            "recordsFiltered" => $poors->num_rows(),
+            "data"            => $data,
+        );
+        echo json_encode($output);
     }
+
 }
 
 /* End of file Fitas.php */

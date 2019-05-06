@@ -14,7 +14,7 @@ class Fitas_model extends CI_Model {
         $portal_moni->order_by('Porcentagem','DESC');
         // $portal_moni->limit(0,100);
         $query = $portal_moni->get();
-        return $query->result_array();
+        return $query;
     }
 
     public function diario_cofre_library(){
@@ -34,7 +34,7 @@ class Fitas_model extends CI_Model {
         $portal_moni->order_by('Porcentagem','ASC');
         // $portal_moni->limit(0,100);
         $query = $portal_moni->get();
-        return $query->result_array();
+        return $query;
     }
 
     public function mensal_library_cofre() {
@@ -50,7 +50,7 @@ class Fitas_model extends CI_Model {
         $portal_moni->order_by('Porcentagem', 'DESC');
         // $portal_moni->limit(0, 100);
         $query = $portal_moni->get();
-        return $query->result_array();
+        return $query;
     }
 
     public function mensal_cofre_library(){
@@ -72,7 +72,7 @@ class Fitas_model extends CI_Model {
         $portal_moni->order_by('ProtectionDate', 'ASC');
         // $portal_moni->limit(0,100);
         $query = $portal_moni->get();
-        return $query->result_array();
+        return $query;
     }
 
     public function fitas_poor() {
@@ -80,7 +80,7 @@ class Fitas_model extends CI_Model {
         $portal_moni->select('*, date_format(ocorrencia, "%d/%m/%Y %H:%i:%s") as ocorrencia, date_format(ocorrencia, "%Y/%m/%d-") as data_session');
         $portal_moni->from('tbl_dp_fitas_poor');
         $query = $portal_moni->get();
-        return $query->result_array();
+        return $query;
     }
     // select *, date_format(ocorrencia, '%d/%m/%Y %H:%i:%s') as ocorrencia, date_format(ocorrencia, '%Y/%m/%d-') as data_session  from tbl_dp_fitas_poor
 }
