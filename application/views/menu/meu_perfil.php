@@ -224,7 +224,7 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    grafico de rosca
+                                    <div style="width:100%;height:400px;" class="chart" id="chartPieDiv"></div>
                                 </div>
                             </div>
                             <!-- END PORTLET -->

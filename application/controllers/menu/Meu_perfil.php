@@ -17,7 +17,7 @@ class Meu_perfil extends CI_Controller {
     }
 
     public function index() {
-        $this->output->enable_profiler(TRUE);
+        $this->output->enable_profiler(FALSE);
         $equipe = $this->session->userdata('physicaldeliveryofficename');
         $username = $this->session->userdata('username');
         $perfil_user = image_upload($username);
@@ -29,7 +29,7 @@ class Meu_perfil extends CI_Controller {
         $categoria = $this->menu_model->top_categoria(date_start(),date_end(),numero_equipe($equipe));
         $abertos = $this->menu_model->top_abertos(date_start(),date_end(),numero_equipe($equipe));
         $atribuidos = $this->menu_model->mantis_atribuito($username);
-        // vd($atribuidos);
+        // vd($status);
         $dados = array(
             'abertos'    => $score_mantis->ABERTOS,
             'impedidos'  => $score_mantis->IMPEDIDOS,
@@ -40,7 +40,8 @@ class Meu_perfil extends CI_Controller {
             'atribuidos' => $atribuidos
         );
         $resolvidos = $this->resolvidos(date_start(),date_end(),numero_equipe($equipe));
-        // vd($servicos);
+        // $status = $this->status(date_start(),date_end(),numero_equipe($equipe));
+
         $css['headerinc'] = '
             <link href="'.base_url().'assets/pages/css/profile.css" rel="stylesheet" type="text/css" />';
         $script['script'] = '
@@ -51,6 +52,7 @@ class Meu_perfil extends CI_Controller {
             var chart = am4core.create("chartdiv", am4charts.XYChart);
             // Add data
             chart.data = '.$resolvidos.';
+
             // Create axes
             var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
             categoryAxis.dataFields.category = "USERNAME";
@@ -94,6 +96,29 @@ class Meu_perfil extends CI_Controller {
             chart.cursor.lineY.opacity = 0;
             </script>
 
+
+            <script>
+            am4core.useTheme(am4themes_animated);
+
+            var chart = am4core.create("chartPieDiv", am4charts.PieChart);
+
+            chart.dataSource.url = "'.base_url().'menu/meu_perfil/status";
+            chart.dataSource.parser = new am4core.JSONParser();
+            chart.dataSource.parser.options.emptyAs = 0;
+
+            var series = chart.series.push(new am4charts.PieSeries());
+            series.dataFields.value = "QTD";
+            series.dataFields.category = "STATUS_DESCRIPTION";
+            // series.fill = am4charts.color("#FF0000")
+            // series.stroke = series.fill;
+
+            // this creates initial animation
+            series.hiddenState.properties.opacity = 1;
+            series.hiddenState.properties.endAngle = -90;
+            series.hiddenState.properties.startAngle = -90;
+
+            chart.legend = new am4charts.Legend();
+            </script>
         ';
         $script['footerinc'] = '
             <script src="'.base_url().'assets/global/plugins/amcharts4/core.js" type="text/javascript"></script>
@@ -124,25 +149,26 @@ class Meu_perfil extends CI_Controller {
             <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
             <script src="'. base_url() .'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
+            <script src="'. base_url() .'assets/custom/menu/configuracao.js"></script>
             ';
 
         $username = $this->session->userdata('username');
-        $id_user = $this->usuario_model->id_user($username);
-        $usuario = $this->usuario_model->listar_usuarios($id_user->id_usuario);
-        $telefone = $this->usuario_model->user_telefone($id_user->id_usuario,1);
-        $celular = $this->usuario_model->user_telefone($id_user->id_usuario,2);
-        $voip = $this->usuario_model->user_telefone($id_user->id_usuario,4);
-        $modulo = $this->usuario_model->listar_modulos($id_user->id_usuario);
+        // $id_user = $this->usuario_model->id_user($username);
+        // $usuario = $this->usuario_model->listar_usuarios($id_user->id_usuario);
+        // $telefone = $this->usuario_model->user_telefone($id_user->id_usuario,1);
+        // $celular = $this->usuario_model->user_telefone($id_user->id_usuario,2);
+        // $voip = $this->usuario_model->user_telefone($id_user->id_usuario,4);
+        // $modulo = $this->usuario_model->listar_modulos($id_user->id_usuario);
         $score_mantis = $this->menu_model->score_mantis($username);
-
+        // // vd($usuario->row());
         $data = array(
             'abertos' => $score_mantis->ABERTOS,
             'impedidos' => $score_mantis->IMPEDIDOS,
             'realizados' => $score_mantis->REALIZADOS,
-            'usuario' => $usuario->row(),
-            'telefone' => $telefone,
-            'celular' => $celular,
-            'voip' => $voip
+        //     'usuario' => $usuario->row(),
+        //     'telefone' => $telefone,
+        //     'celular' => $celular,
+        //     'voip' => $voip
         );
         $perfil_user = image_upload($username);
         $user = array(
@@ -192,9 +218,11 @@ class Meu_perfil extends CI_Controller {
     }
 
 
-    public function resolvidos($data_inicio,$data_fim,$equipe) {
     // public function resolvidos() {
+    public function resolvidos($data_inicio,$data_fim,$equipe) {
+        // $equipe = $this->session->userdata('physicaldeliveryofficename');
         $data = $this->menu_model->realizado_prioridade($data_inicio,$data_fim,$equipe);
+        // $data = $this->menu_model->realizado_prioridade(date_start(),date_end(),numero_equipe($equipe));
         // $data = $this->menu_model->realizado_prioridade('01/04/2019','01/04/2019');
         // Variavel onde será guardada a informação
         $result = array();
@@ -211,6 +239,26 @@ class Meu_perfil extends CI_Controller {
         }
         return json_encode($result);
         // echo json_encode($result);
+    }
+
+    public function status() {
+    // public function status($data_inicio,$data_fim,$equipe) {
+        $equipe = $this->session->userdata('physicaldeliveryofficename');
+            // $data = $this->menu_model->status_prioridade($data_inicio,$data_fim,$equipe);
+            $data = $this->menu_model->status_prioridade(date_start(),date_end(),numero_equipe($equipe));
+            // vd($data);
+            $result = array();
+            foreach ($data as $value) {
+                $retorno = array(
+                    'STATUS'             => $value['STATUS'],
+                    'STATUS_DESCRIPTION' => $value['STATUS_DESCRIPTION'],
+                    'QTD'                => intval($value['QTD'])
+                );
+                array_push($result,$retorno);
+            }
+            // return json_encode($result);
+            echo json_encode($result);
+
     }
 
     public function enviar() {
@@ -231,15 +279,21 @@ class Meu_perfil extends CI_Controller {
     public function listar_usuarios() {
         $this->load->model('usuario_model');
         $username = $this->session->userdata('username');
-        $id = $this->usuario_model->id_user($username);
+        $id_user = $this->usuario_model->id_user($username);
 
-        $usuario = $this->usuario_model->edit_usuario($id);
-
-        $telefone = $this->usuario_model->edit_usuario_telefone($id,1);
-
-        $celular = $this->usuario_model->edit_usuario_telefone($id,2);
-
-        $data = array('usuario' => $usuario, 'telefone' => $telefone, 'celular' => $celular);
+        $usuario = $this->usuario_model->listar_usuarios($id_user->id_usuario);
+        $telefone = $this->usuario_model->user_telefone($id_user->id_usuario,1);
+        $celular = $this->usuario_model->user_telefone($id_user->id_usuario,2);
+        $voip = $this->usuario_model->user_telefone($id_user->id_usuario,4);
+        $modulo = $this->usuario_model->listar_modulos($id_user->id_usuario);
+        // vd($modulo);
+        // vd($usuario->row()->nome_usuario);
+        $data = array(
+            'usuario' => $usuario->row(),
+            'telefone' => $telefone,
+            'celular' => $celular,
+            'voip' => $voip
+        );
         echo json_encode($data);
     }
 

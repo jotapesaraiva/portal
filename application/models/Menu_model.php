@@ -148,6 +148,27 @@ class Menu_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function status_prioridade($data_inicio,$data_fim,$equipe) {
+      $portal_m = $this->load->database('mantis',true);
+      $query = $portal_m->query("
+                  SELECT c.status, c.status_description, COUNT(distinct(b.ID)) AS QTD
+                  FROM mantis.mantis_bug_tb b
+                  JOIN mantis_bug_status_tb c ON b.status=c.status
+                  WHERE b.PROJECT_ID IN (
+                      SELECT A.ID
+                      FROM mantis_project_tb a
+                      LEFT JOIN mantis_project_hierarchy_tb b ON a.id = b.child_id
+                      WHERE A.ENABLED = 1
+                      start with a.id in (".$equipe.")
+                      connect by b.parent_id = prior a.id
+                  )
+                  AND DATE_SUBMITTED  BETWEEN '".$data_inicio."' AND add_months('".$data_fim."',1)
+                  GROUP BY c.status_description,c.status
+                  ORDER BY c.status
+        ");
+       return $query->result_array();
+    }
+
 }
 
 /* End of file Menu_model.php */

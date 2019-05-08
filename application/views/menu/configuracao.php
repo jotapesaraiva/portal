@@ -125,13 +125,13 @@
                                             <form role="form" action="#">
                                                 <div class="form-group">
                                                     <label class="control-label">Nome</label>
-                                                    <input type="text" value="<?php echo $usuario->nome_usuario;?>" class="form-control" /> </div>
+                                                    <input type="text" value="" name="nome" class="form-control" /> </div>
                                                 <div class="form-group">
                                                     <label class="control-label">Login</label>
-                                                    <input type="text" value="<?php echo $usuario->login_usuario;?>" class="form-control" /> </div>
+                                                    <input type="text" value="" name="login" class="form-control" /> </div>
                                                 <div class="form-group">
                                                     <label class="control-label">Email</label>
-                                                    <input type="text" value="<?php echo $usuario->email_usuario;?>"class="form-control" /> </div>
+                                                    <input type="text" value="" name="email" class="form-control" /> </div>
                                                 <div class="form-group">
                                                     <div class="col-md-4 col-md-offset-2">
                                                         <label class="control-label">Sobreaviso</label>
@@ -143,19 +143,19 @@
                                                     </div>
                                                 <div class="form-group">
                                                     <label class="control-label">Cargo</label>
-                                                    <input type="text" value="<?php echo $usuario->nome_cargo;?>" class="form-control" /> </div>
+                                                    <input type="text" value="" name="cargo" class="form-control" /> </div>
                                                 <div class="form-group">
                                                     <label class="control-label">Celula / Equipe</label>
-                                                    <input type="text" value="<?php echo $usuario->nome_grupo;?>" class="form-control" /> </div>
+                                                    <input type="text" value="" name="equipe" class="form-control" /> </div>
                                                 <div class="form-group">
                                                     <label class="control-label">Telefone</label>
-                                                    <input type="text" value="<?php echo $telefone->numero;?>" class="form-control" /> </div>
+                                                    <input type="text" value="" class="form-control" /> </div>
                                                 <div class="form-group">
                                                     <label class="control-label">Celular</label>
-                                                    <input type="text" value="<?php echo $celular->numero;?>" class="form-control" /> </div>
+                                                    <input type="text" value="" class="form-control" /> </div>
                                                 <div class="form-group">
                                                     <label class="control-label">Voip</label>
-                                                    <input type="text" value="<?php echo $voip->numero;?>" class="form-control" /> </div>
+                                                    <input type="text" value="" class="form-control" /> </div>
 
                                                 <div class="margiv-top-10">
                                                     <a href="javascript:;" class="btn green"> Save Changes </a>
@@ -220,33 +220,241 @@
                                             <form action="#">
                                                 <table class="table table-light table-hover">
                                                     <tr>
-                                                        <td> Nivel de acesso : </td>
-                                                        <td>
-                                                            <label class="uniform-inline">
-                                                                <input type="radio" name="optionsRadios1" value="option1" /> Yes </label>
-                                                            <label class="uniform-inline">
-                                                                <input type="radio" name="optionsRadios1" value="option2" checked/> No </label>
+                                                        <td> Nivel de acesso </td>
+                                                        <td class="text-right">
+                                                            <div class="col-md-9">
+                                                                <div class="margin-bottom-10">
+                                                                    <label for="user">Usuário Comum :</label>
+                                                                    <input id="user" type="radio" name="radio1" data-size="small" class="make-switch switch-radio1">
+                                                                </div>
+                                                                <div class="margin-bottom-10">
+                                                                    <label for="admin">Administrador :</label>
+                                                                    <input id="admin" type="radio" name="radio1" data-size="small" class="make-switch switch-radio2">
+                                                                </div>
+                                                                <div class="margin-bottom-10">
+                                                                    <label for="super">Super Admin :</label>
+                                                                    <input id="super" type="radio" name="radio1" data-size="small" class="make-switch switch-radio3">
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td> Acesso as paginas : </td>
-                                                        <td>
-                                                            <label class="uniform-inline">
-                                                                <input type="checkbox" value="" /> Yes </label>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4"  class="bold text-center">### CONSULTA ###</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Gerência</td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="user">Tecnico :</label>
+                                                                <input type="checkbox" name="tecnico" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="admin">Fornecedor :</label>
+                                                                <input type="checkbox" name="fornecedor" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Contato :</label>
+                                                                <input type="checkbox" name="contato" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Servidores :</label>
+                                                                <input type="checkbox" name="servidor" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Acessos :</label>
+                                                                <input type="checkbox" name="acessos" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Voucher :</label>
+                                                                <input type="checkbox" name="voucher" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Agendamento :</label>
+                                                                <input type="checkbox" name="agendamento" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Ativos :</label>
+                                                                <input type="checkbox" name="ativos" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Contratos :</label>
+                                                                <input type="checkbox" name="contratos" class="make-switch" checked data-size="small"  >
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td> Enim eiusmod high life accusamus terry richardson ad squid wolf moon </td>
-                                                        <td>
-                                                            <label class="uniform-inline">
-                                                                <input type="checkbox" value="" /> Yes </label>
+                                                        <td> Ramais </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Voip :</label>
+                                                                <input type="checkbox" name="voip" class="make-switch" checked data-size="small"  >
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td> Enim eiusmod high life accusamus terry richardson ad squid wolf moon </td>
-                                                        <td>
-                                                            <label class="uniform-inline">
-                                                                <input type="checkbox" value="" /> Yes </label>
+                                                        <td> Localidades </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Links :</label>
+                                                                <input type="checkbox" name="link" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Unidades :</label>
+                                                                <input type="checkbox" name="unidade" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4"  class="bold text-center">#### ANALISE ###</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Backup </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Historico :</label>
+                                                                <input type="checkbox" name="historico_bkp" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Janela de Backup :</label>
+                                                                <input type="checkbox" name="janela_bkp" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Fitas :</label>
+                                                                <input type="checkbox" name="fitas" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Gráficos :</label>
+                                                                <input type="checkbox" name="graficos_bkp" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Links </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Historico :</label>
+                                                                <input type="checkbox" name="historico_link" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Calculo multa :</label>
+                                                                <input type="checkbox" name="calculo_multa" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Consumo de banda :</label>
+                                                                <input type="checkbox" name="consumo_banda" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Chamados links :</label>
+                                                                <input type="checkbox" name="chamado_links" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Gráficos :</label>
+                                                                <input type="checkbox" name="graficos_link" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr >
+                                                        <td> Mantis </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">CGAQ :</label>
+                                                                <input type="checkbox" name="cgaq" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">CGPS :</label>
+                                                                <input type="checkbox" name="cgps" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4"  class="bold text-center">### CONFIGURAÇÕES ###</td>
+                                                    </tr>
+                                                    <tr >
+                                                        <td> Sistema </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Geral :</label>
+                                                                <input type="checkbox" name="geral" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Logs :</label>
+                                                                <input type="checkbox" name="log" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">LDAP :</label>
+                                                                <input type="checkbox" name="ldap" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Itens configuração :</label>
+                                                                <input type="checkbox" name="consulta" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Usuários </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Lista usuários :</label>
+                                                                <input type="checkbox" name="lista" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Permissão :</label>
+                                                                <input type="checkbox" name="permissao" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Grupos/Equipe :</label>
+                                                                <input type="checkbox" name="grupos" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Modulos :</label>
+                                                                <input type="checkbox" name="modulos" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Perfil :</label>
+                                                                <input type="checkbox" name="perfil" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Cargo :</label>
+                                                                <input type="checkbox" name="cargo" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Banco de dados </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Configuração :</label>
+                                                                <input type="checkbox" name="configuracao" class="make-switch" checked data-size="small"  >
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="margin-bottom-10">
+                                                                <label for="super">Backup :</label>
+                                                                <input type="checkbox" name="backup" class="make-switch" checked data-size="small"  >
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 </table>
