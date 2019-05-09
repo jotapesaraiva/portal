@@ -153,22 +153,23 @@ class Meu_perfil extends CI_Controller {
             ';
 
         $username = $this->session->userdata('username');
-        // $id_user = $this->usuario_model->id_user($username);
-        // $usuario = $this->usuario_model->listar_usuarios($id_user->id_usuario);
-        // $telefone = $this->usuario_model->user_telefone($id_user->id_usuario,1);
-        // $celular = $this->usuario_model->user_telefone($id_user->id_usuario,2);
-        // $voip = $this->usuario_model->user_telefone($id_user->id_usuario,4);
-        // $modulo = $this->usuario_model->listar_modulos($id_user->id_usuario);
+        $id_user = $this->usuario_model->id_user($username);
+
+        $cargos = $this->usuario_model->listar_cargo();
+        $grupos = $this->usuario_model->listar_grupo();
+        $voips = $this->voip_model->listar_ramal();
+        $permissaos = $this->usuario_model->listar_permissao();
         $score_mantis = $this->menu_model->score_mantis($username);
-        // // vd($usuario->row());
+        // vd($usuario->row());
         $data = array(
+            'cargos' => $cargos,
+            'grupos' => $grupos,
+            'voips' => $voips,
+            'permissaos' => $permissaos,
+
             'abertos' => $score_mantis->ABERTOS,
             'impedidos' => $score_mantis->IMPEDIDOS,
-            'realizados' => $score_mantis->REALIZADOS,
-        //     'usuario' => $usuario->row(),
-        //     'telefone' => $telefone,
-        //     'celular' => $celular,
-        //     'voip' => $voip
+            'realizados' => $score_mantis->REALIZADOS
         );
         $perfil_user = image_upload($username);
         $user = array(
@@ -177,7 +178,6 @@ class Meu_perfil extends CI_Controller {
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Meu perfil</span>', 'dash/meu_perfil');
-
 
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$user);
@@ -263,7 +263,7 @@ class Meu_perfil extends CI_Controller {
 
     public function enviar() {
         $username = $this->session->userdata('username');
-        $upload = do_upload('perfil',$username);
+        $upload = do_upload('file',$username);
         // if (is_array($thumb29)):
         if (is_array($upload) && $upload['file_name'] != ' '):
             create_thumb2($upload['file_name']);
@@ -282,20 +282,24 @@ class Meu_perfil extends CI_Controller {
         $id_user = $this->usuario_model->id_user($username);
 
         $usuario = $this->usuario_model->listar_usuarios($id_user->id_usuario);
-        $telefone = $this->usuario_model->user_telefone($id_user->id_usuario,1);
-        $celular = $this->usuario_model->user_telefone($id_user->id_usuario,2);
-        $voip = $this->usuario_model->user_telefone($id_user->id_usuario,4);
+        $telefone = $this->usuario_model->edit_usuario_telefone($id_user->id_usuario,1);
+        $celular = $this->usuario_model->edit_usuario_telefone($id_user->id_usuario,2);
+
+        $voip = $this->usuario_model->edit_usuario_telefone($id_user->id_usuario,4);
         $modulo = $this->usuario_model->listar_modulos($id_user->id_usuario);
-        // vd($modulo);
         // vd($usuario->row()->nome_usuario);
         $data = array(
-            'usuario' => $usuario->row(),
+            'usuario'  => $usuario->row(),
             'telefone' => $telefone,
-            'celular' => $celular,
-            'voip' => $voip
+            'celular'  => $celular,
+            'voip'     => $voip,
+            'modulo'   => $modulo
         );
+        // vd($data);
         echo json_encode($data);
     }
+
+
 
     public function month() {
         $data_incio = mktime(0, 0, 0, date('m') , 1 , date('Y'));

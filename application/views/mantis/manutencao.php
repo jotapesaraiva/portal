@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                            <thead>
                                <tr>
                                     <th>#</th>
-                                    <th>Número</th>
+                                    <th>Mantis</th>
                                     <th>Resumo</th>
                                     <th>Categoria</th>
                                     <th>Tecnico</th>

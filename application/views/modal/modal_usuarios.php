@@ -113,6 +113,7 @@
                         </div>
                         <div id="wrapper_voip_add">
                             <div class="form-group">
+                                <input type="hidden" class="group-input" name="id_voip[]"/>
                                 <label class="control-label col-md-3">VoIP :</label>
                                 <div class="col-md-9">
                                     <div class="input-group">

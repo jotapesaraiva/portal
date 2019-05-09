@@ -398,7 +398,7 @@ function edit_person(id) {
                             $('[name="link[]"]').selectpicker('val',valor.id_link);
                         } else {
                             var a = '';
-                            a += '<div class="form-group" id="remove_field_'+i+'">';
+                            a += '<div class="form-group" id="remove_field_'+indice+'">';
                                 a += '<input type="hidden" value="'+indice+'" id=voip name="id_voip[]"/>';
                                 a += '<label class="control-label col-md-3">Link :</label>';
                                     a += '<div class="col-md-9">';
@@ -453,14 +453,14 @@ if(data.telefone == null) {
                 $('[name="id_telefone[]"]').val(valor.id_telefone);
             } else {
                 var a = '';
-                  a += '<div class="form-group" id="remove_field_'+i+'">';
+                  a += '<div class="form-group" id="remove_field_'+indice+'">';
                       a += '<input type="hidden" value="'+valor.id_telefone+'" id=telefone name="id_telefone[]"/>';
                       a += '<label class="control-label col-md-3">Telefone :</label>';
                       a += '<div class="col-md-9">';
                           a += '<div class="input-group">';
                               a += '<input class="form-control" name="telefone[]" value="'+valor.numero_telefone+'" placeholder="Numero do telefone" data-mask="(00) 0000-0000" type="text">';
                               a += '<span class="input-group-btn">';
-                                  a += '<button class="btn red remove_field" id="'+i+'" type="button">';
+                                  a += '<button class="btn red remove_field" id="'+indice+'" type="button">';
                                       a += '<i class="fa fa-minus"></i>';
                                   a += '</button>';
                               a += '</span>';
@@ -490,14 +490,14 @@ if(data.telefone == null) {
                     $('[name="id_celular[]"]').val(valor.id_telefone);
                 } else {
                    var a = '';
-                   a += '<div class="form-group" id="remove_field_'+i+'">';
-                       a += '<input type="hidden" value="'+item.id_telefone+'" id=celular name="id_celular[]"/>';
+                   a += '<div class="form-group" id="remove_field_'+indice+'">';
+                       a += '<input type="hidden" value="'+valor.id_telefone+'" id=celular name="id_celular[]"/>';
                        a += '<label class="control-label col-md-3">Celular :</label>';
                        a += '<div class="col-md-9">';
                            a += '<div class="input-group">';
-                               a += '<input class="form-control" name="celular[]" value="'+item.numero_telefone+'" placeholder="Numero do celular" data-mask="(00) 00000-0000" type="text">';
+                               a += '<input class="form-control" name="celular[]" value="'+valor.numero_telefone+'" placeholder="Numero do celular" data-mask="(00) 00000-0000" type="text">';
                                a += '<span class="input-group-btn">';
-                                   a += '<button class="btn red remove_field" id="'+i+'" type="button">';
+                                   a += '<button class="btn red remove_field" id="'+indice+'" type="button">';
                                        a += '<i class="fa fa-minus"></i>';
                                    a += '</button>';
                                a += '</span>';

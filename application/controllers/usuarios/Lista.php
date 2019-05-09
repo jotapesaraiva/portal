@@ -177,17 +177,16 @@ class Lista extends CI_Controller {
 
     public function usuarios_edit($id) {
        $usuario = $this->usuario_model->edit_usuario($id);
-
        $telefone = $this->usuario_model->edit_usuario_telefone($id,1);
-
        $celular = $this->usuario_model->edit_usuario_telefone($id,2);
 
        $data = array('usuario' => $usuario, 'telefone' => $telefone, 'celular' => $celular);
        echo json_encode($data);
     }
+
     //FIXME: Falta finalizar o UPDATE VOIP!
     public function usuarios_update() {
-       $this->usuarios_validate();
+      $this->usuarios_validate();
       if($this->input->post('status') == 'on') {
         $status = '1';
       } else {
@@ -244,8 +243,15 @@ class Lista extends CI_Controller {
                 }
               } else {
                // echo "array com value vazio";
+               // excluir o telefone do primeiro campo.
+               // $id_telefone = $this->input->post('id_telefone');
+               // $this->telefonia_model->delete_telefone($id_telefone);
               }
            }
+       } else{
+          // $id_telefone = $this->input->post('id_telefone');
+          // $this->telefonia_model->delete_telefone($id_telefone);
+        //excluir o telefone do primeiro campo.
        }
        //#######################CELULAR##########################//
        if(!empty($this->input->post('celular'))) {
@@ -288,6 +294,12 @@ class Lista extends CI_Controller {
       }
        // $this->usuario_model->delete_usuario($id);
        echo json_encode(array("status" => TRUE));
+    }
+
+    public function usuarios_delete_telefone($id_telefone,$id_usuario) {
+      $this->usuario_model->delete_usuario_telefone($id_telefone);
+      $this->telefonia_model->delete_telefone($id_telefone);
+      echo json_encode(array("status" => TRUE));
     }
 
     private function usuarios_validate() {

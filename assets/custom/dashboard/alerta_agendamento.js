@@ -10,11 +10,11 @@ function alerta_agendamento() {
         dataType: "text",
         success: function(data) {
             if(data != 0){
-                $('#agendamento').removeClass("badge-info").addClass('badge-danger');
-                $('#agendamento').text(data); // Set title to Bootstrap modal title
+                $('#alerta_agendamento').removeClass("badge-info").addClass('badge-danger');
+                $('#alerta_agendamento').text(data); // Set title to Bootstrap modal title
                 $('#count_agendamento').text(data); // Set title to Bootstrap modal title
             }else{
-                $('#agendamento').removeClass("badge-info");
+                $('#alerta_agendamento').removeClass("badge-info");
                 $('#count_agendamento').text('0'); // Set title to Bootstrap modal title
             }
         },

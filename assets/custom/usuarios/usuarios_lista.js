@@ -315,73 +315,109 @@ function edit_person(id) {
             $('[name="permissao"]').val(data.usuario.id_permissao);
             $('[name="cargo"]').val(data.usuario.id_cargo);
             $('[name="grupo"]').val(data.usuario.id_grupo);
-                          if(data.telefone.length == 2) {
-                              $.each(data.telefone, function(i, item) {
-                                if(i == 0) {
-                                    $('[name="telefone[]"]').val(item.numero_telefone);
-                                    $('[name="id_telefone[]"]').val(item.id_telefone);
-                                } else {
-                                    var a = '';
-                                    a += '<div class="form-group" id="remove_field_'+i+'">';
-                                        a += '<input type="hidden" value="'+item.id_telefone+'" id=telefone name="id_telefone[]"/>';
-                                        a += '<label class="control-label col-md-3">Telefone :</label>';
-                                        a += '<div class="col-md-9">';
-                                            a += '<div class="input-group">';
-                                                a += '<input class="form-control" name="telefone[]" value="'+item.numero_telefone+'" placeholder="Numero do telefone" data-mask="(00) 0000-0000" type="text">';
-                                                a += '<span class="input-group-btn">';
-                                                    a += '<button class="btn red remove_field" id="'+i+'" type="button">';
-                                                        a += '<i class="fa fa-minus"></i>';
-                                                    a += '</button>';
-                                                a += '</span>';
-                                            a += '</div>';
-                                        a += '</div>';
-                                    a += '</div>';
-                                   $("#wrapper_telefone_add").append(a);
-                                }
-                              });
-                          } else {
-                            $.each(data.telefone, function(i, item) {
-                                $('[name="telefone[]"]').val(item.numero_telefone);
-                                $('[name="id_telefone[]"]').val(item.id_telefone);
-                            });
-                          }
+            if(data.telefone.length == 2) {
+                $.each(data.telefone, function(index, item) {
+                  if(i == 0) {
+                      $('[name="telefone[]"]').val(item.numero_telefone);
+                      $('[name="id_telefone[]"]').val(item.id_telefone);
+                  } else {
+                      var a = '';
+                      a += '<div class="form-group" id="remove_field_'+index+'">';
+                          a += '<input type="hidden" value="'+item.id_telefone+'" id=telefone name="id_telefone[]"/>';
+                          a += '<label class="control-label col-md-3">Telefone :</label>';
+                          a += '<div class="col-md-9">';
+                              a += '<div class="input-group">';
+                                  a += '<input class="form-control" name="telefone[]" value="'+item.numero_telefone+'" placeholder="Numero do telefone" data-mask="(00) 0000-0000" type="text">';
+                                  a += '<span class="input-group-btn">';
+                                      a += '<button class="btn red remove_field" id="'+index+'" type="button">';
+                                          a += '<i class="fa fa-minus"></i>';
+                                      a += '</button>';
+                                  a += '</span>';
+                              a += '</div>';
+                          a += '</div>';
+                      a += '</div>';
+                     $("#wrapper_telefone_add").append(a);
+                  }
+                });
+            } else {
+              $.each(data.telefone, function(i, item) {
+                  $('[name="telefone[]"]').val(item.numero_telefone);
+                  $('[name="id_telefone[]"]').val(item.id_telefone);
+              });
+            }
             //************************************************CELULAR**********************************************************************
-                          if(data.celular.length == 2) {
-                              //console.log(data.celular.length);
-                              $.each(data.celular, function(i, item) {
-                                //console.log(i);
-                                if(i == 0) {
-                                    $('[name="celular[]"]').val(item.numero_telefone);
-                                    $('[name="id_celular[]"]').val(item.id_telefone);
-                                    //console.log(item.id_telefone);
-                                    //console.log(item.numero_telefone);
-                                } else {
-                                    //console.log(item.id_telefone);
-                                    //console.log(item.numero_telefone);
-                                    var a = '';
-                                    a += '<div class="form-group" id="remove_field_'+i+'">';
-                                        a += '<input type="hidden" value="'+item.id_telefone+'" id=celular name="id_celular[]"/>';
-                                        a += '<label class="control-label col-md-3">Celular :</label>';
-                                        a += '<div class="col-md-9">';
-                                            a += '<div class="input-group">';
-                                                a += '<input class="form-control" name="celular[]" value="'+item.numero_telefone+'" placeholder="Numero do celular" data-mask="(00) 00000-0000" type="text">';
-                                                a += '<span class="input-group-btn">';
-                                                    a += '<button class="btn red remove_field" id="'+i+'" type="button">';
-                                                        a += '<i class="fa fa-minus"></i>';
-                                                    a += '</button>';
-                                                a += '</span>';
-                                            a += '</div>';
-                                        a += '</div>';
-                                    a += '</div>';
-                                   $("#wrapper_celular_add").append(a);
-                                }
-                              });
-                          } else {
-                            $.each(data.celular, function(i, item) {
-                                $('[name="celular[]"]').val(item.numero_telefone);
-                                $('[name="id_celular[]"]').val(item.id_telefone);
-                            });
-                          }
+            if(data.celular == null) {
+                $('[name="celular[]"]').val('');
+            } else {
+                if(data.celular.length == 1){
+                    $.each(data.celular, function(indice,valor) {
+                        $('[name="celular[]"]').val(valor.numero_telefone);
+                        $('[name="id_celular[]"]').val(valor.id_telefone);
+                    });
+                }else{
+                    $.each(data.celular, function(indice,valor) {
+                        // console.log(indice);
+                        if(indice == 0){
+                            $('[name="celular[]"]').val(valor.numero_telefone);
+                            $('[name="id_celular[]"]').val(valor.id_telefone);
+                        } else {
+                           var a = '';
+                           a += '<div class="form-group" id="remove_field_'+indice+'">';
+                               a += '<input type="hidden" value="'+valor.id_telefone+'" id=celular name="id_celular[]"/>';
+                               // a += '<label class="control-label col-md-3">Celular :</label>';
+                               a += '<div class="col-md-9 col-md-offset-3">';
+                                   a += '<div class="input-group">';
+                                       a += '<input class="form-control" name="celular[]" value="'+valor.numero_telefone+'" placeholder="Numero do celular" data-mask="(00) 00000-0000" type="text">';
+                                       a += '<span class="input-group-btn">';
+                                           a += '<button class="btn red remove_field" id="'+indice+'" type="button">';
+                                               a += '<i class="fa fa-minus"></i>';
+                                           a += '</button>';
+                                       a += '</span>';
+                                   a += '</div>';
+                               a += '</div>';
+                           a += '</div>';
+                          $("#wrapper_celular_add").append(a);
+                        }
+                    });
+                    }
+                }
+
+            // if(data.celular.length == 2) {
+            //     //console.log(data.celular.length);
+            //     $.each(data.celular, function(index, item) {
+            //       //console.log(i);
+            //       if(i == 0) {
+            //           $('[name="celular[]"]').val(item.numero_telefone);
+            //           $('[name="id_celular[]"]').val(item.id_telefone);
+            //           //console.log(item.id_telefone);
+            //           //console.log(item.numero_telefone);
+            //       } else {
+            //           //console.log(item.id_telefone);
+            //           //console.log(item.numero_telefone);
+            //           var a = '';
+            //           a += '<div class="form-group" id="remove_field_'+index+'">';
+            //               a += '<input type="hidden" value="'+item.id_telefone+'" id=celular name="id_celular[]"/>';
+            //               a += '<label class="control-label col-md-3">Celular :</label>';
+            //               a += '<div class="col-md-9">';
+            //                   a += '<div class="input-group">';
+            //                       a += '<input class="form-control" name="celular[]" value="'+item.numero_telefone+'" placeholder="Numero do celular" data-mask="(00) 00000-0000" type="text">';
+            //                       a += '<span class="input-group-btn">';
+            //                           a += '<button class="btn red remove_field" id="'+index+'" type="button">';
+            //                               a += '<i class="fa fa-minus"></i>';
+            //                           a += '</button>';
+            //                       a += '</span>';
+            //                   a += '</div>';
+            //               a += '</div>';
+            //           a += '</div>';
+            //          $("#wrapper_celular_add").append(a);
+            //       }
+            //     });
+            // } else {
+            //   $.each(data.celular, function(i, item) {
+            //       $('[name="celular[]"]').val(item.numero_telefone);
+            //       $('[name="id_celular[]"]').val(item.id_telefone);
+            //   });
+            // }
 
             $('.selectpicker').selectpicker('refresh')// update in selectpicker bootstrap
             $('#modal_usuario').modal('show'); // show bootstrap modal when complete loaded
@@ -442,19 +478,37 @@ function delete_person(id){
             url : server+"/usuarios_delete/"+id,
             type: "POST",
             dataType: "JSON",
-            success: function(data)
-            {
+            success: function(data){
                 //if success reload ajax table
                 $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Usuário deletado com sucesso !!!</div>');
                 $("#myAlert").fadeOut(4000);
                 $('#modal_unidade').modal('hide');
                 reload_table();
             },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
+            error: function (jqXHR, textStatus, errorThrown){
                 alert('Erro ao deletar os dados');
             }
         });
-
     }
+}
+
+function delete_ramal(id_voip,id_usuario) {
+  if(confirm('Você tem certeza que quer deletar o item?')) {
+          // ajax delete data to database
+          $.ajax({
+              url : server+"/usuarios_delete_telefone/"+id_telefone+"/"+id_usuario,
+              type: "POST",
+              dataType: "JSON",
+              success: function(data){
+                  //if success reload ajax table
+                  $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Usuário deletado com sucesso !!!</div>');
+                  $("#myAlert").fadeOut(4000);
+                  $('#modal_unidade').modal('hide');
+                  reload_table();
+              },
+              error: function (jqXHR, textStatus, errorThrown){
+                  alert('Erro ao deletar os dados');
+              }
+          });
+      }
 }

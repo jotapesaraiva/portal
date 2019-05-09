@@ -26,7 +26,7 @@
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <i class="icon-bell"></i>
-                        <span id="agendamento" class="badge badge-info"></span>
+                        <span id="alerta_agendamento" class="badge badge-info"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="external">

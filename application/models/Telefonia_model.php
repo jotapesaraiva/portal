@@ -90,5 +90,8 @@ class Telefonia_model extends CI_Model{
         $this->db->where('id_telefone', $id_telefone);
         $this->db->delete('tbl_telefone');
     }
+    // public function delete_usuario_telefone($id_telefone, $id_usuario) {
+    //     $this->db->where('id_telefone', $id_telefone);
+    // }
 
 }

@@ -144,7 +144,7 @@ class Usuario_model extends CI_Model{
 
     public function edit_usuario_telefone($id_usuario, $categoria) {
         // $this->db = $this->load->database('default',true);
-        $this->db->select('*');
+        $this->db->select('t.id_telefone,t.numero_telefone');
         $this->db->from('tbl_telefone t');
         $this->db->join('tbl_usuario_telefone ut', 't.id_telefone=ut.id_telefone');
         $this->db->join('tbl_usuario u', 'ut.id_usuario=u.id_usuario');
