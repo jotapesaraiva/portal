@@ -174,7 +174,7 @@ class Usuario_model extends CI_Model{
 
     public function delete_usuario_telefone($id){
         // $this->db = $this->load->database('default',true);
-        $this->db->where('id_usuario', $id);
+        $this->db->where('id_telefone', $id);
         $this->db->delete('tbl_usuario_telefone');
     }
 

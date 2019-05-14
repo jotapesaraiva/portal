@@ -1,3 +1,5 @@
+var protocol = window.location.protocol;
+var domainName = window.location.hostname;
 var server = window.location.href;
 $(document).ready(function () {
 atualiza_alertas_servidor();
@@ -11,7 +13,7 @@ atualiza_alertas_servidor();
         // displayResources.text("Loading data from JSON source...");
 
         $.ajax({
-           url: "https://producaoh.sefa.pa.gov.br/portal/dash/server/",
+           url: protocol+"//"+domainName+"/portal/dash/server/",
            dataType: 'json',
            success: function (data) {
             // console.log(data);
@@ -23,7 +25,7 @@ atualiza_alertas_servidor();
                         "</td><td>" +
                         data[i].servidor +
                         "</td><td>" +
-                        "<a href='https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]="+data[i].hostid+"' target='_blank'>"+data[i].ip+"</a>"+
+                        "<a href='http://zabbix.sefa.pa.gov.br/zabbix/search.php?search="+data[i].servidor+"' target='_blank'>"+data[i].ip+"</a>"+
                         "</td><td>" +
                         data[i].duration +
                         "</td><td>" +

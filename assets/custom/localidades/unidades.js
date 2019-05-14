@@ -77,7 +77,7 @@ $(document).ready(function() {
 *********************************************************************/
 var telefones = 0;
 var max_fields = 3; //maximum input boxes allowed
-var i=1;
+var i=100;
 //Adiciona dinamicamente telefones não voips da unidade
 $("#add_telefone").click(function(e) { //on add input button click
     e.preventDefault();
@@ -86,7 +86,7 @@ $("#add_telefone").click(function(e) { //on add input button click
         telefones++; //text box increment
         var a = '';
         a += '<div class="form-group all" id="remove_field_'+i+'">';
-            a += '<input type="hidden" id=telefone name="id_telefone[]"/>';
+            a += '<input type="hidden" id="telefone_'+i+'" name="id_telefone[]"/>';
             a += '<label class="control-label col-md-3">Telefone :</label>';
             a += '<div class="col-md-9">';
                 a += '<div class="input-group">';
@@ -103,24 +103,27 @@ $("#add_telefone").click(function(e) { //on add input button click
     }
 });
 $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user click on remove text
-    var button_id = $(this).attr("id");
-     id_telefone = document.getElementById('telefone').value;
-     id_unidade = document.getElementById('unidade').value;
-    // console.log(id_unidade);
-     if(id_telefone != '') {
-        delete_telefone(id_telefone,id_unidade);
+      var button_id = $(this).attr("id");
+      id_telefone = document.getElementById('telefone').value;
+      if(id_telefone != '') {
+          var result = delete_telefone(id_telefone,'telefone');
+          if(result) {
+              e.preventDefault();
+              $('#remove_field_'+button_id+'').remove();
+              telefones--;
+          }
+      } else {
+          e.preventDefault();
+          $('#remove_field_'+button_id+'').remove();
+          telefones--;
       }
-    e.preventDefault();
-    //$(this).parent().parent().parent().parent().remove();
-    $('#remove_field_'+button_id+'').remove();
-    telefones--;
 });
 
    /*********************************************************************
    *********************************************************************/
    var celular = 0;
    var max_fields = 3; //maximum input boxes allowed
-   var i=1;
+   var i=100;
    //Adiciona dinamicamente celular não voips da unidade
    $("#add_celular").click(function(e) { //on add input button click
        e.preventDefault();
@@ -129,7 +132,7 @@ $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user clic
            celular++; //text box increment
            var a = '';
            a += '<div class="form-group all" id="remove_field_'+i+'">';
-               a += '<input type="hidden" id=celular name="id_celular[]"/>';
+               a += '<input type="hidden" id="celular_'+i+'" name="id_celular[]"/>';
                a += '<label class="control-label col-md-3">Celular :</label>';
                a += '<div class="col-md-9">';
                    a += '<div class="input-group">';
@@ -148,23 +151,25 @@ $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user clic
    $("#wrapper_celular_add").on("click",".remove_field", function(e) { //user click on remove text
        var button_id = $(this).attr("id");
        id_telefone = document.getElementById('celular').value;
-       id_unidade = document.getElementById('unidade').value;
-       //console.log(id_unidade);
-       if(id_telefone != '') {
-          delete_telefone(id_telefone,id_unidade);
-        }
-       //delete_telefone(id);
-       e.preventDefault();
-       //$(this).parent().parent().parent().parent().remove();
-       $('#remove_field_'+button_id+'').remove();
-       celular--;
+       if(id_celular != '') {
+           var result = delete_telefone(id_celular,'celular');
+           if(result) {
+               e.preventDefault();
+               $('#remove_field_'+button_id+'').remove();
+               celular--;
+           }
+       } else {
+           e.preventDefault();
+           $('#remove_field_'+button_id+'').remove();
+           celular--;
+       }
    });
 
 /*********************************************************************
 *********************************************************************/
 var voips = 0;
 var max_fields = 3; //maximum input boxes allowed
-var i = 1;
+var i = 100;
 //Adiciona dinamicamente telefones não voips da unidade
 $("#add_voip").click(function(e) { //on add input button click
     e.preventDefault();
@@ -173,7 +178,7 @@ $("#add_voip").click(function(e) { //on add input button click
         voips++; //text box increment
         var a = '';
         a += '<div class="form-group" id="remove_field_'+i+'">';
-            a += '<input type="hidden" id=voip name="id_voip[]"/>';
+            a += '<input type="hidden" id="voip_'+i+'" name="id_voip[]"/>';
             a += '<label class="control-label col-md-3">VoIP :</label>';
                 a += '<div class="col-md-9">';
                     a += '<div class="input-group">';
@@ -212,16 +217,21 @@ $("#add_voip").click(function(e) { //on add input button click
 $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on remove text
     var button_id = $(this).attr("id");
     id_telefone = document.getElementById('voip').value;
-    id_unidade = document.getElementById('unidade').value;
-    //console.log(id_contato);
-    // if(id_unidade != ''){
-    // delete_ramal(id_telefone,id_contato);
-    // }
-    e.preventDefault();
-    //$(this).parent().parent().parent().parent().remove();
-    $('#remove_field_'+button_id+'').remove();
-    voips--;
+    if(id_voip != '') {
+        var result = delete_telefone(id_voip,'voip');
+        if(result) {
+            e.preventDefault();
+            $('#remove_field_'+button_id+'').remove();
+            voips--;
+        }
+    } else {
+        e.preventDefault();
+        $('#remove_field_'+button_id+'').remove();
+        voips--;
+    }
 });
+
+
 
     /*********************************************************************
     *********************************************************************/
@@ -336,12 +346,14 @@ function edit_person(id) {
             } else {
                 if(data.voip.length == 1){
                     $.each(data.voip, function(indice,valor) {
+                        $('[name="id_voip[]"]').val(valor.id_telefone);
                         $('[name="voip[]"]').selectpicker('val', valor.id_telefone);
                     });
                 }else{
                     $.each(data.voip, function(indice,valor) {
                         // console.log(indice);
                         if(indice == 0){
+                            $('[name="id_voip[]"]').val(valor.id_telefone);
                             $('[name="voip[]"]').selectpicker('val',valor.id_telefone);
                         } else {
                                 var a = '';
@@ -912,7 +924,7 @@ function save() {
     } else {
         url = server+"/unidades_update";
     }
-    console.log($('#form').serialize());
+    // console.log($('#form').serialize());
     // ajax adding data to database
     $.ajax({
         url : url,
@@ -964,11 +976,11 @@ function delete_person(id) {
     }
 }
 
-function delete_telefone(id_telefone,id_unidade) {
+function delete_telefone(id_telefone,tipo) {
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/unidade_telefone_delete/"+id_telefone+"/"+id_unidade,
+            url : server+"/unidade_telefone_delete/"+id_telefone+"/"+tipo,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

@@ -24,14 +24,13 @@ class Ativos extends CI_Controller {
 
         $session['username'] = $this->session->userdata('username');
         $grupos = $this->usuario_model->listar_grupo();
-        $tecnicos = $this->usuario_model->resp_tecnico();
+
         $fornecedores = $this->fornecedor_model->listar_fornecedor();
         $contratos = $this->contratos_model->listar_contratos();
         $tipos = $this->ativos_model->listar_tipo();
 
         $modal = array(
             'grupos' => $grupos,
-            'tecnicos' => $tecnicos,
             'fornecedores' => $fornecedores,
             'contratos' => $contratos,
             'tipos' => $tipos
@@ -69,7 +68,6 @@ class Ativos extends CI_Controller {
             $row[] = $ativo['fabricante_ativo'];
             $row[] = $ativo['nome_tipo_ativo'];
             $row[] = $ativo['nome_grupo'];
-            $row[] = $ativo['login_usuario'];
             $row[] = $ativo['patrimonio_ativo'];
             $row[] = $ativo['numero_contrato'];
             $row[] = $ativo['nome_fornecedor'];

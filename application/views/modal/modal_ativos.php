@@ -91,24 +91,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Grupo Responsavel :</label>
+                            <label class="control-label col-md-3">Equipe Responsavel :</label>
                             <div class="col-md-9">
                                 <select class="selectpicker form-control" name="grupo">
                                     <option value="">------Selecione o Grupo-----</option>
                                     <?php foreach($grupos->result() as $grupo) : ?>
                                     <option value="<?=$grupo->id_grupo?>"><?=$grupo->nome_grupo?></option>
-                                    <?php endforeach ?>
-                                </select>
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Tecnico Responsavel :</label>
-                            <div class="col-md-9">
-                                <select class="selectpicker form-control" name="tecnico">
-                                    <option value="">------Selecione o Tecnico-----</option>
-                                    <?php foreach($tecnicos->result() as $tecnico) : ?>
-                                    <option value="<?=$tecnico->id_usuario?>"><?=$tecnico->nome_usuario?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <span class="help-block"></span>

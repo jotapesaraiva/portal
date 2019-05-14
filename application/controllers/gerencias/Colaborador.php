@@ -1,61 +1,57 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Servidor extends CI_Controller {
+class Colaborador extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         //Do your magic here
         esta_logado();
+        $this->load->model('colaborador_model');
     }
 
     public function index() {
         $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-            ';
+            <link href="' . base_url() . 'assets/multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />';
         $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/gerencias/servidor.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/gerencias/colaborador.js" type="text/javascript"></script>
         ';
         $script['script'] = '';
 
         $session['username'] = $this->session->userdata('username');
         $unidades = $this->unidade_model->listar_unidade();
-        $servidors = $this->servidor_model->listar_usuario();
-        $dados = array("unidades" => $unidades, "servidors" => $servidors);
+        $colaboradores = $this->colaborador_model->listar_usuario();
+        $dados = array("unidades" => $unidades, "colaboradores" => $colaboradores);
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
-        $this->breadcrumbs->push('<span>Servidor</span>', '/gerencias/servidor');
+        $this->breadcrumbs->push('<span>Servidor</span>', '/gerencias/colaborador');
 
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('gerencias/servidor');
-        $this->load->view('modal/modal_servidor', $dados);
+        $this->load->view('gerencias/colaborador');
+        $this->load->view('modal/modal_colaborador', $dados);
 
         $this->load->view('template/footer',$script);
     }
 
-    public function servidor_list() {
+    public function colaborador_list() {
     // Datatables Variables
     $draw = intval($this->input->get("draw"));
     $start = intval($this->input->get("start"));
     $length = intval($this->input->get("length"));
 
-    $servidors = $this->servidor_model->listar_unidade_usuario();
+    $colaboradores = $this->colaborador_model->listar_unidade_usuario();
 
     $data = array();
 
-    foreach($servidors->result() as $servidor) {
+    foreach($colaboradores->result() as $colaborador) {
        $row = array();
-       $row[] = $servidor->nome_usuario;
-       $unidades = $this->servidor_model->listar_unidade($servidor->id_usuario);
+       $row[] = $colaborador->nome_usuario;
+       $unidades = $this->colaborador_model->listar_unidade($colaborador->id_usuario);
        if($unidades == null){
           $row[] = "";
        } else {
@@ -66,8 +62,8 @@ class Servidor extends CI_Controller {
          $row[] = $Unidade;
        }
        if(acesso_admin()):
-       $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$servidor->id_usuario."','".$servidor->id_unidade."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
-                 <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$servidor->id_usuario."','".$servidor->id_unidade."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
+       $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$colaborador->id_usuario."','".$colaborador->id_unidade."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
+                 <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$colaborador->id_usuario."','".$colaborador->id_unidade."'".')"><i class="glyphicon glyphicon-trash"></i> Deletar </a>';
         else:
             $row[] = 'Sem permissão';
         endif;
@@ -76,15 +72,15 @@ class Servidor extends CI_Controller {
 
     $output = array(
        "draw" => $draw,
-       "recordsTotal" => $servidors->num_rows(),
-       "recordsFiltered" => $servidors->num_rows(),
+       "recordsTotal" => $colaboradores->num_rows(),
+       "recordsFiltered" => $colaboradores->num_rows(),
        "data" => $data,
     );
     echo json_encode($output);
     }
-// Função que adiciona um servidor a varias unidades
-    public function servidor_add(){
-        $this->servidor_validate();
+// Função que adiciona um colaborador a varias unidades
+    public function colaborador_add(){
+        $this->colaborador_validate();
         $unidades = $this->input->post('unidade');
         foreach ($unidades as $unidade) {
             $data = array(
@@ -92,18 +88,18 @@ class Servidor extends CI_Controller {
                'id_unidade' => $unidade,
             );
             // var_dump($data);
-            $insert = $this->servidor_model->save_servidor($data);
+            $insert = $this->colaborador_model->save_colaborador($data);
         }
         echo json_encode(array("status" => TRUE));
-        set_msg("msgOk", "Servidor inserido com sucesso !!!","info");
+        set_msg("msgOk", "Colaborador inserido com sucesso !!!","info");
     }
 
-    public function servidor_edit($id_servidor) {
-        $id_unidades = $this->tecnico_model->edit_unidade_tecnico($id_servidor);
+    public function colaborador_edit($id_colaborador) {
+        $id_unidades = $this->colaborador_model->edit_unidade_colaborador($id_colaborador);
         foreach ($id_unidades as $id_unidade) {
             $unidade[] = $id_unidade['id_unidade'];
         }
-        $id_usuario = $id_servidor;
+        $id_usuario = $id_colaborador;
         $data = array(
           'id_unidade' => $unidade,
           'id_usuario' => $id_usuario
@@ -111,8 +107,8 @@ class Servidor extends CI_Controller {
         echo json_encode($data);
     }
 
-    public function servidor_update() {
-        $this->servidor_validate();
+    public function colaborador_update() {
+        $this->colaborador_validate();
         $this->tecnico_model->delete_all($this->input->post('nome'));
         $unidades = $this->input->post('unidade');
         foreach ($unidades as $unidade) {
@@ -120,18 +116,18 @@ class Servidor extends CI_Controller {
                'id_usuario' => $this->input->post('nome'),
                'id_unidade' => $unidade,
             );
-            $this->servidor_model->save_servidor($data);
+            $this->colaborador_model->save_colaborador($data);
         }
         echo json_encode(array("status" => TRUE));
     }
 
-    public function servidor_delete($id_servidor) {
-        $this->tecnico_model->delete_all($id_servidor);
-        set_msg("msgOk", "Servidor deletado com sucesso !!!","info");
+    public function colaborador_delete($id_colaborador) {
+        $this->tecnico_model->delete_all($id_colaborador);
+        set_msg("msgOk", "Colaborador deletado com sucesso !!!","info");
         echo json_encode(array("status" => TRUE));
     }
 
-    private function servidor_validate() {
+    private function colaborador_validate() {
         $data = array();
         $data['error_string'] = array();
         $data['inputerror'] = array();
@@ -158,5 +154,5 @@ class Servidor extends CI_Controller {
 
 }
 
-/* End of file Servidor.php */
-/* Location: ./application/controllers/Servidor.php */
+/* End of file colaborador.php */
+/* Location: ./application/controllers/colaborador.php */

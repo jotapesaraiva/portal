@@ -68,8 +68,7 @@
                                     <th> Modelo </th>
                                     <th> Fabricante </th>
                                     <th> Tipo </th>
-                                    <th> Grupo Responsável </th>
-                                    <th> Tecnico Responsável </th>
+                                    <th> Equipe Responsável </th>
                                     <th> Patrimonio </th>
                                     <th> Contrato </th>
                                     <th> Fornecedor </th>

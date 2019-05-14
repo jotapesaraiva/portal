@@ -128,7 +128,7 @@ $(document).ready(function() {
 *********************************************************************/
 var voips = 0;
 var max_fields = 3; //maximum input boxes allowed
-var i = 1;
+var i = 100;
 //Adiciona dinamicamente telefones não voips da unidade
 $("#add_voip").click(function(e) { //on add input button click
     e.preventDefault();
@@ -137,7 +137,7 @@ $("#add_voip").click(function(e) { //on add input button click
         voips++; //text box increment
         var a = '';
         a += '<div class="form-group" id="remove_field_'+i+'">';
-            a += '<input type="hidden" value="" id=voip name="id_voip[]"/>';
+            a += '<input type="hidden" value="" id="voip_'+i+'" name="id_voip[]"/>';
             a += '<label class="control-label col-md-3">VoIP :</label>';
                 a += '<div class="col-md-9">';
                     a += '<div class="input-group">';
@@ -176,20 +176,25 @@ $("#add_voip").click(function(e) { //on add input button click
 $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on remove text
     var button_id = $(this).attr("id");
     id_voip = document.getElementById('voip').value;
-    id_usuario = document.getElementById('usuario').value;
-    if(id_voip != ''){
-      delete_ramal(id_voip,id_usuario);
+    if(id_voip != '') {
+        var result = delete_telefone(id_voip,'voip');
+        if(result) {
+            e.preventDefault();
+            $('#remove_field_'+button_id+'').remove();
+            voips--;
+        }
+    } else {
+        e.preventDefault();
+        $('#remove_field_'+button_id+'').remove();
+        voips--;
     }
-    e.preventDefault();
-    $('#remove_field_'+button_id+'').remove();
-    voips--;
 });
 
 /*********************************************************************
 *********************************************************************/
      var telefones = 0;
      var max_fields = 3; //maximum input boxes allowed
-     var i=1;
+     var i=100;
      //Adiciona dinamicamente telefones não voips da unidade
      $("#add_telefone").click(function(e) { //on add input button click
          e.preventDefault();
@@ -198,7 +203,7 @@ $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on 
              telefones++; //text box increment
              var a = '';
              a += '<div class="form-group all" id="remove_field_'+i+'">';
-                 a += '<input type="hidden" value="" id=telefone name="id_telefone[]"/>';
+                 a += '<input type="hidden" value="" id="telefone_'+i+'" name="id_telefone[]"/>';
                  a += '<label class="control-label col-md-3">Telefone :</label>';
                  a += '<div class="col-md-9">';
                      a += '<div class="input-group">';
@@ -217,20 +222,25 @@ $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on 
      $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user click on remove text
          var button_id = $(this).attr("id");
          id_telefone = document.getElementById('telefone').value;
-         id_usuario = document.getElementById('usuario').value;
-         if(id_telefone != ''){
-           delete_ramal(id_telefone,id_usuario);
+         if(id_telefone != '') {
+             var result = delete_telefone(id_telefone,'telefone');
+             if(result) {
+                 e.preventDefault();
+                 $('#remove_field_'+button_id+'').remove();
+                 telefones--;
+             }
+         } else {
+             e.preventDefault();
+             $('#remove_field_'+button_id+'').remove();
+             telefones--;
          }
-         e.preventDefault();
-         $('#remove_field_'+button_id+'').remove();
-         telefones--;
      });
 
 /*********************************************************************
 *********************************************************************/
         var celular = 0;
         var max_fields = 3; //maximum input boxes allowed
-        var i=1;
+        var i=100;
         //Adiciona dinamicamente celular não voips da unidade
         $("#add_celular").click(function(e){ //on add input button click
             e.preventDefault();
@@ -239,7 +249,7 @@ $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on 
                 celular++; //text box increment
                 var a = '';
                 a += '<div class="form-group all" id="remove_field_'+i+'">';
-                    a += '<input type="hidden" value="" id=celular name="id_celular[]"/>';
+                    a += '<input type="hidden" value="" id="celular_'+i+'" name="id_celular[]"/>';
                     a += '<label class="control-label col-md-3">Celular :</label>';
                     a += '<div class="col-md-9">';
                         a += '<div class="input-group">';
@@ -258,13 +268,18 @@ $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on 
         $("#wrapper_celular_add").on("click",".remove_field", function(e){ //user click on remove text
             var button_id = $(this).attr("id");
             id_celular = document.getElementById('celular').value;
-            id_usuario = document.getElementById('usuario').value;
-            if(id_celular != ''){
-              delete_ramal(id_celular,id_usuario);
+            if(id_celular != '') {
+                var result = delete_telefone(id_celular,'celular');
+                if(result) {
+                    e.preventDefault();
+                    $('#remove_field_'+button_id+'').remove();
+                    celular--;
+                }
+            } else {
+                e.preventDefault();
+                $('#remove_field_'+button_id+'').remove();
+                celular--;
             }
-            e.preventDefault();
-            $('#remove_field_'+button_id+'').remove();
-            celular--;
         });
 
  /*********************************************************************

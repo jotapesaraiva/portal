@@ -425,7 +425,9 @@ class Unidade extends CI_Controller {
                     $this->unidade_model->salvar_unidade_telefone($unidade_telefone);
                     }
               } else {
-               // echo "array com value vazio";
+                 $id_telefone = $this->input->post('id_telefone')[$i];
+                 $this->unidade_model->delete_unidade_telefone($id_telefone);
+                 $this->telefonia_model->delete_telefone($id_telefone);
               }
            }
        }
@@ -453,10 +455,46 @@ class Unidade extends CI_Controller {
                     $this->unidade_model->salvar_unidade_telefone($unidade_telefone);
               }
           } else {
-           // echo "array com value vazio";
+              $id_celular = $this->input->post('id_celular')[$i];
+              $this->unidade_model->delete_unidade_telefone($id_celular);
+              $this->telefonia_model->delete_telefone($id_celular);
           }
         }
        }
+
+       //#######################VOIP##########################//
+       if(!empty($this->input->post('voip'))) {
+          for($i = 0; $i < count($this->input->post('voip')); $i++) {
+              if(!empty($this->input->post('voip')[$i])) {
+                 $voip_where = array (
+                           'numero_telefone' => $this->input->post('voip')[$i],
+                           'id_tipo_categoria_telefone' => 2,
+                 );
+                 if($this->input->post('id_voip')[$i] != "") {
+                    $voip_dados = array (
+                          'id_telefone' => $this->input->post('id_voip')[$i],
+                          'id_usuario' => $this->input->post('id_usuario'),
+                    );
+                 $this->telefonia_model->update_telefone(array ('id_telefone' =>  $this->input->post('id_voip')[$i]), $voip_where);
+                 $this->usuario_model->update_usuario_telefone(array ($this->input->post('id')), $voip_dados);
+                 } else {
+                    $id_voip = $this->telefonia_model->salvar_telefone($voip_where);
+                    $usuario_telefone = array (
+                          'id_telefone' => $id_voip,
+                          'id_usuario' =>  $this->input->post('id_usuario'),
+                    );
+                    $this->usuario_model->salvar_usuario_telefone($usuario_telefone);
+              }
+          } else {
+             $id_voip = $this->input->post('id_voip')[$i];
+             $this->unidade_model->delete_unidade_telefone($id_voip);
+             // o numero não pode ser deletado somente a relação.- deve ser deletado pelo ramais voip.
+          }
+        }
+       }
+
+
+
        //#######################UNIDADE##########################//
       if($this->input->post('status') == 'on') {
         $status = '1';
@@ -496,9 +534,11 @@ class Unidade extends CI_Controller {
        echo json_encode(array("status" => TRUE));
     }
 
-    public function unidade_telefone_delete($id_telefone,$id_unidade) {
+    public function unidade_telefone_delete($id_telefone,$tipo) {
       $this->unidade_model->delete_unidade_telefone($id_unidade);
-      $this->telefonia_model->delete_telefone($id_telefone);
+      if($tipo != 'voip') {
+        $this->telefonia_model->delete_telefone($id_telefone);
+      }
       echo json_encode(array("status" => TRUE));
     }
 

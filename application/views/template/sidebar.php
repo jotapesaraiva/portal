@@ -86,10 +86,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo span_segment(2,'contato'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Servidores ############-->
-                        <?php } if($this->auth_ad->level_access('servidor',group_session($this->session->userdata('username')))){?>
-                        <li class="nav-item <?php echo active_segment(2,'servidor'); ?>">
-                            <?php echo anchor('gerencias/servidor', '<i class="fa fa-institution"></i> Servidores', 'class="nav-link"')?>
-                            <?php echo span_segment(2,'servidor'); ?>
+                        <?php } if($this->auth_ad->level_access('colaborador',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'colaborador'); ?>">
+                            <?php echo anchor('gerencias/colaborador', '<i class="fa fa-institution"></i> Colaborador SEFA', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'colaborador'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Acessos ############-->
                         <?php } if($this->auth_ad->level_access('acessos',group_session($this->session->userdata('username')))){?>

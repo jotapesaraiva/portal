@@ -139,7 +139,7 @@ $autoload['model'] = array(
     'link_model',
     'usuario_model',
     'fornecedor_model',
-    'servidor_model',
+    'colaborador_model',
     'tecnico_model',
     'consumo_model',
     'contato_model',

@@ -357,11 +357,11 @@ class Fornecedor extends CI_Controller {
             $data['status'] = FALSE;
         }
 
-        if($this->input->post('endereco') == '') {
-            $data['inputerror'][] = 'endereco';
-            $data['error_string'][] = 'O campo endereco é obrigatorio';
-            $data['status'] = FALSE;
-        }
+        // if($this->input->post('endereco') == '') {
+        //     $data['inputerror'][] = 'endereco';
+        //     $data['error_string'][] = 'O campo endereco é obrigatorio';
+        //     $data['status'] = FALSE;
+        // }
 
         if($this->input->post('servico') == '') {
             $data['inputerror'][] = 'servico';

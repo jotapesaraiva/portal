@@ -1,3 +1,7 @@
+var protocol = window.location.protocol;
+var domainName = window.location.hostname;
+console.log(protocol);
+console.log(domainName);
 var save_method; //for save method string
 var table;
 var server = window.location.href;
@@ -8,7 +12,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : server+"/servidor_list",//json datasource
+             url : server+"/colaborador_list",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");
@@ -77,7 +81,7 @@ $(document).ready(function() {
      $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user click on remove text
          var button_id = $(this).attr("id");
          id_telefone = document.getElementById('telefone').value;
-         id_servidor = document.getElementById('servidor').value;
+         id_colaborador = document.getElementById('colaborador').value;
          if(id_telefone != ''){
            delete_ramal(id_telefone,id_usuario);
          }
@@ -119,9 +123,9 @@ $(document).ready(function() {
         $("#wrapper_celular_add").on("click",".remove_field", function(e){ //user click on remove text
             var button_id = $(this).attr("id");
             id_celular = document.getElementById('celular').value;
-            id_servidor = document.getElementById('servidor').value;
+            id_colaborador = document.getElementById('colaborador').value;
             if(id_celular != ''){
-              delete_ramal(id_celular,id_servidor);
+              delete_ramal(id_celular,id_colaborador);
             }
             e.preventDefault();
             $('#remove_field_'+button_id+'').remove();
@@ -137,11 +141,11 @@ function add_person() {
     $('.multi-select').multiSelect('refresh'); //reset selectcpicker bootstrap
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
-    $('#modal_servidor').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Adicionar servidor'); // Set Title to Bootstrap modal title
+    $('#modal_colaborador').modal('show'); // show bootstrap modal
+    $('.modal-title').text('Adicionar colaborador'); // Set Title to Bootstrap modal title
 }
 
-function edit_person(id_servidor) {
+function edit_person(id_colaborador) {
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
     $('.multi-select').multiSelect('refresh'); //reset selectcpicker bootstrap
@@ -150,15 +154,15 @@ function edit_person(id_servidor) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/servidor_edit/"+id_servidor,
+        url : server+"/colaborador_edit/"+id_colaborador,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
             $('[name="nome"]').multiSelect('select',data.id_usuario);
             $('[name="unidade[]"]').multiSelect('select',data.id_unidade);
 
-            $('#modal_servidor').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Editar servidor'); // Set title to Bootstrap modal title
+            $('#modal_colaborador').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Editar colaborador'); // Set title to Bootstrap modal title
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('Erro ao pegar os dados do ajax');
@@ -175,9 +179,9 @@ function save(){
     $('#btnSave').attr('disabled',true); //set button disable
     var url;
     if(save_method == 'add') {
-        url = server+"/servidor_add";
+        url = server+"/colaborador_add";
     } else {
-        url = server+"/servidor_update";
+        url = server+"/colaborador_update";
     }
     // ajax adding data to database
     $.ajax({
@@ -187,9 +191,9 @@ function save(){
         dataType: "JSON",
         success: function(data) {
             if(data.status){ //if success close modal and reload ajax table
-                $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Servidor adicionado com sucesso !!!</div>');
+                $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>colaborador adicionado com sucesso !!!</div>');
                 $("#myAlert").fadeOut(4000);
-                $('#modal_servidor').modal('hide');
+                $('#modal_colaborador').modal('hide');
                 reload_table();
             } else {
                 for (var i = 0; i < data.inputerror.length; i++) {
@@ -208,18 +212,18 @@ function save(){
     });
 }
 
-function delete_person(id_servidor,id_unidade){
+function delete_person(id_colaborador,id_unidade){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/servidor_delete/"+id_servidor,
+            url : server+"/colaborador_delete/"+id_colaborador,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
                 //if success reload ajax table
                 $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Item deletado com sucesso !!!</div>');
                 $("#myAlert").fadeOut(4000);
-                $('#modal_servidor').modal('hide');
+                $('#modal_colaborador').modal('hide');
                 reload_table();
             },
             error: function (jqXHR, textStatus, errorThrown) {

@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="desc"> Nobreak Primário </div>
                     </div>
-                    <a class="more" href="https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10567" target="_blank"> Mais info
+                    <a class="more" href="http://zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10567" target="_blank"> Mais info
                         <i class="m-icon-swapright m-icon-white"></i>
                     </a>
                 </div>
@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="desc"> Nobreak Secundário </div>
                     </div>
-                    <a class="more" href="https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10595" target="_blank"> Mais info
+                    <a class="more" href="http://zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10595" target="_blank"> Mais info
                         <i class="m-icon-swapright m-icon-white"></i>
                     </a>
                 </div>
@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="desc"> Data Center </div>
                     </div>
-                    <a class="more" href="https://x-oc-zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10595" target="_blank"> Mais Info
+                    <a class="more" href="http://zabbix.sefa.pa.gov.br/zabbix/latest.php?filter_set=1&hostids[]=10595" target="_blank"> Mais Info
                         <i class="m-icon-swapright m-icon-white"></i>
                     </a>
                 </div>

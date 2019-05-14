@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                    <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> Servidor </span>
+                        <span class="caption-subject bold uppercase"> Colaborador SEFA </span>
                     </div>
                    </div>
                    <div class="portlet-body">
@@ -69,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                            <thead>
                                <tr>
                                    <!-- <th> ID </th> -->
-                                   <th> Servidor </th>
+                                   <th> Colaborador </th>
                                    <th> Unidade </th>
                                    <th> Ação </th>
                                </tr>

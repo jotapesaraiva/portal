@@ -1,4 +1,16 @@
 $(document).ready(function(){
+  $("#0800").keypress(function (event) {
+      var Chars = $(this).val().length;
+      console.log(Chars);
+      if(Chars == 0){
+        if(event.keyCode == 48 ) {
+          $("#0800").mask("0800-000-0000");
+        } else {
+          $("#0800").mask("(00) 0000-0000");
+        }
+      }
+  });
+
   $('.mantis').mask('0000000');
   $('.duration').mask('00 mes');
   $('#date').mask('00/00/0000');

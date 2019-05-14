@@ -75,7 +75,7 @@ class Chamado_links extends CI_Controller {
       foreach ($chamados as $chamado) {
           $html .= "<tr>\n";
           $html .= "<td>". $count++ ."</td>\n";
-          $html .= "<td>".$chamado['MANTIS']."</td>\n";
+          $html .= "<td>". anchor_popup("http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$chamado['MANTIS']."", $chamado['MANTIS'])."</td>\n";
           $html .= "<td>".$chamado['RESUMO']."</td>\n";
           $html .= "<td> <a href='http://webebt04.embratel.com.br/PORTALGRCTST/troubleticket/tkt_listarhistorico.php?vcontacle=44j5+A0CKaiKEZKgf5bMeVZfqsvrl0AJ4teFsjZMZi/b4=ZS8ec8e/xbFOxpBipHMZ&vlogin=44vvmukhQGO39kGXjMmIMpE5FQV9pRxF4VmouSLb1DRyw=X9FM11Jt0L8=&id_ticket=".htmlentities($chamado['TICKET'], ENT_QUOTES, 'ISO-8859-1')."' target='_blank'  style='color: rgb(0,0,255)'><font color='374E9E' >".htmlentities($chamado['TICKET'], ENT_QUOTES, 'ISO-8859-1')." </font></a></td>\n";
           $html .= "<td>".$chamado['INICIO_CHAMADO']."</td>\n";

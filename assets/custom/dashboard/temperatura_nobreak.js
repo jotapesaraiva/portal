@@ -1,3 +1,5 @@
+var protocol = window.location.protocol;
+var domainName = window.location.hostname;
 $(document).ready(function () {
     temperatura();
 });
@@ -9,7 +11,7 @@ $(document).ready(function () {
         var flag02 = $('#nbk02.dashboard-stat');
         var flag03 = $('#dcenter.dashboard-stat');
         $.ajax({
-            url: "https://producaoh.sefa.pa.gov.br/portal/dash/nobreak",
+            url: protocol+"//"+domainName+"/portal/dash/nobreak",
             dataType: 'json',
             success: function (data) {
                 // console.log(data);

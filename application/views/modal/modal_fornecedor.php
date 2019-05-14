@@ -56,7 +56,7 @@
                             <div class="col-md-9">
                                 <div class="input-group">
                                     <div class="input-icon">
-                                        <input style="padding: 6px 12px !important;" class="form-control" name="telefone[]" id="phone_with_ddd" placeholder="Numero do telefone" type="text">
+                                        <input style="padding: 6px 12px !important;" class="form-control" name="telefone[]" id="0800" placeholder="Numero do telefone" type="text">
                                     </div>
                                     <span class="input-group-btn">
                                         <button class="btn blue" id="add_telefone" type="button" tabindex="-1">

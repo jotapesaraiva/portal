@@ -161,8 +161,6 @@ $(document).ready(function() {
                         }
 
 
-
-
                 $('.selectpicker').selectpicker('refresh')// update in selectpicker bootstrap
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -171,6 +169,27 @@ $(document).ready(function() {
         });
 
  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     var telefones = 0;
     var max_fields = 3; //maximum input boxes allowed
@@ -202,9 +221,8 @@ $(document).ready(function() {
     $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user click on remove text
         var button_id = $(this).attr("id");
         id_telefone = document.getElementById('telefone_'+button_id).value;
-        id_usuario = document.getElementById('usuario').value;
         if(id_telefone != '') {
-            var result = delete_telefone(id_telefone,id_usuario);
+            var result = delete_telefone(id_telefone,'telefone');
             if(result) {
                 e.preventDefault();
                 $('#remove_field_'+button_id+'').remove();
@@ -247,9 +265,8 @@ $(document).ready(function() {
     $("#wrapper_celular_add").on("click",".remove_field", function(e){ //user click on remove text
         var button_id = $(this).attr("id");
         id_celular = document.getElementById('celular_'+button_id).value;
-        id_usuario = document.getElementById('usuario').value;
         if(id_celular != '') {
-            var result = delete_telefone(id_celular,id_usuario);
+            var result = delete_telefone(id_celular,'celular');
             if(result) {
                 e.preventDefault();
                 $('#remove_field_'+button_id+'').remove();
@@ -313,9 +330,8 @@ $(document).ready(function() {
     $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on remove text
         var button_id = $(this).attr("id");
         id_voip = document.getElementById('voip_'+button_id).value;
-        id_usuario = document.getElementById('usuario').value;
         if(id_voip != '') {
-            var result = delete_telefone(id_voip,id_usuario);
+            var result = delete_telefone(id_voip,'voip');
             if(result) {
                 e.preventDefault();
                 $('#remove_field_'+button_id+'').remove();
@@ -357,11 +373,11 @@ function save_info(){
     });
 }
 
-function delete_telefone(id_telefone,id_unidade) {
+function delete_telefone(id_telefone,tipo) {
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/unidade_telefone_delete/"+id_telefone+"/"+id_unidade,
+            url : server+"/usuario_telefone_delete/"+id_telefone+"/"+tipo,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

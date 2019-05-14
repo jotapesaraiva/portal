@@ -1,5 +1,5 @@
 <!-- Bootstrap modal -->
-<div class="modal fade bs-modal-lg" id="modal_servidor" role="dialog">
+<div class="modal fade bs-modal-lg" id="modal_colaborador" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,14 +8,14 @@
             </div>
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal" role="form">
-                    <input type="hidden" value="" id="servidor" name="id"/>
+                    <input type="hidden" value="" id="colaborador" name="id"/>
                     <div class="form-body">
                         <div class="form-group">
                             <label class="control-label col-md-2">Nome :</label>
                             <div class="col-md-10">
                                 <select class="multi-select" name="nome" multiple="multiple" >
-                                    <?php foreach($servidors->result() as $servidor) : ?>
-                                    <option value="<?=$servidor->id_usuario?>"><?=$servidor->nome_usuario?></option>
+                                    <?php foreach($colaboradores->result() as $colaborador) : ?>
+                                    <option value="<?=$colaborador->id_usuario?>"><?=$colaborador->nome_usuario?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
