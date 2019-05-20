@@ -56,6 +56,12 @@ class Antigo_monitora extends CI_Controller {
         echo json_encode($retorno);
     }
 
+
+    public function monitora() {
+        $alertas = $this->monitora_model->monitora();
+        vd($alertas);
+    }
+
 }
 
 /* End of file Antigo_monitora.php */

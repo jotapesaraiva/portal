@@ -67,8 +67,8 @@ class Agendamento extends CI_Controller {
             $row[] = $agendamento['id'];
             $row[] = $agendamento['nome_agendamento'];
             $row[] = $agendamento['mensagem_agendamento'];
-            $row[] = date( 'd/m/Y h:i', strtotime($agendamento['data_inicio_agendamento']));
-            $row[] = date( 'd/m/Y h:i', strtotime($agendamento['data_fim_agendamento']));
+            $row[] = date( 'd/m/Y H:i', strtotime($agendamento['data_inicio_agendamento']));
+            $row[] = date( 'd/m/Y H:i', strtotime($agendamento['data_fim_agendamento']));
             $row[] = $agendamento['nome_grupo']; //responsavel
             $row[] = anchor_popup('http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$agendamento['mantis_solicitado'].'', $agendamento['mantis_solicitado']);
             $row[] = anchor_popup('http://intranet2.sefa.pa.gov.br/mantis/view.php?id='.$agendamento['mantis'].'', $agendamento['mantis']);

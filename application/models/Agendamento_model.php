@@ -37,8 +37,10 @@ class Agendamento_model extends CI_Model {
         // $default = $this->load->database('default',true);
         $this->db->select('a.*, g.nome_grupo');
         $this->db->from('tbl_agendamento a');
-        $this->db->join('tbl_grupos g ', 'g.id_grupo= a.id_grupo');
-        $this->db->where('Month(a.data_inicio_agendamento) <= Month(now() + interval 1 month)');
+        $this->db->join('tbl_grupos g', 'g.id_grupo= a.id_grupo');
+        // $this->db->where('Month(a.data_inicio_agendamento) <= Month(now() + interval 1 month)');
+        $this->db->where('STR_TO_DATE(a.data_inicio_agendamento, "%Y-%m-%d %T" ) <= NOW()');
+        $this->db->where('STR_TO_DATE(a.data_fim_agendamento, "%Y-%m-%d %T" ) >= NOW()');
         $query = $this->db->get();
         return $query;
     }

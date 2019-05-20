@@ -48,7 +48,7 @@ $(document).ready(function() {
     });
     $("textarea").change(function(){
         $(this).parents('div.form-group').removeClass('has-error');
-        $(this).parents('div.form-group').empty();
+        $(this).parents('div.form-group').find('.help-block').empty();
     });
     $("select").change(function(){
         $(this).parents('div.form-group').removeClass('has-error');
@@ -149,16 +149,14 @@ function delete_agendamento(id){
             url : server+"/agendamento_delete/"+id,
             type: "POST",
             dataType: "JSON",
-            success: function(data)
-            {
+            success: function(data) {
                 //if success reload ajax table
                 $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Categoria deletado com sucesso !!!</div>');
                 $("#myAlert").fadeOut(4000);
                 $('#modal_agendamento').modal('hide');
                 reload_table();
             },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
+            error: function (jqXHR, textStatus, errorThrown) {
                 alert('Erro ao deletar dados');
             }
         });
