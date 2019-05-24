@@ -488,9 +488,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </a>
                             <ul class="sub-menu">
                                 <!--############# ABA MANTIS > CGAQ > Manutenção ############-->
-                                <li class="nav-item <?php echo active_segment(3,'manutencao'); ?>">
-                                    <?php echo anchor('mantis/cgaq/manutencao', '<i class="fa fa-table"></i> Manutenção', 'class="nav-link"')?>
-                                    <?php echo span_segment(3,'manutencao'); ?>
+                                <li class="nav-item <?php echo active_segment(3,'mantis_manutencao'); ?>">
+                                    <?php echo anchor('mantis/cgaq/mantis_manutencao', '<i class="fa fa-table"></i> Manutenção', 'class="nav-link"')?>
+                                    <?php echo span_segment(3,'mantis_manutencao'); ?>
                                 </li>
                             </ul>
                         </li>
@@ -897,6 +897,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <li class="nav-item <?php echo active_segment(2,'backup'); ?>">
                             <?php echo anchor('banco_de_dados/backup', '<i class="fa fa-copy"></i> Backup', 'class="nav-link"')?>
                             <?php echo span_segment(2,'backup'); ?>
+                        </li>
+                        <?php }?>
+                    </ul>
+                </li>
+
+                <li class="nav-item <?php echo active_segment(1,'agendamento'); ?>">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="fa fa-calendar-check-o"></i>
+                        <span class="title">Agendamento</span>
+                        <?php echo span_segment(1,'agendamento'); ?>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <?php if($this->auth_ad->level_access('tarefas',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'tarefas'); ?>">
+                            <?php echo anchor('agendamento/tarefas', '<i class="icon-settings"></i> Tarefas', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'tarefas'); ?>
+                        </li>
+                        <?php } if($this->auth_ad->level_access('manutencao',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'manutencao'); ?>">
+                            <?php echo anchor('agendamento/manutencao', '<i class="fa fa-copy"></i> Manutenção', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'manutencao'); ?>
                         </li>
                         <?php }?>
                     </ul>

@@ -5,7 +5,7 @@ $(document).ready(function () {
 });
 function alerta_agendamento() {
     $.ajax({
-        url : "https://producaoh.sefa.pa.gov.br/portal/gerencias/agendamento/alerta",
+        url : "https://producaoh.sefa.pa.gov.br/portal/agendamento/alertas/alerta",
         type: "GET",
         dataType: "text",
         success: function(data) {
@@ -28,7 +28,7 @@ function alerta_agendamento() {
 
 function content_agendamento() {
     $.ajax({
-        url : "https://producaoh.sefa.pa.gov.br/portal/gerencias/agendamento/conteudo",
+        url : "https://producaoh.sefa.pa.gov.br/portal/agendamento/alertas/",
         type: "GET",
         dataType: "JSON",
         beforeSend: function() {
@@ -42,7 +42,7 @@ function content_agendamento() {
                 html += '<ul class="dropdown-menu-list scroller"  data-handle-color="#637283">';
                     $.each(data, function(indice,valor) {
                         html +=     '<li>';
-                        html +=         '<a href="https://producaoh.sefa.pa.gov.br/portal/gerencias/agendamento/" target="_blank">';
+                        html +=         '<a href="https://producaoh.sefa.pa.gov.br/portal/agendamento/tarefas" target="_blank">';
                         // html +=             '<span class="photo">';
                         // html +=                 '<img src="assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>';
                         html +=             '<span class="subject">';
@@ -74,7 +74,7 @@ function table_agendamento() {
     var displayResources = $("#table_agendamento_content");
     // displayResources.text("Loading data from JSON source...");
     $.ajax({
-       url: "https://producaoh.sefa.pa.gov.br/portal/gerencias/agendamento/conteudo",
+       url: "https://producaoh.sefa.pa.gov.br/portal/agendamento/alertas/",
        dataType: 'json',
        success: function (data) {
         // console.log(data);

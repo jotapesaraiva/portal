@@ -67,6 +67,16 @@ class Telefonia_model extends CI_Model{
                             WHERE id_tipo_categoria_telefone=1');
     }
 
+    public function tipo_telefone($telefone){
+        $this->db->select('tct.nome_tipo_categoria_telefone');
+        $this->db->from('tbl_telefone t');
+        $this->db->join('tbl_tipo_categoria_telefone tct', 'tct.id_tipo_categoria_telefone=t.id_tipo_categoria_telefone');
+        $this->db->where('t.numero_telefone',$telefone);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+
     public function save_telefone($dados) {
         // $this->db = $this->load->database('default',true);
         $this->db->insert('tbl_telefone', $dados);

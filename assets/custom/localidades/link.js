@@ -112,7 +112,7 @@ function edit_person(id) {
             $('.modal-title').text('Editar tipo de link'); // Set title to Bootstrap modal title
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('Erro ao pegar os dados do ajax');
+            alert('Erro ao pegar os dados do ajax'+jqXHR.responseText);
         }
     });
 }
@@ -154,7 +154,7 @@ function save() {
             $('#btnSave').attr('disabled',false); //set button enable
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('Erro ao adicionar / editar dados');
+            alert('Erro ao adicionar / editar dados'+jqXHR.responseText);
             $('#btnSave').text('Salvar'); //change button text
             $('#btnSave').attr('disabled',false); //set button enable
         }
@@ -178,7 +178,7 @@ function delete_person(id) {
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Erro ao deletar os dados');
+                alert('Erro ao deletar os dados'+jqXHR.responseText);
             }
         });
 

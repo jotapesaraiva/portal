@@ -223,7 +223,7 @@ class Meu_perfil extends CI_Controller {
         // $equipe = $this->session->userdata('physicaldeliveryofficename');
         $data = $this->menu_model->realizado_prioridade($data_inicio,$data_fim,$equipe);
         // $data = $this->menu_model->realizado_prioridade(date_start(),date_end(),numero_equipe($equipe));
-        // $data = $this->menu_model->realizado_prioridade('01/04/2019','01/04/2019');
+        // $data = $this->menu_model->realizado_prioridade('01/04/2019','01/04/2019','4041');
         // Variavel onde será guardada a informação
         $result = array();
         foreach ($data as $value) {

@@ -196,7 +196,7 @@ $("#add_voip").click(function(e) { //on add input button click
                                     },
                                     error: function (jqXHR, textStatus, errorThrown) {
                                         $("#voip_" + i).html('<option id="-1">none available</option>');
-                                        alert('Erro ao pegar os dados do ajax');
+                                        alert('Erro ao pegar os dados do ajax'+jqXHR.responseText);
                                     }
                                 });
                             a += '</select>';
@@ -264,7 +264,7 @@ $("#add_link").click(function(e){ //on add input button click
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 $("#link_" + i).html('<option id="-1">none available</option>');
-                                alert('Erro ao pegar os dados do ajax');
+                                alert('Erro ao pegar os dados do ajax'+jqXHR.responseText);
                             }
                         });
                         a += '</select>';
@@ -526,7 +526,7 @@ if(data.telefone == null) {
             $('.modal-title').text('Editar unidade'); // Set title to Bootstrap modal title
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('Erro ao pegar os dados do ajax');
+            alert('Erro ao pegar os dados do ajax'+jqXHR.responseText);
         }
     });
 }
@@ -902,7 +902,7 @@ function view_person(id) {
             $('.modal-title').text('Editar unidade'); // Set title to Bootstrap modal title
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('Erro ao pegar os dados do ajax');
+            alert('Erro ao pegar os dados do ajax'+jqXHR.responseText);
         }
     });
 }
@@ -947,7 +947,7 @@ function save() {
             $('#btnSave').attr('disabled',false); //set button enable
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('Erro ao adicionar / atualizar dados');
+            alert('Erro ao adicionar / atualizar dados'+jqXHR.responseText);
             $('#btnSave').text('Salvar'); //change button text
             $('#btnSave').attr('disabled',false); //set button enable
         }
@@ -969,7 +969,7 @@ function delete_person(id) {
                 reload_table();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Erro ao deletar os dados');
+                alert('Erro ao deletar os dados'+jqXHR.responseText);
             }
         });
 
@@ -990,7 +990,7 @@ function delete_telefone(id_telefone,tipo) {
                 alert("excluido com sucesso!!!!");
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Erro ao deletar dados');
+                alert('Erro ao deletar dados'+jqXHR.responseText);
             }
         });
     }

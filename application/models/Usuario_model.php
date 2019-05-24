@@ -116,7 +116,7 @@ class Usuario_model extends CI_Model{
             // $this->db = $this->load->database('default',true);
             $this->db->select('*');
             $this->db->from('tbl_usuario_telefone ut');
-            $this->db->join('tbl_telefone t','t.id_telefone=ut.id_telefone');
+            $this->db->join('tbl_telefone t','t.id_telefone = ut.id_telefone');
             $this->db->where('ut.id_usuario',$id_usuario);
             $query = $this->db->get();
             return $query;
@@ -172,9 +172,14 @@ class Usuario_model extends CI_Model{
         $this->db->delete('tbl_usuario');
     }
 
-    public function delete_usuario_telefone($id){
+    public function delete_unidade_usuario($id) {
+        $this->db->where('id_usuario', $id);
+        $this->db->delete('tbl_unidade_usuario');
+    }
+
+    public function delete_usuario_telefone($id_telefone){
         // $this->db = $this->load->database('default',true);
-        $this->db->where('id_telefone', $id);
+        $this->db->where('id_telefone', $id_telefone);
         $this->db->delete('tbl_usuario_telefone');
     }
 
