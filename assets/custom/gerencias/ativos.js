@@ -1,6 +1,6 @@
   var save_method; //for save method string
   var table;
-  var server = window.location.href;
+  var href = window.location.href;
   $(document).ready(function() {
       table = $('#table').DataTable({
         "dom": "flrtip",
@@ -9,7 +9,7 @@
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-            url : server+"/ativos_list",//json datasource
+            url : href+"/ativos_list",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
               $("#employee_grid_processing").css("display","none");
@@ -73,7 +73,7 @@
 
       //Ajax Load data from ajax
       $.ajax({
-          url : server+"/ativos_edit/" + id,
+          url : href+"/ativos_edit/" + id,
           type: "GET",
           dataType: "JSON",
           success: function(data) {
@@ -109,9 +109,9 @@
       var url;
       if(save_method == 'add') {
           //url = "<?php //echo site_url('site/ajax_add')?>";
-          url = server+"/ativos_add";
+          url = href+"/ativos_add";
       } else {
-          url = server+"/ativos_update";
+          url = href+"/ativos_update";
       }
 
       // ajax adding data to database
@@ -147,7 +147,7 @@
       if(confirm('Você tem certeza que quer deletar o item?')) {
           // ajax delete data to database
           $.ajax({
-              url : server+"/ativos_delete/"+id,
+              url : href+"/ativos_delete/"+id,
               type: "POST",
               dataType: "JSON",
               success: function(data)

@@ -12,6 +12,8 @@
         </div>
         <!-- END LOGO -->
 
+    <?php //require_once(APPPATH.'views/template/megamenu.php'); ?>
+
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
         <!-- END RESPONSIVE MENU TOGGLER -->

@@ -1,5 +1,5 @@
 var save_method; //for save method string
-var server = window.location.href;
+var origin = window.location.origin;
 $(document).ready(function() {
    var table1 = $('#table1').DataTable({
         "dom": "flrtip",
@@ -97,7 +97,7 @@ $(document).ready(function() {
 
         //Ajax Load data from ajax
         $.ajax({
-            url : server+"/acesso_edit/" + id,
+            url : origin+"/acesso_edit/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -149,9 +149,9 @@ $(document).ready(function() {
         var url;
         if(save_method == 'add') {
             //url = "<?php //echo site_url('site/ajax_add')?>";
-            url = server+"/acesso_add";
+            url = origin+"/acesso_add";
         } else {
-            url = server+"/acesso_update";
+            url = origin+"/acesso_update";
         }
         // console.log($('#form').serialize());
         // ajax adding data to database
@@ -187,7 +187,7 @@ $(document).ready(function() {
         if(confirm('Você tem certeza que quer deletar o item?')) {
             // ajax delete data to database
             $.ajax({
-                url : server+"/acesso_delete/"+id,
+                url : origin+"/acesso_delete/"+id,
                 type: "POST",
                 dataType: "JSON",
                 success: function(data) {

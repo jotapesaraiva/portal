@@ -28,6 +28,10 @@ if ( ! function_exists('numero_equipe')){
                 $equipe = '2342,3441';
                 return $equipe;
                 break;
+            case 'CGAQ-SACS':
+                $equipe = 1921;
+                return $equipe;
+                break;
             default:
                 $equipe = '1921,3841';
                 return $equipe;

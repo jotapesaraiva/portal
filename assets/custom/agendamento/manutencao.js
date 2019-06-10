@@ -1,5 +1,6 @@
 var save_method; //for save method string
 var table;
+var hostname = window.location.hostname;
 var server = window.location.href;
 $(document).ready(function() {
     table = $('#table').DataTable({

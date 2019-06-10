@@ -1,7 +1,7 @@
 var table;
 var datai = $( '[name="data_inicio"]' ).val();
 var dataf = $( '[name="data_fim"]' ).val();
-var server = window.location.href;
+var origin = window.location.origin;
 $(document).ready(function() {
     table = $('#table').DataTable({
         "dom": "flrtip",
@@ -10,7 +10,7 @@ $(document).ready(function() {
                   "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : server+"/datatable_list/"+datai+"/"+dataf,//json datasource
+             url : origin+"/datatable_list/"+datai+"/"+dataf,//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");
@@ -44,7 +44,7 @@ $(document).ready(function() {
     //     dataf = $('[name="data_fim"]').val();
     //     console.log(datai);
     //     console.log(dataf);
-    //     table.ajax.url( server+"/datatable_list/"+ datai+"/"+dataf ).load();
+    //     table.ajax.url( origin+"/datatable_list/"+ datai+"/"+dataf ).load();
     // });
     // $('#data_inicio')
     // .datetimepicker()
@@ -64,7 +64,7 @@ $(document).ready(function() {
     }).on('changeDate', function(e) {
         datai = e.format();
         dataf = $('[name="data_fim"]').val();
-        table.ajax.url( server+"/datatable_list/"+ datai+"/"+dataf ).load();
+        table.ajax.url( origin+"/datatable_list/"+ datai+"/"+dataf ).load();
         console.log(datai);
         console.log(dataf);
     });
@@ -78,7 +78,7 @@ $(document).ready(function() {
     }).on('changeDate', function(e) {
         datai = $('[name="data_inicio"]').val();
         dataf = e.format();
-        table.ajax.url( server+"/datatable_list/"+ datai+"/"+dataf ).load();
+        table.ajax.url( origin+"/datatable_list/"+ datai+"/"+dataf ).load();
     });
 
 });

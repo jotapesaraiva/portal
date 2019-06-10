@@ -1,6 +1,8 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var href = window.location.href;
+var href = window.location.href;
+console.log(href);
 $(document).ready(function() {
     table = $('#table').DataTable({
         "dom": "flrtip",
@@ -8,7 +10,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : server+"/tecnico_list",//json datasource
+             url : href+"/tecnico_list",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");
@@ -152,7 +154,7 @@ function edit_person(id_tecnico) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/tecnico_edit/"+id_tecnico,
+        url : href+"/tecnico_edit/"+id_tecnico,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -177,10 +179,10 @@ function save(){
     $('#btnSave').attr('disabled',true); //set button disable
     var url;
     if(save_method == 'add') {
-        url = server+"/tecnico_add";
+        url = href+"/tecnico_add";
         texto = "adicionar";
     } else {
-        url = server+"/tecnico_update";
+        url = href+"/tecnico_update";
         texto = "alterado";
     }
     // ajax adding data to database
@@ -217,7 +219,7 @@ function delete_person(id_tecnico,id_unidade){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/tecnico_delete/"+id_tecnico,
+            url : href+"/tecnico_delete/"+id_tecnico,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

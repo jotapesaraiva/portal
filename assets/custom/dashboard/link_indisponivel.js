@@ -1,6 +1,4 @@
-var protocol = window.location.protocol;
-var domainName = window.location.hostname;
-var server = window.location.href;
+var origin = window.location.origin;
 $(document).ready(function () {
 atualiza_alertas_zabbix_link();
 });
@@ -13,7 +11,7 @@ atualiza_alertas_zabbix_link();
         // displayResources.text("Loading data from JSON source...");
 
         $.ajax({
-           url: protocol+"//"+domainName+"/portal/dash/link_indisponivel/",
+           url: origin+"/portal/dash/link_indisponivel/",
            dataType: 'json',
            success: function (data) {
             console.log(data);

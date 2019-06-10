@@ -1,3 +1,4 @@
+var origin = window.location.origin;
     //Ajax Load data from ajax
 $(document).ready(function () {
 
@@ -6,7 +7,7 @@ $(document).ready(function () {
         "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
-        "ajax": "https://producaoh.sefa.pa.gov.br/portal/dash/replicador/replic_table"
+        "ajax": origin+"/portal/dash/replicador/replic_table"
         // "order": [[2, 'desc']],
     });
 
@@ -15,7 +16,7 @@ $(document).ready(function () {
         "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
-        "ajax": "https://producaoh.sefa.pa.gov.br/portal/dash/replicador/renvia_table"
+        "ajax": origin"/portal/dash/replicador/renvia_table"
         // "order": [[2, 'desc']],
     });
 
@@ -23,7 +24,7 @@ $(document).ready(function () {
 
     function replicador() {
         $.ajax({
-            url : "https://producaoh.sefa.pa.gov.br/portal/dash/replicador/replic/",
+            url : origin+"/portal/dash/replicador/replic/",
             type: "GET",
             dataType: "text",
             success: function(data) {
@@ -42,7 +43,7 @@ $(document).ready(function () {
 
     function renvia() {
         $.ajax({
-            url : "https://producaoh.sefa.pa.gov.br/portal/dash/replicador/renvia",
+            url : origin+"/portal/dash/replicador/renvia",
             type: "GET",
             dataType: "text",
             success: function(data) {

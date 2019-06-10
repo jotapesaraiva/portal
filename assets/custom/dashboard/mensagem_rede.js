@@ -1,3 +1,4 @@
+var origin = window.location.origin;
 $(document).ready(function () {
     alerta_msg();
     content_msg();
@@ -5,7 +6,7 @@ $(document).ready(function () {
 
 function alerta_msg() {
     $.ajax({
-        url : "https://producaoh.sefa.pa.gov.br/portal/dash/mensagem_rede/alerta",
+        url : origin+"/portal/dash/mensagem_rede/alerta",
         type: "GET",
         dataType: "text",
         success: function(data) {
@@ -28,7 +29,7 @@ function alerta_msg() {
 
 function content_msg() {
     $.ajax({
-        url : "https://producaoh.sefa.pa.gov.br/portal/dash/mensagem_rede",
+        url : origin+"/portal/dash/mensagem_rede",
         type: "GET",
         dataType: "JSON",
         beforeSend: function() {

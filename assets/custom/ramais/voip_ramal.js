@@ -1,6 +1,6 @@
   var save_method; //for save method string
   var table;
-  var server = window.location.href;
+  var href = window.location.href;
   $(document).ready(function() {
       table = $('#table').DataTable({
         "dom": "flrtip",
@@ -11,7 +11,7 @@
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
             },
         "ajax": {
-            url : server+"/ramal_voip_list",//json datasource
+            url : href+"/ramal_voip_list",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
               $("#employee_grid_processing").css("display","none");
@@ -79,7 +79,7 @@
 
       //Ajax Load data from ajax
       $.ajax({
-          url : server+"/ramal_voip_edit/" + id,
+          url : href+"/ramal_voip_edit/" + id,
           type: "GET",
           dataType: "JSON",
           success: function(data) {
@@ -113,9 +113,9 @@
       $('#btnSave').attr('disabled',true); //set button disable
       var url;
       if(save_method == 'add') {
-          url = server+"/ramal_voip_add";
+          url = href+"/ramal_voip_add";
       } else {
-          url = server+"/ramal_voip_update";
+          url = href+"/ramal_voip_update";
       }
       // ajax adding data to database
       //console.log($('#form').serialize());
@@ -152,7 +152,7 @@
       if(confirm('Você tem certeza que quer deletar o item?')) {
           // ajax delete data to database
           $.ajax({
-              url : server+"/ramal_voip_delete/"+id_telefone_voip+"/"+id_telefone,
+              url : href+"/ramal_voip_delete/"+id_telefone_voip+"/"+id_telefone,
               type: "POST",
               dataType: "JSON",
               success: function(data) {

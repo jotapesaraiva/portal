@@ -1,6 +1,6 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var href = window.location.href;
 $(document).ready(function() {
     table = $('#table').DataTable({
       "dom": "flrtip",
@@ -9,7 +9,7 @@ $(document).ready(function() {
               "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
       },
       "ajax": {
-          url : server+"/agendamento_list",//json datasource
+          url : href+"/agendamento_list",//json datasource
           type : 'GET', //type of method  , by default would be get
           error: function(){ // error handling code
             $("#employee_grid_processing").css("display","none");
@@ -76,7 +76,7 @@ function edit_agendamento(id) {
     $(".form_datetime").datetimepicker('update');
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/agendamento_edit/" + id,
+        url : href+"/agendamento_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -108,9 +108,9 @@ function save(){
     var url;
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
-        url = server+"/agendamento_add";
+        url = href+"/agendamento_add";
     } else {
-        url = server+"/agendamento_update";
+        url = href+"/agendamento_update";
     }
 
     // ajax adding data to database
@@ -146,7 +146,7 @@ function delete_agendamento(id){
     if(confirm('Você tem certeza que quer deletar o agendamento ?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/agendamento_delete/"+id,
+            url : href+"/agendamento_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

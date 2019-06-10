@@ -1,6 +1,6 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var href = window.location.href;
 $(document).ready(function() {
    table = $('#table').DataTable({
         "dom": "flrtip",
@@ -8,7 +8,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-          url : server+"/voucher_list",//json datasource
+          url : href+"/voucher_list",//json datasource
           type : 'GET', //type of method  , by default would be get
           error: function(){ // error handling code
             $("#employee_grid_processing").css("display","none");
@@ -74,7 +74,7 @@ function edit_voucher(id) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/voucher_edit/" + id,
+        url : href+"/voucher_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -106,9 +106,9 @@ function save(){
     $('#btnSave').attr('disabled',true); //set button disable
     var url;
     if(save_method == 'add') {
-        url = server+"/voucher_add";
+        url = href+"/voucher_add";
     } else {
-        url = server+"/voucher_update";
+        url = href+"/voucher_update";
     }
     // console.log($('#form').serialize());
     // ajax adding data to database
@@ -145,7 +145,7 @@ function delete_voucher(id){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/voucher_delete/"+id,
+            url : href+"/voucher_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)

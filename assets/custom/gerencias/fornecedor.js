@@ -1,6 +1,6 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var href = window.location.href;
 $(document).ready(function() {
     table = $('#table').DataTable({
       // "dom": 'T<"clear">lfrtip', //initialize tableTools
@@ -14,7 +14,7 @@ $(document).ready(function() {
               "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
       "ajax": {
-          url : server+"/fornecedor_list",//json datasource
+          url : href+"/fornecedor_list",//json datasource
           type : 'GET', //type of method  , by default would be get
           error: function(){ // error handling code
             $("#employee_grid_processing").css("display","none");
@@ -194,7 +194,7 @@ function edit_person(id) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/fornecedor_edit/" + id,
+        url : href+"/fornecedor_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -313,7 +313,7 @@ function view_person(id) {
     // $('.help-block').empty(); // clear error string
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/fornecedor_view/" + id,
+        url : href+"/fornecedor_view/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -461,9 +461,9 @@ function save(){
     var url;
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
-        url = server+"/fornecedor_add";
+        url = href+"/fornecedor_add";
     } else {
-        url = server+"/fornecedor_update";
+        url = href+"/fornecedor_update";
     }
     //console.log($('#form').serialize());
     // ajax adding data to database
@@ -499,7 +499,7 @@ function delete_person(id){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/fornecedor_delete/"+id,
+            url : href+"/fornecedor_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
@@ -521,7 +521,7 @@ function delete_person(id){
 //     if(confirm('Você tem certeza que quer deletar o item?')) {
 //         // ajax delete data to database
 //         $.ajax({
-//             url : server+"/fornecedor_telefone_delete/"+id_telefone+"/"+id_fornecedor,
+//             url : href+"/fornecedor_telefone_delete/"+id_telefone+"/"+id_fornecedor,
 //             type: "POST",
 //             dataType: "JSON",
 //             success: function(data) {

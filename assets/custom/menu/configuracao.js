@@ -1,8 +1,8 @@
-var server = window.location.href; // https://portalh.sefa.pa.gov.br/usuarios/lista
+var origin = window.location.origin; // https://portalh.sefa.pa.gov.br/usuarios/lista
 $(document).ready(function() {
         //Ajax Load data from ajax
         $.ajax({
-            url : "https://producaoh.sefa.pa.gov.br/portal/menu/meu_perfil/listar_usuarios",
+            url : origin+"/portal/menu/meu_perfil/listar_usuarios",
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -130,7 +130,7 @@ $(document).ready(function() {
                                                                 a += '<select class="selectpicker form-control" id="voip_'+indice+'" name="voip[]" >';
                                                                     a += '<option value="">------Selecione um VoIP-----</option>';
                                                                     $.ajax({
-                                                                        url : server+"/listar_voip/",
+                                                                        url : origin+"/listar_voip/",
                                                                         type: "GET",
                                                                         dataType: "JSON",
                                                                         success: function(data) {
@@ -347,7 +347,7 @@ $(document).ready(function() {
 function save_info(){
     $('#btnSave').text('Salvando...'); //change button text
     $('#btnSave').attr('disabled',true); //set button disable
-    var url = "https://producaoh.sefa.pa.gov.br/portal/usuarios/lista/usuarios_update/";
+    var url = origin+"/portal/usuarios/lista/usuarios_update/";
     $.ajax({
         url: url,
         type: "POST",
@@ -377,7 +377,7 @@ function delete_telefone(id_telefone,tipo) {
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/usuario_telefone_delete/"+id_telefone+"/"+tipo,
+            url : origin+"/usuario_telefone_delete/"+id_telefone+"/"+tipo,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

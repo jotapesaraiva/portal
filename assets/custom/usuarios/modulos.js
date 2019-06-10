@@ -1,6 +1,6 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var href = window.location.href;
 $(document).ready(function() {
     table = $('#table').DataTable({
       "processing": true, //Feature control the processing indicator.
@@ -9,7 +9,7 @@ $(document).ready(function() {
               "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
       },
       "ajax": {
-          url : server+"/modulo_list",//json datasource
+          url : href+"/modulo_list",//json datasource
           type : 'GET', //type of method  , by default would be get
           error: function(){ // error handling code
             $("#employee_grid_processing").css("display","none");
@@ -72,7 +72,7 @@ function edit_person(id) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/modulo_edit/" + id,
+        url : href+"/modulo_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -98,9 +98,9 @@ function save(){
     var url;
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
-        url = server+"/modulo_add";
+        url = href+"/modulo_add";
     } else {
-        url = server+"/modulo_update";
+        url = href+"/modulo_update";
     }
     console.log($('#form').serialize());
     // ajax adding data to database

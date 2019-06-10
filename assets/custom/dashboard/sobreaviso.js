@@ -1,3 +1,4 @@
+var origin = window.location.origin;
 $(document).ready(function () {
     sobreaviso_new()
 });
@@ -11,7 +12,7 @@ $(document).ready(function () {
         var displayResources = $("#sobreaviso_table_content");
         // displayResources.text("Loading data from JSON source...");
         $.ajax({
-           url: "https://producaoh.sefa.pa.gov.br/portal/dash/sobreaviso",
+           url: origin+"/portal/dash/sobreaviso",
            dataType: 'json',
            success: function (data) {
             // console.log(data);

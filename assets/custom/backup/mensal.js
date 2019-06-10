@@ -1,5 +1,4 @@
-var server =  window.location.hostname;
-var protocol = window.location.protocol;
+var origin = window.location.origin;
 $(document).ready(function() {
 
     table1 = $('#table1').DataTable({
@@ -9,7 +8,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : protocol+"//"+server+"/portal/backup/fitas/table_lc/mensal",//json datasource
+             url : origin+"/portal/backup/fitas/table_lc/mensal",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");
@@ -50,7 +49,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : protocol+"//"+server+"/portal/backup/fitas/table_cl/mensal",//json datasource
+             url : origin+"/portal/backup/fitas/table_cl/mensal",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");

@@ -1,10 +1,11 @@
+var origin = window.location.origin;
 $(document).ready(function () {
     quantidade_mantis();
     var table = $('#example').DataTable({
         "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
-        "ajax": "https://producaoh.sefa.pa.gov.br/portal/dash/chamados_mantis/mantis_producao/",
+        "ajax": origin+"/portal/dash/chamados_mantis/mantis_producao/",
         "order": [[4, 'desc']],
     });
     setInterval( function () {
@@ -19,7 +20,7 @@ $(document).ready(function () {
         var num_mantis = $("#num_mantis");
         var ident = $("#quantidade");
         $.ajax({
-            url: "https://producaoh.sefa.pa.gov.br/portal/dash/chamados_mantis/",
+            url: origin+"/portal/dash/chamados_mantis/",
             dataType: 'json',
             success: function (data) {
                 console.log(data);

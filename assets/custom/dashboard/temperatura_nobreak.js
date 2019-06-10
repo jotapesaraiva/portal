@@ -1,5 +1,4 @@
-var protocol = window.location.protocol;
-var domainName = window.location.hostname;
+var origin = window.location.origin;
 $(document).ready(function () {
     temperatura();
 });
@@ -11,7 +10,7 @@ $(document).ready(function () {
         var flag02 = $('#nbk02.dashboard-stat');
         var flag03 = $('#dcenter.dashboard-stat');
         $.ajax({
-            url: protocol+"//"+domainName+"/portal/dash/nobreak",
+            url: origin+"/portal/dash/nobreak",
             dataType: 'json',
             success: function (data) {
                 // console.log(data);

@@ -1,5 +1,20 @@
 var server =  window.location.hostname;
 var protocol = window.location.protocol;
+var port = window.location.port;
+var href = window.location.href;
+// var hostname = window.location.hostname;
+var host = window.location.host;
+var pathname = window.location.pathname;
+// var protocol = window.location.protocol;
+var origin = window.location.origin;
+console.log(href);
+console.log(host);
+console.log(server);
+console.log(pathname);
+console.log(protocol);
+console.log(port);
+console.log(origin);
+// var server = window.location.href;
 $(document).ready(function() {
     table1 = $('#table1').DataTable({
         "dom": "flrtip",
@@ -8,7 +23,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : protocol+"//"+server+"/portal/backup/fitas/table_lc/diario",//json datasource
+             url : origin+"/portal/backup/fitas/table_lc/diario",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");
@@ -49,7 +64,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : protocol+"//"+server+"/portal/backup/fitas/table_cl/diario",//json datasource
+             url : origin+"/portal/backup/fitas/table_cl/diario",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");

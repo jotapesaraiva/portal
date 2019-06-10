@@ -1,4 +1,4 @@
-var base_url = window.location.origin; // https://portalh.sefa.pa.gov.br
+var origin = window.location.origin; // https://portalh.sefa.pa.gov.br
 $(document).ready(function () {
     alerta_agendamento();
     content_agendamento();
@@ -7,7 +7,7 @@ $(document).ready(function () {
 function alerta_agendamento() {
     $.ajax({
         // url : "https://producaoh.sefa.pa.gov.br/portal/agendamento/alertas/alerta",
-        url : base_url+"/portal/agendamento/alertas/alerta",
+        url : origin+"/portal/agendamento/alertas/alerta",
         type: "GET",
         dataType: "text",
         success: function(data) {

@@ -1,6 +1,6 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var origin = window.location.origin;
 $(document).ready(function() {
     table = $('#table').DataTable({
         "dom": "flrtip",
@@ -8,7 +8,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-            url : server+"/cidade_list",//json datasource
+            url : origin+"/cidade_list",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
               $("#employee_grid_processing").css("display","none");
@@ -72,7 +72,7 @@ function edit_person(id) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/cidade_edit/" + id,
+        url : origin+"/cidade_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -98,9 +98,9 @@ function save(){
     var url;
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
-        url = server+"/cidade_add";
+        url = origin+"/cidade_add";
     } else {
-        url = server+"/cidade_update";
+        url = origin+"/cidade_update";
     }
 
     // ajax adding data to database
@@ -136,7 +136,7 @@ function delete_person(id){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/cidade_delete"+id,
+            url : origin+"/cidade_delete"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

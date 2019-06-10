@@ -1,10 +1,6 @@
-var protocol = window.location.protocol;
-var domainName = window.location.hostname;
-console.log(protocol);
-console.log(domainName);
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var href = window.location.href;
 $(document).ready(function() {
     table = $('#table').DataTable({
         "dom": "flrtip",
@@ -12,7 +8,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : server+"/colaborador_list",//json datasource
+             url : href+"/colaborador_list",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");
@@ -154,7 +150,7 @@ function edit_person(id_colaborador) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/colaborador_edit/"+id_colaborador,
+        url : href+"/colaborador_edit/"+id_colaborador,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -179,9 +175,9 @@ function save(){
     $('#btnSave').attr('disabled',true); //set button disable
     var url;
     if(save_method == 'add') {
-        url = server+"/colaborador_add";
+        url = href+"/colaborador_add";
     } else {
-        url = server+"/colaborador_update";
+        url = href+"/colaborador_update";
     }
     // ajax adding data to database
     $.ajax({
@@ -216,7 +212,7 @@ function delete_person(id_colaborador,id_unidade){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/colaborador_delete/"+id_colaborador,
+            url : href+"/colaborador_delete/"+id_colaborador,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

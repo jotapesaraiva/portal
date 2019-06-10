@@ -1,4 +1,4 @@
-var server = window.location.href;
+var origin = window.location.origin;
 $(document).ready(function() {
     var table1 = $('#table1').DataTable({
         "dom": "flrtip",
@@ -7,7 +7,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : server+"/datatable_list/",//json datasource
+             url : origin+"/datatable_list/",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");

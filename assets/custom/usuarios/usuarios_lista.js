@@ -1,8 +1,6 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href; // https://portalh.sefa.pa.gov.br/usuarios/lista
-var base_url = window.location.origin; // https://portalh.sefa.pa.gov.br
-var host = window.location.host; // https://portalh.sefa.pa.gov.br
+var href = window.location.href; // https://portalh.sefa.pa.gov.br
 $(document).ready(function() {
     table = $('#table').DataTable({
       "dom": "flrtip",
@@ -10,7 +8,7 @@ $(document).ready(function() {
               "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
       "ajax": {
-          url : server+"/usuarios_list",//json datasource
+          url : href+"/usuarios_list",//json datasource
           type : 'GET', //type of method  , by default would be get
           error: function(){ // error handling code
             $("#employee_grid_processing").css("display","none");
@@ -308,7 +306,7 @@ function edit_person(id) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/usuarios_edit/" + id,
+        url : href+"/usuarios_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -453,9 +451,9 @@ function save(){
     $('#btnSave').attr('disabled',true); //set button disable
     var url;
     if(save_method == 'add') {
-        url = server+"/usuarios_add";
+        url = href+"/usuarios_add";
     } else {
-        url = server+"/usuarios_update";
+        url = href+"/usuarios_update";
     }
     // ajax adding data to database
     $.ajax({
@@ -491,7 +489,7 @@ function delete_person(id){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/usuarios_delete/"+id,
+            url : href+"/usuarios_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data){
@@ -512,7 +510,7 @@ function delete_ramal(id_voip,id_usuario) {
   if(confirm('Você tem certeza que quer deletar o item?')) {
           // ajax delete data to database
           $.ajax({
-              url : server+"/usuarios_delete_telefone/"+id_telefone+"/"+id_usuario,
+              url : href+"/usuarios_delete_telefone/"+id_telefone+"/"+id_usuario,
               type: "POST",
               dataType: "JSON",
               success: function(data){

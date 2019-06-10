@@ -205,8 +205,11 @@ class Mantis_model extends CI_Model {
             case 'DTI-GERENTES':
                 $sql .= "start with a.id in(2342,3441) connect by b.parent_id = prior a.id)";
                 break;
+            case 'CGAQ-SACS':
+                $sql .= "start with a.id = 1921 connect by b.parent_id = prior a.id)";
+                break;
             default:
-                $sql .= "start with a.id in(1921,3841) connect by b.parent_id = prior a.id)";
+                $sql .= "start with a.id in(3841) connect by b.parent_id = prior a.id)";
                 break;
         }
         if ($flag == 'quantidade') {

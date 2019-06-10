@@ -1,8 +1,8 @@
-
+var origin = window.location.origin;
 function projeto_selecionada() {
  var the_value = document.getElementById("equipe").value;
      $.ajax({
-             url : 'https://producaoh.sefa.pa.gov.br/portal/alertas/enviar/projeto/'+the_value,
+             url : origin+'/portal/alertas/enviar/projeto/'+the_value,
              dataType: "json",
             success: function( data ) {
                 $("#projeto").empty();
@@ -20,7 +20,7 @@ function projeto_selecionada() {
 function categoria_selecionada() {
  var value_projeto = document.getElementById("projeto").value;
      $.ajax({
-             url : 'https://producaoh.sefa.pa.gov.br/portal/alertas/enviar/categoria/'+value_projeto,
+             url : origin+'/portal/alertas/enviar/categoria/'+value_projeto,
              dataType: "json",
             success: function( data ) {
                 console.table(data)

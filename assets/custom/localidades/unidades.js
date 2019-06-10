@@ -1,6 +1,6 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var origin = window.location.origin;
 $(document).ready(function() {
     table = $('#table').DataTable({
       "dom": "flrtip",
@@ -12,7 +12,7 @@ $(document).ready(function() {
               "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
           },
       "ajax": {
-          url : server+"/unidades_list",//json datasource
+          url : origin+"/unidades_list",//json datasource
           type : 'GET', //type of method  , by default would be get
           error: function(){ // error handling code
             $("#employee_grid_processing").css("display","none");
@@ -186,7 +186,7 @@ $("#add_voip").click(function(e) { //on add input button click
                             a += '<select class="selectpicker form-control" id="voip_'+i+'" name="voip[]" >';
                                 a += '<option value="">------Selecione um VoIP-----</option>';
                                 $.ajax({
-                                    url : server+"/listar_voip/",
+                                    url : origin+"/listar_voip/",
                                     type: "GET",
                                     dataType: "JSON",
                                     success: function(data) {
@@ -254,7 +254,7 @@ $("#add_link").click(function(e){ //on add input button click
                         a += '<select class="selectpicker form-control" id="link_'+i+'" name="link[]" >';
                         a += '<option value="">------Selecione um Link-----</option>';
                         $.ajax({
-                            url : server+"/listar_link/",
+                            url : origin+"/listar_link/",
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {
@@ -325,7 +325,7 @@ function edit_person(id) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/unidades_edit/" + id,
+        url : origin+"/unidades_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -366,7 +366,7 @@ function edit_person(id) {
                                                     a += '<select class="selectpicker form-control" id="voip_'+indice+'" name="voip[]" >';
                                                         a += '<option value="">------Selecione um VoIP-----</option>';
                                                         $.ajax({
-                                                            url : server+"/listar_voip/",
+                                                            url : origin+"/listar_voip/",
                                                             type: "GET",
                                                             dataType: "JSON",
                                                             success: function(data) {
@@ -419,7 +419,7 @@ function edit_person(id) {
                                                 a += '<select class="selectpicker form-control" id="link_'+indice+'" name="link[]" >';
                                                 a += '<option value="">------Selecione um Link-----</option>';
                                                 $.ajax({
-                                                    url : server+"/listar_link/",
+                                                    url : origin+"/listar_link/",
                                                     type: "GET",
                                                     dataType: "JSON",
                                                     success: function(data) {
@@ -568,7 +568,7 @@ function view_person(id) {
     // $('.help-block').empty(); // clear error string
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/unidade_view/" + id,
+        url : origin+"/unidade_view/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -604,7 +604,7 @@ function view_person(id) {
                                         a += '<div class="col-md-6">';
                                                     a += '<select class="selectpicker form-control" id="voip_'+indice+'" name="voip[]" disabled>';
                                                         $.ajax({
-                                                            url : server+"/listar_voip/",
+                                                            url : origin+"/listar_voip/",
                                                             type: "GET",
                                                             dataType: "JSON",
                                                             success: function(data) {
@@ -664,7 +664,7 @@ function view_person(id) {
                                     a += '<div class="col-md-3">';
                                                 a += '<select class="selectpicker form-control" id="link_'+indice+'" name="link[]" disabled>';
                                                 $.ajax({
-                                                    url : server+"/listar_link/",
+                                                    url : origin+"/listar_link/",
                                                     type: "GET",
                                                     dataType: "JSON",
                                                     success: function(data) {
@@ -701,7 +701,7 @@ function view_person(id) {
                                    a +=     '<div class="col-md-3">';
                                    a +=           '<select class="selectpicker form-control" id="acesso_'+indice+'" name="acesso" disabled>';
                                                        $.ajax({
-                                                           url : server+"/listar_acesso",
+                                                           url : origin+"/listar_acesso",
                                                            type: "GET",
                                                            dataType: "JSON",
                                                            success: function(data) {
@@ -720,7 +720,7 @@ function view_person(id) {
                                    a +=     '<div class="col-md-3">';
                                    a +=         '<select class="selectpicker form-control" id="fornecedor_'+indice+'" name="fornecedor" disabled>';
                                                      $.ajax({
-                                                         url : server+"/listar_fornecedor/",
+                                                         url : origin+"/listar_fornecedor/",
                                                          type: "GET",
                                                          dataType: "JSON",
                                                          success: function(data) {
@@ -920,9 +920,9 @@ function save() {
     $('#btnSave').attr('disabled',true); //set button disable
     var url;
     if(save_method == 'add') {
-        url = server+"/unidades_add";
+        url = origin+"/unidades_add";
     } else {
-        url = server+"/unidades_update";
+        url = origin+"/unidades_update";
     }
     // console.log($('#form').serialize());
     // ajax adding data to database
@@ -958,7 +958,7 @@ function delete_person(id) {
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/unidades_delete/"+id,
+            url : origin+"/unidades_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
@@ -980,7 +980,7 @@ function delete_telefone(id_telefone,tipo) {
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/unidade_telefone_delete/"+id_telefone+"/"+tipo,
+            url : origin+"/unidade_telefone_delete/"+id_telefone+"/"+tipo,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

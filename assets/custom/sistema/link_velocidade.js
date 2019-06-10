@@ -1,6 +1,6 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var origin = window.location.origin;
 $(document).ready(function() {
     table = $('#table').DataTable({
         "dom": "flrtip",
@@ -8,7 +8,7 @@ $(document).ready(function() {
                   "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-            url : server+"/velocidade_list",//json datasource
+            url : origin+"/velocidade_list",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");
@@ -71,7 +71,7 @@ function edit_person(id) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/velocidade_edit/" + id,
+        url : origin+"/velocidade_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -97,9 +97,9 @@ function save(){
     var url;
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
-        url = server+"/velocidade_add";
+        url = origin+"/velocidade_add";
     } else {
-        url = server+"/velocidade_update";
+        url = origin+"/velocidade_update";
     }
 
     // ajax adding data to database

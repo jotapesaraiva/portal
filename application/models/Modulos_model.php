@@ -13,6 +13,11 @@ class Modulos_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function listar_modulos() {
+        $query = $this->db->get('mdl_site');
+        return $query->result_array();
+    }
+
 }
 
 /* End of file Modulos_model.php */

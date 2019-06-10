@@ -1,4 +1,4 @@
-var server = window.location.href;
+var origin = window.location.origin;
 $(document).ready(function () {
 atualiza_alertas_backups();
 });
@@ -11,7 +11,7 @@ atualiza_alertas_backups();
         // displayResources.text("Loading data from JSON source...");
 
         $.ajax({
-           url: "https://producaoh.sefa.pa.gov.br/portal/dash/backups_falhos/",
+           url: origin+"/portal/dash/backups_falhos/",
            dataType: 'json',
            success: function (data) {
             // console.log(data);

@@ -1,6 +1,6 @@
 var save_method; //for save method string
 var table;
-var server = window.location.href;
+var href = window.location.href;
 $(document).ready(function() {
     table = $('#table').DataTable({
       "processing": true, //Feature control the processing indicator.
@@ -9,7 +9,7 @@ $(document).ready(function() {
               "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
       },
       "ajax": {
-          url : server+"/perfil_list",//json datasource
+          url : href+"/perfil_list",//json datasource
           type : 'GET', //type of method  , by default would be get
           error: function(){ // error handling code
             $("#employee_grid_processing").css("display","none");
@@ -45,7 +45,7 @@ $(document).ready(function() {
 
     $('#membro').multiSelect({
        afterSelect: function(values) {
-         url = server+"/membro_update";
+         url = href+"/membro_update";
          var form = {
             id_grupo: document.getElementById('grupo_membro').value,
             membro  : values
@@ -79,7 +79,7 @@ $(document).ready(function() {
 
        },
        afterDeselect: function(values) {
-         url = server+"/membro_update";
+         url = href+"/membro_update";
          var form = {
             id_grupo: 11,
             membro  : values
@@ -151,7 +151,7 @@ $(document).ready(function() {
         $('.help-block').empty(); // clear error string
         //Ajax Load data from ajax
             $.ajax({
-            url : server+"/perfil_membro/"+id,
+            url : href+"/perfil_membro/"+id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -175,7 +175,7 @@ $(document).ready(function() {
         $('.help-block').empty(); // clear error string
         //Ajax Load data from ajax
         $.ajax({
-            url : server+"/perfil_modulo/"+id,
+            url : href+"/perfil_modulo/"+id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -202,7 +202,7 @@ $(document).ready(function() {
         if(save_method == 'membro') {
             $('#modal_membros').modal('hide');
         } else {
-            url = server+"/modulo_update";
+            url = href+"/modulo_update";
             form = $('#form_modulo').serialize();
             // ajax adding data to database
             $.ajax({
@@ -238,7 +238,7 @@ $(document).ready(function() {
         if(confirm('Você tem certeza que quer deletar o item?')) {
             // ajax delete data to database
             $.ajax({
-                url : server+"/perfil_delete/"+id,
+                url : href+"/perfil_delete/"+id,
                 type: "POST",
                 dataType: "JSON",
                 success: function(data){

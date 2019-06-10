@@ -1,6 +1,4 @@
-var protocol = window.location.protocol;
-var domainName = window.location.hostname;
-var server = window.location.href;
+var origin = window.location.origin;
 $(document).ready(function () {
 atualiza_alertas_servidor();
 });
@@ -13,7 +11,7 @@ atualiza_alertas_servidor();
         // displayResources.text("Loading data from JSON source...");
 
         $.ajax({
-           url: protocol+"//"+domainName+"/portal/dash/server/",
+           url: origin+"/portal/dash/server/",
            dataType: 'json',
            success: function (data) {
             // console.log(data);
