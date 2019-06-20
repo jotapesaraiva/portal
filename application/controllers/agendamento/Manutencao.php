@@ -7,7 +7,6 @@ class Manutencao extends CI_Controller {
     {
         parent::__construct();
         //Do your magic here
-
         $this->load->model('usuario_model');
         $this->load->model('manutencao_model');
         $this->load->model('mantis_model');
@@ -19,7 +18,6 @@ class Manutencao extends CI_Controller {
         esta_logado();
         $this->output->enable_profiler(FALSE);
         $css['headerinc'] = '
-
             <link href="'.base_url().'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
             <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
             <link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
@@ -36,8 +34,7 @@ class Manutencao extends CI_Controller {
 
         $session['username'] = $this->session->userdata('username');
         $grupos = $this->usuario_model->listar_grupo();
-
-        $modal = array( 'grupos' => $grupos,);
+        $modal = array( 'grupos' => $grupos);
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Agendamento</span>', '/agendamento');

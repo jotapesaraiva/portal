@@ -106,7 +106,7 @@ public function read_user_information($username) {
         // $this->db = $this->load->database('default',true);
         $this->db->select('status_usuario');
         $this->db->from('tbl_usuario');
-        $this->db->where('nome_usuario',$usuario);
+        $this->db->where('login_usuario',$usuario);
         $query = $this->db->get();
         return $query->row();
     }

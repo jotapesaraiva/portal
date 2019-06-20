@@ -1,7 +1,6 @@
 var save_method; //for save method string
 var table;
-var hostname = window.location.hostname;
-var server = window.location.href;
+var href = window.location.href;
 $(document).ready(function() {
     table = $('#table').DataTable({
       "dom": "flrtip",
@@ -10,7 +9,7 @@ $(document).ready(function() {
               "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
       },
       "ajax": {
-          url : server+"/manutencao_list",//json datasource
+          url : href+"/manutencao_list",//json datasource
           type : 'GET', //type of method  , by default would be get
           error: function(){ // error handling code
             $("#employee_grid_processing").css("display","none");
@@ -77,7 +76,7 @@ function edit_manutencao(id) {
     $(".form_datetime").datetimepicker('update');
     //Ajax Load data from ajax
     $.ajax({
-        url : server+"/manutencao_edit/" + id,
+        url : href+"/manutencao_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -109,9 +108,9 @@ function save(){
     var url;
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
-        url = server+"/manutencao_add";
+        url = href+"/manutencao_add";
     } else {
-        url = server+"/manutencao_update";
+        url = href+"/manutencao_update";
     }
 
     // ajax adding data to database
@@ -147,7 +146,7 @@ function delete_manutencao(id){
     if(confirm('Você tem certeza que quer deletar o manutencao ?')) {
         // ajax delete data to database
         $.ajax({
-            url : server+"/manutencao_delete/"+id,
+            url : href+"/manutencao_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data) {

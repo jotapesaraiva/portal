@@ -1,4 +1,5 @@
 var origin = window.location.origin;
+
 $(document).ready(function () {
     alerta_msg();
     content_msg();

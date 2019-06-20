@@ -1,5 +1,5 @@
 var save_method; //for save method string
-var origin = window.location.origin;
+var href = window.location.href;
 $(document).ready(function() {
    var table1 = $('#table1').DataTable({
         "dom": "flrtip",
@@ -97,7 +97,7 @@ $(document).ready(function() {
 
         //Ajax Load data from ajax
         $.ajax({
-            url : origin+"/acesso_edit/" + id,
+            url : href+"/acesso_edit/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -119,7 +119,7 @@ $(document).ready(function() {
     }
 
     function b64DecodeUnicode(str) {
-        // Going backwards: from bytestream, to percent-encoding, to original string.
+        // Going backwards: from bytestream, to percent-encoding, to hrefal string.
         return decodeURIComponent(atob(str).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
@@ -149,9 +149,9 @@ $(document).ready(function() {
         var url;
         if(save_method == 'add') {
             //url = "<?php //echo site_url('site/ajax_add')?>";
-            url = origin+"/acesso_add";
+            url = href+"/acesso_add";
         } else {
-            url = origin+"/acesso_update";
+            url = href+"/acesso_update";
         }
         // console.log($('#form').serialize());
         // ajax adding data to database
@@ -187,7 +187,7 @@ $(document).ready(function() {
         if(confirm('Você tem certeza que quer deletar o item?')) {
             // ajax delete data to database
             $.ajax({
-                url : origin+"/acesso_delete/"+id,
+                url : href+"/acesso_delete/"+id,
                 type: "POST",
                 dataType: "JSON",
                 success: function(data) {

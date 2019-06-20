@@ -71,7 +71,7 @@ class Auth extends CI_Controller{
                 } else {
                     $group = '11';
                 }
-                $status = $this->login_database->status_user($this->session->userdata('displayname'));
+                $status = $this->login_database->status_user($username);
                 //verifica se o usuario está ativo no sistema. - permissão para acessar o sistema.
                 if(isset($status)){
                     $status = $status->status_usuario;

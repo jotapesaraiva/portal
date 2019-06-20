@@ -8,6 +8,7 @@ class Embratel extends CI_Controller {
         //Do your magic here
         $this->load->model('zabbix_model');
         $this->load->model('modulos_model');
+        $this->load->helper("text_date");
     }
 
     public function index() {
@@ -20,65 +21,55 @@ class Embratel extends CI_Controller {
             // sleep(10);//delay de 5 segundos
             shell_exec("cat /opt/script/embratel/tickets/exports/export_php".$data.".csv | sed '1d' > /opt/script/embratel/tickets/exports/temp.csv");
             $file = fopen("/opt/script/embratel/tickets/exports/temp.csv", "r");
-            // $insert = array();
+
+            $insert = array();
             while (($info = fgetcsv($file, 10000, ',', '"')) !== FALSE) {
                 $info = array_map("utf8_encode", $info); //added
                 $csv = array(
-                    'data_atual' => date("Y-m-d H:i:s",strtotime($data)),
-                    'ticket' => $info['0'],
-                    'rec' => $info['1'],
-                    'tempo_operadora' => $info['2'],
-                    'tempo_cliente' => $info['3'],
-                    'duracao_total' => $info['4'],
-                    'sla' => $info['5'],
-                    'contregressivo' => $info['6'],
-                    'equipamento' => $info['7'],
-                    'designacao' => $info['8'],
-                    'abertura' => date("Y-m-d H:i:s",strtotime($info['9'])),
-                    'atualizacao' => date("Y-m-d H:i:s",strtotime($info['10'])),
-                    'rede' => $info['11'],
-                    'status' => $info['12'],
-                    'local' => $info['13'],
-                    'uf' => $info['14'],
-                    'centro' => $info['15'],
-                    'sintoma' => $info['16'],
-                    'causa' => $info['17'],
+                    'data_atual'       => date("Y-m-d H:i:s",strtotime($data)),
+                    'ticket'           => $info['0'],
+                    'rec'              => $info['1'],
+                    'tempo_operadora'  => text_date($info['2']),
+                    'tempo_cliente'    => text_date($info['3']),
+                    'duracao_total'    => text_date($info['4']),
+                    'duracao_zbx'      => '',
+                    'sla'              => $info['5'],
+                    'contregressivo'   => $info['6'],
+                    'equipamento'      => $info['7'],
+                    'designacao'       => $info['8'],
+                    'abertura'         => date("Y-m-d H:i:s",strtotime($info['9'])),
+                    'atualizacao'      => date("Y-m-d H:i:s",strtotime($info['10'])),
+                    'rede'             => $info['11'],
+                    'status'           => $info['12'],
+                    'local'            => $info['13'],
+                    'uf'               => $info['14'],
+                    'centro'           => $info['15'],
+                    'sintoma'          => $info['16'],
+                    'causa'            => $info['17'],
                     'responsabilidade' => $info['18'],
-                    'posicionamento' => $info['19'],
-                    'proativo' => $info['20'],
-                    'protocolo' => $info['21'],
-                    'operadora' => $info['22']
+                    'posicionamento'   => $info['19'],
+                    'proativo'         => $info['20'],
+                    'protocolo'        => $info['21'],
+                    'operadora'        => $info['22'],
                 );
-                // array_push($insert, $csv);
+                array_push($insert, $csv);
                 //verifica se o ticket existe
                 $ticket_existe = $this->zabbix_model->select_ebt_grc($info['0']);
-                if($ticket_existe == 0 ){//se não existe inserir
+                if($ticket_existe->num_rows() == 0 ){//se não existe inserir
                     $this->zabbix_model->insert_ebt_grc($csv);
                     echo "Insert".$info['7']."<br>";
                 } else {//se existe update
                     $this->zabbix_model->update_ebt_grc(array('ticket' => $info['0']),$csv);
                     echo "Update".$info['7']."<br>";
                 }
-                // $num = count ($info);
-                // $line = "";
-                // echo "<pre>";
-                    // for ($c=0; $c < $num; $c++) {
-                    //     // output data
-                    //    // echo "$info[$c]";
-                    // $line .= $info[$c];
-                    // }
-                    // echo $line;
-                    // echo "</pre>";
-                // echo "<pre>";
-                // var_dump($info);
-                // echo "</pre>";
-
             }
+            vd($insert);
             fclose($file);
         } else{
             echo "SCRIPT DESABILITADO NO BANCO DE DADOS";
         }
     }
+
 
 }
 

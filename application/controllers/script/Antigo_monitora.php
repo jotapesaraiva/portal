@@ -21,7 +21,7 @@ class Antigo_monitora extends CI_Controller {
         // vd($modulo[0]['status']);
 
         if($modulo[0]['status'] == 1) {
-            $result ="";
+            $result = "";
             $retorno = array();
             $monitoras = $this->monitora_model->monitora();
             // vd($monitoras);

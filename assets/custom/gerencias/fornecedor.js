@@ -97,7 +97,7 @@ $("#add_telefone").click(function(e) { //on add input button click
             a += '<div class="col-md-9">';
                 a += '<div class="input-group">';
                     a += '<div class="input-icon">';
-                        a += '<input style="padding: 6px 12px !important;" class="form-control" name="telefone[]" data-mask="(00) 0000-0000" placeholder="Numero do telefone" type="text">';
+                        a += '<input style="padding: 6px 12px !important;" class="0800 form-control" name="telefone[]" placeholder="Numero do telefone" type="text">';
                     a += '</div>';
                     a += '<span class="input-group-btn">';
                         a += '<button class="btn red remove_field" id="'+i+'" type="button">';
@@ -142,7 +142,7 @@ $("#add_celular").click(function(e) { //on add input button click
             a += '<div class="col-md-9">';
                 a += '<div class="input-group">';
                     a += '<div class="input-icon">';
-                        a += '<input style="padding: 6px 12px !important;" class="form-control" name="celular[]" data-mask="(00) 00000-0000" placeholder="Numero do celular" type="text">';
+                        a += '<input style="padding: 6px 12px !important;" class="form-control" name="celular[]" placeholder="Numero do celular" type="text">';
                     a += '</div>';
                     a += '<span class="input-group-btn">';
                         a += '<button class="btn red remove_field" id="'+i+'" type="button">';

@@ -100,7 +100,7 @@ class Contratos extends CI_Controller {
         }
         $data = array(
             'nome_contrato' => $this->input->post('nome'),
-            'tipo_contrato' => $this->input->post('tipo'),
+            'id_tipo_contrato' => $this->input->post('tipo'),
             'numero_contrato' => $this->input->post('numero'),
             'data_inicio_contrato' => date('Y-m-d', strtotime($this->input->post('data'))),
             'duracao_contrato' => $this->input->post('duracao'),
@@ -126,7 +126,7 @@ class Contratos extends CI_Controller {
         }
         $data = array(
             'nome_contrato' => $this->input->post('nome'),
-            'tipo_contrato' => $this->input->post('tipo'),
+            'id_tipo_contrato' => $this->input->post('tipo'),
             'numero_contrato' => $this->input->post('numero'),
             'data_inicio_contrato' => date('Y-m-d', strtotime($this->input->post('data'))),
             'duracao_contrato' => $this->input->post('duracao'),

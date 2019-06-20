@@ -114,9 +114,10 @@ class Fornecedor_model extends CI_Model {
         $this->db->delete('tbl_fornecedor');
     }
 
-    public function delete_fornecedor_telefone($id){
+    public function delete_fornecedor_telefone($id_telefone){
         // $this->db = $this->load->database('default',true);
-        $this->db->where('id_fornecedor', $id);
+        // $this->db->where('id_fornecedor', $id);
+        $this->db->where('id_telefone', $id_telefone);
         $this->db->delete('tbl_fornecedor_telefone');
     }
 

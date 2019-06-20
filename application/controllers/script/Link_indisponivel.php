@@ -124,19 +124,19 @@ class Link_indisponivel extends CI_Controller {
                                 }
                             }
                             $save_db = array(
-                                'id' => $id,
-                                'servidor' => $hostname,
-                                'host_id' => $hostid,
-                                'designacao' => $hostdesignacao,
-                                'ip' => $hostip,
-                                'servico' => $description,
-                                'detalhe' => $detalhe,
-                                'prioridade' => $priority,
-                                'data_alerta' => $duration,
+                                'id'                      => $id,
+                                'servidor'                => $hostname,
+                                'host_id'                 => $hostid,
+                                'designacao'              => $hostdesignacao,
+                                'ip'                      => $hostip,
+                                'servico'                 => $description,
+                                'detalhe'                 => $detalhe,
+                                'prioridade'              => $priority,
+                                'data_alerta'             => $duration,
                                 'data_ultima_verificacao' => date('Y-m-d H'),
-                                'situacao' => 'PROBLEMA',
-                                'vendor' => $hostvendor,
-                                'duration' => $tempo_fora
+                                'situacao'                => 'PROBLEMA',
+                                'vendor'                  => $hostvendor,
+                                'duration'                => $tempo_fora
                             );//salva os link fora na tabela zbx_link_fora.
                             $this->zabbix_model->duplicate_zabbix_grc($save_db);
                             print_r($save_db);
