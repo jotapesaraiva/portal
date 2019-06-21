@@ -7,6 +7,7 @@ class Modulos extends CI_Controller {
     {
         parent::__construct();
         //Do your magic here
+        $this->load->model('modulos_model');
     }
 
     public function index()
@@ -23,6 +24,7 @@ class Modulos extends CI_Controller {
         ';
 
         $session['username'] = $this->session->userdata('username');
+        $data['modulo'] = $this->listar();
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Sitema</span>', '/sistema;');
@@ -31,8 +33,8 @@ class Modulos extends CI_Controller {
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
-        // $data['modulo'] = $this->modulos();
-        $this->load->view('sistema/modulos');
+
+        $this->load->view('sistema/modulos',$data);
 
         $this->load->view('template/footer',$script);
     }
@@ -40,26 +42,26 @@ class Modulos extends CI_Controller {
 
     public function listar()
     {
-        $this->load->model('modulos_model');
-        $modulos = $this->modulos_model->listar_modulos();
-        // $html = '';
-        // foreach ($modulos as $key => $value) {
-        //     $html .= '<div class="form-body">';
-        //     $html .=  '<div class="form-group">';
-        //     $html .=    '<label class="control-label col-md-3 bold uppercase">'.$value['aplicacao'].' :</label>';
-        //     $html .=   '<div class="col-md-9 text-center">';
-        //     if($value['status'] == '1'){
-        //             $html .= '<input type="checkbox" checked class="make-switch" data-size="small">';
 
-        //     } else{
-        //             $html .= '<input type="checkbox" class="make-switch" data-size="small">';
-        //     }
-        //     $html .=   '</div>';
-        //     $html .= '</div>';
-        //     $html .= '</div>';
-        // }
-        // return $html;
-        return $modulos;
+        $modulos = $this->modulos_model->listar_modulos();
+        $html = '';
+        foreach ($modulos as $key => $value) {
+            $html .= '<div class="form-body">';
+            $html .=  '<div class="form-group">';
+            $html .=    '<label class="control-label col-md-3 bold uppercase">'.$value['aplicacao'].' :</label>';
+            $html .=   '<div class="col-md-9 text-center">';
+            if($value['status'] == '1'){
+                    $html .= '<input type="checkbox" checked class="make-switch" data-size="small">';
+
+            } else{
+                    $html .= '<input type="checkbox" class="make-switch" data-size="small">';
+            }
+            $html .=   '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+        }
+        return $html;
+        // return $modulos;
     }
 
 

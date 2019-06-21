@@ -29,14 +29,12 @@ $(document).ready(function() {
               // "targets": [ -1 ], //last column
               // "orderable": false, //set not orderable
           },{ "width": "2%", "targets": 0 },//#
-          { "width": "2%", "targets": 1 },//numero
-          { "width": "12%", "targets": 2 },//Resumo
-          { "width": "8%", "targets": 3 },//categoria
-          { "width": "11%", "targets": 4 },//tecnico
-          { "width": "8%", "targets": 5 },//inicio
-          { "width": "8%", "targets": 6 },//fim
-          { "width": "5%", "targets": 7 },//duracao
-          { "width": "11%", "targets": 8 }],//localidade
+          { "width": "12%", "targets": 1 },//localidade
+          { "width": "5%", "targets": 2 },//ticket
+          { "width": "8%", "targets": 3 },//abertura
+          { "width": "8%", "targets": 4 },//fechamento
+          { "width": "8%", "targets": 5 },//tempo ebt
+          { "width": "5%", "targets": 6 }],//responsavel
     });
 
     // $('td.day').on('click',function() {

@@ -15,16 +15,19 @@ $(document).ready(function () {
             success: function (data) {
                 // console.log(data);
                 for (var i in data){
-                    if(data[i].name == 'Nobreak 01'){
-                        var nobreak01 = data[i].temperatura;
-                        var fnbk01 = data[i].flag;
-                    }else{
-                        var nobreak02 = data[i].temperatura;
-                        var fnbk02 = data[i].flag;
-                    }
-                    if(data[i].name =='DataCenter'){
-                        var dcenter = data[i].temperatura;
-                        var fdcenter = data[i].flag;
+                    switch(data[i].name) {
+                        case 'Nobreak 01':
+                            var nobreak01 = data[i].temperatura;
+                            var fnbk01 = data[i].flag;
+                            break;
+                        case 'Nobreak 02':
+                            var nobreak02 = data[i].temperatura;
+                            var fnbk02 = data[i].flag;
+                            break;
+                        case 'DataCenter':
+                            var dcenter = data[i].temperatura;
+                            var fdcenter = data[i].flag;
+                            break;
                     }
                 }
                 displaynbk01.html(nobreak01);
@@ -35,5 +38,5 @@ $(document).ready(function () {
                 flag03.removeClass('red green').addClass(fdcenter);
             }
         });
-        setTimeout('temperatura()', 30000);
+        setTimeout('temperatura()', 60000);// de 1 em 1 minuto.
     }

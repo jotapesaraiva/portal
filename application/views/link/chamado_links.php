@@ -36,8 +36,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <form method="post" action="<?php $_SERVER['PHP_SELF']?>">
                           <div class="col-md-3 col-md-offset-3">
                             <label class="control-label col-md-4">Data Inicio </label>
-                              <div class="input-group input-medium date date-picker" >
-                                  <input class="form-control" readonly="" name="data1" value="<?php echo $data_inicio;?>" type="text" onchange='this.form.submit()'>
+                              <div class="input-group input-medium date date-picker" id='data_inicio'>
+                                  <input class="form-control" readonly="" name="data_inicio" value="<?php echo $data_inicio;?>" type="text">
                                   <span class="input-group-btn">
                                       <button class="btn default" type="button">
                                           <i class="fa fa-calendar"></i>
@@ -47,8 +47,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <div class="col-md-3">
                             <label class="control-label col-md-4">Data Final </label>
-                            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy">
-                                <input class="form-control" readonly="" name="data2" value="<?php echo $data_final;?>" type="text" onchange='this.form.submit()'>
+                            <div class="input-group input-medium date date-picker" id='data_fim'>
+                                <input class="form-control" readonly="" name="data_fim" value="<?php echo $data_fim;?>" type="text">
                                 <span class="input-group-btn">
                                     <button class="btn default" type="button">
                                         <i class="fa fa-calendar"></i>
@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                       </div>
                     </div>
-                       <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table1">
+                       <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table">
                            <thead>
                                <tr>
                                             <th>#</th>
@@ -95,7 +95,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                </tr>
                            </thead>
                            <tbody>
-                            <?php echo $chamados;?>
                            </tbody>
                        </table>
                    </div>

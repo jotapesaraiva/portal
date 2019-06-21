@@ -4,41 +4,69 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Link_model extends CI_Model{
 
 
-    public function calculo_atendimento($data_inicio,$data_final) {
-        $mantis = $this->load->database('mantis',true);
-        $sql = "
-            SELECT
-                mbt.id as mantis,
-                substr(regexp_substr(mbt.summary,'-[^'']*'),3) as resumo,
-                --mbt.summary as resumo,
-                mcf3.value as ticket,
-               to_char(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf1.value / 60 / 60 / 24) - 0.125, 'dd/mm/yyyy hh24:mi:ss') as inicio_chamado,
-               to_char(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf2.value / 60 / 60 / 24) - 0.125,'dd/mm/yyyy hh24:mi:ss') as fim_chamado,
-                (trunc(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf2.value / 60 / 60 / 24) - 0.125) - trunc(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf1.value / 60 / 60 / 24) - 0.125))
-                || ' dias '  ||
-                TO_CHAR(to_date('00-00-00', 'hh24:mi:ss')+ to_number((to_date('01-JAN-1970', 'dd-mon-yyyy') +
-                           (mcf2.value / 60 / 60 / 24) - 0.125) - (to_date('01-JAN-1970', 'dd-mon-yyyy') +
-                           (mcf1.value / 60 / 60 / 24) - 0.125)), 'hh24:mi:ss') as calculo_horas,
-                mcf4.value as responsabilidade
-            from mantis.mantis_bug_tb mbt
-            left join mantis.mantis_custom_field_string_tb mcf1 on mbt.id=mcf1.bug_id
-            left join mantis.mantis_custom_field_string_tb mcf2 on mbt.id=mcf2.bug_id
-            left join mantis.mantis_custom_field_string_tb mcf3 on mbt.id=mcf3.bug_id
-            left join mantis.mantis_custom_field_string_tb mcf4 on mbt.id=mcf4.bug_id
-            where mbt.project_id = 521 and mcf1.field_id = 381 and mcf2.field_id = 401 and mcf3.field_id = 361 and (mcf4.field_id = 1541 and mcf4.value in ('Embratel','PRODEPA'))
-            and mbt.status in (60,80)
-            and trunc(mbt.date_submitted) between '".$data_inicio."' and '".$data_final."'
-            order by mcf1.value asc";
-        $stmt = oci_parse($mantis->conn_id,$sql);
-        oci_execute($stmt, OCI_NO_AUTO_COMMIT);
-        // $nrows = oci_fetch_all($stmt, $res);//retorna o numero de ocorrencias
-        // echo "$nrows rows fetched<br>\n";
-        // var_dump($res);
-        // oci_fetch_all($stmt, $res);//cria array apartir das colunas
-        oci_fetch_all($stmt, $res,null, null, OCI_FETCHSTATEMENT_BY_ROW);//cria array apartir das linhas
-        return $res;
-    }
+    // public function xxxcalculo_atendimento($data_inicio,$data_final) {
+    //     $mantis = $this->load->database('mantis',true);
+    //     $sql = "
+    //         SELECT
+    //             mbt.id as mantis,
+    //             substr(regexp_substr(mbt.summary,'-[^'']*'),3) as resumo,
+    //             --mbt.summary as resumo,
+    //             mcf3.value as ticket,
+    //            to_char(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf1.value / 60 / 60 / 24) - 0.125, 'dd/mm/yyyy hh24:mi:ss') as inicio_chamado,
+    //            to_char(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf2.value / 60 / 60 / 24) - 0.125,'dd/mm/yyyy hh24:mi:ss') as fim_chamado,
+    //             (trunc(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf2.value / 60 / 60 / 24) - 0.125) - trunc(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf1.value / 60 / 60 / 24) - 0.125))
+    //             || ' dias '  ||
+    //             TO_CHAR(to_date('00-00-00', 'hh24:mi:ss')+ to_number((to_date('01-JAN-1970', 'dd-mon-yyyy') +
+    //                        (mcf2.value / 60 / 60 / 24) - 0.125) - (to_date('01-JAN-1970', 'dd-mon-yyyy') +
+    //                        (mcf1.value / 60 / 60 / 24) - 0.125)), 'hh24:mi:ss') as calculo_horas,
+    //             mcf4.value as responsabilidade
+    //         from mantis.mantis_bug_tb mbt
+    //         left join mantis.mantis_custom_field_string_tb mcf1 on mbt.id=mcf1.bug_id
+    //         left join mantis.mantis_custom_field_string_tb mcf2 on mbt.id=mcf2.bug_id
+    //         left join mantis.mantis_custom_field_string_tb mcf3 on mbt.id=mcf3.bug_id
+    //         left join mantis.mantis_custom_field_string_tb mcf4 on mbt.id=mcf4.bug_id
+    //         where mbt.project_id = 521 and mcf1.field_id = 381 and mcf2.field_id = 401 and mcf3.field_id = 361 and (mcf4.field_id = 1541 and mcf4.value in ('Embratel','PRODEPA'))
+    //         and mbt.status in (60,80)
+    //         and trunc(mbt.date_submitted) between '".$data_inicio."' and '".$data_final."'
+    //         order by mcf1.value asc";
+    //     $stmt = oci_parse($mantis->conn_id,$sql);
+    //     oci_execute($stmt, OCI_NO_AUTO_COMMIT);
+    //     // $nrows = oci_fetch_all($stmt, $res);//retorna o numero de ocorrencias
+    //     // echo "$nrows rows fetched<br>\n";
+    //     // var_dump($res);
+    //     // oci_fetch_all($stmt, $res);//cria array apartir das colunas
+    //     oci_fetch_all($stmt, $res,null, null, OCI_FETCHSTATEMENT_BY_ROW);//cria array apartir das linhas
+    //     // echo $this->mantis->last_query();
+    //     return $res;
+    // }
 
+    public function calculo_atendimento($data_inicio,$data_final){
+        $mantis = $this->load->database('mantis',true);
+        $query = $mantis->query("SELECT
+                            mbt.id as mantis,
+                            substr(regexp_substr(mbt.summary,'-[^'']*'),3) as resumo,
+                            --mbt.summary as resumo,
+                            mcf3.value as ticket,
+                           to_char(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf1.value / 60 / 60 / 24) - 0.125, 'dd/mm/yyyy hh24:mi:ss') as inicio_chamado,
+                           to_char(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf2.value / 60 / 60 / 24) - 0.125,'dd/mm/yyyy hh24:mi:ss') as fim_chamado,
+                            (trunc(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf2.value / 60 / 60 / 24) - 0.125) - trunc(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf1.value / 60 / 60 / 24) - 0.125))
+                            || ' dias '  ||
+                            TO_CHAR(to_date('00-00-00', 'hh24:mi:ss')+ to_number((to_date('01-JAN-1970', 'dd-mon-yyyy') +
+                                       (mcf2.value / 60 / 60 / 24) - 0.125) - (to_date('01-JAN-1970', 'dd-mon-yyyy') +
+                                       (mcf1.value / 60 / 60 / 24) - 0.125)), 'hh24:mi:ss') as calculo_horas,
+                            mcf4.value as responsabilidade
+                        from mantis.mantis_bug_tb mbt
+                        left join mantis.mantis_custom_field_string_tb mcf1 on mbt.id=mcf1.bug_id
+                        left join mantis.mantis_custom_field_string_tb mcf2 on mbt.id=mcf2.bug_id
+                        left join mantis.mantis_custom_field_string_tb mcf3 on mbt.id=mcf3.bug_id
+                        left join mantis.mantis_custom_field_string_tb mcf4 on mbt.id=mcf4.bug_id
+                        where mbt.project_id = 521 and mcf1.field_id = 381 and mcf2.field_id = 401 and mcf3.field_id = 361 and (mcf4.field_id = 1541 and mcf4.value in ('Embratel','PRODEPA'))
+                        and mbt.status in (60,80)
+                        and trunc(mbt.date_submitted) between '".$data_inicio."' and '".$data_final."'
+                        order by mcf1.value asc");
+        // echo $portal_ora->last_query();
+        return $query;
+    }
 
     public function listar_link() {
         // $this->db = $this->load->database('default',true);
@@ -161,20 +189,21 @@ class Link_model extends CI_Model{
         $this->db->order_by('id', 'DESC');
         $this->db->limit('1000');
         $query = $this->db->get();
-        return $query->result_array();
+        return $query;
     }
 
     public function calculo($inicio,$fim) {
         // $portal_moni = $this->load->database('default',true);
-        $this->db->select('g.centro, g.ticket, date_format(g.abertura, "%d/%m/%Y %H:%i:%s") AS abertura, date_format(g.atualizacao, "%d/%m/%Y %H:%i:%s") AS atualizacao, g.tempo_embratel_hora as tmp_portal , g.responsabilidade');
-        $this->db->from('ebt_grc g');
+        $this->db->select('centro, ticket, date_format(abertura, "%d/%m/%Y %H:%i:%s") AS abertura, date_format(atualizacao, "%d/%m/%Y %H:%i:%s") AS atualizacao, tempo_operadora , responsabilidade');
+        $this->db->from('ebt_grc_teste');
         // $this->db->join('tbl_ebt_fatura f','g.ticket = f.ticket','left');
         $where = "atualizacao BETWEEN '". $inicio ."' AND '". $fim ."'";
         $this->db->where($where);
-        $this->db->order_by('g.centro', 'DESC');
+        $this->db->order_by('centro', 'DESC');
         $this->db->limit('100');
         $query = $this->db->get();
-        return $query->result_array();
+        // echo $this->db->last_query();
+        return $query;
     }
 
     public function ticket($mes) {

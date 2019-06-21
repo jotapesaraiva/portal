@@ -34,23 +34,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <ul class="sub-menu">
                         <?php if($this->auth_ad->level_access('producao', group_session($this->session->userdata('username')))){?>
                         <li class="nav-item start <?php echo active_segment(2,'producao'); ?>">
-                            <?php echo anchor('dashboard/producao', '<i class="icon-bar-chart"></i>Dashboard Produção', 'class="nav-link"')?>
+                            <?php echo anchor('dashboard/producao', '<i class="icon-bar-chart"></i>Dashboard CGRE', 'class="nav-link"')?>
                             <?php echo span_segment(2,'producao'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('rede', group_session($this->session->userdata('username')))){?>
-                        <li class="nav-item start <?php echo active_segment(2,'rede'); ?>">
-                            <?php echo anchor('dashboard/rede', '<i class="icon-bar-chart"></i>Dashboard Rede', 'class="nav-link"')?>
-                            <?php echo span_segment(2,'rede'); ?>
+                        <?php } if($this->auth_ad->level_access('cgda', group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item start <?php echo active_segment(2,'cgda'); ?>">
+                            <?php echo anchor('dashboard/cgda', '<i class="icon-bar-chart"></i>Dashboard CGDA', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'cgda'); ?>
                         </li>
                         <?php } if( $this->auth_ad->level_access('cgps', group_session($this->session->userdata('username')))){?>
                         <li class="nav-item start <?php echo active_segment(2,'cgps'); ?>">
                             <?php echo anchor('dashboard/cgps', '<i class="icon-bar-chart"></i>Dashboard CGPS', 'class="nav-link"')?>
                             <?php echo span_segment(2,'cgps'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('admin', group_session($this->session->userdata('username')))){?>
-                        <li class="nav-item start <?php echo active_segment(2,'admin'); ?>">
-                            <?php echo anchor('dashboard/admin', '<i class="icon-bar-chart"></i>Dashboard Admin', 'class="nav-link"')?>
-                            <?php echo span_segment(2,'admin'); ?>
+                        <?php } if($this->auth_ad->level_access('cgaq', group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item start <?php echo active_segment(2,'cgaq'); ?>">
+                            <?php echo anchor('dashboard/cgaq', '<i class="icon-bar-chart"></i>Dashboard CGAQ', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'cgaq'); ?>
                         </li>
                         <?php }?>
                     </ul>

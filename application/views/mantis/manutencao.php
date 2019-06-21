@@ -97,7 +97,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                </tr>
                            </thead>
                            <tbody>
-                            <?php //echo $calculo ?>
                            </tbody>
                        </table>
                    </div>

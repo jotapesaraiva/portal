@@ -72,7 +72,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                </tr>
                            </thead>
                            <tbody>
-                            <?php echo $historico;?>
                            </tbody>
                        </table>
                    </div>

@@ -151,7 +151,7 @@ class Enviar extends CI_Controller {
                 break;
             case '3'://CGPS - Gestão de Configuração
                 $projeto   = 'Infraestrutura';
-                $categoria = 'Análise';
+                $categoria = 'Análise de erro e Performance';
                 $procedore = 'STP_RELT_CASO_DEMANDAS_CONFIG';
                 $parametros = "IN_CF_ESCOPO => 'Sustentação/Produção',
                                IN_CF_NOAMBIENTE => 'Produção',

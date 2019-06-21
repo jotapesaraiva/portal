@@ -14,4 +14,10 @@
         //retorna a data inicio da mes atual
          return date('d-m-Y', mktime(0, 0, 0, date('m') , 1 , date('Y')));
     }
+
+    function date_start_dez() {
+        //retorna a data inicio da mes atual
+         return date('10-m-Y', mktime(0, 0, 0, date('m') , 1 , date('Y')));
+    }
+    //https://www.php.net/manual/pt_BR/function.date.php
  ?>

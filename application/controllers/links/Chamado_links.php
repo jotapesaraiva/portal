@@ -6,100 +6,75 @@ class Chamado_links extends CI_Controller {
   public function __construct() {
     parent::__construct();
     //Do your magic here
-    esta_logado();
+    $this->load->helper('month_helper');
     $this->load->model('link_model');
+    esta_logado();
   }
 
     public function index() {
-        $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
-            <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />';
+      $data['data_inicio'] = date_start_dez();
+      $data['data_fim'] = date('d-m-Y');
 
-        $script['footerinc'] = '
-        <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-                    <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
-        <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-        <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-        <script src="' . base_url() . 'assets/custom/links/chamado_links.js" type="text/javascript"></script>
-        <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
-        $script['script'] = '
-        <script src="' . base_url() . 'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>';
+      $css['headerinc'] = '
+          <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+          <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
+      $script['footerinc'] = '
+      <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+      <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
+      <script src="' . base_url() . 'assets/custom/links/chamado_links.js" type="text/javascript"></script>
+      <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
+      $script['script'] = '
+      <script src="' . base_url() . 'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>';
 
-          $session['username'] = $this->session->userdata('username');
+      $session['username'] = $this->session->userdata('username');
 
-          if(!$this->input->post('data1')) {
-            $date = date("Y-m-10");
-            $date = strtotime(date("Y-m-d", strtotime($date)) . "-1 month");
-            $data_inicio = date('d-m-Y', $date);
-            $data['data_inicio'] = date('d/m/Y', $date);
-          } else {
-            $datai = str_replace('/', '-', $this->input->post('data1'));
-            $data_inicio = date("d-m-Y", strtotime($datai));
-            $data['data_inicio'] = $this->input->post('data1');
-          }
+      $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
+      $this->breadcrumbs->push('<span>Link</span>','/link');
+      $this->breadcrumbs->push('<span>Calculo de atendimento</span>','link/chamado_links');
 
-          if(!$this->input->post('data2')) {
-            $data_final = date("09-m-Y");
-            $data['data_final'] = date("d/m/Y", strtotime($data_final));
-            //$data['mostra_dataf'] = $data_final;
-          } else {
-            $dataf = str_replace('/', '-', $this->input->post('data2'));
-            $data_final = date("d-m-Y", strtotime($dataf));
-            $data['data_final'] = $this->input->post('data2');
-          }
-          // vd($data_final);
-          $data['chamados'] = $this->create_table($data_inicio,$data_final);
-          $this->load->model('link_model');
-          // $this->teste($data_inicio,$data_final);
+      $this->load->view('template/header',$css);
+      $this->load->view('template/navbar',$session);
+      $this->load->view('template/sidebar');
 
-          $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-          $this->breadcrumbs->push('<span>Link</span>','/link');
-          $this->breadcrumbs->push('<span>Calculo de atendimento</span>','link/chamado_links');
+      $this->load->view('link/chamado_links',$data);
 
-          $this->load->view('template/header',$css);
-          $this->load->view('template/navbar',$session);
-          $this->load->view('template/sidebar');
-
-          $this->load->view('link/chamado_links',$data);
-
-          $this->load->view('template/footer',$script);
+      $this->load->view('template/footer',$script);
     }
 
+    public function datatable_list($datai,$dataf){
+      // Datatables Variables
+      $draw = intval($this->input->get("draw"));
+      $start = intval($this->input->get("start"));
+      $length = intval($this->input->get("length"));
 
-    public function create_table($data_inicio,$data_final) {
-      $chamados = $this->link_model->calculo_atendimento($data_inicio,$data_final);
-      $html = "";
-      $count = 0;
-      foreach ($chamados as $chamado) {
-          $html .= "<tr>\n";
-          $html .= "<td>". $count++ ."</td>\n";
-          $html .= "<td>". anchor_popup("http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$chamado['MANTIS']."", $chamado['MANTIS'])."</td>\n";
-          $html .= "<td>".$chamado['RESUMO']."</td>\n";
-          $html .= "<td> <a href='http://webebt04.embratel.com.br/PORTALGRCTST/troubleticket/tkt_listarhistorico.php?vcontacle=44j5+A0CKaiKEZKgf5bMeVZfqsvrl0AJ4teFsjZMZi/b4=ZS8ec8e/xbFOxpBipHMZ&vlogin=44vvmukhQGO39kGXjMmIMpE5FQV9pRxF4VmouSLb1DRyw=X9FM11Jt0L8=&id_ticket=".htmlentities($chamado['TICKET'], ENT_QUOTES, 'ISO-8859-1')."' target='_blank'  style='color: rgb(0,0,255)'><font color='374E9E' >".htmlentities($chamado['TICKET'], ENT_QUOTES, 'ISO-8859-1')." </font></a></td>\n";
-          $html .= "<td>".$chamado['INICIO_CHAMADO']."</td>\n";
-          $html .= "<td>".$chamado['FIM_CHAMADO']."</td>\n";
-          $html .= "<td>".$chamado['CALCULO_HORAS']."</td>\n";
-          $html .= "<td>".$chamado['RESPONSABILIDADE']."</td>\n";
+      $chamados = $this->link_model->calculo_atendimento($datai,$dataf);
+
+      $data = array();
+      foreach ($chamados->result_array() as $key => $value) {
+          $row = array();
+          $row[] = $key + 1;
+          $row[] = anchor_popup("http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$value['MANTIS']."", $value['MANTIS']);
+          $row[] = $value['RESUMO'];
+          $row[] = "<a href='http://webebt04.embratel.com.br/PORTALGRCTST/troubleticket/tkt_listarhistorico.php?vcontacle=44j5+A0CKaiKEZKgf5bMeVZfqsvrl0AJ4teFsjZMZi/b4=ZS8ec8e/xbFOxpBipHMZ&vlogin=44vvmukhQGO39kGXjMmIMpE5FQV9pRxF4VmouSLb1DRyw=X9FM11Jt0L8=&id_ticket=".htmlentities($value['TICKET'], ENT_QUOTES, 'ISO-8859-1')."' target='_blank'  style='color: rgb(0,0,255)'><font color='374E9E' >".htmlentities($value['TICKET'], ENT_QUOTES, 'ISO-8859-1')." </font></a>";
+          $row[] = $value['INICIO_CHAMADO'];
+          $row[] = $value['FIM_CHAMADO'];
+          $row[] = $value['CALCULO_HORAS'];
+          $row[] = $value['RESPONSABILIDADE'];
+
+          $data[] = $row;
       }
-      return $html;
+          $output = array (
+              "draw"            => $draw,
+              "recordsTotal"    => $chamados->num_rows(),
+              "recordsFiltered" => $chamados->num_rows(),
+              "data"            => $data,
+          );
+          echo json_encode($output);
     }
 
-    public function teste() {
-      $data_inicio= '09-01-2019';
-      $data_final = '10-02-2019';
-      $chamados = $this->link_model->calculo_atendimento($data_inicio,$data_final);
-      foreach ($chamados as $chamado) {
-        echo $chamado['MANTIS'];
-        echo $chamado['RESUMO'];
-        echo $chamado['TICKET'];
-        echo $chamado['INICIO_CHAMADO'];
-        echo $chamado['FIM_CHAMADO'];
-        echo $chamado['CALCULO_HORAS'];
-        echo $chamado['RESPONSABILIDADE'];
-      }
-      // vd($chamados);
+    public function teste(){
+      $chamados = $this->link_model->calculo_atendimento(date_start_dez(),date_end());
+      vd($chamados);
     }
 
 }
