@@ -82,13 +82,11 @@ class Link_model extends CI_Model{
     }
 
     public function update_link($where,$dados) {
-        // $this->db = $this->load->database('default',true);
         $this->db->update('tbl_link', $dados, $where);
         return $this->db->affected_rows();
     }
 
     public function edit_link($id) {
-        // $this->db = $this->load->database('default',true);
         $this->db->from('tbl_link');
         $this->db->where('id_link',$id);
         $query = $this->db->get();
@@ -96,13 +94,11 @@ class Link_model extends CI_Model{
     }
 
     public function delete_link($id){
-        // $this->db = $this->load->database('default',true);
         $this->db->where('id_link', $id);
         $this->db->delete('tbl_link');
     }
 
     public function save_link($dados){
-        // $this->db = $this->load->database('default',true);
         $this->db->insert('tbl_link', $dados);
         return $this->db->insert_id();
     }
@@ -112,19 +108,16 @@ class Link_model extends CI_Model{
     //
 
     public function listar_acesso(){
-        // $this->db = $this->load->database('default',true);
         return $this->db->get('tbl_tipo_acesso');
 
     }
 
     public function update_acesso($where,$dados){
-        // $this->db = $this->load->database('default',true);
         $this->db->update('tbl_tipo_acesso', $dados, $where);
         return $this->db->affected_rows();
     }
 
     public function edit_acesso($id){
-        // $this->db = $this->load->database('default',true);
         $this->db->from('tbl_tipo_acesso');
         $this->db->where('id_tipo_acesso',$id);
         $query = $this->db->get();
@@ -132,13 +125,11 @@ class Link_model extends CI_Model{
     }
 
     public function delete_acesso($id){
-        // $this->db = $this->load->database('default',true);
         $this->db->where('id_tipo_acesso', $id);
         $this->db->delete('tbl_tipo_acesso');
     }
 
     public function save_acesso($dados){
-        // $this->db = $this->load->database('default',true);
         $this->db->insert('tbl_tipo_acesso', $dados);
         return $this->db->insert_id();
     }
@@ -148,18 +139,15 @@ class Link_model extends CI_Model{
     //
 
     public function listar_velocidade(){
-        // $this->db = $this->load->database('default',true);
         return $this->db->get('tbl_tipo_velocidade');
     }
 
     public function update_velocidade($where,$dados){
-        // $this->db = $this->load->database('default',true);
         $this->db->update('tbl_tipo_velocidade', $dados, $where);
         return $this->db->affected_rows();
     }
 
     public function edit_velocidade($id){
-        // $this->db = $this->load->database('default',true);
         $this->db->from('tbl_tipo_velocidade');
         $this->db->where('id_tipo_velocidade',$id);
         $query = $this->db->get();
@@ -167,13 +155,11 @@ class Link_model extends CI_Model{
     }
 
     public function delete_velocidade($id){
-        // $this->db = $this->load->database('default',true);
         $this->db->where('id_tipo_velocidade', $id);
         $this->db->delete('tbl_tipo_velocidade');
     }
 
     public function save_velocidade($dados){
-        // $this->db = $this->load->database('default',true);
         $this->db->insert('tbl_tipo_velocidade', $dados);
         return $this->db->insert_id();
     }
@@ -183,7 +169,6 @@ class Link_model extends CI_Model{
     //
 
     public function historico() {
-        // $portal_moni = $this->load->database('default',true);
         $this->db->select('ticket, posicionamento, rec, centro, status, responsabilidade, causa, date_format(abertura, "%d/%m/%Y %H:%i:%s") as abertura, date_format(atualizacao, "%d/%m/%Y %H:%i:%s") as atualizacao');
         $this->db->from('ebt_grc');
         $this->db->order_by('id', 'DESC');
@@ -193,7 +178,6 @@ class Link_model extends CI_Model{
     }
 
     public function calculo($inicio,$fim) {
-        // $portal_moni = $this->load->database('default',true);
         $this->db->select('centro, ticket, date_format(abertura, "%d/%m/%Y %H:%i:%s") AS abertura, date_format(atualizacao, "%d/%m/%Y %H:%i:%s") AS atualizacao, tempo_operadora , responsabilidade');
         $this->db->from('ebt_grc_teste');
         // $this->db->join('tbl_ebt_fatura f','g.ticket = f.ticket','left');
@@ -207,7 +191,6 @@ class Link_model extends CI_Model{
     }
 
     public function ticket($mes) {
-        // $portal_moni = $this->load->database('default',true);
         $this->db->select('Month(atualizacao) as mes, count(ticket) as numero');
         $this->db->from('ebt_grc');
         $this->db->where('year(atualizacao)',$mes);
@@ -219,7 +202,6 @@ class Link_model extends CI_Model{
     }
 
     public function ticket_anual() {
-        // $portal_moni = $this->load->database('default',true);
         $this->db->select('year(atualizacao) as ano, count(ticket) as numero');
         $this->db->from('ebt_grc');
         $this->db->where('year(atualizacao) >=','2010');
@@ -231,7 +213,6 @@ class Link_model extends CI_Model{
     }
 
     public function causa($mes,$ano) {
-        // $portal_moni = $this->load->database('default',true);
         $this->db->select('causa, count(causa) as numero');
         $this->db->from('ebt_grc');
         if($mes != 'null'){
@@ -246,7 +227,6 @@ class Link_model extends CI_Model{
     }
 
     public function tempo($mes,$ano) {
-        // $this->db = $this->load->database('default',true);
         $this->db->select('centro, sum(TIMESTAMPDIFF(HOUR,abertura,atualizacao)) AS tempo');
         $this->db->from('ebt_grc');
         $this->db->where('Month(atualizacao)',$mes);
@@ -260,7 +240,6 @@ class Link_model extends CI_Model{
     }
 
     public function localidade($mes,$ano) {
-        // $portal_moni = $this->load->database('default',true);
         $this->db->select('centro, count(ticket) as numero');
         $this->db->from('ebt_grc');
         if($mes != 'null'){

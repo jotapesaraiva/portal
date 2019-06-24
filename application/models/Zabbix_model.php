@@ -37,7 +37,7 @@ class Zabbix_model extends CI_Model {
     public function list_grc_link($designacao) {
         $portal_db = $this->load->database('default',true);
         $portal_db->select('*');
-        $portal_db->from('ebt_grc');
+        $portal_db->from('ebt_grc_teste');
         $portal_db->like('designacao',$designacao);
         $portal_db->where_not_in('status',array('Fechado','Cancelado'));
         $portal_db->order_by('ticket','DESC');
