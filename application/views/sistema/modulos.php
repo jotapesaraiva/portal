@@ -31,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                    </div>
                    <div class="portlet-body form">
-                    <form class="form-horizontal form-bordered" action="#">
+                    <form class="form-horizontal form-bordered" id="form" action="#">
 
                     <div id="modulos"></div>
 
@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <div class="form-actions">
                           <div class="row">
                               <div class="col-md-offset-3 col-md-9">
-                                  <a href="javascript:;" class="btn green">
+                                  <a href="javascript:;" id="btnSave" onclick="save()" class="btn green">
                                       <i class="fa fa-check"></i> Alterar</a>
                                   <a href="javascript:;" class="btn btn-outline grey-salsa">Cancelar</a>
                               </div>

@@ -123,8 +123,7 @@ class Geral extends CI_Controller {
            'enable_query_strings' => $enable_query_strings,
            'controller_trigger'   => $controller_trigger,
            'function_trigger'     => $function_trigger,
-           'directory_trigger'    => $directory_trigger,
-
+           'directory_trigger'    => $directory_trigger
         );
         $session['username'] = $this->session->userdata('username');
 

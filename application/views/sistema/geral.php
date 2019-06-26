@@ -329,6 +329,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
 
                                 <div class="tab-pane" id="tab_8">
+                                    <div>
+                                        <iframe src="<?php echo base_url('sistema/phpinfo') ?>" height="35000" width="1000" scrolling="yes" frameborder="0"></iframe>
+                                    </div>
                                 </div>
 
                                 <div class="tab-pane" id="tab_9">

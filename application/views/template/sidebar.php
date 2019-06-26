@@ -771,10 +771,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor('sistema/geral', '<i class="icon-social-dribbble"></i> Geral', 'class="nav-link"')?>
                             <?php echo span_segment(2,'geral'); ?>
                         </li>
-                        <?php } if($this->auth_ad->level_access('cronjob',group_session($this->session->userdata('username')))){?>
-                        <li class="nav-item <?php echo active_segment(2,'cronjob'); ?>">
-                            <?php echo anchor('sistema/cronjob', '<i class="fa fa-tasks"></i> Cron Job', 'class="nav-link"')?>
-                            <?php echo span_segment(2,'cronjob'); ?>
+                        <?php } if($this->auth_ad->level_access('modulos',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'modulos'); ?>">
+                            <?php echo anchor('sistema/modulos', '<i class="fa fa-tasks"></i> Modulos', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'modulos'); ?>
                         </li>
                         <?php } if($this->auth_ad->level_access('log',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'log'); ?>">

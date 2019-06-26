@@ -18,6 +18,11 @@ class Modulos_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function update_modulos($id,$dados) {
+        $this->db->update('mdl_site', $dados, $id);
+        return $this->db->affected_rows();
+    }
+
 }
 
 /* End of file Modulos_model.php */

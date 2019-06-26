@@ -51,10 +51,10 @@ class Modulos extends CI_Controller {
             $html .=    '<label class="control-label col-md-3 bold uppercase">'.$value['aplicacao'].' :</label>';
             $html .=   '<div class="col-md-9 text-center">';
             if($value['status'] == '1'){
-                    $html .= '<input type="checkbox" checked class="make-switch" data-size="small">';
+                    $html .= '<input name="'.$value['aplicacao'].'" type="checkbox" checked class="make-switch" data-size="small">';
 
-            } else{
-                    $html .= '<input type="checkbox" class="make-switch" data-size="small">';
+            } else {
+                    $html .= '<input name="'.$value['aplicacao'].'" type="checkbox" class="make-switch" data-size="small">';
             }
             $html .=   '</div>';
             $html .= '</div>';
@@ -64,6 +64,19 @@ class Modulos extends CI_Controller {
         // return $modulos;
     }
 
+    public function modulos_update() {
+
+        $modulos = $this->modulos_model->listar_modulos();
+        foreach ($modulos as $value) {
+            if($this->input->post($value['aplicacao']) == 'on'){
+                $status = '1';
+            } else {
+                $status = '0';
+            }
+            $this->modulos_model->update_modulos(array('id' => $value['id']),array('status' => $status ) );
+        }
+        echo json_encode(array("status" => TRUE));
+    }
 
 }
 
