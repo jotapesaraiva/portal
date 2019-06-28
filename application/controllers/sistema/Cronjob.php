@@ -42,16 +42,16 @@ class Cronjob extends CI_Controller {
         echo json_encode($active);
     }
 
-    public function add($value='')
+    public function add()
     {
         // $this->crontab = new Crontab();
 
-        if(isset($_POST['minute']) && $_POST['minute'] != '') $this->crontab->onMinute($_POST['minute']);
-        if(isset($_POST['hour']) && $_POST['hour'] != '') $this->crontab->onHour($_POST['hour']);
-        if(isset($_POST['month']) && $_POST['month'] != '') $this->crontab->onMonth($_POST['month']);
-        if(isset($_POST['dayweek']) && $_POST['dayweek'] != '') $this->crontab->onDayOfWeek($_POST['dayweek']);
-        if(isset($_POST['daymonth']) && $_POST['daymonth'] != '') $this->crontab->onDayOfMonth($_POST['daymonth']);
-        if(isset($_POST['command']) && $_POST['command'] != '') $this->crontab->doJob($_POST['command']);
+        if(!empty($this->input->post('minute')) ) $this->crontab->onMinute($this->input->post('minute'));
+        if(!empty($this->input->post('hour')) ) $this->crontab->onHour($this->input->post('hour'));
+        if(!empty($this->input->post('month')) ) $this->crontab->onMonth($this->input->post('month'));
+        if(!empty($this->input->post('dayweek')) ) $this->crontab->onDayOfWeek($this->input->post('dayweek'));
+        if(!empty($this->input->post('daymonth')) ) $this->crontab->onDayOfMonth($this->input->post('daymonth'));
+        if(!empty($this->input->post('command')) ) $this->crontab->doJob($this->input->post('command'));
 
         if($this->crontab->activate()) {
             echo json_encode($this->crontab);
@@ -60,16 +60,21 @@ class Cronjob extends CI_Controller {
         }
     }
 
-    public function deletejob($value='')
+    public function deletejob()
     {
         // $this->crontab = new Crontab();
-        $this->crontab->deleteJob($_POST['jobid']);
+        $this->crontab->deleteJob($this->input->post('jobid'));
     }
 
     public function deleteall()
     {
         // $this->crontab = new Crontab();
         $this->crontab->deleteAllJobs();
+    }
+
+    public function editjob()
+    {
+        $this->crontab->editJob('0');
     }
 
 

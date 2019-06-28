@@ -25,13 +25,13 @@ $(document).ready(function() {
 });
 
 function onDeleteAllJobsClick(event) {
-    $.ajax({url:"lib/deleteall.php"}).done(function(data) {
+    $.ajax({url:href+"/deleteall"}).done(function(data) {
         location.reload();
     });
 }
 
 function onDeleteJobClick(jobID) {
-    $.post("lib/deletejob.php", { "jobid":jobID },
+    $.post(href+"/deletejob", { "jobid":jobID },
         function(data){
             location.reload();
         }
@@ -47,10 +47,12 @@ function onSaveButtonClick(event) {
     var name = $('.add-name').val();
     var command = $('.add-command').val();
 
-    $.post("lib/add.php", { "minute":minute, "hour":hour, "dayweek":dayweek, "daymonth":daymonth, "month":month, "name":name, "command":command },
+    $.post(href+"/add", { "minute":minute, "hour":hour, "dayweek":dayweek, "daymonth":daymonth, "month":month, "name":name, "command":command },
         function(data){
             console.log(data);
-            changePage('active');
+            $('#modal_cronjob').modal('hide');
+            location.reload();
+            // changePage('active');
         }
     );
 }
