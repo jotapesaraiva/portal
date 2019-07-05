@@ -3,16 +3,16 @@ function time_elapsed_string($datetime, $full = false) {
     $now = new DateTime;
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
-    $diff->w = floor($diff->d / 7);
-    $diff->d -= $diff->w * 7;
+    // $diff->w = floor($diff->d / 7);
+    // $diff->d -= $diff->w * 7;
     $string = array(
         // 'y' => 'a',
-        // 'm' => 'M',
+        'm' => 'M',
         // 'w' => 'S',
         'd' => 'd',
         'h' => 'h',
         'i' => 'm',
-        's' => 's',
+        // 's' => 's',
     );
     foreach ($string as $k => &$v) {
         if ($diff->$k) {

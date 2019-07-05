@@ -26,10 +26,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Data Inicio :</label>
+                            <label class="control-label col-md-3">Data Vencimento :</label>
                             <div class="col-md-9">
                                 <div class="input-group date form_datetime">
-                                    <input type="text" name="data_inicio" class="form-control" readonly>
+                                    <input type="text" name="data_vencimento" class="form-control" readonly>
                                     <span class="input-group-btn">
                                         <button class="btn default date-set" type="button">
                                             <i class="fa fa-calendar"></i>
@@ -40,18 +40,29 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Data Fim :</label>
-                            <div class="col-md-9">
-                                <div class="input-group date form_datetime">
-                                    <input type="text" name="data_fim" class="form-control" readonly>
-                                    <span class="input-group-btn">
-                                        <button class="btn default date-set" type="button">
-                                            <i class="fa fa-calendar"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <span class="help-block"></span>
-                            </div>
+                             <label class="control-label col-md-3"> Repetir :</label>
+                             <div class="col-md-4">
+                                 <select class="selectpicker form-control" name="vezes">
+                                     <option value="">------Quantas vezes-----</option>
+                                     <option value="1">1</option>
+                                     <option value="2">2</option>
+                                     <option value="3">3</option>
+                                     <option value="4">4</option>
+                                     <option value="5">5</option>
+                                     <option value="6">6</option>
+                                 </select>
+                                 <span class="help-block"></span>
+                             </div>
+                             <div class="col-md-4 col-md-offset-1">
+                                 <select class="selectpicker form-control" name="vezes">
+                                     <option value="">------Períodos-----</option>
+                                     <option value="minuto">Minuto</option>
+                                     <option value="hora">Hora</option>
+                                     <option value="dia">Dias</option>
+                                     <option value="mes">Meses</option>
+                                 </select>
+                                 <span class="help-block"></span>
+                             </div>
                         </div>
                          <div class="form-group">
                              <label class="control-label col-md-3">Grupo Responsavel :</label>
