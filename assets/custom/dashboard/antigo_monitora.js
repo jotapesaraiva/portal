@@ -11,7 +11,7 @@ atualiza_alertas_monitora();
         // displayResources.text("Loading data from JSON source...");
 
         $.ajax({
-           url: origin+"/portal/dash/antigo_monitora/",
+           url: origin+"/dash/antigo_monitora/",
            dataType: 'json',
            success: function (data) {
             // console.log(data);

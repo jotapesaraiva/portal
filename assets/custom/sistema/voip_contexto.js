@@ -1,6 +1,6 @@
 var save_method; //for save method string
 var table;
-var origin = window.location.origin;
+var href = window.location.href;
 $(document).ready(function() {
     table = $('#table').DataTable({
         "dom": "flrtip",
@@ -9,7 +9,7 @@ $(document).ready(function() {
               "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
       },
       "ajax": {
-          url : origin+"/contexto_voip_list",//json datasource
+          url : href+"/contexto_voip_list",//json datasource
           type : 'GET', //type of method  , by default would be get
           error: function(){ // error handling code
             $("#employee_grid_processing").css("display","none");
@@ -73,7 +73,7 @@ function edit_person(id) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url : origin+"/contexto_voip_edit/" + id,
+        url : href+"/contexto_voip_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -99,9 +99,9 @@ function save(){
     var url;
     if(save_method == 'add') {
         //url = "<?php //echo site_url('site/ajax_add')?>";
-        url = origin+"/contexto_voip_add";
+        url = href+"/contexto_voip_add";
     } else {
-        url = origin+"/contexto_voip_update";
+        url = href+"/contexto_voip_update";
     }
 
     // ajax adding data to database
@@ -137,7 +137,7 @@ function delete_person(id){
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : origin+"/contexto_voip_delete/"+id,
+            url : href+"/contexto_voip_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)

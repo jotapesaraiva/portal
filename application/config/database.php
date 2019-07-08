@@ -177,7 +177,7 @@ $db['mantis'] = array(
 
 $db['sobreaviso'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => '10.3.3.96',
 	'username' => 'root',
 	'password' => '!!GR&m10',
 	'database' => 'sobreaviso',

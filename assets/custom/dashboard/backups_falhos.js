@@ -11,7 +11,7 @@ atualiza_alertas_backups();
         // displayResources.text("Loading data from JSON source...");
 
         $.ajax({
-           url: origin+"/portal/dash/backups_falhos/",
+           url: origin+"/dash/backups_falhos/",
            dataType: 'json',
            success: function (data) {
             // console.log(data);

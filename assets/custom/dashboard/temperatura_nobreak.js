@@ -10,7 +10,7 @@ $(document).ready(function () {
         var flag02 = $('#nbk02.dashboard-stat');
         var flag03 = $('#dcenter.dashboard-stat');
         $.ajax({
-            url: origin+"/portal/dash/nobreak",
+            url: origin+"/dash/nobreak",
             dataType: 'json',
             success: function (data) {
                 // console.log(data);

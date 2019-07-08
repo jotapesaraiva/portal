@@ -4,7 +4,7 @@ $(document).ready(function () {
         "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
-        "ajax": origin+"/portal/dash/ramais/dti"
+        "ajax": origin+"/dash/ramais/dti"
         // "order": [[2, 'desc']],
     });
 });

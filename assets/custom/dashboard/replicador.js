@@ -1,4 +1,4 @@
-var origin = window.location.origin;
+var href = window.location.href;
     //Ajax Load data from ajax
 $(document).ready(function () {
 
@@ -7,7 +7,7 @@ $(document).ready(function () {
         "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
-        "ajax": origin+"/portal/dash/replicador/replic_table"
+        "ajax": href+"/dash/replicador/replic_table"
         // "order": [[2, 'desc']],
     });
 
@@ -16,7 +16,7 @@ $(document).ready(function () {
         "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
-        "ajax": origin+"/portal/dash/replicador/renvia_table"
+        "ajax": href+"/dash/replicador/renvia_table"
         // "order": [[2, 'desc']],
     });
 
@@ -24,7 +24,7 @@ $(document).ready(function () {
 
     function replicador() {
         $.ajax({
-            url : origin+"/portal/dash/replicador/replic/",
+            url : href+"/dash/replicador/replic/",
             type: "GET",
             dataType: "text",
             success: function(data) {
@@ -43,7 +43,7 @@ $(document).ready(function () {
 
     function renvia() {
         $.ajax({
-            url : origin+"/portal/dash/replicador/renvia",
+            url : href+"/dash/replicador/renvia",
             type: "GET",
             dataType: "text",
             success: function(data) {

@@ -11,7 +11,7 @@ atualiza_alertas_zabbix();
         // displayResources.text("Loading data from JSON source...");
 
         $.ajax({
-           url: origin+"/portal/dash/zabbix/",
+           url: origin+"/dash/zabbix/",
            dataType: 'json',
            success: function (data) {
             // console.log(data);

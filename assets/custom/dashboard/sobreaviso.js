@@ -12,7 +12,7 @@ $(document).ready(function () {
         var displayResources = $("#sobreaviso_table_content");
         // displayResources.text("Loading data from JSON source...");
         $.ajax({
-           url: origin+"/portal/dash/sobreaviso",
+           url: origin+"/dash/sobreaviso",
            dataType: 'json',
            success: function (data) {
             // console.log(data);

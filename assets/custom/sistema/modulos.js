@@ -2,7 +2,7 @@ var href = window.location.href;
 $(document).ready(function() {
 
     $.ajax({
-        url: href+"/portal/sistema/modulos/listar",
+        url: href+"/sistema/modulos/listar",
         type: "GET",
         dataType: "JSON",
         success: function(data) {

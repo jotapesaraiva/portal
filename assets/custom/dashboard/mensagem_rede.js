@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 function alerta_msg() {
     $.ajax({
-        url : origin+"/portal/dash/mensagem_rede/alerta",
+        url : origin+"/dash/mensagem_rede/alerta",
         type: "GET",
         dataType: "text",
         success: function(data) {
@@ -30,7 +30,7 @@ function alerta_msg() {
 
 function content_msg() {
     $.ajax({
-        url : origin+"/portal/dash/mensagem_rede",
+        url : origin+"/dash/mensagem_rede",
         type: "GET",
         dataType: "JSON",
         beforeSend: function() {

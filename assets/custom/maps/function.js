@@ -4,6 +4,7 @@ This code is available for a fee.
 Please contact me at wolfpil@gmail.com
 */
 //declarando de variaveis
+var href = window.location.href;
 var markers = [];
 var base = "https://sites.google.com/site/mapalinks/";//só é possivel usar o kmllayer se os kml estiverem hospedados em um servidor publico visivel pelo google.
 var markerCluster = null;
@@ -217,7 +218,7 @@ function init(){
 
 //###############################funcao que configura a inicializacao dos pontos#########################################################
 function carregarPontos() {
-	$.getJSON('https://producaoh.sefa.pa.gov.br/portal/assets/custom/maps/zabbix/alertas_zabbix_api.php', function(data) {
+	$.getJSON(href+'/assets/custom/maps/zabbix/alertas_zabbix_api.php', function(data) {
 		$.each(data, function(index, ponto) {
 			var iconShadow={
 			url:icons.img,

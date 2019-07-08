@@ -1,6 +1,6 @@
 var table;
 var value = $( "select.selector" ).val();
-var origin = window.location.origin;
+var href = window.location.href;
 $(document).ready(function() {
     table = $('#table').DataTable({
         "dom": "flrtip",
@@ -9,7 +9,7 @@ $(document).ready(function() {
                   "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : origin+"/datatable_list/"+ value,//json datasource
+             url : href+"/datatable_list/"+ value,//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");
@@ -42,6 +42,6 @@ $(document).ready(function() {
     $('select#selector').change(function() {
         value = $(this).val();
         console.log(value);
-        table.ajax.url( origin+"/datatable_list/"+ value ).load();
+        table.ajax.url( href+"/datatable_list/"+ value ).load();
     });
 });

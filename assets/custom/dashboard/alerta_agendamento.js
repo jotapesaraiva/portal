@@ -7,7 +7,7 @@ $(document).ready(function () {
 function alerta_agendamento() {
     $.ajax({
         // url : "https://producaoh.sefa.pa.gov.br/portal/agendamento/alertas/alerta",
-        url : origin+"/portal/agendamento/alertas/alerta",
+        url : origin+"/agendamento/alertas/alerta",
         type: "GET",
         dataType: "text",
         success: function(data) {

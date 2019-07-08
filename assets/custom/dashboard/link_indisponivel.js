@@ -11,7 +11,7 @@ atualiza_alertas_zabbix_link();
         // displayResources.text("Loading data from JSON source...");
 
         $.ajax({
-           url: origin+"/portal/dash/link_indisponivel/",
+           url: origin+"/dash/link_indisponivel/",
            dataType: 'json',
            success: function (data) {
             console.log(data);

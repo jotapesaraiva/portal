@@ -11,7 +11,7 @@ atualiza_alertas_servidor();
         // displayResources.text("Loading data from JSON source...");
 
         $.ajax({
-           url: origin+"/portal/dash/server/",
+           url: origin+"/dash/server/",
            dataType: 'json',
            success: function (data) {
             // console.log(data);

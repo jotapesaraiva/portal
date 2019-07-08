@@ -1,8 +1,8 @@
-var origin = window.location.origin;
+var href = window.location.href;
 function projeto_selecionada() {
  var the_value = document.getElementById("equipe").value;
      $.ajax({
-             url : origin+'/portal/alertas/enviar/projeto/'+the_value,
+             url : href+'/alertas/enviar/projeto/'+the_value,
              dataType: "json",
             success: function( data ) {
                 $("#projeto").empty();
@@ -20,7 +20,7 @@ function projeto_selecionada() {
 function categoria_selecionada() {
  var value_projeto = document.getElementById("projeto").value;
      $.ajax({
-             url : origin+'/portal/alertas/enviar/categoria/'+value_projeto,
+             url : href+'/alertas/enviar/categoria/'+value_projeto,
              dataType: "json",
             success: function( data ) {
                 console.table(data)
