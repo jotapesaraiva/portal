@@ -125,7 +125,7 @@ class Mes extends CI_Controller {
             <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $session['username'] = $this->session->userdata('username');
 
-        $data['nm_job'] = $this->option_job($this->indicadores_model->nome_job());
+        $data['nm_job'] = $this->option_job($this->indicadores_model->nome_job(date('m')));
         $data['nm_status'] = $this->option_job($this->indicadores_model->nome_status());
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');

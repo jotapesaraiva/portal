@@ -334,12 +334,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor('links/calculo_multa', '<i class="fa fa-calculator"></i> Cálculo Multa', 'class="nav-link"')?>
                             <?php echo span_segment(2,'calculo_multa'); ?>
                         </li>
-                        <!--############# ABA LINKS > Consumo de banda ############-->
-                        <?php } if($this->auth_ad->level_access('consumo_banda',group_session($this->session->userdata('username')))){?>
-                        <li class="nav-item <?php echo active_segment(2,'consumo_banda'); ?>">
-                            <?php echo anchor('links/consumo_banda', '<i class="fa fa-bar-chart"></i> Consumo de Banda', 'class="nav-link"')?>
-                            <?php echo span_segment(2,'consumo_banda'); ?>
-                        </li>
+
                         <!--############# ABA LINKS > Chamados de Links ############-->
                         <?php } if($this->auth_ad->level_access('chamado_links',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'chamado_links'); ?>">

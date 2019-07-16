@@ -131,7 +131,7 @@ class Dia extends CI_Controller {
             <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $session['username'] = $this->session->userdata('username');
 
-        $data['nm_job'] = $this->option_job($this->indicadores_model->nome_job());
+        $data['nm_job'] = $this->option_job($dados = $this->indicadores_model->nome_job($nmes));
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Backup</span>', 'backup');
@@ -149,6 +149,7 @@ class Dia extends CI_Controller {
     }
 
     public function option_job($dados) {
+        // vd($dados);
         $html = "";
         foreach ($dados as $dado) {
             $html .= "<option value='".$dado['variavel']."' >".$dado['variavel']."</option>";

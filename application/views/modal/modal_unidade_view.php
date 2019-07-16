@@ -20,7 +20,7 @@
                             <a href="#tab_3" data-toggle="tab" aria-expanded="false"> Técnico </a>
                         </li>
                         <li class="active">
-                            <a href="#tab_4" data-toggle="tab" aria-expanded="false"> Servidor </a>
+                            <a href="#tab_4" data-toggle="tab" aria-expanded="false"> Colaborador </a>
                         </li>
                     </ul>
                     <div class="tab-content">

@@ -3,18 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Indicadores_model extends CI_Model {
 
-    public function nome_job() {
-        $portal_moni = $this->load->database('portalmoni',true);
-        $portal_moni->select('nm_job as variavel');
-        $portal_moni->from('tab_job_nova');
-        $portal_moni->group_by('nm_job');
-        $portal_moni->order_by('nm_job');
-        $query = $portal_moni->get();
+    public function nome_job($mes) {
+        $this->db->select('distinct(specification) as variavel');
+        $this->db->from('dp_backups');
+        $this->db->where('Month(day_time)', $mes);
+        $query = $this->db->get();
+        // echo $this->db->last_query();
         return $query->result_array();
     }
 
     public function nome_status() {
-        // $portal_moni = $this->load->database('default',true);
+        // $this->db = $this->load->database('default',true);
         $this->db->select('status as variavel');
         $this->db->from('dp_backups');
         $this->db->group_by('status');

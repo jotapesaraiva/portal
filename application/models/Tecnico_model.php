@@ -66,7 +66,7 @@ class Tecnico_model extends CI_Model{
         $this->db->select('*');
         $this->db->from('tbl_unidade_usuario');
         $this->db->where('id_usuario', $id_tecnico);
-        $this->db->order_by('nome_usuario');
+        // $this->db->order_by('nome_usuario');
         $query = $this->db->get();
         return $query->result_array();
     }

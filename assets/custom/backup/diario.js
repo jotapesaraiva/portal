@@ -23,7 +23,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : href+"/backup/fitas/table_lc/diario",//json datasource
+             url : origin+"/backup/fitas/table_lc/diario",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");
@@ -64,7 +64,7 @@ $(document).ready(function() {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
         },
         "ajax": {
-             url : href+"/backup/fitas/table_cl/diario",//json datasource
+             url : origin+"/backup/fitas/table_cl/diario",//json datasource
             type : 'GET', //type of method  , by default would be get
             error: function(){ // error handling code
                 $("#employee_grid_processing").css("display","none");
