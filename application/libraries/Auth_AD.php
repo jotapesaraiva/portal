@@ -194,6 +194,8 @@ class Auth_AD
             $modulos = $this->ci->usuario_model->modulos_grupo_nome($group);
         } else {
             $modulos = "Sem Grupo";
+            log_message('error', 'Auth_AD: O Usuário não possui grupo no AD.');
+            show_error('O Usuário não possui grupo no AD<br>Verirficar se no AD <br> o campo escritorio está definido com os seguintes grupos:<br>CGRE-Rede<br>CGDA<br>CGPS<br>CGAQ-Manutenção<br>CGAQ-SACS<br>CGAQ-Tecnico');
         }
         // vd($modulos->result());
         $mod = array();
