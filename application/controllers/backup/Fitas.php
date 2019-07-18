@@ -103,7 +103,7 @@ class Fitas extends CI_Controller {
 
         if($value == 'diario') {
             $resultado = $this->fitas_model->diario_library_cofre();
-        } else{
+        } else {
             $resultado = $this->fitas_model->mensal_library_cofre();
         }
 
