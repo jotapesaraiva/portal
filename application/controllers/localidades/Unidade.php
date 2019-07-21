@@ -259,10 +259,6 @@ class Unidade extends CI_Controller {
     }
 
 
-
-
-
-
     public function unidade_view($id) {
         $unidade  = $this->unidade_model->listar_unidade($id);
         $link     = $this->unidade_model->listar_link($id);
