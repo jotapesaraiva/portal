@@ -25,7 +25,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <head>
         <meta charset="utf-8" />
-        <title>Portal Produção</title>
+        <title>NOC</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="" name="description" />
@@ -61,7 +61,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="logo">
             <a href="#">
                 <img style="text-shadow: 0px 0px 5px black;" src="<?php echo base_url(); ?>/assets/pages/img/logo.png" alt="" width="10%" /> </a>
-                <h2 style="color: white;text-shadow: 3px 3px 5px #404040; "><b>Portal Produção<b></h2>
+                <h2 style="color: white;text-shadow: 3px 3px 5px #404040;"><b>NOC<b></h2>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->
@@ -108,7 +108,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <?php echo form_close(); ?>
             <!-- END LOGIN FORM -->
         </div>
-        <div class="copyright"> 2018 © CGRE-Produção. Portal de monitoramento. </div>
+        <div class="copyright"> 2018 © CGRE-Produção. Network Operation Center. </div>
         <!--[if lt IE 9]>
 <script src="<?php echo base_url(); ?>assets/global/plugins/respond.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/global/plugins/excanvas.min.js"></script>

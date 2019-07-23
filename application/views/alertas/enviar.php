@@ -126,7 +126,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <div class="row">
                                             <div class="col-md-offset-3 col-md-9">
                                                 <?php echo form_submit(array('class'=> 'btn green','id' => 'submit', 'value' => 'Enviar')); ?>
-                                                <?php echo form_button(array('type' => 'button', 'class' => 'btn default', 'content' => 'Cancelar', 'onClick' => "window.location.href='https://producaoh.sefa.pa.gov.br/portal/dashboard/producao'")); ?>
+                                                <?php echo form_button(array('type' => 'button', 'class' => 'btn default', 'content' => 'Cancelar', 'onClick' => "window.location.href='".base_url('dashboard/producao')."'")); ?>
                                             </div>
                                         </div>
                                     </div>
