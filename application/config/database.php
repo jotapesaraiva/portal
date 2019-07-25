@@ -177,9 +177,9 @@ $db['mantis'] = array(
 
 $db['sobreaviso'] = array(
 	'dsn'	=> '',
-	'hostname' => '10.3.3.96',
+	'hostname' => '10.3.1.142',
 	'username' => 'root',
-	'password' => '!!GR&m10',
+	'password' => '!!GR&m10!',
 	'database' => 'sobreaviso',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
