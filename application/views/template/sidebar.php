@@ -672,42 +672,77 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.102:7001/console/login/LoginForm.jsp', 'Extranet 11G'); ?>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <span class="title">Extranet</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.3.1.163:7001/console/login/LoginForm.jsp', 'Portal NFC'); ?>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.3.1.102:7001/console/login/LoginForm.jsp', '11G'); ?>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.3.1.13:7001/console/login/LoginForm.jsp', '12C'); ?>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.3.1.248:7001/console/login/LoginForm.jsp', 'APP Pub 12C'); ?>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.13:7001/console/login/LoginForm.jsp', 'Extranet 12C'); ?>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <span class="title">Intranet</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.3.1.190:7001/console/login/LoginForm.jsp', '11G'); ?>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.3.1.213:7001/console/login/LoginForm.jsp', '12C'); ?>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.3.1.177:7001/console/login/LoginForm.jsp', 'API 12C'); ?>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.104:7001/console/login/LoginForm.jsp', 'Intranet 11G'); ?>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <span class="title">Processamento</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.3.1.106:7001/console/login/LoginForm.jsp', '11G'); ?>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.3.1.17:7001/console/login/LoginForm.jsp', '12C'); ?>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.213:7001/console/login/LoginForm.jsp', 'Intranet 12C'); ?>
-                                </li>
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.106:7001/console/login/LoginForm.jsp', 'Processamento 11G'); ?>
-                                </li>
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.17:7001/console/login/LoginForm.jsp', 'Processamento 12C'); ?>
-                                </li>
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.190:7001/console/login/LoginForm.jsp', 'SiatWeb'); ?>
-                                </li>
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.163:7001/console/login/LoginForm.jsp', 'Portal NFC'); ?>
-                                </li>
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.2.3.181:7001/console/login/LoginForm.jsp', 'DAE PRODEPA'); ?>
-                                </li>
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.172:7001/console/login/LoginForm.jsp', 'DAE SEFA'); ?>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <span class="title">DAE</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.2.3.181:7001/console/login/LoginForm.jsp', 'PRODEPA'); ?>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <?php echo anchor_popup('http://10.3.1.172:7001/console/login/LoginForm.jsp', 'SEFA'); ?>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li class="nav-item ">
                                     <?php echo anchor_popup('http://10.3.1.161:7001/console/login/LoginForm.jsp', 'SEFA NET'); ?>
                                 </li>
-                                <li class="nav-item ">
-                                    <?php echo anchor_popup('http://10.3.1.57:7001/console', 'BO'); ?>
-                                </li>
+<!--                                 <li class="nav-item ">
+                                    <?php //echo anchor_popup('http://10.3.1.57:7001/console', 'BO'); ?>
+                                </li> -->
                             </ul>
                         </li>
                         <li class="nav-item  ">
@@ -718,7 +753,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </a>
                             <ul class="sub-menu">
                                 <li class="nav-item">
-
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="icon-puzzle"></i>
+                                        <span class="title">Externo</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <?php echo anchor_popup('http://10.3.3.102:7001/console', 'Interno 12c'); ?>
+                                        </li>
+                                        <li class="nav-item">
+                                            <?php echo anchor_popup('http://10.3.3.236:7001/console', 'APP 11g'); ?>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="icon-puzzle"></i>
+                                        <span class="title">Interno</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <?php echo anchor_popup('http://10.3.3.215:7001/console', 'API 12c'); ?>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <?php echo anchor_popup('http://10.3.3.17:7001/console', 'PROC 12c'); ?>
+                                </li>
+                                <li class="nav-item">
+                                    <?php echo anchor_popup('http://10.3.3.125:7001/console', 'API DAE 12c'); ?>
+                                </li>
+                                <li class="nav-item">
+                                    <?php echo anchor_popup('http://10.3.3.206:7001/console', 'NFC 11g'); ?>
                                 </li>
                             </ul>
                         </li>
@@ -730,7 +798,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </a>
                             <ul class="sub-menu">
                                 <li class="nav-item">
-
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="icon-puzzle"></i>
+                                        <span class="title">Externo</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <?php echo anchor_popup('http://10.3.3.180:7001/console', '12c'); ?>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="icon-puzzle"></i>
+                                        <span class="title">Interno</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <?php echo anchor_popup('http://10.3.1.79:7001/console', '11g'); ?>
+                                        </li>
+                                        <li class="nav-item">
+                                            <?php echo anchor_popup('http://10.3.4.166:7001/console', 'APP 12c'); ?>
+                                        </li>
+                                        <li class="nav-item">
+                                            <?php echo anchor_popup('http://10.3.4.162:7001/console', 'API 12c'); ?>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <?php echo anchor_popup('http://10.3.4.168:7001/console', 'PROC 12c'); ?>
                                 </li>
                             </ul>
                         </li>
@@ -742,7 +840,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </a>
                             <ul class="sub-menu">
                                 <li class="nav-item">
-
+                                    <?php echo anchor_popup('http://10.3.3.103:7001/console', 'Interno 12c'); ?>
                                 </li>
                             </ul>
                         </li>
