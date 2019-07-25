@@ -21,7 +21,7 @@ class Mantis_model extends CI_Model {
                         IN_NM_USUARIO => '".$params['usuario']."',
                         IN_NM_PROJETO => '".$params['projeto']."',
                         IN_RESUMO => '".$params['servico']."',
-                        IN_DESCRICAO => '".$params['detalhe']."',
+                        IN_DESCRICAO => q'[".$params['detalhe']."]',
                         IN_CATEGORIA => '".$params['categoria']."',
                         ".$personalizado."
                         OUT_NUMERO => NUM_CASO);

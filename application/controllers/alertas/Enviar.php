@@ -46,7 +46,7 @@ class Enviar extends CI_Controller {
                                 \nAcionamento: ".$alerta['acionamento']."
                                 \nPode Interromper: ".$alerta['interromper']."
                                 \nDescrição de Serviço: ".$alerta['desc_servico']."
-                                \nInformação Adicional:".str_replace("'", " ", $alerta['info_adicional']);
+                                \nInformação Adicional:".$alerta['info_adicional'];
         }
         $dados['projetos'] = $this->select_option();
         $dados['form'] = "modelo_cprojeto";
