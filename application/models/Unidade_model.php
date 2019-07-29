@@ -93,7 +93,7 @@ class Unidade_model extends CI_Model{
 
     public function delete_unidade_telefone($id){
         // $this->db = $this->load->database('default',true);
-        $this->db->where('id_unidade', $id);
+        $this->db->where('id_telefone', $id);
         $this->db->delete('tbl_unidade_telefone');
     }
 

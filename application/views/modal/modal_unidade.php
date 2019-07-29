@@ -68,7 +68,7 @@
                         </div>
                         <div id="wrapper_telefone_add">
                         <div class="form-group">
-                            <input type="hidden" name="id_telefone[]"/>
+                            <input type="hidden" id="telefone_0" name="id_telefone[]"/>
                             <label class="control-label col-md-3">Telefone :</label>
                             <div class="col-md-9">
                                 <div class="input-group">
@@ -86,7 +86,7 @@
                         </div>
                         <div id="wrapper_celular_add">
                         <div class="form-group">
-                            <input type="hidden" name="id_celular[]"/>
+                            <input type="hidden" id="celular_0" name="id_celular[]"/>
                             <label class="control-label col-md-3">Celular :</label>
                             <div class="col-md-9">
                                 <div class="input-group">
@@ -104,7 +104,7 @@
                         </div>
                         <div id="wrapper_voip_add">
                             <div class="form-group">
-                                <input type="hidden" value="" name="id_voip[]"/>
+                                <input type="hidden" id="voip_0" name="id_voip[]"/>
                                 <label class="control-label col-md-3">VoIP :</label>
                                 <div class="col-md-9">
                                     <div class="input-group">
@@ -127,6 +127,7 @@
                         </div>
                         <div id="wrapper_link_add">
                             <div class="form-group">
+                                <input type="hidden" id="link_0" name="id_link[]"/>
                                 <label class="control-label col-md-3">Link :</label>
                                 <div class="col-md-9">
                                     <div class="input-group">
