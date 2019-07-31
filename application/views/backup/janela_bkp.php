@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
                   <div class="portlet-body">
                     <!-- 16:9 aspect ratio -->
                     <div class="embed-responsive embed-responsive-4by3">
-                      <iframe class="embed-responsive-item" src="https://producaoh.sefa.pa.gov.br/portal/backup/janela_bkp/janela"></iframe>
+                      <iframe class="embed-responsive-item" src="<?php echo base_url()?>backup/janela_bkp/janela"></iframe>
                     </div>
                   </div>
                 </div>

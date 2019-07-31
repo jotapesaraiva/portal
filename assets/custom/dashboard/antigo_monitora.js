@@ -34,5 +34,5 @@ atualiza_alertas_monitora();
             displayResources.html(output);
            }
         });
-            setTimeout('atualiza_alertas_monitora()', 30000);
+            setTimeout('atualiza_alertas_monitora()', 30000);//30segundos
     }

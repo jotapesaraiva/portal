@@ -192,7 +192,7 @@ class Link_model extends CI_Model{
 
     public function ticket($mes) {
         $this->db->select('Month(atualizacao) as mes, count(ticket) as numero');
-        $this->db->from('ebt_grc');
+        $this->db->from('ebt_grc_teste');
         $this->db->where('year(atualizacao)',$mes);
         $this->db->group_by('Month(atualizacao)');
         $this->db->order_by('mes', 'ASC');
@@ -203,7 +203,7 @@ class Link_model extends CI_Model{
 
     public function ticket_anual() {
         $this->db->select('year(atualizacao) as ano, count(ticket) as numero');
-        $this->db->from('ebt_grc');
+        $this->db->from('ebt_grc_teste');
         $this->db->where('year(atualizacao) >=','2010');
         $this->db->group_by('year(atualizacao)');
         $this->db->order_by('ano', 'ASC');
@@ -214,7 +214,7 @@ class Link_model extends CI_Model{
 
     public function causa($mes,$ano) {
         $this->db->select('causa, count(causa) as numero');
-        $this->db->from('ebt_grc');
+        $this->db->from('ebt_grc_teste');
         if($mes != 'null'){
             $this->db->where('Month(atualizacao)',$mes);
         }
@@ -228,7 +228,7 @@ class Link_model extends CI_Model{
 
     public function tempo($mes,$ano) {
         $this->db->select('centro, sum(TIMESTAMPDIFF(HOUR,abertura,atualizacao)) AS tempo');
-        $this->db->from('ebt_grc');
+        $this->db->from('ebt_grc_teste');
         $this->db->where('Month(atualizacao)',$mes);
         $this->db->where('year(atualizacao)',$ano);
         $this->db->group_by('centro');
@@ -241,7 +241,7 @@ class Link_model extends CI_Model{
 
     public function localidade($mes,$ano) {
         $this->db->select('centro, count(ticket) as numero');
-        $this->db->from('ebt_grc');
+        $this->db->from('ebt_grc_teste');
         if($mes != 'null'){
             $this->db->where('Month(atualizacao)',$mes);
         }

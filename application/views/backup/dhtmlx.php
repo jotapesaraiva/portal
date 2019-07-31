@@ -163,7 +163,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 
     <script src="<?php echo base_url() ?>static/lib/dhtmlxScheduler/codebase/ext/dhtmlxscheduler_active_links.js"></script>
     <script type="text/javascript" charset="utf-8">
-
+        var origin = window.location.origin;
         //===============
         //Set MiniCalendar
         //===============
@@ -441,7 +441,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
                 //===============
 
                 //scheduler.load("./db/genjson.php", "json");
-                scheduler.load("https://producaoh.sefa.pa.gov.br/portal/backup/janela_bkp/data"); //XML
+                scheduler.load(origin+"/backup/janela_bkp/data"); //XML
                 /*,function(){ //XML
                     alert("Dados Carregados com Sucesso!");
                 });

@@ -397,6 +397,9 @@ class Unidade extends CI_Controller {
 
     public function unidades_update() {
        $this->unidades_validate();
+       //
+       //#######################TELEFONE##########################//
+       //
        for ($i=0; $i < count($this->input->post('id_telefone')); $i++) {
             if($this->input->post('id_telefone')[$i] == '' and $this->input->post('telefone')[$i] != ''){
                     //ADD vd('PASSOU AQUI 1');

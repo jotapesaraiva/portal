@@ -251,68 +251,79 @@ class Fornecedor extends CI_Controller {
 
     public function fornecedor_update(){
        $this->fornecedor_validate();
-
+        //
         //#######################TELEFONE##########################//
-        if(!empty($this->input->post('telefone'))) {
-           for($i = 0; $i < count($this->input->post('telefone')); $i++) {
-              if(!empty($this->input->post('telefone')[$i])) {
-                 $telefone_where = array (
-                           'numero_telefone' => $this->input->post('telefone')[$i],
-                           'id_tipo_categoria_telefone' => 1,
-                 );
-                 if($this->input->post('id_telefone')[$i] != "") {
-                    $telefone_dados = array (
-                          'id_telefone' => $this->input->post('id_telefone')[$i],
-                          'id_fornecedor' => $this->input->post('id'),
+        //
+       for ($i=0; $i < count($this->input->post('id_telefone')); $i++) {
+            if($this->input->post('id_telefone')[$i] == '' and $this->input->post('telefone')[$i] != ''){
+                    //ADD vd('PASSOU AQUI 1');
+                    $telefone_where = array (
+                              'numero_telefone' => $this->input->post('telefone')[$i],
+                              'id_tipo_categoria_telefone' => 1,
                     );
-                 $this->telefonia_model->update_telefone(array ('id_telefone' => $this->input->post('id_telefone')[$i]), $telefone_where);
-                 $this->fornecedor_model->update_fornecedor_telefone(array ($this->input->post('id')), $telefone_dados);
-                 } else {
                     $id_telefone = $this->telefonia_model->salvar_telefone($telefone_where);
                     $fornecedor_telefone = array (
                           'id_telefone' => $id_telefone,
                           'id_fornecedor' =>  $this->input->post('id'),
                     );
                     $this->fornecedor_model->salvar_fornecedor_telefone($fornecedor_telefone);
-                    }
-              } else {
-                // echo "array com value vazio";
-                $id_telefone = $this->input->post('id_telefone')[$i];
-                $this->fornecedor_model->delete_fornecedor_telefone($id_telefone);
-                $this->telefonia_model->delete_telefone($id_telefone);
-              }
-           }
-       }
-       //#######################CELULAR##########################//
-       if(!empty($this->input->post('celular'))) {
-          for($i = 0; $i < count($this->input->post('celular')); $i++) {
-              if(!empty($this->input->post('celular')[$i])) {
-                 $celular_where = array (
-                           'numero_telefone' => $this->input->post('celular')[$i],
-                           'id_tipo_categoria_telefone' => 2,
-                 );
-                 if($this->input->post('id_celular')[$i] != "") {
-                    $celular_dados = array (
-                          'id_telefone' => $this->input->post('id_celular')[$i],
-                          'id_fornecedor' => $this->input->post('id'),
+            }elseif($this->input->post('id_telefone')[$i] != '' and $this->input->post('telefone')[$i] != ''){
+                    //UPDATE vd('PASSOU AQUI 2');
+                    $telefone_where = array (
+                              'numero_telefone' => $this->input->post('telefone')[$i],
+                              'id_tipo_categoria_telefone' => 1,
                     );
-                 $this->telefonia_model->update_telefone(array ('id_telefone' =>  $this->input->post('id_celular')[$i]), $celular_where);
-                 $this->fornecedor_model->update_fornecedor_telefone(array ($this->input->post('id')), $celular_dados);
-                 } else {
+                    $this->telefonia_model->update_telefone(array ('id_telefone' => $this->input->post('id_telefone')[$i]), $telefone_where);
+            }elseif($this->input->post('id_telefone')[$i] != '' and $this->input->post('telefone')[$i] == ''){
+                    //DELETE vd('PASSOU AQUI 3');
+                    $id_telefone = $this->input->post('id_telefone')[$i];
+                    $this->fornecedor_model->delete_fornecedor_telefone($id_telefone);
+                    $this->telefonia_model->delete_telefone($id_telefone);
+            }elseif($this->input->post('id_telefone')[$i] == '' and  $this->input->post('telefone')[$i] == ''){
+                    //NADA vd('PASSOU AQUI 4');
+            }
+           // vd('NÂO PASSOU PELO IF');
+       }
+       //
+       //#######################CELULAR##########################//
+       //
+       for ($i=0; $i < count($this->input->post('id_celular')); $i++) {
+            if($this->input->post('id_celular')[$i] == '' and $this->input->post('celular')[$i] != ''){
+                    //ADD vd('PASSOU AQUI 1');
+                    $celular_where = array (
+                              'numero_telefone' => $this->input->post('celular')[$i],
+                              'id_tipo_categoria_telefone' => 2,
+                    );
                     $id_celular = $this->telefonia_model->salvar_telefone($celular_where);
                     $fornecedor_telefone = array (
                           'id_telefone' => $id_celular,
                           'id_fornecedor' =>  $this->input->post('id'),
                     );
                     $this->fornecedor_model->salvar_fornecedor_telefone($fornecedor_telefone);
-              }
-          } else {
-           $id_celular = $this->input->post('id_celular')[$i];
-           $this->fornecedor_model->delete_fornecedor_telefone($id_celular);
-           $this->telefonia_model->delete_telefone($id_celular);
-          }
-        }
+            }elseif($this->input->post('id_celular')[$i] != '' and $this->input->post('celular')[$i] != ''){
+                    //UPDATE vd('PASSOU AQUI 2');
+                    $celular_where = array (
+                              'numero_telefone' => $this->input->post('celular')[$i],
+                              'id_tipo_categoria_telefone' => 2,
+                    );
+                       // $celular_dados = array (
+                       //       'id_telefone' => $this->input->post('id_celular')[$i],
+                       //       'id_unidade' => $this->input->post('id_unidade'),
+                       // );
+                    $this->telefonia_model->update_telefone(array ('id_telefone' => $this->input->post('id_celular')[$i]), $celular_where);
+                    // $this->unidade_model->update_unidade_telefone(array ($this->input->post('id_unidade')), $celular_dados);
+            }elseif($this->input->post('id_celular')[$i] != '' and $this->input->post('celular')[$i] == ''){
+                    //DELETE vd('PASSOU AQUI 3');
+                    $id_celular = $this->input->post('id_celular')[$i];
+                    $this->fornecedor_model->delete_fornecedor_telefone($id_celular);
+                    $this->telefonia_model->delete_telefone($id_celular);
+            }elseif($this->input->post('id_celular')[$i] == '' and  $this->input->post('celular')[$i] == ''){
+                    //NADA vd('PASSOU AQUI 4');
+            }
+           // vd('NÂO PASSOU PELO IF');
        }
+       //
+       //
 
        if($this->input->post('status') == 'on') {
          $status = '1';
