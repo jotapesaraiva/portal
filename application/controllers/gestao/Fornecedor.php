@@ -12,7 +12,7 @@ class Fornecedor extends CI_Controller {
         $script['footerinc'] = '
             <script src="'.base_url().'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="'.base_url().'assets/custom/gerencias/fornecedor.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/custom/gestao/fornecedor.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>';
@@ -31,14 +31,14 @@ class Fornecedor extends CI_Controller {
         $session['username'] = $this->session->userdata('username');
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
-        $this->breadcrumbs->push('<span>Fornecedor</span>', '/gerencias/fornecedor');
+        $this->breadcrumbs->push('<span>Gestão</span>', '/gestao');
+        $this->breadcrumbs->push('<span>Fornecedor</span>', '/gestao/fornecedor');
 
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('gerencias/fornecedor');
+        $this->load->view('gestao/fornecedor');
         $this->load->view('modal/modal_fornecedor',$dados);
         $this->load->view('modal/modal_fornecedor_view');
 

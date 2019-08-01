@@ -14,7 +14,7 @@ class Contato extends CI_Controller {
       $script['script'] = '
             <script src="' . base_url() . 'assets/custom/form-input-mask.js" type="text/javascript"></script>';
       $script['footerinc'] = '
-          <script src="' . base_url() . 'assets/custom/gerencias/contato.js" type="text/javascript"></script>
+          <script src="' . base_url() . 'assets/custom/gestao/contato.js" type="text/javascript"></script>
           <script src="' . base_url() . 'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
           <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
       ';
@@ -26,14 +26,14 @@ class Contato extends CI_Controller {
         $session['username'] = $this->session->userdata('username');
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
-        $this->breadcrumbs->push('<span>Contatos</span>', '/gerencias/contato');
+        $this->breadcrumbs->push('<span>Gestão</span>', '/gestao');
+        $this->breadcrumbs->push('<span>Contatos</span>', '/gestao/contato');
 
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('gerencias/contatos');
+        $this->load->view('gestao/contatos');
         $this->load->view('modal/modal_contatos',$dados);
 
         $this->load->view('template/footer',$script);

@@ -59,66 +59,66 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <h3>CONSULTA</h3>
                 </li>
                 <!--############# ABA GERENCIA ############-->
-                <li class="nav-item <?php echo active_segment(1,'gerencias'); ?>">
+                <li class="nav-item <?php echo active_segment(1,'gestao'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-briefcase"></i>
-                        <span class="title">Gerências</span>
-                        <?php echo span_segment(1,'gerencias'); ?>
+                        <span class="title">Gestão</span>
+                        <?php echo span_segment(1,'gestao'); ?>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
                         <!--############# ABA GERENCIA > Tecnicos ############-->
                         <?php if($this->auth_ad->level_access('tecnico', group_session($this->session->userdata('username'))) ){?>
                         <li class="nav-item <?php echo active_segment(2,'tecnico'); ?>">
-                            <?php echo anchor('gerencias/tecnico', '<i class=" icon-wrench"></i> Tecnicos', 'class="nav-link"')?>
+                            <?php echo anchor('gestao/tecnico', '<i class=" icon-wrench"></i> Tecnicos', 'class="nav-link"')?>
                             <?php echo span_segment(2,'tecnico'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Fornecedores ############-->
                         <?php } if($this->auth_ad->level_access('fornecedor',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'fornecedor'); ?>">
-                            <?php echo anchor('gerencias/fornecedor', '<i class="fa fa-industry"></i> Fornecedores', 'class="nav-link"')?>
+                            <?php echo anchor('gestao/fornecedor', '<i class="fa fa-industry"></i> Fornecedores', 'class="nav-link"')?>
                             <?php echo span_segment(2,'fornecedor'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Contatos ############-->
                         <?php } if($this->auth_ad->level_access('contato',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'contato'); ?>">
-                            <?php echo anchor('gerencias/contato', '<i class="fa fa-phone"></i> Contatos', 'class="nav-link"')?>
+                            <?php echo anchor('gestao/contato', '<i class="fa fa-phone"></i> Contatos', 'class="nav-link"')?>
                             <?php echo span_segment(2,'contato'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Servidores ############-->
                         <?php } if($this->auth_ad->level_access('colaborador',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'colaborador'); ?>">
-                            <?php echo anchor('gerencias/colaborador', '<i class="fa fa-institution"></i> Colaborador SEFA', 'class="nav-link"')?>
+                            <?php echo anchor('gestao/colaborador', '<i class="fa fa-institution"></i> Colaborador SEFA', 'class="nav-link"')?>
                             <?php echo span_segment(2,'colaborador'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Acessos ############-->
                         <?php } if($this->auth_ad->level_access('acessos',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'acessos'); ?>">
-                            <?php echo anchor('gerencias/acessos', '<i class="fa fa-user-secret"></i> Acessos', 'class="nav-link"')?>
+                            <?php echo anchor('gestao/acessos', '<i class="fa fa-user-secret"></i> Acessos', 'class="nav-link"')?>
                             <?php echo span_segment(2,'acessos'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Voucher ############-->
                         <?php } if($this->auth_ad->level_access('voucher',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'voucher'); ?>">
-                            <?php echo anchor('gerencias/voucher', '<i class="fa fa-cab"></i> Voucher', 'class="nav-link"')?>
+                            <?php echo anchor('gestao/voucher', '<i class="fa fa-cab"></i> Voucher', 'class="nav-link"')?>
                             <?php echo span_segment(2,'voucher'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Agendamento ############-->
                         <?php } if($this->auth_ad->level_access('agendamento',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'agendamento'); ?>">
-                            <?php echo anchor('gerencias/agendamento', '<i class="fa fa-calendar-check-o"></i> Agendamento', 'class="nav-link"')?>
+                            <?php echo anchor('gestao/agendamento', '<i class="fa fa-calendar-check-o"></i> Agendamento', 'class="nav-link"')?>
                             <?php echo span_segment(2,'agendamento'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Ativos ############-->
                         <?php } if($this->auth_ad->level_access('ativos',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'ativos'); ?>">
-                            <?php echo anchor('gerencias/ativos', '<i class="fa fa-sitemap"></i> Ativos', 'class="nav-link"')?>
+                            <?php echo anchor('gestao/ativos', '<i class="fa fa-sitemap"></i> Ativos', 'class="nav-link"')?>
                             <?php echo span_segment(2,'ativos'); ?>
                         </li>
                         <!--############# ABA GERENCIA > Contratos ############-->
                         <?php } if($this->auth_ad->level_access('contratos',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'contratos'); ?>">
-                            <?php echo anchor('gerencias/contratos', '<i class="fa fa-book"></i> contratos', 'class="nav-link"')?>
+                            <?php echo anchor('gestao/contratos', '<i class="fa fa-book"></i> contratos', 'class="nav-link"')?>
                             <?php echo span_segment(2,'contratos'); ?>
                         </li>
                         <?php }?>
@@ -580,9 +580,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <li class="nav-item ">
                             <?php echo anchor_popup('http://libraryhp.sefa.pa.gov.br/login.ssi', 'Library HP'); ?>
                         </li>
-                        <!--<li class="nav-item">
-                            <?php //echo anchor_popup('http://librarydell.sefa.pa.gov.br', 'Library Dell'); ?>
-                        </li> -->
+                        <li class="nav-item">
+                            <?php echo anchor_popup('http://libraryibm.sefa.pa.gov.br', 'Library IBM'); ?>
+                        </li>
                     </ul>
                 </li>
 
@@ -654,6 +654,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </li>
                         <li class="nav-item ">
                             <?php echo anchor_popup('http://rede.sefa.pa.gov.br/portalrede/index.html', 'Portal Rede'); ?>
+                        </li>
+                        <li class="nav-item ">
+                            <?php echo anchor_popup('http://x-oc-config.sefa.pa.gov.br/gitlab/users/sign_in', 'GitLab'); ?>
                         </li>
                     </ul>
                 </li>

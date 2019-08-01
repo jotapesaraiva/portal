@@ -24,7 +24,7 @@ class Agendamento extends CI_Controller {
             <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
             <link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['footerinc'] = '
-            <script src="'.base_url().'assets/custom/gerencias/agendamento.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/custom/gestao/agendamento.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
@@ -40,14 +40,14 @@ class Agendamento extends CI_Controller {
         $modal = array( 'grupos' => $grupos,);
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
-        $this->breadcrumbs->push('<span>Agendamento</span>', '/gerencias/agendamento');
+        $this->breadcrumbs->push('<span>Gestão</span>', '/gestao');
+        $this->breadcrumbs->push('<span>Agendamento</span>', '/gestao/agendamento');
 
         $this->load->view('template/header', $css);
         $this->load->view('template/navbar', $session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('gerencias/agendamento');
+        $this->load->view('gestao/agendamento');
         $this->load->view('modal/modal_agendamento', $modal);
 
         $this->load->view('template/footer', $script);
@@ -236,18 +236,18 @@ class Agendamento extends CI_Controller {
         $session['username'] = $this->session->userdata('username');
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
-        $this->breadcrumbs->push('<span>Agendamento Alerta</span>', '/gerencias/agendamento_alerta');
+        $this->breadcrumbs->push('<span>Gestão</span>', '/gestao');
+        $this->breadcrumbs->push('<span>Agendamento Alerta</span>', '/gestao/agendamento_alerta');
 
         $this->load->view('template/header', $css);
         $this->load->view('template/navbar', $session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('gerencias/table_agendamento_alerta');
+        $this->load->view('gestao/table_agendamento_alerta');
 
         $this->load->view('template/footer', $script);
     }
 }
 
 /* End of file Agendamento.php */
-/* Location: ./application/controllers/gerencias/Agendamento.php */
+/* Location: ./application/controllers/gestao/Agendamento.php */

@@ -14,7 +14,7 @@ class Acessos extends CI_Controller {
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/gerencias/senhas.js" type="text/javascript"></script>';
+            <script src="' . base_url() . 'assets/custom/gestao/senhas.js" type="text/javascript"></script>';
         $script['script'] = '';
         $css['headerinc'] = '
             <link href="' . base_url() . 'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
@@ -22,8 +22,8 @@ class Acessos extends CI_Controller {
         $session['username'] = $this->session->userdata('username');
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
-        $this->breadcrumbs->push('<span>Acessos</span>', '/gerencias/acessos');
+        $this->breadcrumbs->push('<span>Gestão</span>', '/gestao');
+        $this->breadcrumbs->push('<span>Acessos</span>', '/gestao/acessos');
 
         $this->load->view('template/header', $css);
         $this->load->view('template/navbar', $session);
@@ -32,7 +32,7 @@ class Acessos extends CI_Controller {
         $data['servidor'] = $this->table_servidor();
         $data['servico'] = $this->table_servico();
 
-        $this->load->view('gerencias/acessos', $data);
+        $this->load->view('gestao/acessos', $data);
         $this->load->view('modal/modal_acessos');
 
         $this->load->view('template/footer', $script);
@@ -192,4 +192,4 @@ class Acessos extends CI_Controller {
 }
 
 /* End of file Acessos.php */
-/* Location: ./application/controllers/gerencias/Acessos.php */
+/* Location: ./application/controllers/gestao/Acessos.php */

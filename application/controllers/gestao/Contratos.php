@@ -19,7 +19,7 @@ class Contratos extends CI_Controller {
             <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
             <link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['footerinc'] = '
-            <script src="'.base_url().'assets/custom/gerencias/contratos.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/custom/gestao/contratos.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/jquery-mask-plugin-master/dist/jquery.mask.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
@@ -38,14 +38,14 @@ class Contratos extends CI_Controller {
             'tipos' => $tipos );
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
-        $this->breadcrumbs->push('<span>Contratos</span>', '/gerencias/contratos');
+        $this->breadcrumbs->push('<span>Gestão</span>', '/gestao');
+        $this->breadcrumbs->push('<span>Contratos</span>', '/gestao/contratos');
 
         $this->load->view('template/header', $css);
         $this->load->view('template/navbar', $session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('gerencias/contratos');
+        $this->load->view('gestao/contratos');
         $this->load->view('modal/modal_contratos', $modal);
 
         $this->load->view('template/footer', $script);
@@ -199,4 +199,4 @@ class Contratos extends CI_Controller {
 }
 
 /* End of file Contratos.php */
-/* Location: ./application/controllers/gerencias/Contratos.php */
+/* Location: ./application/controllers/gestao/Contratos.php */

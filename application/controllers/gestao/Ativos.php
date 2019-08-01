@@ -18,7 +18,7 @@ class Ativos extends CI_Controller {
         $this->output->enable_profiler(FALSE);
         $css['headerinc'] = '<link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['footerinc'] = '
-            <script src="' . base_url() . 'assets/custom/gerencias/ativos.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/gestao/ativos.js" type="text/javascript"></script>
             <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '';
 
@@ -37,14 +37,14 @@ class Ativos extends CI_Controller {
         );
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
-        $this->breadcrumbs->push('<span>Ativos</span>', '/gerencias/Ativos');
+        $this->breadcrumbs->push('<span>Gestão</span>', '/gestao');
+        $this->breadcrumbs->push('<span>Ativos</span>', '/gestao/Ativos');
 
         $this->load->view('template/header', $css);
         $this->load->view('template/navbar', $session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('gerencias/ativos');
+        $this->load->view('gestao/ativos');
         $this->load->view('modal/modal_ativos', $modal);
 
         $this->load->view('template/footer', $script);
@@ -173,4 +173,4 @@ class Ativos extends CI_Controller {
 }
 
 /* End of file Ativos.php */
-/* Location: ./application/controllers/gerencias/Ativos.php */
+/* Location: ./application/controllers/gestao/Ativos.php */

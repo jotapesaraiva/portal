@@ -19,21 +19,21 @@ class Voucher extends CI_Controller {
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
             <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/gerencias/voucher.js" type="text/javascript"></script>';
+            <script src="' . base_url() . 'assets/custom/gestao/voucher.js" type="text/javascript"></script>';
         $script['script'] = '
             <script src="' . base_url() . 'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>';
         $session['username'] = $this->session->userdata('username');
         $modal['usuario'] = $this->session->userdata('username');
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
-        $this->breadcrumbs->push('<span>Voucher</span>', '/gerencias/voucher');
+        $this->breadcrumbs->push('<span>Gestão</span>', '/gestao');
+        $this->breadcrumbs->push('<span>Voucher</span>', '/gestao/voucher');
 
         $this->load->view('template/header', $css);
         $this->load->view('template/navbar', $session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('gerencias/voucher');
+        $this->load->view('gestao/voucher');
         $this->load->view('modal/modal_voucher', $modal);
 
         $this->load->view('template/footer', $script);
@@ -175,4 +175,4 @@ class Voucher extends CI_Controller {
 }
 
 /* End of file Voucher.php */
-/* Location: ./application/controllers/gerencias/Voucher.php */
+/* Location: ./application/controllers/gestao/Voucher.php */

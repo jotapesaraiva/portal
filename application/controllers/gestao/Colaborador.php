@@ -15,7 +15,7 @@ class Colaborador extends CI_Controller {
             <link href="' . base_url() . 'assets/multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />';
         $script['footerinc'] = '
             <script src="' . base_url() . 'assets/multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
-            <script src="' . base_url() . 'assets/custom/gerencias/colaborador.js" type="text/javascript"></script>
+            <script src="' . base_url() . 'assets/custom/gestao/colaborador.js" type="text/javascript"></script>
         ';
         $script['script'] = '';
 
@@ -25,14 +25,14 @@ class Colaborador extends CI_Controller {
         $dados = array("unidades" => $unidades, "colaboradores" => $colaboradores);
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
-        $this->breadcrumbs->push('<span>Gerências</span>', '/gerencias');
-        $this->breadcrumbs->push('<span>Servidor</span>', '/gerencias/colaborador');
+        $this->breadcrumbs->push('<span>Gestão</span>', '/gestao');
+        $this->breadcrumbs->push('<span>Servidor</span>', '/gestao/colaborador');
 
         $this->load->view('template/header',$css);
         $this->load->view('template/navbar',$session);
         $this->load->view('template/sidebar');
 
-        $this->load->view('gerencias/colaborador');
+        $this->load->view('gestao/colaborador');
         $this->load->view('modal/modal_colaborador', $dados);
 
         $this->load->view('template/footer',$script);
