@@ -462,6 +462,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php }?>
                     </ul>
                 </li>
+                <li class="nav-item <?php echo active_segment(1,'email');?>">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="fa fa-envelope"></i>
+                        <span class="title">Email</span>
+                        <?php echo span_segment(1,'email'); ?>
+                        <span class="arrow"></span>
+                    </a>
+                </li>
 
                 <!--############# ABA MANTIS ############-->
                 <li class="nav-item <?php echo active_segment(1,'mantis'); ?>">

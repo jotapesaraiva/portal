@@ -93,7 +93,7 @@ class Backup extends CI_Controller {
 
 
     public function table() {
-        $iterator = new FilesystemIterator('/var/www/html/portal/backups');
+        $iterator = new FilesystemIterator('/var/www/html/noc/backups');
         $html = "";
         foreach($iterator as $fileInfo){
             if($fileInfo->isFile()) {//Arquigo
