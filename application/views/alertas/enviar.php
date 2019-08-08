@@ -99,7 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             <input type="text" name="ticket" class="form-control" value="<?php echo $ticket; ?>"> </div>
                                                     </div>
                                                 </div>
-
+                                                 <?php echo form_hidden('vendor', $vendor);?>
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label">Inicio do Chamado</label>
                                                     <div class="col-md-8">

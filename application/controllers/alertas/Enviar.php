@@ -84,6 +84,7 @@ class Enviar extends CI_Controller {
             \nUltimo Posicionamento: ".$detalhe['posicionamento'];
 
             $dados['ticket'] = $detalhe['ticket'];
+            $dados['vendor'] = $detalhe['vendor'];
             $dados['inicio_chamado'] = date('d/m/Y H:i' ,strtotime($detalhe['data_alerta']));
         }
         $dados['projeto'] = "7";
@@ -185,6 +186,7 @@ class Enviar extends CI_Controller {
                 $categoria = 'DADOS';
                 $procedore = 'STP_RELT_CASO_DEMANDAS_LINK';
                 $parametros = "IN_CF_TICKET => '".$this->input->post('ticket')."',
+                               IN_CF_PROVEDOR => '".$this->input->post('vendor')."',
                                IN_CF_INICIO_CHAMADO => '".strtotime(str_replace("/", "-",$this->input->post("inicio_chamado")))."',";
                 $table =$this->input->post('tabela');
                 break;
