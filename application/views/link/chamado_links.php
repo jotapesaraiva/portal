@@ -87,6 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <th>#</th>
                                             <th>Mantis</th>
                                             <th>Localidade</th>
+                                            <th>Provedor</th>
                                             <th>Ticket/Chamado</th>
                                             <th>Data Abertura</th>
                                             <th>Data Fechamento</th>

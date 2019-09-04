@@ -55,6 +55,7 @@ class Chamado_links extends CI_Controller {
           $row[] = $key + 1;
           $row[] = anchor_popup("http://intranet.sefa.pa.gov.br/mantis/view.php?id=".$value['MANTIS']."", $value['MANTIS']);
           $row[] = $value['RESUMO'];
+          $row[] = $value['PROVEDOR'];
           $row[] = "<a href='http://webebt04.embratel.com.br/PORTALGRCTST/troubleticket/tkt_listarhistorico.php?vcontacle=44j5+A0CKaiKEZKgf5bMeVZfqsvrl0AJ4teFsjZMZi/b4=ZS8ec8e/xbFOxpBipHMZ&vlogin=44vvmukhQGO39kGXjMmIMpE5FQV9pRxF4VmouSLb1DRyw=X9FM11Jt0L8=&id_ticket=".htmlentities($value['TICKET'], ENT_QUOTES, 'ISO-8859-1')."' target='_blank'  style='color: rgb(0,0,255)'><font color='374E9E' >".htmlentities($value['TICKET'], ENT_QUOTES, 'ISO-8859-1')." </font></a>";
           $row[] = $value['INICIO_CHAMADO'];
           $row[] = $value['FIM_CHAMADO'];
