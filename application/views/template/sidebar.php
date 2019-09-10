@@ -618,7 +618,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item ">
-                            <?php echo anchor_popup('http://x-oc-zabbix.sefa.pa.ipa/zabbix/', 'Zabbix'); ?>
+                            <?php echo anchor_popup('http://x-oc-zabbix.sefa.pa.gov.br/zabbix/', 'Zabbix'); ?>
                         </li>
                         <li class="nav-item ">
                             <?php echo anchor_popup('https://webebt04.embratel.com.br/PORTALGRCTST/portal/index.php?vcontacle=44S3nLstBc67pclngtz0F0NhQOg8bp3FVmKq+pI5ecspg=hm3OHlUJoRdMZ/ZMbzFn&vlogin=44eEeIsydqbD8u3QhNE/73tWjLpl6eUPv91F3iVuBAJsM=mHZ6V+cEuow=', 'Embratel'); ?>

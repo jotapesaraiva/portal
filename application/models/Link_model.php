@@ -40,7 +40,7 @@ class Link_model extends CI_Model{
     //     return $res;
     // }
 
-    public function calculo_atendimento($data_inicio,$data_final){
+/*    public function calculo_atendimento($data_inicio,$data_final){
         $mantis = $this->load->database('mantis',true);
         $query = $mantis->query("SELECT
                             mbt.id as mantis,
@@ -61,6 +61,37 @@ class Link_model extends CI_Model{
                         left join mantis.mantis_custom_field_string_tb mcf3 on mbt.id=mcf3.bug_id
                         left join mantis.mantis_custom_field_string_tb mcf4 on mbt.id=mcf4.bug_id
                         where mbt.project_id = 521 and mcf1.field_id = 381 and mcf2.field_id = 401 and mcf3.field_id = 361 and (mcf4.field_id = 1541 and mcf4.value in ('Embratel','PRODEPA'))
+                        and mbt.status in (60,80)
+                        and trunc(mbt.date_submitted) between '".$data_inicio."' and '".$data_final."'
+                        order by mcf1.value asc");
+        // echo $portal_ora->last_query();
+        return $query;
+    }
+*/
+
+    public function calculo_atendimento($data_inicio,$data_final){
+        $mantis = $this->load->database('mantis',true);
+        $query = $mantis->query("SELECT
+                            mbt.id as mantis,
+                            substr(regexp_substr(mbt.summary,'-[^'']*'),3) as resumo,
+                            --mbt.summary as resumo,
+                            mcf5.value as provedor,
+                            mcf3.value as ticket,
+                           to_char(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf1.value / 60 / 60 / 24) - 0.125, 'dd/mm/yyyy hh24:mi:ss') as inicio_chamado,
+                           to_char(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf2.value / 60 / 60 / 24) - 0.125,'dd/mm/yyyy hh24:mi:ss') as fim_chamado,
+                            (trunc(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf2.value / 60 / 60 / 24) - 0.125) - trunc(to_date('01-JAN-1970', 'dd-mon-yyyy') + (mcf1.value / 60 / 60 / 24) - 0.125))
+                            || ' dias '  ||
+                            TO_CHAR(to_date('00-00-00', 'hh24:mi:ss')+ to_number((to_date('01-JAN-1970', 'dd-mon-yyyy') +
+                                       (mcf2.value / 60 / 60 / 24) - 0.125) - (to_date('01-JAN-1970', 'dd-mon-yyyy') +
+                                       (mcf1.value / 60 / 60 / 24) - 0.125)), 'hh24:mi:ss') as calculo_horas,
+                            mcf4.value as responsabilidade
+                        from mantis.mantis_bug_tb mbt
+                        left join mantis.mantis_custom_field_string_tb mcf1 on mbt.id=mcf1.bug_id
+                        left join mantis.mantis_custom_field_string_tb mcf2 on mbt.id=mcf2.bug_id
+                        left join mantis.mantis_custom_field_string_tb mcf3 on mbt.id=mcf3.bug_id
+                        left join mantis.mantis_custom_field_string_tb mcf4 on mbt.id=mcf4.bug_id
+                        left join mantis.mantis_custom_field_string_tb mcf5 on mbt.id=mcf5.bug_id
+                        where mbt.project_id = 521 and mcf1.field_id = 381 and mcf2.field_id = 401 and mcf3.field_id = 361 and mcf4.field_id = 1541 and mcf5.field_id = 3901 --  and (mcf4.field_id = 1541 and mcf4.value in ('Embratel','PRODEPA'))
                         and mbt.status in (60,80)
                         and trunc(mbt.date_submitted) between '".$data_inicio."' and '".$data_final."'
                         order by mcf1.value asc");

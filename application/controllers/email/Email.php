@@ -7,22 +7,15 @@ class Email extends CI_Controller {
         parent::__construct();
         //Do your magic here
         $this->load->model('email_model');
-        $this->load->library('Auth_AD');
         $this->load->library('highcharts');
-        if($this->auth_ad->is_authenticated()){
-            $username = $this->session->userdata('username');
-        } else {
-            // $data = array('error_message' => 'Efetue o login para acessar o sistema');
-            set_msg('loginErro','Efetue o login para acessar o sistema','erro');
-            redirect('auth/login');
-        }
+
     }
 
     public function index() {
 
         $array_meses3 = array(01 =>"Janeiro",02=>"Fevereiro",03=>"Março",04=>"Abril",05=>"Maio",6=>"Junho",7=>"Julho",8=>"Agosto",9=>"Setembro",10=>"Outubro",11=>"Novembro",12=>"Dezembro");
         $mes = date("m");       // Mês desejado, pode ser por ser obtido por POST, GET, etc.
-        $ano = date("Y");       // Ano atual
+        $ano = '2016';//date("Y");       // Ano atual
         $ultimo_dia = date("t", mktime(0,0,0,$mes,'01',$ano)); // Mágica, plim!
         $data_consulta = $ano.'-'.$mes.'-'.$ultimo_dia;
         // $mes_coleta = (isset($_POST['mes']) ? $_POST['mes'] : $mes);
@@ -35,6 +28,7 @@ class Email extends CI_Controller {
             $array_total = $this->somaMesAtual($mes_coleta,$nano);
         }
         else{*/
+
             $array_dados = $this->get_dados($mes_coleta, $ano);
             $array_total = $this->somaMesAtual($mes_coleta,$ano);
             $email_recebido = number_format(($array_total['total_in']/$array_total['total'])*100,2);

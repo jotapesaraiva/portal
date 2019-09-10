@@ -3,33 +3,76 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Email_model extends CI_Model {
 
-    public function __construct() {
-        parent::__construct();
-        //Load Dependencies
-        // $portal_m = $this->load->database('portalm',true);
+    public function select_mxhero($rota) //$rota -> in ou ->out
+    {
+        $mxhero = $this->load->database('mxhero', TRUE);
+        $mxhero->select("date_format(insert_date,'%Y-%m-%d') as data_coleta, count(*) as qtd,sum(bytes_size/1000000) as size");
+        $mxhero->from('mail_records');
+        $mxhero->where("flow in ('".$rota."','both')");
+        $mxhero->where('insert_date >= CURDATE()');
+        $mxhero->group_by('day(insert_date)');
+        $query = $mxhero->get();
+        return $query->row_array();
     }
 
+    public function select_spam_mxhero()
+    {
+        $mxhero = $this->load->database('mxhero', TRUE);
+        $query = $mxhero->query("
+            select a.data_coleta, a.spam+b.spam total from (
+                    select date_format(insert_date,'%Y-%m-%d') data_coleta, count(distinct(subject)) as SPAM
+                    from mail_records
+                    where state_reason like '%blocklist%'
+                    and insert_date >= CURDATE()
+                    group by day(insert_date)
+                ) a
+                join (
+                    select date_format(insert_date,'%Y-%m-%d') data_coleta, count(*) as SPAM
+                    from mail_records
+                    where state_reason like '%spamassassin%'
+                    and insert_date >= CURDATE()
+                    group by day(insert_date)
+                ) b
+                on a.data_coleta=b.data_coleta
+                ");
+        return $query->row_array();
+    }
+
+    public function insert_mxhero($dados)
+    {
+        $this->db->insert('tbl_indicador_email', $dados);
+        return $this->db->insert_id();
+    }
+
+    public function update_mxhero($where,$dados)
+    {
+        $this->db->update('tbl_indicador_email', $dados, $where);
+        return $this->db->affected_rows();
+    }
+    //
+    //####################################################################################################################################
+    //####################################################################################################################################
+    //####################################################################################################################################
+    //
     // List all your items
     public function indicador_email ($mes,$ano) {
-        $portal_m = $this->load->database('portalm',true);
-        $portal_m->select('month(data_coleta), sum(qtd_in) as total_in, sum(qtd_out) as total_out, sum(qtd_spam) as total_spam');
-        $portal_m->from('tab_indicador_email');
-        $portal_m->where('month(data_coleta)',$mes);
-        $portal_m->where('year(data_coleta)', $ano);
-        $portal_m->group_by('month(data_coleta)');
-        $query = $portal_m->get();
+        $this->db->select('month(data_coleta), sum(qtd_in) as total_in, sum(qtd_out) as total_out, sum(qtd_spam) as total_spam');
+        $this->db->from('tbl_indicador_email');
+        $this->db->where('month(data_coleta)',$mes);
+        $this->db->where('year(data_coleta)', $ano);
+        $this->db->group_by('month(data_coleta)');
+        $query = $this->db->get();
         return $query->row_array();
 
     }
 
     // Add a new item
     public function consulta_banco($mes,$ano) {
-        $portal_m = $this->load->database('portalm',true);
-        $portal_m->select('*');
-        $portal_m->from('tab_indicador_email');
-        $portal_m->where('month(data_coleta)', $mes);
-        $portal_m->Where('year(data_coleta)', $ano);
-        $query = $portal_m->get();
+        $this->db->select('*');
+        $this->db->from('tbl_indicador_email');
+        $this->db->where('month(data_coleta)', $mes);
+        $this->db->Where('year(data_coleta)', $ano);
+        $query = $this->db->get();
         return $query->result_array();
     }
 
