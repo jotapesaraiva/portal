@@ -91,10 +91,10 @@ class Server extends CI_Controller {
               // vd($hostTriggers);
               // vd($hosts);
               foreach ($hosts as $host) {
-                  $hostid = $host->hostid;
-                  $hostname = $host->name;
-                  $hoststatus = $host->status;
-                  $hostip = $host->interfaces[0]->ip;
+                $hostid = $host->hostid;
+                $hostname = $host->name;
+                $hoststatus = $host->status;
+                $hostip = $host->interfaces[0]->ip;
 
                   if($hoststatus == 0){
                     // var_dump(array_key_exists($hostid, $hostTriggers));
@@ -102,9 +102,9 @@ class Server extends CI_Controller {
                         // vd($hostTriggers[$hostid][0]->lastchange);
                           $tempo_fora=time_elapsed_string(date('Y-m-d H:i:s', $hostTriggers[$hostid][0]->lastchange),true);
                           $data_alerta = date('Y-m-d H:i:s' ,$hostTriggers[$hostid][0]->lastchange);
-                          $detalhe = $hostTriggers[$hostid][0]->comments;
                           $count = "0";
                           foreach ($hostTriggers[$hostid] as $event) {
+                                  $detalhe = $event->comments;
                                   $id = $event->triggerid;
                               if ($count++ <= 5 ) {
                                   $priority = $event->priority;
@@ -120,16 +120,16 @@ class Server extends CI_Controller {
                                   break;
                               }
                                 $save_db = array(
-                                  'id' => $id,
-                                  'host_id' => $hostid,
+                                  'id' => $id,//OK
+                                  'host_id' => $hostid,//OK
                                   'servidor' => $hostname,
-                                  'servico' => $description,
-                                  'detalhe' => $detalhe,
+                                  'servico' => $description,//OK
+                                  'detalhe' => $detalhe,//
                                   'data_alerta' => $duration,
                                   'data_ultima_verificacao' => date('Y-m-d H'),
                                   'ip' => $hostip,
                                   'duration' => $tempo_fora,
-                                  'priority' => $priority
+                                  'priority' => $priority//OK
                                 );
                                 print_r($save_db);
                                 array_push($alert,$id);
