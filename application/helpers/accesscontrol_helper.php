@@ -4,8 +4,12 @@ if ( ! function_exists('esta_logado')){
     function esta_logado(){
         $CI =& get_instance();
         $CI->load->library('session');
+        $CI->load->model('usuario_model');
         if($CI->auth_ad->is_authenticated()) {
-            if($CI->auth_ad->level_access($CI->uri->segment(2),$CI->session->userdata('physicaldeliveryofficename'))){
+            $group = $CI->usuario_model->usuario_grupo($CI->session->userdata('username'));
+            // vd($group->nome_grupo);
+            // if($CI->auth_ad->level_access($CI->uri->segment(2),$CI->session->userdata('physicaldeliveryofficename'))){
+            if($CI->auth_ad->level_access($CI->uri->segment(2),$group->nome_grupo)){
                 $username = $CI->session->userdata('username');
                 return TRUE;
             } else {
