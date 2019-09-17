@@ -36,9 +36,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                        </div>
                        <div class="details">
                            <div class="number">
-                               <span><?= $array_total['total_in'] ?></span>
+                               <span ><?php echo $array_total['total_in'];?></span>
                            </div>
-                           <div class="desc"> Total de E-mails Recebidos - <?= $email_recebido?>%</div>
+                           <div class="desc"> Total de E-mails Recebidos - <?php echo porcentagem($array_total['total_in'],array_sum($array_total));?>%</div>
                        </div>
                    </div>
                </div>
@@ -49,9 +49,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                        </div>
                        <div class="details">
                           <div class="number">
-                               <span ><?=$array_total['total_out']?></span>
-                          </div>
-                          <div class="desc">Total de E-mails Enviados  - <?= $email_enviado?>%</div>
+                               <span> <?php echo $array_total['total_out'];?></span>
+                           </div>
+
+                          <div class="desc">Total de E-mails Enviados - <?php echo porcentagem($array_total['total_out'],array_sum($array_total));?>%</div>
                        </div>
                    </div>
                </div>
@@ -62,9 +63,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                        </div>
                        <div class="details">
                           <div class="number">
-                                <span><?=$array_total['total_spam']?></span>
+                                <span><?php echo array_sum($array_total);?></span>
                           </div>
-                          <div class="desc">Total de Spam - <?= $spam?>%</div>
+                          <div class="desc">Total de Spam - <?php echo porcentagem($array_total['total_spam'],array_sum($array_total));?>%</div>
                        </div>
                    </div>
                </div>
@@ -77,28 +78,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           <span class="caption-subject bold uppercase">Indicador de Evolução Diária do Fluxo de E-mails</span>
                           <span class="caption-helper">(Mês Atual)</span>
                       </div>
-                      <div class="tools">
-                        <a href="" class="collapse"> </a>
-                        <a href="" class="reload"> </a>
-                        <a href="" class="remove"> </a>
-                      </div>
                    </div>
                    <div class="portlet-body">
-                      <form id="grafico" name="grafico" method="post" action="<?php $_SERVER['PHP_SELF']?>">
-                            <div  align="center">
-                                <b>Mês</b>
-                                <select name="mes" class="select" onchange='this.form.submit()'>
-                                  <option value='03'>Anterior</option>
-                                  <option value='04'>Atual</option>
-                                </select>
-                            </div>
-                          <!-- Gr⧩co de Menu dos Gr⧩cos de Link-->
-                          <input type='hidden' value='sim' name='rodou'>
-                      </form>
-                      <div id="hc_chart_1"></div>
+                      <div id="grafico"></div>
               </div>
         </div>
     </div>
 </div>
-<!-- End of file email.php -->
-<!-- Location: ./application/views/email/email.php  -->
+<!-- End of file dados.php -->
+<!-- Location: ./application/views/email/dados.php  -->

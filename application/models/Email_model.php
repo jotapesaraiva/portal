@@ -67,13 +67,24 @@ class Email_model extends CI_Model {
     }
 
     // Add a new item
-    public function consulta_banco($mes,$ano) {
+    public function consultaBanco($mes,$ano) {
         $this->db->select('*');
         $this->db->from('tbl_indicador_email');
         $this->db->where('month(data_coleta)', $mes);
         $this->db->Where('year(data_coleta)', $ano);
         $query = $this->db->get();
         return $query->result_array();
+    }
+
+    public function somaMesAtual($mes,$ano)
+    {
+        $this->db->select('sum(qtd_in) as total_in, sum(qtd_out) as total_out, sum(qtd_spam) as total_spam'); //month(data_coleta),
+        $this->db->from('tbl_indicador_email');
+        $this->db->where('month(data_coleta)', $mes);
+        $this->db->Where('year(data_coleta)', $ano);
+        $this->db->group_by('month(data_coleta)');
+        $query = $this->db->get();
+        return $query->row_array();
     }
 
     //Update one item

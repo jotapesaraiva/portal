@@ -469,8 +469,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php echo span_segment(1,'email'); ?>
                         <span class="arrow"></span>
                     </a>
+                    <ul class="sub-menu">
+                        <!--############# ABA EMAIL > Consultar ############-->
+                        <li class="nav-item <?php echo active_segment(2,'consultar'); ?>">
+                            <?php echo anchor('email/consultar', '<i class="fa fa-table"></i> Consultar', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'consultar'); ?>
+                        </li>
+                    </ul>
                 </li>
 
+                <li class="nav-item <?php echo active_segment(1,'impressora');?>">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="fa fa-print"></i>
+                        <span class="title">Impressora</span>
+                        <?php echo span_segment(1,'impressora'); ?>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <!--############# ABA impressora > Consultar ############-->
+                        <li class="nav-item <?php echo active_segment(2,'consultar'); ?>">
+                            <?php echo anchor('impressora/consultar', '<i class="fa fa-table"></i> Consultar', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'consultar'); ?>
+                        </li>
+                        <!--############# ABA impressora > Cadastrar ############-->
+                        <li class="nav-item <?php echo active_segment(2,'cadastrar'); ?>">
+                            <?php echo anchor('impressora/cadastrar', '<i class="fa fa-table"></i> Cadastrar', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'cadastrar'); ?>
+                        </li>
+                    </ul>
+                </li>
                 <!--############# ABA MANTIS ############-->
                 <li class="nav-item <?php echo active_segment(1,'mantis'); ?>">
                     <a href="javascript:;" class="nav-link nav-toggle">

@@ -63,7 +63,7 @@ class Embratel extends CI_Controller {
                     echo "Update".$info['7']."<br>";
                 }
             }
-            vd($insert);
+            // vd($insert);
             fclose($file);
         } else{
             echo "SCRIPT DESABILITADO NO BANCO DE DADOS";
