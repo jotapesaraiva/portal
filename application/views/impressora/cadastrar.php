@@ -71,7 +71,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                <tr>
                                       <th>ID</th>
                                       <th>IP</th>
-                                      <th>Localidade</th>
+                                      <th>Local</th>
+                                      <th>Número Serial</th>
+                                      <th>Modelo</th>
+                                      <th>Type</th>
                                       <th>Unidade</th>
                                       <th>Ação</th>
                                </tr>

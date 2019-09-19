@@ -5,7 +5,7 @@ class Impressora_model extends CI_Model {
 
     public function select_printer()
     {
-        $this->db->select('i.id_impressora, i.ip, i.location, u.nome_unidade');
+        $this->db->select('i.*, u.nome_unidade');
         $this->db->from('tbl_impressora i');
         $this->db->join('tbl_unidade u', 'u.id_unidade=i.id_unidade');
         $query = $this->db->get();

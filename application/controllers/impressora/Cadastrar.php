@@ -58,6 +58,9 @@ class Cadastrar extends CI_Controller {
           $row[] = $value['id_impressora'];
           $row[] = anchor_popup('http://'.$value['ip'].'/cgi-bin/dynamic/printer/config/reports/devicestatistics.html',$value['ip']);
           $row[] = $value['location'];
+          $row[] = $value['serial_number'];
+          $row[] = $value['model'];
+          $row[] = $value['type'];
           $row[] = $value['nome_unidade'];
           if(acesso_admin()):
           $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Editar" onclick="edit_printer('."'".$value['id_impressora']."'".')"><i class="glyphicon glyphicon-pencil"></i></a>
@@ -81,7 +84,11 @@ class Cadastrar extends CI_Controller {
        $this->printer_validate();
        $data = array(
                'ip' => $this->input->post('ip'),
-               'unidade' => $this->input->post('unidade'),
+               'location' => $this->input->post('location'),
+               'serial_number' => $this->input->post('sn'),
+               'model' => $this->input->post('model'),
+               'type' => $this->input->post('type'),
+               'id_unidade' => $this->input->post('unidade'),
            );
        $insert = $this->impressora_model->save_printer($data);
        echo json_encode(array("status" => TRUE));
@@ -96,6 +103,10 @@ class Cadastrar extends CI_Controller {
        $this->printer_validate();
        $data = array(
                'ip' => $this->input->post('ip'),
+               'location' => $this->input->post('location'),
+               'serial_number' => $this->input->post('sn'),
+               'model' => $this->input->post('model'),
+               'type' => $this->input->post('type'),
                'id_unidade' => $this->input->post('unidade'),
            );
        $this->impressora_model->update_printer(array('id_impressora' => $this->input->post('id_impressora')), $data);

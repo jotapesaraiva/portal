@@ -12,9 +12,37 @@
                     <input type="hidden" value="" name="id_impressora"/>
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-3">Nome :</label>
+                            <label class="control-label col-md-3">IP :</label>
                             <div class="col-md-9">
                                 <input name="ip" placeholder="IP" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Local :</label>
+                            <div class="col-md-9">
+                                <input name="location" placeholder="IP" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Número serial :</label>
+                            <div class="col-md-9">
+                                <input name="sn" placeholder="Número serial" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Modelo :</label>
+                            <div class="col-md-9">
+                                <input name="model" placeholder="Modelo" class="form-control" type="text">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Tipo :</label>
+                            <div class="col-md-9">
+                                <input name="type" placeholder="Tipo" class="form-control" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
