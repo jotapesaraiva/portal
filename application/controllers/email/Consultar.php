@@ -56,7 +56,7 @@ class Consultar extends CI_Controller {
             <script type="text/javascript">
             $(function () {
             Highcharts.setOptions({
-                                        colors : [ "#485F77","#E55B3C","#3CC6E6"]
+                                    colors : [ "#485F77","#E55B3C","#3CC6E6"]
                                     });
                 $("#grafico_1").highcharts({
                     chart: {
@@ -219,7 +219,6 @@ class Consultar extends CI_Controller {
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Email</span>','/email');
         $this->breadcrumbs->push('<span>Consultar</span>','email/consultar');
-
 
         $data['array_total'] = $array_total;
 
