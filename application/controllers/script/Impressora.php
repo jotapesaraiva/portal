@@ -16,7 +16,7 @@ class Impressora extends CI_Controller {
         $lista = $this->impressora_model->select_printer();
         // vd($lista->result_array());
         foreach ($lista->result_array() as $value) {
-            if($this->pinga($value['ip'],'80') == true){
+            if($this->pinga($value['ip'],'80') == true) {
                 try{
                     // $printer = new Kohut_SNMP_Printer($ip);
                     $printer = new Kohut_SNMP_Printer($value['ip']);
@@ -35,11 +35,14 @@ class Impressora extends CI_Controller {
                                           'Kit de manutenção de 160K: '.$printer->getDrumLevel().' '.
                                           'Kit de manutenção de 320K: '.$printer->getDrumLevel().' '.
                                           'Kit de manutenção de 480K: '.$printer->getDrumLevel();
+                            $count_page = 'Color:'.$printer->getNumberOfPrintedPapersColor().' '.
+                                          'Mono: '.$printer->getNumberOfPrintedPapers();
                         } elseif ($printer->isMonoPrinter()){
                             $color = 'mono printer';
                             $toner = 'Blanck Toner:'. round($printer->getBlackTonerLevel(), 2).'%';
                             $drum_level = 'kit fc:'.$printer->getDrumLevel().'% '.
                                           'kit manutenção:'.$printer->getDrumLevel().'%';
+                            $count_page = $printer->getNumberOfPrintedPapers();
                         }
 
                     $save_array = array (
@@ -51,10 +54,10 @@ class Impressora extends CI_Controller {
                         'serial_number' => $printer->getSerialNumber(),
                         'toner' => $toner,
                         'drum_level' => $drum_level,
-                        'count_page' => $printer->getNumberOfPrintedPapers(),
+                        'count_page' => $count_page,
                         'id_impressora' => $value['id_impressora']
                     );
-                    $update_array = array(
+                    $update_array = array (
                         'location' => $printer->getlocation(),
                         'serial_number' => $printer->getSerialNumber(),
                         'model' => $printer->getFactoryId(),

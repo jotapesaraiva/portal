@@ -230,11 +230,12 @@ class Consultar extends CI_Controller {
         $this->load->view('template/footer',$script);
     }
 
-    public function consulta() {
-        $banco = $this->email_model->somaMesAtual('09', '2019');
-        // vd($banco);
+    public function teste() {
+        // $banco = $this->email_model->somaMesAtual('09', '2019');
+        $banco  =  $this->email_model->select_mxhero('out');
+        vd($banco);
         // echo $banco['data_coleta'];
-        echo json_encode($banco);
+        // echo json_encode($banco);
     }
 
 

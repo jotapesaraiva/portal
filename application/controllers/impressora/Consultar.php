@@ -18,17 +18,13 @@ class Consultar extends CI_Controller {
         // $dados['data_fim'] = date('d-m-Y');
 
         $css['headerinc'] = '
-            <link href="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-            <link href="'.base_url().'assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-            <link href="'.base_url().'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+            <link href="'.base_url().'assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
             <link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $script['footerinc'] = '
-        <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-        <script src="' . base_url() . 'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
-            <script src="'.base_url().'assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-            <script src="'.base_url().'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-            <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
-            <script src="'.base_url().'assets/custom/impressora/consultar.js" type="text/javascript"></script>';
+            <script src="'.base_url().'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/custom/impressora/consultar.js" type="text/javascript"></script>
+            <script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>';
         $script['script'] = '
         <script src="'.base_url().'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>';
         $session['username'] = $this->session->userdata('username');
@@ -90,55 +86,6 @@ class Consultar extends CI_Controller {
           );
           echo json_encode($output);
     }
-
-    public function printer_add(){
-       $this->printer_validate();
-       $data = array(
-               'ip' => $this->input->post('ip'),
-               'unidade' => $this->input->post('unidade'),
-           );
-       $insert = $this->impressora_model->save_printer($data);
-       echo json_encode(array("status" => TRUE));
-    }
-
-    public function printer_edit($id){
-       $data = $this->impressora_model->edit_printer($id);
-       echo json_encode($data);
-    }
-
-    public function printer_update(){
-       $this->printer_validate();
-       $data = array(
-               'ip' => $this->input->post('ip'),
-               'id_unidade' => $this->input->post('unidade'),
-           );
-       $this->impressora_model->update_printer(array('id_impressora' => $this->input->post('id_impressora')), $data);
-       echo json_encode(array("status" => TRUE));
-    }
-
-    public function printer_delete($id){
-       $this->impressora_model->delete_printer($id);
-       echo json_encode(array("status" => TRUE));
-    }
-
-    private function printer_validate() {
-        $data = array();
-        $data['error_string'] = array ();
-        $data['inputerror'] = array ();
-        $data['status'] = TRUE;
-
-        if($this->input->post('ip') == '') {
-            $data['inputerror'][] = 'ip';
-            $data['error_string'][] = 'O campo ip é obrigatorio';
-            $data['status'] = FALSE;
-        }
-
-        if($data['status'] === FALSE) {
-            echo json_encode($data);
-            exit();
-        }
-    }
-
 
     public function teste(){
       $chamados = $this->impressora_model->list_printer('2019-09-16 10:00:00','2019-09-16 10:40:00');

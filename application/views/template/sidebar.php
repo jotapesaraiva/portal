@@ -917,6 +917,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php echo anchor('sistema/ldap', '<i class="fa fa-windows"></i> LDAP', 'class="nav-link"')?>
                             <?php echo span_segment(2,'ldap'); ?>
                         </li>
+                    <?php } if($this->auth_ad->level_access('cronjob',group_session($this->session->userdata('username')))){?>
+                        <li class="nav-item <?php echo active_segment(2,'cronjob'); ?>">
+                            <?php echo anchor('sistema/cronjob', '<i class="fa fa-windows"></i> CronJob', 'class="nav-link"')?>
+                            <?php echo span_segment(2,'cronjob'); ?>
+                        </li>
                         <?php } if($this->auth_ad->level_access('consulta',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'consulta'); ?>">
                             <a href="javascript:;" class="nav-link nav-toggle">

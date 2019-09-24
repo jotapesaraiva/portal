@@ -12,6 +12,7 @@ class Email_model extends CI_Model {
         $mxhero->where('insert_date >= CURDATE()');
         $mxhero->group_by('day(insert_date)');
         $query = $mxhero->get();
+        // echo $mxhero->last_query();
         return $query->row_array();
     }
 
@@ -36,6 +37,52 @@ class Email_model extends CI_Model {
                 on a.data_coleta=b.data_coleta
                 ");
         return $query->row_array();
+    }
+
+
+    public function select_mxhero_date($rota) //$rota -> in ou ->out
+    {
+        $mxhero = $this->load->database('mxhero', TRUE);
+        $mxhero->select("date_format(insert_date,'%Y-%m-%d') as data_coleta, count(*) as qtd,sum(bytes_size/1000000) as size");
+        $mxhero->from('mail_records');
+        $mxhero->where("flow in ('".$rota."','both')");
+        $mxhero->where('insert_date >= "2019-09-20"');
+        $mxhero->group_by('day(insert_date)');
+        $query = $mxhero->get();
+        // echo $mxhero->last_query();
+        return $query->row_array();
+    }
+
+    public function select_spam_mxhero_date()
+    {
+        $mxhero = $this->load->database('mxhero', TRUE);
+        $query = $mxhero->query("
+            select a.data_coleta, a.spam+b.spam total from (
+                    select date_format(insert_date,'%Y-%m-%d') data_coleta, count(distinct(subject)) as SPAM
+                    from mail_records
+                    where state_reason like '%blocklist%'
+                    and insert_date >= '2019-09-20'
+                    group by day(insert_date)
+                ) a
+                join (
+                    select date_format(insert_date,'%Y-%m-%d') data_coleta, count(*) as SPAM
+                    from mail_records
+                    where state_reason like '%spamassassin%'
+                    and insert_date >= '2019-09-20'
+                    group by day(insert_date)
+                ) b
+                on a.data_coleta=b.data_coleta
+                ");
+        return $query->row_array();
+    }
+
+    public function select_mx()
+    {
+        $mxhero = $this->load->database('mxhero', TRUE);
+        $query = $mxhero->query("
+            select * from mail_records where insert_date >= CURDATE()
+                    ");
+            return $query->row_array();
     }
 
     public function insert_mxhero($dados)
