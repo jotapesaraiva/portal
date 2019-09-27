@@ -8,10 +8,11 @@ class Cronjob extends CI_Controller {
         parent::__construct();
         //Do your magic here
         $this->load->library('crontab');
+        // include APPPATH . 'third_party/cronjob/application/models/Crontab.php';
     }
 
 
-    public function index()
+    public function old()
     {
         // $this->output->enable_profiler(FALSE);
         $script['footerinc'] = '';
@@ -72,11 +73,35 @@ class Cronjob extends CI_Controller {
         $this->crontab->deleteAllJobs();
     }
 
-    public function editjob()
+    public function edit_job()
     {
         $this->crontab->editJob('0');
+        // echo "teste final";
     }
 
+
+    public function index()
+    {
+        $this->output->enable_profiler(FALSE);
+        $script['footerinc'] = '';
+        $script['script'] = '';
+        $css['headerinc'] = '';
+        $session['username'] = $this->session->userdata('username');
+
+        $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
+        $this->breadcrumbs->push('<span>Sitema</span>', '/sistema;');
+        $this->breadcrumbs->push('<span>CronJob</span>', '/sistema/cronjob');
+        $this->breadcrumbs->push('<span>Teste</span>', '/sistema/cronjob/teste');
+
+        $this->load->view('template/header',$css);
+        $this->load->view('template/navbar',$session);
+        $this->load->view('template/sidebar');
+
+        $this->load->view('sistema/cronjob');
+
+        $this->load->view('template/footer',$script);
+
+    }
 
 }
 

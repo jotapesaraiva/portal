@@ -26,6 +26,9 @@
  *
  */
 
+
+
+
 class Crontab {
 
     /**
@@ -75,6 +78,7 @@ class Crontab {
      * @var array
      */
     var $jobs = array();
+
 
     function Crontab() { }
 
@@ -187,6 +191,20 @@ class Crontab {
 
         return false;
     }
+
+    /**
+    * Editar a specific crontab entry.
+    */
+    function editJob($id) {
+        $allJobs = $this->listJobs();
+        foreach ($allJobs as $key => $job) {
+            if($key == $id) {
+                $subject = $allJobs[$key];
+                vd($subject);
+            }
+        }
+    }
+
 
     /**
     * Deletes all crontab entries.
