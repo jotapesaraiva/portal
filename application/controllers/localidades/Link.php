@@ -150,7 +150,6 @@ class Link extends CI_Controller {
                     'id_unidade' => $this->input->post('unidade'),
                     'id_fornecedor' => $this->input->post('fornecedor'),
                 );
-            // var_dump($data);
             $this->link_model->update_link(array ('id_link' => $this->input->post('id')), $data);
             echo json_encode(array ("status" => TRUE));
          }

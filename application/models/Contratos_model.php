@@ -24,7 +24,6 @@ class Contratos_model extends CI_Model {
     }
 
     public function update_contrato($where,$dados) {
-        // $this->db = $this->load->database('default',true);
         $this->db->update('tbl_contratos', $dados, $where);
         return $this->db->affected_rows();
     }

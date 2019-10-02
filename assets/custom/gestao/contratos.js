@@ -79,7 +79,7 @@ function edit_contrato(id) {
         type: "GET",
         dataType: "JSON",
         success: function(data) {
-            $('[name="id"]').val(data[0].id_contratos);
+            $('[name="id_contrato"]').val(data[0].id_contrato);
             $('[name="nome"]').val(data[0].nome_contrato);
             $('[name="tipo"]').selectpicker('val', data[0].id_tipo_contrato);
             $('[name="numero"]').val(data[0].numero_contrato);
@@ -118,7 +118,7 @@ function save(){
     } else {
         url = href+"/contratos_update";
     }
-
+    console.log($('#form').serialize());
     // ajax adding data to database
     $.ajax({
         url : url,
