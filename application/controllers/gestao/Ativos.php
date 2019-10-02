@@ -97,11 +97,10 @@ class Ativos extends CI_Controller {
             'modelo_ativo' => $this->input->post('modelo'),
             'fabricante_ativo' => $this->input->post('fabricante'),
             'id_tipo_ativo' => $this->input->post('tipo'),
-            'id_grupo' => $this->input->post('grupo'),
-            'id_usuario' => $this->input->post('tecnico'),
             'patrimonio_ativo' => $this->input->post('patrimonio'),
             'id_contrato' => $this->input->post('contrato'),
-            'id_fornecedor' => $this->input->post('fornecedor')
+            'id_fornecedor' => $this->input->post('fornecedor'),
+            'id_grupo' => $this->input->post('grupo')
          );
         $this->ativos_model->save_ativo($data);
         echo json_encode(array("status" => TRUE));
@@ -126,7 +125,6 @@ class Ativos extends CI_Controller {
             'fabricante_ativo' => $this->input->post('fabricante'),
             'id_tipo_ativo' => $this->input->post('tipo'),
             'id_grupo' => $this->input->post('grupo'),
-            'id_usuario' => $this->input->post('tecnico'),
             'patrimonio_ativo' => $this->input->post('patrimonio'),
             'id_contrato' => $this->input->post('contrato'),
             'id_fornecedor' => $this->input->post('fornecedor')

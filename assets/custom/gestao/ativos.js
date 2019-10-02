@@ -60,6 +60,7 @@
       save_method = 'add';
       $('#form')[0].reset(); // reset form on modals
       $('.form-group').removeClass('has-error'); // clear error class
+      $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker
       $('.help-block').empty(); // clear error string
       $('#modal_ativo').modal('show'); // show bootstrap modal
       $('.modal-title').text('Adicionar Tipo de Categoria VOIP'); // Set Title to Bootstrap modal title
@@ -70,7 +71,7 @@
       $('#form')[0].reset(); // reset form on modals
       $('.form-group').removeClass('has-error'); // clear error class
       $('.help-block').empty(); // clear error string
-
+      $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker
       //Ajax Load data from ajax
       $.ajax({
           url : href+"/ativos_edit/" + id,
@@ -86,7 +87,6 @@
               $('[name="tipo"]').selectpicker('val', data[0].id_tipo_ativo);
               $('[name="patrimonio"]').val(data[0].patrimonio_ativo);
               $('[name="grupo"]').selectpicker('val', data[0].id_grupo);
-              $('[name="tecnico"]').selectpicker('val', data[0].id_usuario);
               $('[name="contrato"]').selectpicker('val', data[0].id_contrato);
               $('[name="fornecedor"]').selectpicker('val', data[0].id_fornecedor);
 
@@ -113,7 +113,7 @@
       } else {
           url = href+"/ativos_update";
       }
-
+      // console.log($('#form').serialize())
       // ajax adding data to database
       $.ajax({
           url : url,
@@ -136,7 +136,7 @@
               $('#btnSave').attr('disabled',false); //set button enable
           },
           error: function (jqXHR, textStatus, errorThrown) {
-              alert('Erro ao adicionar / editar dados');
+              alert('Erro ao adicionar / editar dados'+errorThrown);
               $('#btnSave').text('Salvar'); //change button text
               $('#btnSave').attr('disabled',false); //set button enable
           }

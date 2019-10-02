@@ -13,6 +13,15 @@ class Impressora_model extends CI_Model {
         return $query;
     }
 
+    public function select_id($ip)
+    {
+        $this->db->select('i.*, u.nome_unidade');
+        $this->db->from('tbl_impressora i');
+        $query = $this->db->get();
+        // echo $this->db->last_query();
+        return $query;
+    }
+
     public function list_printer($datai,$dataf)
     {
         $this->db->select('i.id_impressora, i.location as nome, u.nome_unidade, i.ip, ic.date, ic.location, ic.serial_number, ic.toner, ic.drum_level, ic.count_page');

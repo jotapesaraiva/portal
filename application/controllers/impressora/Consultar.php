@@ -29,7 +29,7 @@ class Consultar extends CI_Controller {
         <script src="'.base_url().'assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>';
         $session['username'] = $this->session->userdata('username');
         $unidades = $this->unidade_model->listar_unidade();
-        $dados = array("unidades" => $unidades, 'data_inicio' => date_start_dez(), 'data_fim' => date('d-m-Y'));
+        $dados = array("unidades" => $unidades, 'data_inicio' => date_start_traco(), 'data_fim' => date('d-m-Y'));
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
         $this->breadcrumbs->push('<span>Impressora</span>', 'impressora');
@@ -52,7 +52,7 @@ class Consultar extends CI_Controller {
       $length = intval($this->input->get("length"));
 
       $datainicio = date("Y-m-d H:i:s", strtotime($datai));
-      $datafim = date("Y-m-d H:i:s", strtotime($dataf));
+      $datafim = date("Y-m-d 23:59:59", strtotime($dataf));
 
       $chamados = $this->impressora_model->list_printer($datainicio,$datafim);
       // $chamados = $this->impressora_model->list_printer('2019-09-16 10:00','2019-09-16 10:40:00');
@@ -64,7 +64,7 @@ class Consultar extends CI_Controller {
           $row[] = anchor_popup('http://'.$value['ip'].'/cgi-bin/dynamic/printer/config/reports/devicestatistics.html',$value['ip']);
           $row[] = $value['location'];
           $row[] = $value['nome_unidade'];
-          $row[] = $value['date'];
+          $row[] = date("d-m-Y H:i:s", strtotime($value['date']));
           $row[] = $value['serial_number'];
           $row[] = $value['toner'];
           $row[] = $value['drum_level'];
