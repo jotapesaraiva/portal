@@ -154,6 +154,11 @@ class Impressora extends CI_Controller {
     }
 
 
+    public function teste()
+    {
+        echo "teste do controller impressora ok !!!!";
+    }
+
 
 
     public function pinga($IPAddress,$Port) {

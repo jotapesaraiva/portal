@@ -41,7 +41,8 @@
                             <label class="control-label col-md-3">Data Inicio :</label>
                             <div class="col-md-9">
                                 <div class="input-group date date-picker">
-                                    <input type="text" name="data" class="form-control" readonly>
+                                    <input type="text" name="data_inicio" class="form-control" readonly>
+                                    <input type="hidden" name="duracao" class="form-control duration" readonly>
                                     <span class="input-group-btn">
                                         <button class="btn default" type="button">
                                             <i class="fa fa-calendar"></i>
@@ -52,9 +53,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Duração :</label>
+                            <label class="control-label col-md-3">Data Fim :</label>
                             <div class="col-md-9">
-                                <input name="duracao" placeholder="" class="form-control duration" type="text">
+                                <div class="input-group date date-picker">
+                                    <input type="text" name="data_fim" class="form-control" readonly>
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
                                 <span class="help-block"></span>
                             </div>
                         </div>

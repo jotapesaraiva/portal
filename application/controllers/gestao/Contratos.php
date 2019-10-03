@@ -65,9 +65,10 @@ class Contratos extends CI_Controller {
             $row[] = $contrato['nome_contrato'];
             $row[] = $contrato['numero_contrato'];
             $row[] = $contrato['nome_tipo_contrato'];
-            $row[] = date( 'd/M/Y', strtotime($contrato['data_inicio_contrato']));
-            $row[] = $contrato['duracao_contrato'].' Meses';
-            $row[] = $contrato['aviso_contrato'].' Meses';
+            $row[] = date( 'd/m/Y', strtotime($contrato['data_inicio_contrato']));
+            $row[] = date( 'd/m/Y', strtotime($contrato['data_fim_contrato']));
+            $row[] = $contrato['duracao_contrato'].' Dias';
+            $row[] = $contrato['aviso_contrato'].' Dias';
             if ($contrato['renovacao_contrato'] == '1'){
              $row[] = '<span class="label label-sm label-info"> Sim. </span>';
             } else {
@@ -98,12 +99,14 @@ class Contratos extends CI_Controller {
         } else {
           $status = '0';
         }
+        $duracao = $this->duracao($this->input->post('data_inicio'),$this->input->post('data_fim'));
         $data = array(
             'nome_contrato' => $this->input->post('nome'),
             'id_tipo_contrato' => $this->input->post('tipo'),
             'numero_contrato' => $this->input->post('numero'),
-            'data_inicio_contrato' => date('Y-m-d', strtotime($this->input->post('data'))),
-            'duracao_contrato' => $this->input->post('duracao'),
+            'data_inicio_contrato' => date('Y-m-d', strtotime($this->input->post('data_inicio'))),
+            'data_fim_contrato' => date('Y-m-d', strtotime($this->input->post('data_fim'))),
+            'duracao_contrato' => $duracao,
             'renovacao_contrato' => $status,
             'aviso_contrato' => $this->input->post('aviso'),
             'id_fornecedor' => $this->input->post('fornecedor')
@@ -124,12 +127,14 @@ class Contratos extends CI_Controller {
         } else {
           $status = '0';
         }
+        $duracao = $this->duracao($this->input->post('data_inicio'),$this->input->post('data_fim'));
         $data = array(
             'nome_contrato' => $this->input->post('nome'),
             'id_tipo_contrato' => $this->input->post('tipo'),
             'numero_contrato' => $this->input->post('numero'),
-            'data_inicio_contrato' => date('Y-m-d', strtotime($this->input->post('data'))),
-            'duracao_contrato' => $this->input->post('duracao'),
+            'data_inicio_contrato' => date('Y-m-d', strtotime($this->input->post('data_inicio'))),
+            'data_fim_contrato' => date('Y-m-d', strtotime($this->input->post('data_fim'))),
+            'duracao_contrato' => $duracao,
             'renovacao_contrato' => $status,
             'aviso_contrato' => $this->input->post('aviso'),
             'id_fornecedor' => $this->input->post('fornecedor')
@@ -167,9 +172,15 @@ class Contratos extends CI_Controller {
             $data['status'] = FALSE;
         }
 
-        if($this->input->post('data') == '') {
+        if($this->input->post('data_inicio') == '') {
             $data['inputerror'][] = 'data';
-            $data['error_string'][] = 'O campo data é obrigatorio';
+            $data['error_string'][] = 'O campo data inicio é obrigatorio';
+            $data['status'] = FALSE;
+        }
+
+        if($this->input->post('data_fim') == '') {
+            $data['inputerror'][] = 'data';
+            $data['error_string'][] = 'O campo data fim é obrigatorio';
             $data['status'] = FALSE;
         }
 
@@ -195,6 +206,19 @@ class Contratos extends CI_Controller {
             echo json_encode($data);
             exit();
         }
+    }
+
+    public function duracao($datai,$dataf){
+        // Usa a função strtotime() e pega o timestamp das duas datas:
+        $time_inicial = strtotime($datai);
+        $time_final = strtotime($dataf);
+        // Calcula a diferença de segundos entre as duas datas:
+        $diferenca = $time_final - $time_inicial; // 19522800 segundos
+        // Calcula a diferença de dias
+        $dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
+        // Exibe uma mensagem de resultado:
+        return $dias;
+        // echo "A diferença entre as datas ".$data_inicial." e ".$data_final." é de <strong>".$dias."</strong> dias";
     }
 }
 

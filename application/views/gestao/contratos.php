@@ -66,6 +66,7 @@
                                     <th> Numero </th>
                                     <th> Tipo </th>
                                     <th> Data inicio </th>
+                                    <th> Data fim </th>
                                     <th> Duração </th>
                                     <th> Aviso </th>
                                     <th> Renovação </th>

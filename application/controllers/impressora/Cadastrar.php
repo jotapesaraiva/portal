@@ -64,7 +64,8 @@ class Cadastrar extends CI_Controller {
           $row[] = $value['nome_unidade'];
           if(acesso_admin()):
           $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Editar" onclick="edit_printer('."'".$value['id_impressora']."'".')"><i class="glyphicon glyphicon-pencil"></i></a>
-                    <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Deletar" onclick="delete_printer('."'".$value['id_impressora']."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+                    <a class="btn red-mint btn-outline sbold" href="javascript:void(0)" title="Deletar" onclick="delete_printer('."'".$value['id_impressora']."'".')"><i class="glyphicon glyphicon-trash"></i></a>
+                    <a class="btn green btn-outline sbold" href="javascript:void(0)" title="Coletar" onclick="download_printer('."'".$value['ip']."'".')"><i class="fa fa-download"></i></a>';
           else:
              $row[] = 'Sem permissão';
           endif;
@@ -136,10 +137,17 @@ class Cadastrar extends CI_Controller {
         }
     }
 
+    public function printer_download($ip){
 
-    public function teste(){
-      $chamados = $this->impressora_model->list_printer('2019-09-16 10:00:00','2019-09-16 10:40:00');
-      vd($chamados);
+    }
+
+
+    public function outro(){
+
+        require_once('')
+        $this->$teste();
+      // $chamados = $this->impressora_model->list_printer('2019-09-16 10:00:00','2019-09-16 10:40:00');
+      // vd($chamados);
     }
 
 }

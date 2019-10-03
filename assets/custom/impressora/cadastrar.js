@@ -175,3 +175,28 @@ function delete_printer(id) {
 
     }
 }
+
+function download_printer(ip) {
+        //Ajax Load data from ajax
+    $.ajax({
+        url : href+"/printer_download/" + ip,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data) {
+            $('[name="id_impressora"]').val(data.id_impressora);
+            $('[name="ip"]').val(data.ip);
+            $('[name="location"]').val(data.location);
+            $('[name="sn"]').val(data.serial_number);
+            $('[name="model"]').val(data.model);
+            $('[name="type"]').val(data.type);
+            $('[name="unidade"]').val(data.id_unidade);
+
+            $('.selectpicker').selectpicker('refresh')// update in selectpicker bootstrap
+            $('#modal_impressora').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Editar impressora'); // Set title to Bootstrap modal title
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Erro ao pegar os dados do ajax'+jqXHR.responseText);
+        }
+    });
+}

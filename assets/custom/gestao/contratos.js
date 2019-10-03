@@ -83,7 +83,8 @@ function edit_contrato(id) {
             $('[name="nome"]').val(data[0].nome_contrato);
             $('[name="tipo"]').selectpicker('val', data[0].id_tipo_contrato);
             $('[name="numero"]').val(data[0].numero_contrato);
-            $('[name="data"]').val(data[0].data_inicio_contrato);
+            $('[name="data_inicio"]').val(data[0].data_inicio_contrato);
+            $('[name="data_fim"]').val(data[0].data_fim_contrato);
             $('[name="duracao"]').val(data[0].duracao_contrato);
             if(data[0].renovacao_contrato == '1') {
                 $('[name="renovacao"]').bootstrapSwitch('state', true);
