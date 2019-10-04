@@ -42,3 +42,31 @@ function save(){
         }
     });
 }
+
+
+$(function() {
+  var switchSelector = 'input[type="checkbox"].make-switch';
+
+  // Convert all checkboxes with className `bs-switch` to switches.
+  $(switchSelector).bootstrapSwitch();
+
+  // Attach `switchChange` event to all switches.
+  $(switchSelector).on('switchChange.bootstrapSwitch', function(event, state) {
+    console.log(this);  // DOM element
+    console.log(event); // jQuery event
+    console.log(state); // true | false
+
+    // Get the information for the switch.
+    var info = {
+      state : state,
+      value : $(this).data(state ? 'onText' : 'offText'),
+      data : $(this).attr('data')
+    }
+
+    // Show bootstrap info alert.
+    if ($('div.alert').length === 0) {
+      $('body').append($('<div>').addClass('alert alert-info'));
+    }
+    $('div.alert').text(JSON.stringify(info, undefined, '  '));
+  });
+});

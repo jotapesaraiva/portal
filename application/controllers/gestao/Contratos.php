@@ -67,8 +67,8 @@ class Contratos extends CI_Controller {
             $row[] = $contrato['nome_tipo_contrato'];
             $row[] = date( 'd/m/Y', strtotime($contrato['data_inicio_contrato']));
             $row[] = date( 'd/m/Y', strtotime($contrato['data_fim_contrato']));
-            $row[] = $contrato['duracao_contrato'].' Dias';
-            $row[] = $contrato['aviso_contrato'].' Dias';
+            $row[] = $contrato['duracao_contrato'].' Anos';
+            $row[] = $contrato['aviso_contrato'].' Meses';
             if ($contrato['renovacao_contrato'] == '1'){
              $row[] = '<span class="label label-sm label-info"> Sim. </span>';
             } else {
@@ -210,14 +210,18 @@ class Contratos extends CI_Controller {
 
     public function duracao($datai,$dataf){
         // Usa a função strtotime() e pega o timestamp das duas datas:
-        $time_inicial = strtotime($datai);
-        $time_final = strtotime($dataf);
+        // $time_inicial = strtotime($datai);
+        // $time_final = strtotime($dataf);
+        $ano_inicial = date('Y',strtotime($datai));
+        $ano_final = date('Y',strtotime($dataf));
         // Calcula a diferença de segundos entre as duas datas:
-        $diferenca = $time_final - $time_inicial; // 19522800 segundos
+        // $diferenca = $time_final - $time_inicial; // 19522800 segundos
+        $diferenca = $ano_final - $ano_inicial; // 19522800 segundos
         // Calcula a diferença de dias
-        $dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
+        // $dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
         // Exibe uma mensagem de resultado:
-        return $dias;
+        // echo $dias;
+        return $diferenca;
         // echo "A diferença entre as datas ".$data_inicial." e ".$data_final." é de <strong>".$dias."</strong> dias";
     }
 }

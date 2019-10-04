@@ -118,7 +118,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <!--############# ABA GERENCIA > Contratos ############-->
                         <?php } if($this->auth_ad->level_access('contratos',group_session($this->session->userdata('username')))){?>
                         <li class="nav-item <?php echo active_segment(2,'contratos'); ?>">
-                            <?php echo anchor('gestao/contratos', '<i class="fa fa-book"></i> contratos', 'class="nav-link"')?>
+                            <?php echo anchor('gestao/contratos', '<i class="fa fa-book"></i> Contratos', 'class="nav-link"')?>
                             <?php echo span_segment(2,'contratos'); ?>
                         </li>
                         <?php }?>
