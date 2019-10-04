@@ -179,7 +179,7 @@ function delete_printer(id) {
 function download_printer(ip) {
         //Ajax Load data from ajax
     $.ajax({
-        url : href+"/printer_download/" + ip,
+        url : "http://10.3.1.146/script/impressora/printer_download/" + ip,
         type: "GET",
         dataType: "JSON",
         success: function(data) {

@@ -196,12 +196,12 @@ class Link_model extends CI_Model{
     }
 
     //
-    //=============================================================================================================
+    //===============================================================================================================================================
     //
 
     public function historico() {
         $this->db->select('ticket, posicionamento, rec, centro, status, responsabilidade, causa, date_format(abertura, "%d/%m/%Y %H:%i:%s") as abertura, date_format(atualizacao, "%d/%m/%Y %H:%i:%s") as atualizacao');
-        $this->db->from('ebt_grc');
+        $this->db->from('ebt_grc_teste');
         $this->db->order_by('id', 'DESC');
         $this->db->limit('1000');
         $query = $this->db->get();

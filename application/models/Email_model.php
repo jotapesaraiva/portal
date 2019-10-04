@@ -46,7 +46,7 @@ class Email_model extends CI_Model {
         $mxhero->select("date_format(insert_date,'%Y-%m-%d') as data_coleta, count(*) as qtd,sum(bytes_size/1000000) as size");
         $mxhero->from('mail_records');
         $mxhero->where("flow in ('".$rota."','both')");
-        $mxhero->where('insert_date >= "2019-09-20"');
+        $mxhero->where('insert_date >= "2019-10-02" AND insert_date < "2019-10-03"');
         $mxhero->group_by('day(insert_date)');
         $query = $mxhero->get();
         // echo $mxhero->last_query();
@@ -61,14 +61,14 @@ class Email_model extends CI_Model {
                     select date_format(insert_date,'%Y-%m-%d') data_coleta, count(distinct(subject)) as SPAM
                     from mail_records
                     where state_reason like '%blocklist%'
-                    and insert_date >= '2019-09-20'
+                    and insert_date >= '2019-10-02' AND insert_date < '2019-10-03'
                     group by day(insert_date)
                 ) a
                 join (
                     select date_format(insert_date,'%Y-%m-%d') data_coleta, count(*) as SPAM
                     from mail_records
                     where state_reason like '%spamassassin%'
-                    and insert_date >= '2019-09-20'
+                    and insert_date >= '2019-10-02' AND insert_date < '2019-10-03'
                     group by day(insert_date)
                 ) b
                 on a.data_coleta=b.data_coleta
@@ -80,7 +80,7 @@ class Email_model extends CI_Model {
     {
         $mxhero = $this->load->database('mxhero', TRUE);
         $query = $mxhero->query("
-            select * from mail_records where insert_date >= CURDATE()
+            select * from mail_records where insert_date >= '2019-09-20'
                     ");
             return $query->row_array();
     }
@@ -108,6 +108,7 @@ class Email_model extends CI_Model {
         $this->db->where('month(data_coleta)',$mes);
         $this->db->where('year(data_coleta)', $ano);
         $this->db->group_by('month(data_coleta)');
+        $this->db->order_by('data_coleta', 'asc');
         $query = $this->db->get();
         return $query->row_array();
 
@@ -119,6 +120,7 @@ class Email_model extends CI_Model {
         $this->db->from('tbl_indicador_email');
         $this->db->where('month(data_coleta)', $mes);
         $this->db->Where('year(data_coleta)', $ano);
+        $this->db->order_by('data_coleta', 'asc');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -130,6 +132,7 @@ class Email_model extends CI_Model {
         $this->db->where('month(data_coleta)', $mes);
         $this->db->Where('year(data_coleta)', $ano);
         $this->db->group_by('month(data_coleta)');
+        $this->db->order_by('data_coleta', 'asc');
         $query = $this->db->get();
         return $query->row_array();
     }

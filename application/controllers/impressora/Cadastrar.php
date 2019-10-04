@@ -142,10 +142,8 @@ class Cadastrar extends CI_Controller {
     }
 
 
-    public function outro(){
+    public function teste() {
 
-        require_once('')
-        $this->$teste();
       // $chamados = $this->impressora_model->list_printer('2019-09-16 10:00:00','2019-09-16 10:40:00');
       // vd($chamados);
     }

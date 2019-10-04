@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Zabbix {
 
     public function __construct() {
-        $this->ci = &get_instance();
+        $this->ci =& get_instance();
         include APPPATH . 'third_party/zabbix/ZabbixApiAbstract.class.php';
         include APPPATH . 'third_party/zabbix/ZabbixApi.class.php';
         include APPPATH . 'third_party/zabbix/date_function.php';

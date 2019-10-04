@@ -82,6 +82,7 @@ class Email extends CI_Controller {
             echo "insert spam na tabela";
             echo "<br>";
     }
+
     public function teste() {
         // $banco = $this->email_model->somaMesAtual('09', '2019');
         // $banco  =  $this->email_model->select_mxhero_date('in');
