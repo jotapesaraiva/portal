@@ -20,6 +20,7 @@ class Modulos_model extends CI_Model {
 
     public function update_modulos($id,$dados) {
         $this->db->update('mdl_site', $dados, $id);
+        // echo $this->db->last_query();
         return $this->db->affected_rows();
     }
 

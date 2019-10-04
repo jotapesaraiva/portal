@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     <?php echo $modulo; ?>
 
-                      <div class="form-actions">
+<!--                       <div class="form-actions">
                           <div class="row">
                               <div class="col-md-offset-3 col-md-9">
                                   <a href="javascript:;" id="btnSave" onclick="save()" class="btn green">
@@ -45,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                   <a href="javascript:;" class="btn btn-outline grey-salsa">Cancelar</a>
                               </div>
                           </div>
-                      </div>
+                      </div> -->
 
                     </form>
                    </div>
