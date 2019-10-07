@@ -131,7 +131,7 @@ class Server extends CI_Controller {
                                   'duration' => $tempo_fora,
                                   'priority' => $priority//OK
                                 );
-                                print_r($save_db);
+                                // print_r($save_db);
                                 array_push($alert,$id);
                                 //salvar os servidores fora no banco zbx_server_fora
                                 $this->zabbix_model->duplicate_zabbix_server($save_db);
@@ -147,20 +147,22 @@ class Server extends CI_Controller {
               //consultar todos os alertas da tabela mnt_alertas no banco portal
               $alertas = $this->server_model->select_server_fora();
               // vd($alertas);
-              foreach($alertas as $alerta){
+              foreach($alertas as $alerta) {
                 //consultar todos os alertas da tabela bug_tb no banco mantis
                 $projetos = $this->mantis_model->mantis_projetos();
                 // vd($projetos);
                 foreach ($projetos as $projeto) {
-                  if("servidor ".$alerta['servidor']." - servico ".$alerta['servico']."" == $projeto['RESUMO']){
+                  // echo "<br>ZABBIX:".$alerta['servico']." MANTIS:".$projeto['RESUMO']."<br>";
+                  if($alerta['servico'] == $projeto['RESUMO'] || 'Alerta: '.$alerta['servico'] == $projeto['RESUMO']) {
                   // if("servidor {$alerta['servidor']} - servico {$alerta['servico']}" == $projeto['RESUMO']) {
-                    echo "servidor ".$alerta['servidor']." - servico ".$alerta['servico']." RESUMO:".$projeto['RESUMO']."<br>";
+                    echo "<br>ZABBIX : ".$alerta['servico']." MANTIS : ".$projeto['RESUMO']."<br>";
                       //update tabela com numeo mantis
                       $this->server_model->update_server_fora(array('id'=> $alerta['id']),array('mantis' => $projeto['NUMERO_CHAMADO']));
                   } else {
                     // echo "ERRADO: servidor ".$alerta['servidor']." - servico ".$alerta['servico']." RESUMO:".$projeto['RESUMO']."<br>";
                   }
                 }
+                echo "nada foi feito!!";
               }
               // vd($alert);
               //deleta todos que não estão alertando
