@@ -229,8 +229,9 @@ $db['teste'] = array(
 
 $db['msg'] = array(
 	'dsn'	=> '',
-	'hostname' => '10.3.1.42',
-	'username' => 'root',
+	// 'hostname' => '10.3.1.42',
+	'hostname' => '10.3.1.80',
+	'username' => 'msg',
 	'password' => 'p@$$w0rd',
 	'database' => 'msg',
 	'dbdriver' => 'mysqli',
