@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- END PAGE BAR -->
         <!-- BEGIN PAGE TITLE-->
         <h3 class="page-title"> Dashboard
-            <small>Produção</small>
+            <small>CGRE</small>
         </h3>
         <?php
             get_msg('loginOk');
@@ -183,7 +183,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div><!-- FIM da Tabela Backupsl -->
         </div>
         <div class="row">
-
+            <div class="col-lg-7 col-md-6 col-sm-6"> <!-- Tabela Backupsl -->
+                <div class="portlet light tasks-widget bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-copy font-green-haze"></i>
+                            <span class="caption-subject font-green bold uppercase">Novo</span>
+                            <span class="caption-helper">Moniora</span>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-circle btn-icon-only btn-default tooltips" href="javascript:;" data-placement="top" data-original-title="Configuração"><i class="icon-wrench"></i></a>
+                            <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="novomonitora_down_loading">
+                            <img src="../assets/global/img/loading.gif" alt="loading" />
+                        </div>
+                        <div id="novomonitora_down_content" class="table-scrollable table-scrollable-borderless"></div>
+                    </div>
+                </div>
+            </div><!-- FIM da Tabela Backupsl -->
     </div>
     <!-- END CONTENT BODY -->
 </div>

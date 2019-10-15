@@ -51,9 +51,9 @@ class Nobreak extends CI_Controller {
              $hoststatus = $host->status;
               foreach ($itens as $item) {
                  $temperatura = $item->prevvalue;
-                 if($temperatura >25.00){
+                 if($temperatura >25.00) {
                     $flag = "red";
-                 }else {
+                 } else {
                     $flag ="green";
                  }
               }

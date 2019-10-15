@@ -103,18 +103,19 @@ class Mantis_model extends CI_Model {
 
     public function mantis_projetos() {
         $mantis = $this->load->database('mantis', true);
-        $sql = "select b.id numero_chamado, b.summary resumo,
-                case when b.project_id = 4006 then 'Monitoramento'
-                        when b.project_id = 1502 then 'Sustentação'
-                        when b.project_id = 4121 then 'Projetos/Man.Assistida'
-                        when b.project_id = 4041 then 'CGRE - Produção'
-                        when b.project_id = 3922 then 'Suporte a Servidores'
-
-                   end projeto
-                from mantis.mantis_bug_tb b
-                where b.status not in (60,80,90)
-                and b.project_id in (4006,1502,4121,4041,3922)
-
+        $sql = "SELECT b.id numero_chamado, b.summary resumo, b.status,
+                CASE
+                    WHEN b.project_id = 4006 THEN 'Monitoramento'
+                    WHEN b.project_id = 1502 THEN 'Sustentação'
+                    WHEN b.project_id = 4121 THEN 'Operação Assistida'
+                    WHEN b.project_id = 4044 THEN 'Administração de Ambiente'
+                    WHEN b.project_id = 4062 THEN 'Ambiente de Backup'
+                    WHEN b.project_id = 521  THEN 'Chamado de Link'
+                    WHEN b.project_id = 3922 THEN 'Suporte a Servidores'
+                END projeto
+                FROM mantis.mantis_bug_tb b
+                WHERE b.status not IN (60,80,90)
+                AND b.project_id IN (4006,1502,4121,4044,4062,521,3922)
                 ORDER BY numero_chamado DESC";
         $stmt = oci_parse($mantis->conn_id,$sql);
         oci_execute($stmt, OCI_NO_AUTO_COMMIT);

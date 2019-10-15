@@ -19,6 +19,7 @@ class Producao extends CI_Controller {
                 <script src="' . base_url() . 'assets/custom/dashboard/backups_falhos.js" type="text/javascript"></script>
                 <script src="' . base_url() . 'assets/custom/dashboard/zabbix.js" type="text/javascript"></script>
                 <script src="' . base_url() . 'assets/custom/dashboard/antigo_monitora.js" type="text/javascript"></script>
+                <script src="' . base_url() . 'assets/custom/dashboard/novo_monitora.js" type="text/javascript"></script>
                 <script src="' . base_url() . 'assets/custom/dashboard/chamados_mantis.js" type="text/javascript"></script>
                 <script src="' . base_url() . 'assets/custom/dashboard/temperatura_nobreak.js" type="text/javascript"></script>';
 

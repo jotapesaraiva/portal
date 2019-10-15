@@ -59,7 +59,7 @@ class Enviar extends CI_Controller {
         $detalhes = $this->zabbix_model->select_zabbix_server($id);
         // vd($detalhes);
         $dados['id'] = $detalhes->id;
-        $dados['alerta'] = "Alerta: ".$detalhes->servico;
+        $dados['alerta'] = $detalhes->servico;
         $dados['detalhe'] = "Alerta: ".$detalhes->servico."
         \nServidor: ".$detalhes->servidor."
         \nIP:".$detalhes->ip."

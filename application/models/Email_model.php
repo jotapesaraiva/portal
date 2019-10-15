@@ -9,10 +9,10 @@ class Email_model extends CI_Model {
         $mxhero->select("date_format(insert_date,'%Y-%m-%d') as data_coleta, count(*) as qtd,sum(bytes_size/1000000) as size");
         $mxhero->from('mail_records');
         $mxhero->where("flow in ('".$rota."','both')");
-        $mxhero->where('insert_date >= CURDATE()');
+        $mxhero->where('insert_date >= CURDATE() AND insert_date < CURDATE()+1');
         $mxhero->group_by('day(insert_date)');
         $query = $mxhero->get();
-        // echo $mxhero->last_query();
+        echo $mxhero->last_query();
         return $query->row_array();
     }
 
@@ -20,21 +20,21 @@ class Email_model extends CI_Model {
     {
         $mxhero = $this->load->database('mxhero', TRUE);
         $query = $mxhero->query("
-            select a.data_coleta, a.spam+b.spam total from (
-                    select date_format(insert_date,'%Y-%m-%d') data_coleta, count(distinct(subject)) as SPAM
-                    from mail_records
-                    where state_reason like '%blocklist%'
-                    and insert_date >= CURDATE()
-                    group by day(insert_date)
+            SELECT a.data_coleta, a.spam+b.spam total FROM (
+                    SELECT date_format(insert_date,'%Y-%m-%d') data_coleta, count(distinct(subject)) AS SPAM
+                    FROM mail_records
+                    WHERE state_reason LIKE '%blocklist%'
+                    AND insert_date >= CURDATE() AND insert_date < CURDATE()+1
+                    GROUP BY day(insert_date)
                 ) a
-                join (
-                    select date_format(insert_date,'%Y-%m-%d') data_coleta, count(*) as SPAM
-                    from mail_records
-                    where state_reason like '%spamassassin%'
-                    and insert_date >= CURDATE()
-                    group by day(insert_date)
+                JOIN (
+                    SELECT date_format(insert_date,'%Y-%m-%d') data_coleta, count(*) AS SPAM
+                    FROM mail_records
+                    WHERE state_reason LIKE '%spamassassin%'
+                    AND insert_date >= CURDATE() AND insert_date < CURDATE()+1
+                    GROUP BY day(insert_date)
                 ) b
-                on a.data_coleta=b.data_coleta
+                ON a.data_coleta=b.data_coleta
                 ");
         return $query->row_array();
     }
@@ -46,7 +46,7 @@ class Email_model extends CI_Model {
         $mxhero->select("date_format(insert_date,'%Y-%m-%d') as data_coleta, count(*) as qtd,sum(bytes_size/1000000) as size");
         $mxhero->from('mail_records');
         $mxhero->where("flow in ('".$rota."','both')");
-        $mxhero->where('insert_date >= "2019-10-02" AND insert_date < "2019-10-03"');
+        $mxhero->where('insert_date >= "2019-10-14" AND insert_date < "2019-10-15"');
         $mxhero->group_by('day(insert_date)');
         $query = $mxhero->get();
         // echo $mxhero->last_query();
@@ -57,21 +57,21 @@ class Email_model extends CI_Model {
     {
         $mxhero = $this->load->database('mxhero', TRUE);
         $query = $mxhero->query("
-            select a.data_coleta, a.spam+b.spam total from (
-                    select date_format(insert_date,'%Y-%m-%d') data_coleta, count(distinct(subject)) as SPAM
-                    from mail_records
-                    where state_reason like '%blocklist%'
-                    and insert_date >= '2019-10-02' AND insert_date < '2019-10-03'
-                    group by day(insert_date)
+            SELECT a.data_coleta, a.spam+b.spam total FROM (
+                    SELECT date_format(insert_date,'%Y-%m-%d') data_coleta, count(distinct(subject)) AS SPAM
+                    FROM mail_records
+                    WHERE state_reason LIKE '%blocklist%'
+                    AND insert_date >= '2019-10-14' AND insert_date < '2019-10-15'
+                    GROUP BY day(insert_date)
                 ) a
-                join (
-                    select date_format(insert_date,'%Y-%m-%d') data_coleta, count(*) as SPAM
-                    from mail_records
-                    where state_reason like '%spamassassin%'
-                    and insert_date >= '2019-10-02' AND insert_date < '2019-10-03'
-                    group by day(insert_date)
+                JOIN (
+                    SELECT date_format(insert_date,'%Y-%m-%d') data_coleta, count(*) AS SPAM
+                    FROM mail_records
+                    WHERE state_reason LIKE '%spamassassin%'
+                    AND insert_date >= '2019-10-14' AND insert_date < '2019-10-15'
+                    GROUP BY day(insert_date)
                 ) b
-                on a.data_coleta=b.data_coleta
+                ON a.data_coleta=b.data_coleta
                 ");
         return $query->row_array();
     }
@@ -80,9 +80,25 @@ class Email_model extends CI_Model {
     {
         $mxhero = $this->load->database('mxhero', TRUE);
         $query = $mxhero->query("
-            select * from mail_records where insert_date >= '2019-09-20'
+            select * from mail_stats'
                     ");
             return $query->row_array();
+        // $tables = $mxhero->list_tables();
+
+        // foreach ($tables as $table)
+        // {
+        //     echo '<br>';
+        //    echo $table;
+        //     echo '<br>';
+        // }
+        // mail_records
+
+        // mail_stats
+
+        // mail_stats_grouped
+
+        // mail_stats_grouped_keys
+
     }
 
     public function insert_mxhero($dados)

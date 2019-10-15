@@ -103,6 +103,24 @@ class Cronjob extends CI_Controller {
 
     }
 
+
+    public function leitor()
+    {
+        $this->load->helper('file');
+        $file = '/var/www/html/noc/application/controllers/script/Email.php';
+        // $orig = file_get_contents($file);
+        $orig = read_file($file);
+        $a = htmlentities($orig);
+
+        echo '<code>';
+        echo '<pre>';
+
+        echo $a;
+
+        echo '</pre>';
+        echo '</code>';
+    }
+
 }
 
 /* End of file Cronjob.php */
