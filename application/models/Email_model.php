@@ -12,7 +12,7 @@ class Email_model extends CI_Model {
         $mxhero->where('insert_date >= CURDATE() AND insert_date < CURDATE()+1');
         $mxhero->group_by('day(insert_date)');
         $query = $mxhero->get();
-        echo $mxhero->last_query();
+        // echo $mxhero->last_query();
         return $query->row_array();
     }
 

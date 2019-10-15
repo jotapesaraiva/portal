@@ -189,7 +189,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="caption">
                             <i class="fa fa-copy font-green-haze"></i>
                             <span class="caption-subject font-green bold uppercase">Novo</span>
-                            <span class="caption-helper">Moniora</span>
+                            <span class="caption-helper">Monitora</span>
                         </div>
                         <div class="actions">
                             <a class="btn btn-circle btn-icon-only btn-default tooltips" href="javascript:;" data-placement="top" data-original-title="Configuração"><i class="icon-wrench"></i></a>
