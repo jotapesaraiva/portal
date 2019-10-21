@@ -32,7 +32,7 @@
                   <div class="portlet-body">
                     <!-- 16:9 aspect ratio -->
                     <div class="embed-responsive embed-responsive-4by3">
-                      <iframe class="embed-responsive-item" src="http://10.3.1.146/cronkeep/src/"></iframe>
+                      <iframe class="embed-responsive-item" src="<?php echo base_url() ?>cronkeep/src/"></iframe>
                     </div>
                   </div>
                 </div>
