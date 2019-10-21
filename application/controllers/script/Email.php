@@ -86,10 +86,14 @@ class Email extends CI_Controller {
     public function teste() {
         // $banco = $this->email_model->somaMesAtual('09', '2019');
         // $banco  =  $this->email_model->select_mxhero_date('in');
-        $backup = $this->email_model->select_mxhero('in');
-        vd($backup);
+        // $backup = $this->email_model->select_mxhero('in');
+        // vd($backup);
         // echo $banco['data_coleta'];
         // echo json_encode($banco);
+        echo date('Y-m-d');
+        echo '<br>';
+        $var_subtracted_date = date('Y-m-d', strtotime('-1 days', strtotime(date('Y-m-d'))));
+        echo $var_subtracted_date;
     }
 }
 
