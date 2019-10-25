@@ -100,11 +100,6 @@ class Lista extends CI_Controller {
        echo json_encode($output);
     }
 
-    public function teste() {
-      // $exist = $this->telefonia_model->listar_telefone('(91) 3323-3853');
-      $id_telefone = $this->telefonia_model->id_telefone('(91) 3323-3853');
-      vd($id_telefone);
-    }
     //FIXME: Falta finalizar o ADD VOIP!
     public function usuarios_add() {
       $this->usuarios_validate();
@@ -172,6 +167,18 @@ class Lista extends CI_Controller {
            }
          }
        }
+
+       if(!empty($this->input->post('voip[]'))) {
+         foreach($this->input->post('voip[]') as $voip) {
+           if(!empty($voip)){
+             $usuario_voip = array (
+               'id_telefone' => $voip,
+               'id_usuario' =>  $insert,
+             );
+             $this->usuario_model->salvar_usuario_telefone($usuario_voip);
+           }
+         }
+       }
        echo json_encode(array("status" => TRUE));
     }
 
@@ -179,8 +186,9 @@ class Lista extends CI_Controller {
        $usuario = $this->usuario_model->edit_usuario($id);
        $telefone = $this->usuario_model->edit_usuario_telefone($id,1);
        $celular = $this->usuario_model->edit_usuario_telefone($id,2);
+       $voip = $this->usuario_model->edit_usuario_telefone($id,4);
 
-       $data = array('usuario' => $usuario, 'telefone' => $telefone, 'celular' => $celular);
+       $data = array('usuario' => $usuario, 'telefone' => $telefone, 'celular' => $celular, 'voip' => $voip);
        echo json_encode($data);
     }
 
@@ -224,7 +232,7 @@ class Lista extends CI_Controller {
                     $id_telefone = $this->telefonia_model->salvar_telefone($telefone_where);
                     $usuario_telefone = array (
                           'id_telefone' => $id_telefone,
-                          'id_usuario' =>  $this->input->post('id_unidade'),
+                          'id_usuario' =>  $this->input->post('id_usuario'),
                     );
                     $this->usuario_model->salvar_usuario_telefone($usuario_telefone);
             }elseif($this->input->post('id_telefone')[$i] != '' and $this->input->post('telefone')[$i] != ''){
@@ -241,8 +249,9 @@ class Lista extends CI_Controller {
                     // $this->unidade_model->update_unidade_telefone(array ($this->input->post('id_unidade')), $telefone_dados);
             }elseif($this->input->post('id_telefone')[$i] != '' and $this->input->post('telefone')[$i] == ''){
                     //DELETE vd('PASSOU AQUI 3');
+                    $id_usuario = $this->input->post('id_usuario');
                     $id_telefone = $this->input->post('id_telefone')[$i];
-                    $this->usuario_model->delete_usuario_telefone($id_telefone);
+                    $this->usuario_model->delete_usuario_telefone_e($id_telefone,$id_usuario);
                     $this->telefonia_model->delete_telefone($id_telefone);
             }elseif($this->input->post('id_telefone')[$i] == '' and  $this->input->post('telefone')[$i] == ''){
                     //NADA vd('PASSOU AQUI 4');
@@ -253,7 +262,7 @@ class Lista extends CI_Controller {
        //#######################CELULAR##########################//
        //
        for ($i=0; $i < count($this->input->post('id_celular')); $i++) {
-            if($this->input->post('id_celular')[$i] == '' and $this->input->post('celular')[$i] != ''){
+            if($this->input->post('id_celular')[$i] == '' and $this->input->post('celular')[$i] != '') {
                     //ADD vd('PASSOU AQUI 1');
                     $celular_where = array (
                               'numero_telefone' => $this->input->post('celular')[$i],
@@ -262,7 +271,7 @@ class Lista extends CI_Controller {
                     $id_celular = $this->telefonia_model->salvar_telefone($celular_where);
                     $usuario_celular = array (
                           'id_telefone' => $id_celular,
-                          'id_usuario' =>  $this->input->post('id_unidade'),
+                          'id_usuario' =>  $this->input->post('id_usuario'),
                     );
                     $this->usuario_model->salvar_usuario_telefone($usuario_telefone);
             }elseif($this->input->post('id_celular')[$i] != '' and $this->input->post('celular')[$i] != ''){
@@ -279,18 +288,50 @@ class Lista extends CI_Controller {
                     // $this->unidade_model->update_unidade_telefone(array ($this->input->post('id_unidade')), $celular_dados);
             }elseif($this->input->post('id_celular')[$i] != '' and $this->input->post('celular')[$i] == ''){
                     //DELETE vd('PASSOU AQUI 3');
+                    $id_usuario = $this->input->post('id_usuario');
                     $id_celular = $this->input->post('id_celular')[$i];
-                    $this->usuario_model->delete_usuario_telefone($id_celular);
+                    $this->usuario_model->delete_usuario_telefone($id_celular,$id_usuario);
                     $this->telefonia_model->delete_telefone($id_celular);
             }elseif($this->input->post('id_celular')[$i] == '' and  $this->input->post('celular')[$i] == ''){
                     //NADA vd('PASSOU AQUI 4');
             }
            // vd('NÂO PASSOU PELO IF');
        }
+       //
+       //#######################VOIP##########################//
+       //
+       for ($i=0; $i < count($this->input->post('id_voip')); $i++) {
+            if($this->input->post('id_voip')[$i] == '' and $this->input->post('voip')[$i] != ''){
+                    //ADD vd('PASSOU AQUI 1');
+                    $usuario_voip = array (
+                          'id_telefone' => $this->input->post('voip')[$i],
+                          'id_usuario' =>  $this->input->post('id_usuario')
+                    );
+                    $this->usuario_model->salvar_usuario_telefone($usuario_voip);
+            }elseif($this->input->post('id_voip')[$i] != '' and $this->input->post('voip')[$i] != ''){
+                    //UPDATE vd('PASSOU AQUI 2');
+                    // $select_numero = $this->telefonia_model->select_telefone($this->input->post('voip')[$i]);
+                       $celular_dados = array (
+                             'id_telefone' => $this->input->post('voip')[$i],
+                             'id_usuario' => $this->input->post('id_usuario'),
+                       );
+                    // vd($celular_dados);
+                    $this->usuario_model->delete_usuario_telefone_e($this->input->post('id_voip')[$i],$this->input->post('id_usuario'));
+                    $this->usuario_model->salvar_usuario_telefone($celular_dados);
+            }elseif($this->input->post('id_voip')[$i] != '' and $this->input->post('voip')[$i] == ''){
+                    //DELETE vd('PASSOU AQUI 3');
+                    $this->usuario_model->delete_usuario_telefone_e($this->input->post('id_voip')[$i],$this->input->post('id_usuario'));
+                    // $this->telefonia_model->delete_telefone($id_voip); //--> não se pode deletar o voip pode esta relacionado com um usuario.
+            }elseif($this->input->post('id_voip')[$i] == '' and  $this->input->post('voip')[$i] == ''){
+                    //NADA vd('PASSOU AQUI 4');
+            }
+           // vd('NÂO PASSOU PELO IF');
+       }
+
 
        echo json_encode(array("status" => TRUE));
     }
-    // FIXME: Falta finalizar o delete VOIP!
+
     public function usuarios_delete($id) {
       $telefones = $this->usuario_model->listar_usuario_telefone($id);
       foreach($telefones->result() as $telefone) {
@@ -305,12 +346,17 @@ class Lista extends CI_Controller {
        echo json_encode(array("status" => TRUE));
     }
 
-    public function usuarios_delete_telefone($id_telefone,$tipo) {
-      $this->usuario_model->delete_usuario_telefone($id_telefone);
+    public function usuarios_delete_telefone($id_telefone,$id_usuario,$tipo) {
+      $this->usuario_model->delete_usuario_telefone_e($id_telefone,$id_usuario);
       if($tipo != 'voip') {
         $this->telefonia_model->delete_telefone($id_telefone);
       }
       echo json_encode(array("status" => TRUE));
+    }
+
+    public function listar_voip() {
+       $data = $this->voip_model->listar_ramal();
+       echo json_encode($data->result());
     }
 
     private function usuarios_validate() {

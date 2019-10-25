@@ -108,6 +108,17 @@ $("#add_telefone").click(function(e) { //on add input button click
             a += '</div>';
         a += '</div>';
         $("#wrapper_telefone_add").append(a);
+        $(".0800").keypress(function (event) {
+            var Chars = $(this).val().length;
+            console.log(Chars);
+            if(Chars == 0){
+              if(event.keyCode == 48 ) {
+                $(".0800").mask("0800-000-0000");
+              } else {
+                $(".0800").mask("(00) 0000-0000");
+              }
+            }
+        });
     }
 });
 $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user click on remove text
@@ -115,13 +126,20 @@ $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user clic
     id_telefone = document.getElementById('telefone').value;
     id_fornecedor = document.getElementById('fornecedor').value;
     //console.log(id_fornecedor);
-    if(id_fornecedor != '') {
-        delete_telefone(id_telefone,id_fornecedor);
+    if (id_telefone != '') {
+        if(id_fornecedor != '') {
+            var result = delete_telefone(id_telefone,id_fornecedor);
+            if(result){
+                e.preventDefault();
+                $('#remove_field_'+button_id+'').remove();
+                telefones--;
+            }
+        }
+    } else {
+        e.preventDefault();
+        $('#remove_field_'+button_id+'').remove();
+        telefones--;
     }
-    e.preventDefault();
-    //$(this).parent().parent().parent().parent().remove();
-    $('#remove_field_'+button_id+'').remove();
-    telefones--;
 });
 
 /*********************************************************************
@@ -142,7 +160,7 @@ $("#add_celular").click(function(e) { //on add input button click
             a += '<div class="col-md-9">';
                 a += '<div class="input-group">';
                     a += '<div class="input-icon">';
-                        a += '<input style="padding: 6px 12px !important;" class="form-control" name="celular[]" placeholder="Numero do celular" type="text">';
+                        a += '<input style="padding: 6px 12px !important;" class="form-control" name="celular[]" placeholder="Numero do celular" data-mask="(00) 00000-0000" type="text">';
                     a += '</div>';
                     a += '<span class="input-group-btn">';
                         a += '<button class="btn red remove_field" id="'+i+'" type="button">';
@@ -157,17 +175,23 @@ $("#add_celular").click(function(e) { //on add input button click
 });
 $("#wrapper_celular_add").on("click",".remove_field", function(e) { //user click on remove text
     var button_id = $(this).attr("id");
-    id_telefone = document.getElementById('celular').value;
+    id_celular = document.getElementById('celular').value;
     id_fornecedor = document.getElementById('fornecedor').value;
     //console.log(id_fornecedor);
-    if(id_fornecedor != '') {
-        delete_telefone(id_telefone,id_fornecedor);
+    if(id_celular != ''){
+        if(id_fornecedor != '') {
+            var result = delete_telefone(id_telefone,id_fornecedor);
+            if (result) {
+                e.preventDefault();
+                $('#remove_field_'+button_id+'').remove();
+                celular--;
+            }
+        }
+    } else {
+        e.preventDefault();
+        $('#remove_field_'+button_id+'').remove();
+        celular--;
     }
-    //delete_telefone(id);
-    e.preventDefault();
-    //$(this).parent().parent().parent().parent().remove();
-    $('#remove_field_'+button_id+'').remove();
-    celular--;
 });
 
  /*********************************************************************
@@ -513,26 +537,25 @@ function delete_person(id){
                 alert('Erro ao deletar dados');
             }
         });
-
+        return true;
     }
 }
 
-// function delete_telefone(id_telefone,id_fornecedor) {
-//     if(confirm('Você tem certeza que quer deletar o item?')) {
-//         // ajax delete data to database
-//         $.ajax({
-//             url : href+"/fornecedor_telefone_delete/"+id_telefone+"/"+id_fornecedor,
-//             type: "POST",
-//             dataType: "JSON",
-//             success: function(data) {
-//                 //if success reload ajax table
-//                 //$('#modal_fornecedor').modal('hide');
-//                 //reload_table();
-//                 alert("excluido com sucesso!!!!");
-//             },
-//             error: function (jqXHR, textStatus, errorThrown) {
-//                 alert('Erro ao deletar dados');
-//             }
-//         });
-//     }
-// }
+function delete_telefone(id_telefone,id_fornecedor) {
+    if(confirm('Você tem certeza que quer deletar o item?')) {
+        // ajax delete data to database
+        $.ajax({
+            url : href+"/fornecedor_telefone_delete/"+id_telefone+"/"+id_fornecedor,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data) {
+
+                alert("excluido com sucesso!!!!");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Erro ao deletar dados');
+            }
+        });
+        return true;
+    }
+}

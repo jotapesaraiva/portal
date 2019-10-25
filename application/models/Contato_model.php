@@ -129,6 +129,12 @@ class Contato_model extends CI_Model {
         $this->db->delete('tbl_contato_telefone');
     }
 
+    public function delete_contato_telefone_e($id_telefone,$id){
+        $this->db->where('id_telefone', $id_telefone);
+        $this->db->where('id_contato', $id);
+        $this->db->delete('tbl_contato_telefone');
+    }
+
     public function save_contato($dados) {
         // $this->db = $this->load->database('default',true);
         $this->db->insert('tbl_contato', $dados);

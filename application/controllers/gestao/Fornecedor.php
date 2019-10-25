@@ -277,7 +277,8 @@ class Fornecedor extends CI_Controller {
             }elseif($this->input->post('id_telefone')[$i] != '' and $this->input->post('telefone')[$i] == ''){
                     //DELETE vd('PASSOU AQUI 3');
                     $id_telefone = $this->input->post('id_telefone')[$i];
-                    $this->fornecedor_model->delete_fornecedor_telefone($id_telefone);
+                    $id_fornecedor = $this->input->post('id');
+                    $this->fornecedor_model->delete_fornecedor_telefone($id_telefone,$id_fornecedor);
                     $this->telefonia_model->delete_telefone($id_telefone);
             }elseif($this->input->post('id_telefone')[$i] == '' and  $this->input->post('telefone')[$i] == ''){
                     //NADA vd('PASSOU AQUI 4');
@@ -315,7 +316,8 @@ class Fornecedor extends CI_Controller {
             }elseif($this->input->post('id_celular')[$i] != '' and $this->input->post('celular')[$i] == ''){
                     //DELETE vd('PASSOU AQUI 3');
                     $id_celular = $this->input->post('id_celular')[$i];
-                    $this->fornecedor_model->delete_fornecedor_telefone($id_celular);
+                    $id_fornecedor = $this->input->post('id');
+                    $this->fornecedor_model->delete_fornecedor_telefone($id_celular,$id_fornecedor);
                     $this->telefonia_model->delete_telefone($id_celular);
             }elseif($this->input->post('id_celular')[$i] == '' and  $this->input->post('celular')[$i] == ''){
                     //NADA vd('PASSOU AQUI 4');
@@ -347,7 +349,7 @@ class Fornecedor extends CI_Controller {
     public function fornecedor_delete($id) {
        $telefones = $this->fornecedor_model->listar_fornecedor_telefone($id);
        $this->fornecedor_model->delete_fornecedor_telefone($id);
-       foreach($telefones->result() as $telefone){
+       foreach($telefones->result() as $telefone) {
          $this->telefonia_model->delete_telefone($telefone->id_telefone);
        }
        $this->fornecedor_model->delete_fornecedor($id);
@@ -355,7 +357,7 @@ class Fornecedor extends CI_Controller {
     }
 
     public function fornecedor_telefone_delete($id_telefone,$id_fornecedor) {
-      $this->fornecedor_model->delete_fornecedor_telefone($id_fornecedor);
+      $this->fornecedor_model->delete_fornecedor_telefone_e($id_telefone,$id_fornecedor);
       $this->telefonia_model->delete_telefone($id_telefone);
       echo json_encode(array("status" => TRUE));
     }

@@ -135,15 +135,15 @@ $("#add_voip").click(function(e) { //on add input button click
         voips++; //text box increment
         var a = '';
         a += '<div class="form-group" id="remove_field_'+i+'">';
-            a += '<input type="hidden" value="" id="voip_'+i+'" name="id_voip[]"/>';
+            a += '<input type="hidden" value="" id="id_voip_'+i+'" name="id_voip[]"/>';
             a += '<label class="control-label col-md-3">VoIP :</label>';
                 a += '<div class="col-md-9">';
                     a += '<div class="input-group">';
                         a +='<div class="input-icon">';
-                            a += '<select class="selectpicker form-control" id="voip_'+i+'" name="voip[]" >';
+                            a += '<select class="selectpicker form-control" id="voip_'+i+'" name="voip[]" data-live-search="true">';
                                 a += '<option value="">------Selecione um VoIP-----</option>';
                                 $.ajax({
-                                    url : "/portal/localidades/unidade/listar_voip/",
+                                    url : href+"/listar_voip/",
                                     type: "GET",
                                     dataType: "JSON",
                                     success: function(data) {
@@ -173,9 +173,10 @@ $("#add_voip").click(function(e) { //on add input button click
 });
 $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on remove text
     var button_id = $(this).attr("id");
-    id_voip = document.getElementById('voip').value;
+    var id_voip = $('#voip_'+button_id).val();
+    id_usuario = document.getElementById('usuario').value;
     if(id_voip != '') {
-        var result = delete_telefone(id_voip,'voip');
+        var result = delete_telefone(id_voip,id_usuario,'voip');
         if(result) {
             e.preventDefault();
             $('#remove_field_'+button_id+'').remove();
@@ -219,9 +220,10 @@ $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on 
      });
      $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user click on remove text
          var button_id = $(this).attr("id");
-         id_telefone = document.getElementById('telefone').value;
+         var id_telefone = $('#telefone_'+button_id).val();
+         id_usuario = document.getElementById('usuario').value;
          if(id_telefone != '') {
-             var result = delete_telefone(id_telefone,'telefone');
+             var result = delete_telefone(id_telefone,id_usuario,'telefone');
              if(result) {
                  e.preventDefault();
                  $('#remove_field_'+button_id+'').remove();
@@ -265,9 +267,10 @@ $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on 
         });
         $("#wrapper_celular_add").on("click",".remove_field", function(e){ //user click on remove text
             var button_id = $(this).attr("id");
-            id_celular = document.getElementById('celular').value;
+            var id_celular = $('#celular_'+button_id).val();
+            id_usuario = document.getElementById('usuario').value;
             if(id_celular != '') {
-                var result = delete_telefone(id_celular,'celular');
+                var result = delete_telefone(id_celular,id_usuario,'celular');
                 if(result) {
                     e.preventDefault();
                     $('#remove_field_'+button_id+'').remove();
@@ -392,45 +395,63 @@ function edit_person(id) {
                           $("#wrapper_celular_add").append(a);
                         }
                     });
-                    }
-                }
+                  }
+              }
 
-            // if(data.celular.length == 2) {
-            //     //console.log(data.celular.length);
-            //     $.each(data.celular, function(index, item) {
-            //       //console.log(i);
-            //       if(i == 0) {
-            //           $('[name="celular[]"]').val(item.numero_telefone);
-            //           $('[name="id_celular[]"]').val(item.id_telefone);
-            //           //console.log(item.id_telefone);
-            //           //console.log(item.numero_telefone);
-            //       } else {
-            //           //console.log(item.id_telefone);
-            //           //console.log(item.numero_telefone);
-            //           var a = '';
-            //           a += '<div class="form-group" id="remove_field_'+index+'">';
-            //               a += '<input type="hidden" value="'+item.id_telefone+'" id=celular name="id_celular[]"/>';
-            //               a += '<label class="control-label col-md-3">Celular :</label>';
-            //               a += '<div class="col-md-9">';
-            //                   a += '<div class="input-group">';
-            //                       a += '<input class="form-control" name="celular[]" value="'+item.numero_telefone+'" placeholder="Numero do celular" data-mask="(00) 00000-0000" type="text">';
-            //                       a += '<span class="input-group-btn">';
-            //                           a += '<button class="btn red remove_field" id="'+index+'" type="button">';
-            //                               a += '<i class="fa fa-minus"></i>';
-            //                           a += '</button>';
-            //                       a += '</span>';
-            //                   a += '</div>';
-            //               a += '</div>';
-            //           a += '</div>';
-            //          $("#wrapper_celular_add").append(a);
-            //       }
-            //     });
-            // } else {
-            //   $.each(data.celular, function(i, item) {
-            //       $('[name="celular[]"]').val(item.numero_telefone);
-            //       $('[name="id_celular[]"]').val(item.id_telefone);
-            //   });
-            // }
+              if (data.voip == null) {
+                $('[name="voip[]"]').selectpicker('val','');
+              } else {
+                if (data.voip.length == 1) {
+                  $.each(data.voip, function(indice,valor) {
+                      $('[name="id_voip[]"]').val(valor.id_telefone);
+                      $('[name="voip[]"]').selectpicker('val',valor.id_telefone);
+                  });
+                } else {
+                  $.each(data.voip, function(indice,valor) {
+                    // console.log(indice);
+                    if(indice == 0){
+                        $('[name="id_voip[]"]').val(valor.id_telefone);
+                        $('[name="voip[]"]').selectpicker('val',valor.id_telefone);
+                    } else {
+                            var a = '';
+                            a += '<div class="form-group" id="remove_field_'+indice+'">';
+                                a += '<input type="hidden" value="'+valor.id_telefone+'" name="id_voip[]"/>';
+                                a += '<label class="control-label col-md-3">VoIP :</label>';
+                                    a += '<div class="col-md-9">';
+                                        a += '<div class="input-group">';
+                                            a +='<div class="input-icon">';
+                                                a += '<select class="selectpicker form-control" id="voip_'+indice+'" name="voip[]" >';
+                                                    a += '<option value="">------Selecione um VoIP-----</option>';
+                                                    $.ajax({
+                                                        url : href+"/listar_voip/",
+                                                        type: "GET",
+                                                        dataType: "JSON",
+                                                        success: function(data) {
+                                                            $.each(data, function(index,item) {
+                                                                $("#voip_" + indice).append('<option value="' + item.id_telefone + '">' + item.numero_telefone + '</option>').selectpicker('val', valor.id_telefone);//.selectpicker("refresh");
+                                                            });
+                                                        },
+                                                        error: function (jqXHR, textStatus, errorThrown) {
+                                                            $("#voip_" + i).html('<option id="-1">none available</option>');
+                                                            alert('Erro ao pegar os dados do ajax');
+                                                        }
+                                                    });
+                                                a += '</select>';
+                                            a +='</div>';
+                                            a += '<span class="input-group-btn">';
+                                                a += '<button class="btn red remove_field" id="'+indice+'" type="button">';
+                                                    a += '<i class="fa fa-minus"></i>';
+                                                a += '</button>';
+                                            a += '</span>';
+                                        a += '</div>';
+                                    a += '</div>';
+                            a += '</div>';
+                        $("#wrapper_voip_add").append(a);
+                    }
+                  });
+                }
+              }
+
 
             $('.selectpicker').selectpicker('refresh')// update in selectpicker bootstrap
             $('#modal_usuario').modal('show'); // show bootstrap modal when complete loaded
@@ -506,23 +527,20 @@ function delete_person(id){
     }
 }
 
-function delete_ramal(id_voip,id_usuario) {
-  if(confirm('Você tem certeza que quer deletar o item?')) {
-          // ajax delete data to database
-          $.ajax({
-              url : href+"/usuarios_delete_telefone/"+id_telefone+"/"+id_usuario,
-              type: "POST",
-              dataType: "JSON",
-              success: function(data){
-                  //if success reload ajax table
-                  $('#msgs').html('<div class="custom-alerts alert alert-info fade in" id="myAlert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>Usuário deletado com sucesso !!!</div>');
-                  $("#myAlert").fadeOut(4000);
-                  $('#modal_unidade').modal('hide');
-                  reload_table();
-              },
-              error: function (jqXHR, textStatus, errorThrown){
-                  alert('Erro ao deletar os dados');
-              }
-          });
-      }
+   function delete_telefone(id_telefone,id_unidade,tipo) {
+    if(confirm('Você tem certeza que quer deletar o item?')) {
+        // ajax delete data to database
+        $.ajax({
+            url : href+"/usuarios_delete_telefone/"+id_telefone+"/"+id_unidade+"/"+tipo,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data) {
+                alert("excluido com sucesso!!!!");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Erro ao deletar dados'+jqXHR.responseText);
+            }
+        });
+        return true;
+    }
 }

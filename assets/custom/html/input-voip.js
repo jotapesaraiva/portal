@@ -13,19 +13,20 @@ $("#add_voip").click(function(e) { //on add input button click
         voips++; //text box increment
         var a = '';
         a += '<div class="form-group" id="remove_field_'+i+'">';
-            a += '<input type="hidden" id="voip_'+i+'" value="" name="id_voip[]"/>';
+            a += '<input type="hidden" id="id_voip_'+i+'" value="" name="id_voip[]"/>';
             a += '<label class="control-label col-md-3">VoIP :</label>';
                 a += '<div class="col-md-9">';
                     a += '<div class="input-group">';
                         a +='<div class="input-icon">';
-                            a += '<select class="selectpicker form-control" id="voip_'+i+'" name="voip[]" >';
+                            a += '<select class="selectpicker form-control" id="voip_'+i+'" name="voip[]" data-live-search="true">';
                                 a += '<option value="">------Selecione um VoIP-----</option>';
-                                console.log(href+"/listar_voip/");
+                                // console.log(href+"/listar_voip/");
                                 $.ajax({
                                     url : href+"/listar_voip/",
                                     type: "GET",
                                     dataType: "JSON",
                                     success: function(data) {
+                                        // console.log(data);
                                         $.each(data, function(index,item) {
                                             $("#voip_" + i).append('<option value="' + item.id_telefone + '">' + item.numero_telefone + '</option>').selectpicker("refresh");
                                         });
@@ -53,8 +54,9 @@ $("#add_voip").click(function(e) { //on add input button click
 $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on remove text
     var button_id = $(this).attr("id");
     var id_voip = $('#voip_'+button_id).val();
+    var id_unidade = $('#unidade').val();
     if(id_voip != '') {
-        var result = delete_telefone(id_voip,'voip');
+        var result = delete_telefone(id_voip,id_unidade,'voip');
         if(result) {
             e.preventDefault();
             $('#remove_field_'+button_id+'').remove();
@@ -67,22 +69,20 @@ $("#wrapper_voip_add").on("click",".remove_field", function(e){ //user click on 
     }
 });
 
-   function delete_telefone(id_telefone,tipo) {
+   function delete_telefone(id_telefone,id_unidade,tipo) {
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : href+"/unidade_telefone_delete/"+id_telefone+"/"+tipo,
+            url : href+"/unidade_telefone_delete/"+id_telefone+"/"+id_unidade+"/"+tipo,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
-                //if success reload ajax table
-                //$('#modal_contato').modal('hide');
-                //reload_table();
                 alert("excluido com sucesso!!!!");
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Erro ao deletar dados'+jqXHR.responseText);
             }
         });
+        return true;
     }
 }

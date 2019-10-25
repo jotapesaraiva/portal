@@ -31,8 +31,9 @@ $("#add_telefone").click(function(e) { //on add input button click
 $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user click on remove text
       var button_id = $(this).attr("id");
       var id_telefone = $('#telefone_'+button_id).val();
+      var id_unidade = $('#unidade').val();
       if(id_telefone != '') {
-          var result = delete_telefone(id_telefone,'telefone');
+          var result = delete_telefone(id_telefone,id_unidade,'telefone');
           if(result) {
               e.preventDefault();
               $('#remove_field_'+button_id+'').remove();
@@ -45,22 +46,20 @@ $("#wrapper_telefone_add").on("click",".remove_field", function(e) { //user clic
       }
 });
 
-function delete_telefone(id_telefone,tipo) {
+function delete_telefone(id_telefone,id_unidade,tipo) {
     if(confirm('Você tem certeza que quer deletar o item?')) {
         // ajax delete data to database
         $.ajax({
-            url : href+"/unidade_telefone_delete/"+id_telefone+"/"+tipo,
+            url : href+"/unidade_telefone_delete/"+id_telefone+"/"+id_unidade+"/"+tipo,
             type: "POST",
             dataType: "JSON",
             success: function(data) {
-                //if success reload ajax table
-                //$('#modal_contato').modal('hide');
-                //reload_table();
                 alert("excluido com sucesso!!!!");
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Erro ao deletar dados'+jqXHR.responseText);
             }
         });
+        return true;
     }
 }

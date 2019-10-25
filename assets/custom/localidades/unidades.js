@@ -924,7 +924,6 @@ function save() {
     } else {
         url = href+"/unidades_update";
     }
-    console.log($('#form').serialize());
     // ajax adding data to database
     $.ajax({
         url : url,

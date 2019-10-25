@@ -183,6 +183,12 @@ class Usuario_model extends CI_Model{
         $this->db->delete('tbl_usuario_telefone');
     }
 
+    public function delete_usuario_telefone_e($id_telefone,$id_usuario){
+        $this->db->where('id_usuario', $id_usuario);
+        $this->db->where('id_telefone', $id_telefone);
+        $this->db->delete('tbl_usuario_telefone');
+    }
+
     public function save_usuario($dados) {
         // $this->db = $this->load->database('default',true);
         $this->db->insert('tbl_usuario', $dados);

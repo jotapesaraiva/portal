@@ -255,11 +255,11 @@ class Contato extends CI_Controller {
       echo json_encode(array("status" => TRUE));
     }
 
-    // public function contato_telefone_delete($id_telefone,$id_contato) {
-    //   $this->contato_model->delete_contato_telefone($id_contato);
-    //   $this->telefonia_model->delete_telefone($id_telefone);
-    //   echo json_encode(array("status" => TRUE));
-    // }
+    public function contato_telefone_delete($id_telefone,$id_contato) {
+      $this->contato_model->delete_contato_telefone_e($id_telefone,$id_contato);
+      $this->telefonia_model->delete_telefone($id_telefone);
+      echo json_encode(array("status" => TRUE));
+    }
 
     private function contato_validate() {
         $data = array();

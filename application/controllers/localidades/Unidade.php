@@ -85,7 +85,7 @@ class Unidade extends CI_Controller {
              }
            $row[] = $tel;
            }
-           //****************************************************************************************
+           //*****************************************   CELULARES   ***********************************************
 /*           $celulares = $this->unidade_model->listar_unidade_telefone($unidade->id_unidade,2);
            if($celulares == null){
               $row[] = "";
@@ -96,7 +96,7 @@ class Unidade extends CI_Controller {
              }
            $row[] = $cel;
            }*/
-           //****************************************************************************************
+           //*************************************   VOIP   ***************************************************
            $voips = $this->unidade_model->listar_unidade_telefone($unidade->id_unidade,4);
            if($voips == null){
             $row[] = "";
@@ -107,7 +107,7 @@ class Unidade extends CI_Controller {
              }
              $row[] = $VoIP;
            }
-           //****************************************************************************************
+           //***************************************   LINKS   *************************************************
            $links = $this->unidade_model->listar_link($unidade->id_unidade);
            if($links == null){
               $row[] = "";
@@ -128,7 +128,7 @@ class Unidade extends CI_Controller {
              }
            $row[] = $Link;
            }
-           //****************************************************************************************
+           //*****************************************   TECNICOS   ***********************************************
             $tecnicos = $this->unidade_model->listar_unidade_usuario($unidade->id_unidade,6);
             if($tecnicos == null){
                $row[] = "";
@@ -139,7 +139,7 @@ class Unidade extends CI_Controller {
               }
               $row[] = $Tecnico;
             }
-           //****************************************************************************************
+           //***************************************   SERVIDORES   *************************************************
            $servidores = $this->unidade_model->listar_unidade_usuario($unidade->id_unidade,16);
            if($servidores == null){
               $row[] = "";
@@ -150,7 +150,7 @@ class Unidade extends CI_Controller {
              }
              $row[] = $Servidor;
            }
-           //****************************************************************************************
+           //***************************************   UNIDADES   *************************************************
            if ($unidade->status_unidade == '1'){
             $row[] = '<span class="label label-sm label-info"> Ativo. </span>';
            } else {
@@ -200,7 +200,7 @@ class Unidade extends CI_Controller {
                'id_link' => $this->input->post('link'),*/
                'comentario_unidade' => $this->input->post('comentario'),
            );
-       $insert = $this->unidade_model->save_unidade($data);
+       $insert_unidade = $this->unidade_model->save_unidade($data);
 
        if(!empty($this->input->post('telefone'))) {
          foreach ($this->input->post('telefone') as $tel) {
@@ -213,10 +213,12 @@ class Unidade extends CI_Controller {
              //var_dump($telefone);
              $unidade_telefone = array (
                'id_telefone' => $id_telefone,
-               'id_unidade' =>  $insert,
+               'id_unidade' =>  $insert_unidade
              );
              $this->unidade_model->salvar_unidade_telefone($unidade_telefone);
              //var_dump($unidade_telefone);
+           } else {
+            // se o campo estiver vazio não faça nada.
            }
          }
        }
@@ -233,10 +235,24 @@ class Unidade extends CI_Controller {
              // var_dump($celular);
              $unidade_celular = array (
                'id_telefone' => $id_celular,
-               'id_unidade'  =>  $insert
+               'id_unidade'  =>  $insert_unidade
              );
              $this->unidade_model->salvar_unidade_telefone($unidade_celular);
              // var_dump($unidade_celular);
+           } else {
+             // se o campo estiver vazio não faça nada.
+           }
+         }
+       }
+
+       if(!empty($this->input->post('voip[]'))) {
+         foreach($this->input->post('voip[]') as $voip) {
+           if(!empty($voip)){
+             $unidade_voip = array (
+               'id_telefone' => $voip,
+               'id_unidade' =>  $insert_unidade,
+             );
+             $this->unidade_model->salvar_unidade_telefone($unidade_voip);
            }
          }
        }
@@ -427,8 +443,9 @@ class Unidade extends CI_Controller {
                     // $this->unidade_model->update_unidade_telefone(array ($this->input->post('id_unidade')), $telefone_dados);
             }elseif($this->input->post('id_telefone')[$i] != '' and $this->input->post('telefone')[$i] == ''){
                     //DELETE vd('PASSOU AQUI 3');
+                    $id_unidade = $this->input->post('id_unidade');
                     $id_telefone = $this->input->post('id_telefone')[$i];
-                    $this->unidade_model->delete_unidade_telefone($id_telefone);
+                    $this->unidade_model->delete_unidade_telefone_e($id_telefone,$id_unidade);
                     $this->telefonia_model->delete_telefone($id_telefone);
             }elseif($this->input->post('id_telefone')[$i] == '' and  $this->input->post('telefone')[$i] == ''){
                     //NADA vd('PASSOU AQUI 4');
@@ -466,7 +483,8 @@ class Unidade extends CI_Controller {
             }elseif($this->input->post('id_celular')[$i] != '' and $this->input->post('celular')[$i] == ''){
                     //DELETE vd('PASSOU AQUI 3');
                     $id_celular = $this->input->post('id_celular')[$i];
-                    $this->unidade_model->delete_unidade_telefone($id_celular);
+                    $id_unidade = $this->input->post('id_unidade');
+                    $this->unidade_model->delete_unidade_telefone_e($id_celular,$id_unidade);
                     $this->telefonia_model->delete_telefone($id_celular);
             }elseif($this->input->post('id_celular')[$i] == '' and  $this->input->post('celular')[$i] == ''){
                     //NADA vd('PASSOU AQUI 4');
@@ -479,33 +497,25 @@ class Unidade extends CI_Controller {
        for ($i=0; $i < count($this->input->post('id_voip')); $i++) {
             if($this->input->post('id_voip')[$i] == '' and $this->input->post('voip')[$i] != ''){
                     //ADD vd('PASSOU AQUI 1');
-                    $voip_where = array (
-                              'numero_telefone' => $this->input->post('voip')[$i],
-                              'id_tipo_categoria_telefone' => 4,
-                    );
-                    $id_voip = $this->telefonia_model->salvar_telefone($voip_where);
                     $unidade_voip = array (
-                          'id_telefone' => $id_voip,
-                          'id_unidade' =>  $this->input->post('id_unidade'),
+                          'id_telefone' => $this->input->post('voip')[$i],
+                          'id_unidade' =>  $this->input->post('id_unidade')
                     );
                     $this->unidade_model->salvar_unidade_telefone($unidade_voip);
             }elseif($this->input->post('id_voip')[$i] != '' and $this->input->post('voip')[$i] != ''){
                     //UPDATE vd('PASSOU AQUI 2');
-                    $voip_where = array (
-                              'numero_telefone' => $this->input->post('voip')[$i],
-                              'id_tipo_categoria_telefone' => 4,
-                    );
-                       // $celular_dados = array (
-                       //       'id_telefone' => $this->input->post('id_celular')[$i],
-                       //       'id_unidade' => $this->input->post('id_unidade'),
-                       // );
-                    $this->telefonia_model->update_telefone(array ('id_telefone' => $this->input->post('id_voip')[$i]), $voip_where);
-                    // $this->unidade_model->update_unidade_telefone(array ($this->input->post('id_unidade')), $celular_dados);
+                    // $select_numero = $this->telefonia_model->select_telefone($this->input->post('voip')[$i]);
+                       $celular_dados = array (
+                             'id_telefone' => $this->input->post('voip')[$i],
+                             'id_unidade' => $this->input->post('id_unidade'),
+                       );
+                    // vd($celular_dados);
+                    $this->unidade_model->delete_unidade_telefone_e($this->input->post('id_voip')[$i],$this->input->post('id_unidade'));
+                    $this->unidade_model->salvar_unidade_telefone($celular_dados);
             }elseif($this->input->post('id_voip')[$i] != '' and $this->input->post('voip')[$i] == ''){
                     //DELETE vd('PASSOU AQUI 3');
-                    $id_voip = $this->input->post('id_voip')[$i];
-                    $this->unidade_model->delete_unidade_telefone($id_voip);
-                    // $this->telefonia_model->delete_telefone($id_voip); //--> não se pode deletar o voip
+                    $this->unidade_model->delete_unidade_telefone_e($this->input->post('id_voip')[$i],$this->input->post('id_unidade'));
+                    // $this->telefonia_model->delete_telefone($id_voip); //--> não se pode deletar o voip pode esta relacionado com um usuario.
             }elseif($this->input->post('id_voip')[$i] == '' and  $this->input->post('voip')[$i] == ''){
                     //NADA vd('PASSOU AQUI 4');
             }
@@ -539,10 +549,10 @@ class Unidade extends CI_Controller {
        echo json_encode(array("status" => TRUE));
     }
 
-
-
-
     public function unidades_delete($id) {
+        //deletar a relação unidade usuario (tecnicos e colaboradores)
+        $this->unidade_model->delete_unidade_usuario($id);
+        //deletar a relação unidade telefone
        $this->unidade_model->delete_unidade_telefone($id);
        $this->unidade_model->delete_unidade($id);
        $telefones = $this->unidade_model->listar_unidade_telefone($id,1);
@@ -552,8 +562,8 @@ class Unidade extends CI_Controller {
        echo json_encode(array("status" => TRUE));
     }
 
-    public function unidade_telefone_delete($id_telefone,$tipo) {
-      $this->unidade_model->delete_unidade_telefone($id_telefone);
+    public function unidade_telefone_delete($id_telefone,$id_unidade,$tipo) {
+      $this->unidade_model->delete_unidade_telefone_e($id_telefone,$id_unidade);
       if($tipo != 'voip') {
         $this->telefonia_model->delete_telefone($id_telefone);
       }

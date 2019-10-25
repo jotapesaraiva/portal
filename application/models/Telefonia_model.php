@@ -38,7 +38,6 @@ class Telefonia_model extends CI_Model{
     //=============================================================================
 
     public function listar_telefone($num_telefone=null) {
-        // $this->db = $this->load->database('default',true);
         $this->db->select('*');
         $this->db->from('tbl_telefone');
         if($num_telefone != null){
@@ -50,12 +49,19 @@ class Telefonia_model extends CI_Model{
         return $query;
     }
 
+    public function select_telefone($id) {
+        $this->db->select('numero_telefone');
+        $this->db->where('id_telefone', $id);
+        $query = $this->db->get('tbl_telefone');
+        return $query->row();
+    }
+
     public function id_telefone($num_telefone) {
-        // $this->db = $this->load->database('default',true);
         $this->db->select('id_telefone');
         $this->db->from('tbl_telefone');
         $this->db->where('numero_telefone',$num_telefone);
         $query = $this->db->get();
+        // echo $this->db->last_query();
         return $query->row();
     }
 
