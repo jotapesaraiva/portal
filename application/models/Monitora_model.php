@@ -58,8 +58,7 @@ class Monitora_model extends CI_Model {
          $this->db->from('mnt_alertas');
          $this->db->where('data_fim > NOW() - INTERVAL "10" MINUTE');
          switch ($session) {
-             case 'CGRE-Produção':
-                    $this->db->where_not_in('tipo_alerta',array('Informativo'));
+             case 'CGDA-Banco':
                     $this->db->order_by('data_inicio', 'DESC');
                     $query = $this->db->get();
                     // echo $this->db->last_query();
@@ -73,6 +72,7 @@ class Monitora_model extends CI_Model {
                     return $query->result_array();
                  break;
              default:
+                    $this->db->where_not_in('tipo_alerta',array('Informativo'));
                     $this->db->order_by('data_inicio', 'DESC');
                     $query = $this->db->get();
                     // echo $this->db->last_query();

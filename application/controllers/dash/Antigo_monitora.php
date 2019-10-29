@@ -16,7 +16,7 @@ class Antigo_monitora extends CI_Controller {
         $result ="";
         $retorno = array();
         // TODO: pesquisar qual é a session do usuario para consultar no mnt_alertas de acordo com o dashboard.
-        $alertas = $this->monitora_model->select_mnt_alerta($this->session->userdata('physicaldeliveryofficename'));
+        $alertas = $this->monitora_model->select_mnt_alerta($this->usuario_model->usuario_grupo(strtolower($this->session->userdata('username'))));
         // vd($alertas);
         foreach ($alertas as $alerta) {
             $id = $alerta['id'];
@@ -58,8 +58,10 @@ class Antigo_monitora extends CI_Controller {
 
 
     public function monitora() {
-        $alertas = $this->monitora_model->monitora();
-        vd($alertas);
+        // $alertas = $this->monitora_model->monitora();
+        // vd($alertas);
+        $grupo = $this->usuario_model->usuario_grupo(strtolower($this->session->userdata('username')));
+        vd($grupo->nome_grupo);
     }
 
 }
