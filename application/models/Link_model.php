@@ -215,7 +215,7 @@ class Link_model extends CI_Model{
         $where = "atualizacao BETWEEN '". $inicio ."' AND '". $fim ."'";
         $this->db->where($where);
         $this->db->order_by('centro', 'DESC');
-        $this->db->limit('100');
+        // $this->db->limit('100');
         $query = $this->db->get();
         // echo $this->db->last_query();
         return $query;
