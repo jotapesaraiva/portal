@@ -62,7 +62,7 @@ class Contratos extends CI_Controller {
         $data = array();
         foreach ($contratos->result_array() as $contrato) {
             $row = array();
-            $row[] = $contrato['nome_contrato'];
+            // $row[] = $contrato['nome_contrato'];
             $row[] = $contrato['numero_contrato'];
             $row[] = $contrato['nome_tipo_contrato'];
             $row[] = date( 'd/m/Y', strtotime($contrato['data_inicio_contrato']));
@@ -101,7 +101,7 @@ class Contratos extends CI_Controller {
         }
         $duracao = $this->duracao($this->input->post('data_inicio'),$this->input->post('data_fim'));
         $data = array(
-            'nome_contrato' => $this->input->post('nome'),
+            // 'nome_contrato' => $this->input->post('nome'),
             'id_tipo_contrato' => $this->input->post('tipo'),
             'numero_contrato' => $this->input->post('numero'),
             'data_inicio_contrato' => date('Y-m-d', strtotime($this->input->post('data_inicio'))),
@@ -129,7 +129,7 @@ class Contratos extends CI_Controller {
         }
         $duracao = $this->duracao($this->input->post('data_inicio'),$this->input->post('data_fim'));
         $data = array(
-            'nome_contrato' => $this->input->post('nome'),
+            // 'nome_contrato' => $this->input->post('nome'),
             'id_tipo_contrato' => $this->input->post('tipo'),
             'numero_contrato' => $this->input->post('numero'),
             'data_inicio_contrato' => date('Y-m-d', strtotime($this->input->post('data_inicio'))),
@@ -154,11 +154,11 @@ class Contratos extends CI_Controller {
         $data['inputerror'] = array();
         $data['status'] = TRUE;
 
-        if($this->input->post('nome') == '') {
-            $data['inputerror'][] = 'nome';
-            $data['error_string'][] = 'O campo nome é obrigatorio';
-            $data['status'] = FALSE;
-        }
+        // if($this->input->post('nome') == '') {
+        //     $data['inputerror'][] = 'nome';
+        //     $data['error_string'][] = 'O campo nome é obrigatorio';
+        //     $data['status'] = FALSE;
+        // }
 
         if($this->input->post('tipo') == '') {
             $data['inputerror'][] = 'tipo';

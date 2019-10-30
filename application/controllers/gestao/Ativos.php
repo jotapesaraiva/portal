@@ -28,12 +28,14 @@ class Ativos extends CI_Controller {
         $fornecedores = $this->fornecedor_model->listar_fornecedor();
         $contratos = $this->contratos_model->listar_contratos();
         $tipos = $this->ativos_model->listar_tipo();
+        $tipos_c = $this->contratos_model->listar_tipo();
 
         $modal = array(
             'grupos' => $grupos,
             'fornecedores' => $fornecedores,
             'contratos' => $contratos,
-            'tipos' => $tipos
+            'tipos' => $tipos,
+            'tipos_c' => $tipos_c
         );
 
         $this->breadcrumbs->unshift('<i class="icon-home"></i> Home', 'portal');
@@ -46,6 +48,7 @@ class Ativos extends CI_Controller {
 
         $this->load->view('gestao/ativos');
         $this->load->view('modal/modal_ativos', $modal);
+        $this->load->view('modal/modal_contrato_view', $modal);
 
         $this->load->view('template/footer', $script);
 
@@ -69,7 +72,7 @@ class Ativos extends CI_Controller {
             $row[] = $ativo['nome_tipo_ativo'];
             $row[] = $ativo['nome_grupo'];
             $row[] = $ativo['patrimonio_ativo'];
-            $row[] = $ativo['numero_contrato'];
+            $row[] = '<a href="javascript:void(0)" onclick="view_contrato('.$ativo['numero_contrato'].')">'.$ativo['numero_contrato'].'</a>';
             $row[] = $ativo['nome_fornecedor'];
             if(acesso_admin()):
             $row[] = '<a class="btn yellow-mint btn-outline sbold" href="javascript:void(0)" title="Edit" onclick="edit_ativo('."'".$ativo['id_ativo']."'".')"><i class="glyphicon glyphicon-pencil"></i> Editar </a>
@@ -111,8 +114,9 @@ class Ativos extends CI_Controller {
         echo json_encode($ativo->result_array());
     }
 
-    public function ativos_view($id) {
-        # code...
+    public function view_contrato($nm) {
+        $contrato = $this->contratos_model->contrato($nm);
+        echo json_encode($contrato->result_array());
     }
 
     public function ativos_update() {

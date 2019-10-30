@@ -80,7 +80,7 @@ function edit_contrato(id) {
         dataType: "JSON",
         success: function(data) {
             $('[name="id_contrato"]').val(data[0].id_contrato);
-            $('[name="nome"]').val(data[0].nome_contrato);
+            // $('[name="nome"]').val(data[0].nome_contrato);
             $('[name="tipo"]').selectpicker('val', data[0].id_tipo_contrato);
             $('[name="numero"]').val(data[0].numero_contrato);
             $('[name="data_inicio"]').val(data[0].data_inicio_contrato);

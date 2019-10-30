@@ -43,7 +43,14 @@ class Contratos_model extends CI_Model {
         return $query;
     }
 
+    public function contrato($nm)
+    {
+        $this->db->where('numero_contrato', $nm);
+        $query = $this->db->get('tbl_contratos');
+        return $query;
+    }
 }
+
 
 /* End of file Contratos_model.php */
 /* Location: ./application/models/Contratos_model.php */

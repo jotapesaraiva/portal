@@ -99,6 +99,40 @@
       });
   }
 
+  function view_contrato(nm) {
+          $('#form')[0].reset(); // reset form on modals
+          $(".selectpicker").val('').selectpicker('refresh'); //reset selectcpicker
+          $('.form-group').removeClass('has-error'); // clear error class
+          $('.help-block').empty(); // clear error string
+          //Ajax Load data from ajax
+          $.ajax({
+              url : href+"/view_contrato/" + nm,
+              type: "GET",
+              dataType: "JSON",
+              success: function(data) {
+                  $('[name="id_contrato"]').val(data[0].id_contrato);
+                  $('[name="tipo"]').selectpicker('val', data[0].id_tipo_contrato);
+                  $('[name="numero"]').val(data[0].numero_contrato);
+                  $('[name="data_inicio"]').val(data[0].data_inicio_contrato);
+                  $('[name="data_fim"]').val(data[0].data_fim_contrato);
+                  $('[name="duracao"]').val(data[0].duracao_contrato);
+                  if(data[0].renovacao_contrato == '1') {
+                      $('[name="renovacao"]').bootstrapSwitch('state', true);
+                  } else {
+                      $('[name="renovacao"]').bootstrapSwitch('state', false);
+                  }
+                  $('[name="aviso"]').val(data[0].aviso_contrato);
+                  $('[name="fornecedor"]').selectpicker('val', data[0].id_fornecedor);
+
+                  $('#modal_contrato_view').modal('show'); // show bootstrap modal when complete loaded
+                  $('.modal-title').text('View Contrato'); // Set title to Bootstrap modal title
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                  alert('Erro ao pegar os dados do ajax');
+              }
+          });
+      }
+
   function reload_table(){
       table.ajax.reload(null,false); //reload datatable ajax
   }

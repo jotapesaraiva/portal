@@ -62,7 +62,7 @@
                         <table class="table table-striped table-bordered table-hover table-checkable order-column" id="table">
                             <thead>
                                 <tr>
-                                    <th> Nome </th>
+                                    <!-- <th> Nome </th> -->
                                     <th> Numero </th>
                                     <th> Tipo </th>
                                     <th> Data inicio </th>

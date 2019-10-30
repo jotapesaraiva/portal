@@ -11,13 +11,13 @@
                 <form action="#" id="form" class="form-horizontal">
                     <input type="hidden" value="" id="id_contrato" name="id_contrato"/>
                     <div class="form-body">
-                        <div class="form-group">
+<!--                         <div class="form-group">
                             <label class="control-label col-md-3">Nome :</label>
                             <div class="col-md-9">
                                 <input name="nome" placeholder="" class="form-control" type="text">
                                 <span class="help-block"></span>
                             </div>
-                        </div>
+                        </div> -->
                         <div id="help-block" class="form-group">
                             <label class="control-label col-md-3">Tipo :</label>
                             <div class="col-md-9">
