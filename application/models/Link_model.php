@@ -227,7 +227,7 @@ class Link_model extends CI_Model{
         $this->db->where('year(atualizacao)',$mes);
         $this->db->group_by('Month(atualizacao)');
         $this->db->order_by('mes', 'ASC');
-        $this->db->limit('12');
+        // $this->db->limit('12');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -238,7 +238,7 @@ class Link_model extends CI_Model{
         $this->db->where('year(atualizacao) >=','2010');
         $this->db->group_by('year(atualizacao)');
         $this->db->order_by('ano', 'ASC');
-        $this->db->limit('12');
+        // $this->db->limit('12');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -252,7 +252,7 @@ class Link_model extends CI_Model{
         $this->db->where('year(atualizacao)',$ano);
         $this->db->group_by('causa');
         $this->db->order_by('numero', 'DESC');
-        $this->db->limit('10');
+        // $this->db->limit('10');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -264,7 +264,7 @@ class Link_model extends CI_Model{
         $this->db->where('year(atualizacao)',$ano);
         $this->db->group_by('centro');
         $this->db->order_by('tempo', 'DESC');
-        $this->db->limit('10');
+        // $this->db->limit('10');
         $query = $this->db->get();
         // echo $this->db->last_query();
         return $query->result_array();
@@ -279,7 +279,7 @@ class Link_model extends CI_Model{
         $this->db->where('year(atualizacao)',$ano);
         $this->db->group_by('centro');
         $this->db->order_by('numero', 'DESC');
-        $this->db->limit('10');
+        // $this->db->limit('10');
         $query = $this->db->get();
         return $query->result_array();
     }
