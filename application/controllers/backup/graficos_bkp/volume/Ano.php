@@ -21,9 +21,13 @@ class Ano extends CI_Controller {
         }
 
         $graficos = $this->indicadores_model->tempo_volume('volume','null',$nano);
+        $result = array();
         foreach ($graficos as $key => $value) {
-                $array_dados['specification'][$key] = $graficos[$key]['specification'];
-                $array_dados['numero'][$key] = floatval($graficos[$key]['numero']);
+            $graph = array(
+                $value['specification'],
+                $value['numero']
+            );
+            array_push($result, $graph);
         }
 
         $script['footerinc'] = '
@@ -31,75 +35,56 @@ class Ano extends CI_Controller {
         <script src="' . base_url() . 'assets/js/highcharts/highcharts.js"></script>
         <script src="' . base_url() . 'assets/js/highcharts/exporting.js"></script>
         <script src="' . base_url() . 'assets/js/highcharts/export-data.js"></script>
-        <script src="' . base_url() . 'assets/js/highcharts/pareto.js"></script>
-        ';
-        $script['script']    = '
-        <script type="text/javascript">
-            $(function () {
-                $("#grafico").highcharts({
-                chart: {
-                    zoomType: "xy"
-                },
-                title: {
-                    text: "TOP 10 - Backups com Maior Volume no ano de '.  $nano .'"
-                },
-                xAxis: {
-                    categories: '. json_encode($array_dados['specification']).',
-                    crosshair: true
-                },
-                yAxis: [{
-                    title: {
-                        text: "Volume"
-                    },
-                    labels: {
-                        format: "{value} GB"
-                    }
-                }, {
-                    title: {
-                        text: "Porcentagem"
-                    },
-                    minPadding: 0,
-                    maxPadding: 0,
-                    max: 100,
-                    min: 0,
-                    opposite: true,
-                    labels: {
-                        format: "{value}%"
-                    }
-                }],
-                 legend: {
-                        align: "right",
-                        x: -70,
-                        verticalAlign: "top",
-                        y: -5,
-                        floating: true,
-                        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || "white",
-                        borderColor: "#CCC",
-                        borderWidth: 1,
-                        shadow: false
-                },
-                series: [{
-                    name: "Porcentagem",
-                    type: "pareto",
-                    yAxis: 1,
-                    zIndex: 10,
-                    tooltip: {
-                        valueDecimals: 1,
-                        valueSuffix: " %"
-                    },
-                    baseSeries: 1
-                }, {
-                    name: "Volume",
-                    type: "column",
-                    zIndex: 2,
-                    tooltip: {
-                       valueSuffix: " GB"
-                    },
-                    data: '. json_encode($array_dados['numero']).'
-                }]
-            });
-        });
-        </script>';
+        <script src="' . base_url() . 'assets/js/highcharts/pareto.js"></script>';
+        $script['script'] = "
+                    <script type='text/javascript'>
+                        Highcharts.chart('grafico', {
+                                chart: {
+                                    type: 'column'
+                                },
+                                title: {
+                                    text: 'Backups com Maior Volume no ano de ".$nano."'
+                                },
+                                xAxis: {
+                                    crosshair: true,
+                                    type: 'category',
+                                    labels: {
+                                        style: {
+                                            fontSize: '10px',
+                                            fontFamily: 'Verdana, sans-serif'
+                                        }
+                                    }
+                                },
+                                yAxis: {
+                                    min: 0,
+                                    title: {
+                                        text: 'Volume'
+                                    }
+                                },
+                                legend: {
+                                    enabled: false
+                                },
+                                tooltip: {
+                                    pointFormat: 'Volume: <b>{point.y}</b>'
+                                },
+                                series: [{
+                                    name: 'Backups',
+                                    data: ".json_encode($result, JSON_NUMERIC_CHECK).",
+                                    dataLabels: {
+                                        enabled: true,
+                                        color: '#FFFFFF',
+                                        align: 'right',
+                                        format: '{point.y}', // one decimal
+                                        y: 25, // 10 pixels down from the top
+                                        x: -23,
+                                        style: {
+                                            fontSize: '13px',
+                                            fontFamily: 'Verdana, sans-serif'
+                                        }
+                                    }
+                                }]
+                            });
+                        </script>";
         $css['headerinc']    = '
             <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $session['username'] = $this->session->userdata('username');

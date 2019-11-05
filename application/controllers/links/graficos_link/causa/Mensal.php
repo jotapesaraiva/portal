@@ -31,11 +31,14 @@ class Mensal extends CI_Controller {
         }
 
         $dados = $this->link_model->causa($nmes,$nano);
-         $array_dados = array();
-         foreach ($dados as $key => $value) {
-             $array_dados['causa'][$key] =  $dados[$key]['causa'];
-             $array_dados['numero'][$key] = floatval($dados[$key]['numero']);
-         }
+        $result = array();
+        foreach ($dados as $key => $value) {
+            $graph = array(
+                $value['causa'],
+                $value['numero']
+            );
+            array_push($result, $graph);
+        }
 
         $script['footerinc'] = '
         <script src="' . base_url() . 'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
@@ -43,73 +46,55 @@ class Mensal extends CI_Controller {
         <script src="' . base_url() . 'assets/js/highcharts/exporting.js"></script>
         <script src="' . base_url() . 'assets/js/highcharts/export-data.js"></script>
         <script src="' . base_url() . 'assets/js/highcharts/pareto.js"></script>>';
-        $script['script']    = '
-                <script type="text/javascript">
-                    $(function () {
-                        $("#grafico").highcharts({
+        $script['script'] = "
+            <script type='text/javascript'>
+                Highcharts.chart('grafico', {
                         chart: {
-                            zoomType: "xy"
+                            type: 'column'
                         },
                         title: {
-                            text: "TOP 10 - Maiores Causas de Indisponibilidade de Circuito no Mês '. dataEmPortugues($nmes) .' de '.  $nano .'"
+                            text: 'Maiores Causas de Indisponibilidade de Circuito no Mês ".dataEmPortugues($nmes)." de ".$nano."'
                         },
                         xAxis: {
-                            categories: '. json_encode($array_dados['causa']).',
-                            crosshair: true
+                            crosshair: true,
+                            type: 'category',
+                            labels: {
+                                style: {
+                                    fontSize: '10px',
+                                    fontFamily: 'Verdana, sans-serif'
+                                }
+                            }
                         },
-                        yAxis: [{
-                            title: {
-                                text: "Causa"
-                            },
-                            labels: {
-                                format: "{value} Tickets"
-                            }
-                        }, {
-                            title: {
-                                text: "Porcentagem"
-                            },
-                            minPadding: 0,
-                            maxPadding: 0,
-                            max: 100,
+                        yAxis: {
                             min: 0,
-                            opposite: true,
-                            labels: {
-                                format: "{value}%"
+                            title: {
+                                text: 'Ticket'
                             }
-                        }],
-                         legend: {
-                                align: "right",
-                                x: -70,
-                                verticalAlign: "top",
-                                y: -5,
-                                floating: true,
-                                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || "white",
-                                borderColor: "#CCC",
-                                borderWidth: 1,
-                                shadow: false
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        tooltip: {
+                            pointFormat: 'Ticket: <b>{point.y}</b>'
                         },
                         series: [{
-                            name: "Porcentagem",
-                            type: "pareto",
-                            yAxis: 1,
-                            zIndex: 10,
-                            tooltip: {
-                                valueDecimals: 1,
-                                valueSuffix: " %"
-                            },
-                            baseSeries: 1
-                        }, {
-                            name: "Tickets",
-                            type: "column",
-                            zIndex: 2,
-                            tooltip: {
-                               valueSuffix: " Tickets"
-                            },
-                            data: '. json_encode($array_dados['numero']).'
+                            name: 'Unidades',
+                            data: ".json_encode($result, JSON_NUMERIC_CHECK).",
+                            dataLabels: {
+                                enabled: true,
+                                color: '#FFFFFF',
+                                align: 'right',
+                                format: '{point.y}', // one decimal
+                                y: 25, // 10 pixels down from the top
+                                x: -23,
+                                style: {
+                                    fontSize: '13px',
+                                    fontFamily: 'Verdana, sans-serif'
+                                }
+                            }
                         }]
                     });
-                });
-                </script>';
+                </script>";
         $css['headerinc']    = '
             <link href="' . base_url() . 'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">';
         $session['username'] = $this->session->userdata('username');
