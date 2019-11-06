@@ -26,17 +26,16 @@ $(document).ready(function() {
           "order": [[0, 'asc']],
           //Set column definition initialisation properties.
           "columnDefs": [{},
-    { "width": "3%", "targets": 0 },//Id
-    { "width": "5%", "targets": 1 },//IP
-    { "width": "20%", "targets": 2 },//LOCALIDADE
-    { "width": "10%", "targets": 3 },//UNIADE
-    { "width": "10%", "targets": 4 },//DATA COLETA
-    { "width": "10%", "targets": 5 },//N de SERIE
-    { "width": "10%", "targets": 6 },//TONER
-    { "width": "15%", "targets": 7 },//KIT
-    { "width": "10%", "targets": 8 }]//N de PAGINAS
+            { "width": "3%", "targets": 0 },//Id
+            { "width": "5%", "targets": 1 },//IP
+            { "width": "20%", "targets": 2 },//LOCALIDADE
+            { "width": "10%", "targets": 3 },//UNIADE
+            { "width": "10%", "targets": 4 },//DATA COLETA
+            { "width": "10%", "targets": 5 },//N de SERIE
+            { "width": "10%", "targets": 6 },//TONER
+            { "width": "15%", "targets": 7 },//KIT
+            { "width": "10%", "targets": 8 }]//N de PAGINAS
           });
-
     // $('td.day').on('click',function() {
     //     datai = $('[name="data_inicio"]').val();
     //     dataf = $('[name="data_fim"]').val();
@@ -78,5 +77,19 @@ $(document).ready(function() {
         dataf = e.format();
         table.ajax.url( href+"/datatable_list/"+ datai+"/"+dataf ).load();
     });
+
+    $("#btn-pdf").on('click', function() {
+        table.button( '0-0' ).trigger();
+    });
+    $('#btn-csv').on('click', function() {
+        table.button( '0-3' ).trigger();
+    });
+    $('#btn-print').on('click', function() {
+        table.button( '0-2' ).trigger();
+    });
+    $('#btn-excel').on('click', function() {
+        table.button( '0-1' ).trigger();
+    });
+
 
 });
