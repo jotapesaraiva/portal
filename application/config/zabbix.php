@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 # API Info
 // $config['api_url'] = 'https://x-oc-zabbix.sefa.pa.ipa/zabbix/api_jsonrpc.php';
-$config['api_url'] = 'http://10.3.1.189/zabbix/api_jsonrpc.php';
+$config['api_url'] = 'https://zabbix.sefa.pa.gov.br/zabbix/api_jsonrpc.php';
 // $api_url = 'https://x-oc-zabbix.sefa.pa.ipa/zabbix/api_jsonrpc.php';
 $config['api_user'] = 'zbx3';
 // $api_user = 'joao.saraiva';
