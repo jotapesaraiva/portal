@@ -98,7 +98,12 @@
                             <a href="<?php echo base_url();?>menu/meu_perfil"><i class="icon-user"></i> Meu Perfil </a>
                         </li>
                         <li>
+                            <a href="<?php echo base_url();?>fechamento/turno"><i class="fa fa-paper-plane"></i> Fechamento </a>
+                        </li>
+                        <li>
+                            <?php if(control_session($this->session->userdata('physicaldeliveryofficename'))){?>
                             <?php echo anchor_popup('https://mantis.sefa.pa.gov.br/my_view_page.php', '<i class="icon-rocket"></i> Minhas Tarefas <span class="badge badge-success"> '.minhas_tarefas().' </span>' ); ?>
+                            <?php }?>
                         </li>
                         <li class="divider"> </li>
                         <li>
