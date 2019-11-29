@@ -106,7 +106,7 @@ class Server extends CI_Controller {
                                   $data_alerta = date('Y-m-d H:i:s' ,$event->lastchange);
                                   $detalhe = $event->comments;
                                   $id = $event->triggerid;
-                              if ($count++ <= 5 ) {
+                              if ($count++ <= 1000 ) {
                                   $priority = $event->priority;
                                   $description = $event->description;
                                   // Remove hostname or host.name in description

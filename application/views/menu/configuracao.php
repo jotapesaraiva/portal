@@ -140,7 +140,8 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label class="control-label">Status</label>
-                                                        <input name="status" type="checkbox" class="make-switch" checked data-on-text="&nbsp;Ativo&nbsp;&nbsp;" data-off-text="&nbsp;Desativado&nbsp;"> </div>
+                                                        <input name="status" type="checkbox" class="make-switch" checked data-on-text="&nbsp;Ativo&nbsp;&nbsp;" data-off-text="&nbsp;Desativado&nbsp;">
+                                                    </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label">Permissão : </label>

@@ -12,6 +12,7 @@ class Nobreak extends CI_Controller {
     }
 
     public function index() {
+        $car = '';
         $this->output->enable_profiler(false);
         //Load config file
         $this->load->config('zabbix', TRUE);
@@ -41,28 +42,51 @@ class Nobreak extends CI_Controller {
         // vd($hosts);
           foreach ($hosts as $host) {
               // $host_id[] = $host->hostid;
-             $hostid = $host->hostid;
+            $hostid = $host->hostid;
             $itens =  $api->itemGet(array(
                 'output' => 'extend',
                 'hostids' => $hostid,
-                'search' => array( 'name' => 'Temperatura' )
+                'search' => array( 'name' => 'Temperatura')
+            ));
+            $umidades =  $api->itemGet(array(
+                'output' => 'extend',
+                'hostids' => $hostid,
+                'search' => array('name' => 'umidade')
+            ));
+            $cargas =  $api->itemGet(array(
+                'output' => 'extend',
+                'hostids' => $hostid,
+                'search' => array('name' => 'Carga Atual (%)')
             ));
              $hostname = $host->name;
              $hoststatus = $host->status;
               foreach ($itens as $item) {
                  $temperatura = $item->prevvalue;
-                 if($temperatura >25.00) {
+                 if($temperatura > 25.00) {
                     $flag = "red";
                  } else {
                     $flag ="green";
                  }
               }
+              foreach ($umidades as $umidade) {
+                 $umi = $umidade->prevvalue;
+                 if($umi > 25.00) {
+                    $flag = "red";
+                 } else {
+                    $flag ="green";
+                 }
+              }
+              foreach ($cargas as $carga) {
+                 $car = $carga->prevvalue;
+              }
                   $result = array(
-                    'id' => $hostid,
-                    'name' => $hostname,
-                    'status' => $hoststatus,
+                    'id'          => $hostid,
+                    'name'        => $hostname,
+                    'status'      => $hoststatus,
                     'temperatura' => trim($temperatura,0),
-                    'flag' => $flag
+                    'umidade'     => trim($umi,0),
+                    'carga'       => trim($car,0)."%",
+                    'flag'        => $flag
                   );
                   //inserir todos os alertas no mesmo array
                   array_push($retorno,$result);

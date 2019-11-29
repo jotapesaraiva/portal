@@ -7,6 +7,8 @@ class Teste extends CI_Controller {
         echo "teste ok !!!";
     }
 
+
+
 }
 
 /* End of file Teste.php */
