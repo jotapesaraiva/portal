@@ -70,11 +70,6 @@ class Nobreak extends CI_Controller {
               }
               foreach ($umidades as $umidade) {
                  $umi = $umidade->prevvalue;
-                 if($umi > 25.00) {
-                    $flag = "red";
-                 } else {
-                    $flag ="green";
-                 }
               }
               foreach ($cargas as $carga) {
                  $car = $carga->prevvalue;
