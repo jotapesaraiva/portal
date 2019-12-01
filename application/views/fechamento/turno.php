@@ -128,7 +128,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-2 control-label">Atividades equipe:</label>
+                                            <label class="col-md-2 control-label">Atividades (últimas 6h):</label>
                                             <div class="col-md-8">
                                                 <textarea class="form-control" placeholder="Nenhuma atividade"name="atividadesEquipe" rows="3"><?php echo $atividadeEquipe; ?></textarea>
                                             </div>
@@ -143,7 +143,7 @@
                                             <label class="control-label col-md-2">Turno</label>
                                             <div class="col-md-8">
                                                 <select class="selectpicker form-control" name="turno" requerid>
-                                                    <option value="" <?php echo set_select('turno', '', TRUE); ?>>------Selecione uma turno-----</option>
+                                                    <option value="" <?php echo set_select('turno', '', TRUE); ?>>------Selecione um turno-----</option>
                                                     <option value="Madrugada" <?php echo set_select('turno', 'Madrugada'); ?>>Madrugada</option>
                                                     <option value="Manhã" <?php echo set_select('turno', 'Manhã'); ?>>Manhã</option>
                                                     <option value="Tarde" <?php echo set_select('turno', 'Tarde'); ?>>Tarde</option>

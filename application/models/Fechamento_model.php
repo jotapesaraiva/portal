@@ -66,7 +66,7 @@ class Fechamento_model extends CI_Model {
       $query = $this->db->get('zbx_server_fora');
       $result = "";
       foreach ($query->result_array() as $key => $value) {
-        $result .= $value['mantis']." ".$value['servidor']." ".$value['duration']."\n";
+        $result .= $value['mantis']." ".$value['servico']." ".$value['servidor']."\n";
       }
       return $result;
     }
@@ -148,7 +148,7 @@ class Fechamento_model extends CI_Model {
          ORDER BY mb.date_submitted ASC");
         $result = "";
         foreach ($query->result_array() as $key => $value) {
-          $result .= $value['MANTIS']." ".$value['RESUMO']."n";
+          $result .= $value['MANTIS']." ".$value['RESUMO']."\n";
         }
          return $result;
     }
