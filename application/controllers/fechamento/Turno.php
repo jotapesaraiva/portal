@@ -79,7 +79,7 @@ class Turno extends CI_Controller {
            Led\'s: '.$led.'
 
            ============== SALA de NOBREAK =============
-           Ar condicionado: '.$this->input->post('ar_nobrek').'
+           Ar condicionado: '.$this->input->post('ar_nobreak').'
            === Nobreak 01 ===
            Temperatura: '.$this->input->post('temperatura_nobreak02').'
            Umidade: '.$this->input->post('umidade_nobreak01').'

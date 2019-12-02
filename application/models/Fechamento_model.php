@@ -129,8 +129,9 @@ class Fechamento_model extends CI_Model {
                  and (mb.date_submitted > (select sysdate - interval '6' hour from dual))
                order by mb.date_submitted asc");
         $result = "";
+        $result = "\n";
         foreach ($query->result_array() as $key => $value) {
-          $result .= "\n".$value['MANTIS']." ".$value['RESUMO']. "\n";
+          $result .= $value['MANTIS']." ".$value['RESUMO']. "\n";
         }
         return $result;
     }
