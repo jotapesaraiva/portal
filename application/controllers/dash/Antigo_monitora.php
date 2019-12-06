@@ -58,10 +58,10 @@ class Antigo_monitora extends CI_Controller {
 
 
     public function monitora() {
-        // $alertas = $this->monitora_model->monitora();
-        // vd($alertas);
-        $grupo = $this->usuario_model->usuario_grupo(strtolower($this->session->userdata('username')));
-        vd($grupo->nome_grupo);
+        $alertas = $this->monitora_model->monitora();
+        pr($alertas);
+        // $grupo = $this->usuario_model->usuario_grupo(strtolower($this->session->userdata('username')));
+        // vd($grupo->nome_grupo);
     }
 
 }

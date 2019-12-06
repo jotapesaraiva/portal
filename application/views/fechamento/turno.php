@@ -136,7 +136,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">OBS:</label>
                                             <div class="col-md-8">
-                                                <textarea class="form-control" placeholder="Anotar alguma observação" name="obs" rows="3"><?php echo set_value('obs'); ?><?php echo $obs; ?></textarea>
+                                                <textarea class="form-control" placeholder="Anotar alguma observação" name="obs" rows="3"><?php echo set_value('obs',$obs); ?></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">

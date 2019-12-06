@@ -223,17 +223,38 @@ $db['teste'] = array(
 	'save_queries' => TRUE
 );
 
-
 // $active_group = 'msg';
 // $query_builder = TRUE;
 
-$db['msg'] = array(
+$db['msg_old'] = array(
 	'dsn'	=> '',
 	// 'hostname' => '10.3.1.42',
 	'hostname' => '10.3.1.80',
 	'username' => 'msg',
 	'password' => 'p@$$w0rd',
 	'database' => 'msg',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['msg_new'] = array(
+	'dsn'	=> '',
+	'hostname' => '10.3.1.142',
+	'username' => 'root',
+	'password' => '!!GR&m10!',
+	'database' => 'msg_rede',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

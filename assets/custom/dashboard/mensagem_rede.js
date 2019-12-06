@@ -30,7 +30,7 @@ function alerta_msg() {
 
 function content_msg() {
     $.ajax({
-        url : origin+"/dash/mensagem_rede",
+        url : origin+"/dash/mensagem_rede/conteudo",
         type: "GET",
         dataType: "JSON",
         beforeSend: function() {
@@ -44,7 +44,7 @@ function content_msg() {
                 html += '<ul class="dropdown-menu-list scroller"  data-handle-color="#637283">';
                     $.each(data, function(indice,valor) {
                         html +=     '<li>';
-                        html +=         '<a href="https://rede.sefa.pa.gov.br/msg/showmsg.php?id='+valor.id+'" target="_blank">';
+                        html +=         '<a href="'+origin+'/dash/mensagem_rede/copiar/'+valor.id+'" target="_blank">';
                         html +=             '<span class="photo">';
                         html +=                 '<img src="../assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>';
                         html +=             '<span class="subject">';
