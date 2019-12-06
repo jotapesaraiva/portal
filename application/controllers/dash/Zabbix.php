@@ -27,7 +27,7 @@ class Zabbix extends CI_Controller {
         $result ="";
         $retorno = array();
         // connect to Zabbix Json API
-        $api = new ZabbixApi($api_url, $api_user, base64_decode($api_pass));
+        $api = new ZabbixApi($api_url, $api_user, $api_pass);
         // Set Defaults
 
       //   $macros = $api->usermacroGet(array(
