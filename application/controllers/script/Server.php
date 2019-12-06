@@ -38,7 +38,7 @@ class Server extends CI_Controller {
             $alert = array();
             $retorno = array();
             // connect to Zabbix Json API
-            $api = new ZabbixApi($api_url, $api_user, base64_decode($api_pass));
+            $api = new ZabbixApi($api_url, $api_user, $api_pass);
             // Set Defaults
 
             $hosts = $api->hostGet(array(
