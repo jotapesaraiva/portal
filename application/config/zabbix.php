@@ -9,8 +9,8 @@ $config['api_url'] = 'https://zabbix.sefa.pa.gov.br/zabbix/api_jsonrpc.php';
 $config['api_user'] = 'joao.saraiva';
 // $config['api_pass'] = 'MTJhZG1pbjE5';
 $config['api_pass'] = '12admin19';
-// $config['api_pass'] = 'ISFaQGJiMXh4';
-// $api_pass = 'MDVhZG1pbjE4';
+// $config['api_pass'] = 'ISFaQGJiMXh4';!!Z@bb1xx
+// $api_pass = 'MTJhZG1pbjE5';12admin19
 # Time in milliseconds.  1000 = 1 second
 $config['reload_time'] = 30000;
 # path on web server

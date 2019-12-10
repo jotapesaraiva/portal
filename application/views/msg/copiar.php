@@ -88,7 +88,7 @@
                                         <select class="selectpicker form-control" name="meio[]" multiple>
                                             <option value="">------Selecione uma Unidade-----</option>
                                             <?php foreach($meios as $meio) :?>
-                                              <option value="<?=$meio->id?>"><?=utf8_decode($meio->local)?></option>
+                                              <option value="<?=$meio->id?>"><?=$meio->local?></option>
                                             <?php endforeach ?>
                                         </select>
                                     </div>
@@ -101,7 +101,7 @@
                                 </div>
                                  <div class="form-group">
                                     <label class="col-md-2 control-label">Título</label>
-                                    <input type="text" value = "<?php echo set_value('titulo',$titulo); ?>" name="titulo" class="col-md-10 form-control input-line input-medium">
+                                    <input type="text" value = "<?php echo set_value('titulo',$titulo); ?>" name="titulo" class="col-md-10 form-control input-line input-medium" placeholder="Recortar do conteúdo">
                                     <?php echo form_error('titulo');?>
                                 </div>
                                  <div class="form-group">
@@ -113,7 +113,7 @@
                                 </div>
                                  <div class="form-group">
                                     <label class="col-md-2 control-label">Assinatura</label>
-                                    <input type="text" value = "<?php echo set_value('assinatura',$assinatura); ?>" name="assinatura" class="col-md-10 form-control input-line input-medium">
+                                    <input type="text" value = "<?php echo set_value('assinatura',$assinatura); ?>" name="assinatura" class="col-md-10 form-control input-line input-medium" placeholder="Recortar do conteúdo">
                                     <?php echo form_error('assinatura');?>
                                 </div>
                                 <hr>
