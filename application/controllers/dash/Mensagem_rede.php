@@ -144,10 +144,10 @@ class Mensagem_rede extends CI_Controller {
             Tipo da mensagem: '.$mensagem.'
             Para a '. $destinatario.' ';
             $params = array(
-                'usuario'   => $this->session->userdata('username').' - '.$this->input->post('avaliador'),//nome do usuario
+                'usuario'   => $this->session->userdata('username'),//nome do usuario
                 'projeto'   => 'Administração de Ambiente',//projeto mantis
                 'categoria' => 'Mensagem de Rede',//categoria do projeto mantis
-                'servico'   => $this->input->post('titulo'),//resumo do mantis
+                'servico'   => $this->input->post('titulo').' - '.$this->input->post('avaliador'),//resumo do mantis
                 'detalhe'   => $detalhe//descriçao do mantis
             );
             $procedore = 'STP_RELT_CASO_PROJETO_CATEG';
@@ -173,7 +173,7 @@ class Mensagem_rede extends CI_Controller {
                 'assinatura'        => $this->input->post('assinatura'),
                 'observacao'        => $this->input->post('obs'),
                 'data_inicio'       => $this->input->post('datai').':00',
-                'data_fim'          => $this->input->post('dataf').':00',
+                'data_final'          => $this->input->post('dataf').':00',
                 'ip'                => $ipsem,
                 'tipo'              => $tiposem,
                 'usuario_post'      => $this->input->post('usuario'),
