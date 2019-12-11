@@ -189,6 +189,7 @@ class Mensagem_rede extends CI_Controller {
 
             $dados = array(
                 'received_user' => $this->input->post('operador'),
+                'received_date' => strtotime(date('Y-m-d H:i:s')),
                 'status' => '3'//0->pendente;1->encaminhada; 2->reprovada;3->Atendida
             );
             $this->msg_model->update_old(array('id' => $this->input->post('id')),$dados);
@@ -200,8 +201,10 @@ class Mensagem_rede extends CI_Controller {
 
     public function teste()
     {
-        $result = $this->msg_model->meio_new();
-        vd($result);
+        echo strtotime(date('Y-m-d H:i:s'));
+        echo date('Y-m-d H:i:s');
+        // $result = $this->msg_model->meio_new();
+        // vd($result);
 
     }
 }
