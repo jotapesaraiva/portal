@@ -181,7 +181,7 @@ class Mensagem_rede extends CI_Controller {
                 'usuario_avaliador' => $this->input->post('avaliador'),
                 'data_avaliada'     => date('Y-m-d H:i:s'),
                 'status'            => '2', //Status 2 autorizada
-                'imediato'          => $imediato
+                'imediata'          => $imediato
             );
             $this->msg_model->insert_new($dados);
 
