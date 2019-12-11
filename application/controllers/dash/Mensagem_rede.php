@@ -31,12 +31,10 @@ class Mensagem_rede extends CI_Controller {
 
     public function copiar($id)
     {
-        $css['headerinc']    =
-        '<link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
-        <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />';
-        $script['footerinc'] =
-        '<script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
-        <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>';
+        $css['headerinc']    =' <link href="'.base_url().'assets/custom/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css">
+                                <link href="'.base_url().'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />';
+        $script['footerinc'] = '<script src="'.base_url().'assets/custom/bootstrap-select/dist/js/bootstrap-select.js"></script>
+                                <script src="'.base_url().'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>';
         $script['script']    = '';
 
         $result              = $this->msg_model->select_id($id);
@@ -140,11 +138,13 @@ class Mensagem_rede extends CI_Controller {
             '.$this->input->post('titulo').'
             '.$this->input->post('conteudo').'
             '.$this->input->post('assinatura').'
+
+            #############################################################################
             Exibir de '.$this->input->post('datai').' até '.$this->input->post('dataf').'
             Tipo da mensagem: '.$mensagem.'
             Para a '. $destinatario.' ';
             $params = array(
-                'usuario'   => $this->session->userdata('username'),//nome do usuario
+                'usuario'   => $this->session->userdata('username').' - '.$this->input->post('avaliador'),//nome do usuario
                 'projeto'   => 'Administração de Ambiente',//projeto mantis
                 'categoria' => 'Mensagem de Rede',//categoria do projeto mantis
                 'servico'   => $this->input->post('titulo'),//resumo do mantis
@@ -152,6 +152,7 @@ class Mensagem_rede extends CI_Controller {
             );
             $procedore = 'STP_RELT_CASO_PROJETO_CATEG';
             $parametros = '';
+            // vd($params);
             $this->mantis_model->abrir_mantis_teste($params,$procedore,$parametros);
 
             //###############Inserindo no Novo Mensagem de rede################
@@ -179,7 +180,7 @@ class Mensagem_rede extends CI_Controller {
                 'data_post'         => date('Y-m-d H:i:s'),
                 'usuario_avaliador' => $this->input->post('avaliador'),
                 'data_avaliada'     => date('Y-m-d H:i:s'),
-                'status'            => '2',
+                'status'            => '2', //Status 2 autorizada
                 'imediato'          => $imediato
             );
             $this->msg_model->insert_new($dados);
@@ -191,7 +192,8 @@ class Mensagem_rede extends CI_Controller {
                 'status' => '3'//0->pendente;1->encaminhada; 2->reprovada;3->Atendida
             );
             $this->msg_model->update_old(array('id' => $this->input->post('id')),$dados);
-
+            //redireciona para a pagina inicial.
+            redirect('dashboard/producao');
         }
 
     }
